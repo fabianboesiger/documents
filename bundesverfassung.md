@@ -23,13 +23,13 @@ geben sich folgende Verfassung:
 Das Schweizervolk und die Kantone Zürich, Bern, Luzern, Uri, Schwyz, Obwalden und Nidwalden, Glarus, Zug, Freiburg, Solothurn, Basel-Stadt und Basel-Landschaft, Schaffhausen, Appenzell Ausserrhoden und Appenzell Innerrhoden, St. Gallen, Graubünden, Aargau, Thurgau, Tessin, Waadt, Wallis, Neuenburg, Genf und Jura bilden die Schweizerische Eidgenossenschaft.
 
 ### Art. 2 Zweck
-^1 Die Schweizerische Eidgenossenschaft schützt die Freiheit und die Rechte des Volkes und wahrt die Unabhängigkeit und die Sicherheit des Landes.
+<sup>1</sup> Die Schweizerische Eidgenossenschaft schützt die Freiheit und die Rechte des Volkes und wahrt die Unabhängigkeit und die Sicherheit des Landes.
 
-2 Sie fördert die gemeinsame Wohlfahrt, die nachhaltige Entwicklung, den inneren Zusammenhalt und die kulturelle Vielfalt des Landes.
+<sup>2</sup> Sie fördert die gemeinsame Wohlfahrt, die nachhaltige Entwicklung, den inneren Zusammenhalt und die kulturelle Vielfalt des Landes.
 
-3 Sie sorgt für eine möglichst grosse Chancengleichheit unter den Bürgerinnen und Bürgern.
+<sup>3</sup> Sie sorgt für eine möglichst grosse Chancengleichheit unter den Bürgerinnen und Bürgern.
 
-4 Sie setzt sich ein für die dauerhafte Erhaltung der natürlichen Lebensgrundlagen und für eine friedliche und gerechte internationale Ordnung.
+<sup>4</sup> Sie setzt sich ein für die dauerhafte Erhaltung der natürlichen Lebensgrundlagen und für eine friedliche und gerechte internationale Ordnung.
 
 ### Art. 3 Kantone
 Die Kantone sind souverän, soweit ihre Souveränität nicht durch die Bundesverfassung beschränkt ist; sie üben alle Rechte aus, die nicht dem Bund übertragen sind.
