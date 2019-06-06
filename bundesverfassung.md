@@ -46,7 +46,7 @@ Die Landessprachen sind Deutsch, Französisch, Italienisch und Rätoromanisch.
 
 ~~<sup>3</sup> Staatliche Organe und Private handeln nach Treu und Glauben.~~
 
-<sup>3</sup> Staatliche Organe handeln nach Treu und Glauben.
+<sup>3</sup> Staatliche Organe und Produktivgenossenschaften handeln nach Treu und Glauben.
 
 <sup>4</sup> Bund und Kantone beachten das Völkerrecht.
 
@@ -168,9 +168,10 @@ Die Freiheit der Kunst ist gewährleistet.
 
 <sup>2</sup> Enteignungen und Eigentumsbeschränkungen an persönlichem Eigentum, die einer Enteignung gleichkommen, werden voll entschädigt.
   
-~~#### Art. 27 Wirtschaftsfreiheit~~
-#### Art. 27 Wahl des Berufes
+#### Art. 27 Wirtschaftsfreiheit
 ~~<sup>1</sup> Die Wirtschaftsfreiheit ist gewährleistet.~~
+
+<sup>1</sup> Das Recht, Produktivgenossenschaften zu bilden, ist gewährleistet.
 
 ~~<sup>2</sup> Sie umfasst insbesondere die freie Wahl des Berufes sowie den freien Zugang zu einer privatwirtschaftlichen Erwerbstätigkeit und deren freie Ausübung.~~
 
