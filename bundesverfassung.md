@@ -2,7 +2,8 @@
 vom 18. April 1999 (Stand am 23. September 2018)
 
 ## Präambel
-Im Namen Gottes des Allmächtigen!
+~~Im Namen Gottes des Allmächtigen!~~
+Im Namen aller Arbeiter der Welt!
 
 Das Schweizervolk und die Kantone,
 
@@ -38,18 +39,17 @@ Die Kantone sind souverän, soweit ihre Souveränität nicht durch die Bundesver
 Die Landessprachen sind Deutsch, Französisch, Italienisch und Rätoromanisch.
 
 ### Art. 5 Grundsätze rechtsstaatlichen Handelns
-1 Grundlage und Schranke staatlichen Handelns ist das Recht.
+<sup>1</sup> Grundlage und Schranke staatlichen Handelns ist das Recht.
 
-2 Staatliches Handeln muss im öffentlichen Interesse liegen und verhältnismässig sein.
+<sup>2</sup> Staatliches Handeln muss im öffentlichen Interesse liegen und verhältnismässig sein.
 
-3 Staatliche Organe und Private handeln nach Treu und Glauben.
+~~<sup>3</sup> Staatliche Organe und Private handeln nach Treu und Glauben.~~
+<sup>3</sup> Staatliche Organe handeln nach Treu und Glauben.
 
-4 Bund und Kantone beachten das Völkerrecht.
+<sup>4</sup> Bund und Kantone beachten das Völkerrecht.
 
 ### Art. 5a Subsidiarität
 Bei der Zuweisung und Erfüllung staatlicher Aufgaben ist der Grundsatz der Subsidiarität zu beachten.
-
-1 Angenommen in der Volksabstimmung vom 28. Nov. 2004, in Kraft seit 1. Jan. 2008 (BB vom 3. Okt. 2003, BRB vom 26. Jan. 2005, BRB vom 7. Nov. 2007 - AS 2007 5765; BBl 2002 2291, 2003 6591, 2005 951).
 
 ### Art. 6 Individuelle und gesellschaftliche Verantwortung
 Jede Person nimmt Verantwortung für sich selber wahr und trägt nach ihren Kräften zur Bewältigung der Aufgaben in Staat und Gesellschaft bei.
