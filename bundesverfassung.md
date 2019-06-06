@@ -89,83 +89,94 @@ Jede Person hat Anspruch darauf, von den staatlichen Organen ohne Willkür und n
 Wer in Not gerät und nicht in der Lage ist, für sich zu sorgen, hat Anspruch auf Hilfe und Betreuung und auf die Mittel, die für ein menschenwürdiges Dasein unerlässlich sind.
 
 #### Art. 13 Schutz der Privatsphäre
+<sup>1</sup> Jede Person hat Anspruch auf Achtung ihres Privat- und Familienlebens, ihrer Wohnung sowie ihres Brief-, Post- und Fernmeldeverkehrs.
 
-1 Jede Person hat Anspruch auf Achtung ihres Privat- und Familienlebens, ihrer Wohnung sowie ihres Brief-, Post- und Fernmeldeverkehrs.
+<sup>2</sup> Jede Person hat Anspruch auf Schutz vor Missbrauch ihrer persönlichen Daten.
 
-2 Jede Person hat Anspruch auf Schutz vor Missbrauch ihrer persönlichen Daten.
-  Art. 14 Recht auf Ehe und Familie
-
+#### Art. 14 Recht auf Ehe und Familie
 Das Recht auf Ehe und Familie ist gewährleistet.
-  Art. 15 Glaubens- und Gewissensfreiheit
+  
+#### Art. 15 Glaubens- und Gewissensfreiheit
+<sup>1</sup> Die Glaubens- und Gewissensfreiheit ist gewährleistet.
 
-1 Die Glaubens- und Gewissensfreiheit ist gewährleistet.
+<sup>2</sup> Jede Person hat das Recht, ihre Religion und ihre weltanschauliche Überzeugung frei zu wählen und allein oder in Gemeinschaft mit anderen zu bekennen.
 
-2 Jede Person hat das Recht, ihre Religion und ihre weltanschauliche Überzeugung frei zu wählen und allein oder in Gemeinschaft mit anderen zu bekennen.
+<sup>3</sup> Jede Person hat das Recht, einer Religionsgemeinschaft beizutreten oder anzugehören und religiösem Unterricht zu folgen.
 
-3 Jede Person hat das Recht, einer Religionsgemeinschaft beizutreten oder anzugehören und religiösem Unterricht zu folgen.
+<sup>4</sup> Niemand darf gezwungen werden, einer Religionsgemeinschaft beizutreten oder anzugehören, eine religiöse Handlung vorzunehmen oder religiösem Unterricht zu folgen.
 
-4 Niemand darf gezwungen werden, einer Religionsgemeinschaft beizutreten oder anzugehören, eine religiöse Handlung vorzunehmen oder religiösem Unterricht zu folgen.
-  Art. 16 Meinungs- und Informationsfreiheit
+#### Art. 16 Meinungs- und Informationsfreiheit
+<sup>1</sup> Die Meinungs- und Informationsfreiheit ist gewährleistet.
 
-1 Die Meinungs- und Informationsfreiheit ist gewährleistet.
+<sup>2/sup> Jede Person hat das Recht, ihre Meinung frei zu bilden und sie ungehindert zu äussern und zu verbreiten.
 
-2 Jede Person hat das Recht, ihre Meinung frei zu bilden und sie ungehindert zu äussern und zu verbreiten.
+<sup>3</sup> Jede Person hat das Recht, Informationen frei zu empfangen, aus allgemein zugänglichen Quellen zu beschaffen und zu verbreiten.
 
-3 Jede Person hat das Recht, Informationen frei zu empfangen, aus allgemein zugänglichen Quellen zu beschaffen und zu verbreiten.
-  Art. 17 Medienfreiheit
+#### Art. 17 Medienfreiheit
+<sup>1</sup> Die Freiheit von Presse, Radio und Fernsehen sowie anderer Formen der öffentlichen fernmeldetechnischen Verbreitung von Darbietungen und Informationen ist gewährleistet.
 
-1 Die Freiheit von Presse, Radio und Fernsehen sowie anderer Formen der öffentlichen fernmeldetechnischen Verbreitung von Darbietungen und Informationen ist gewährleistet.
+<sup>2</sup> Zensur ist verboten.
 
-2 Zensur ist verboten.
+<sup>3</sup> Das Redaktionsgeheimnis ist gewährleistet.
 
-3 Das Redaktionsgeheimnis ist gewährleistet.
-  Art. 18 Sprachenfreiheit
-
+#### Art. 18 Sprachenfreiheit
 Die Sprachenfreiheit ist gewährleistet.
-  Art. 19 Anspruch auf Grundschulunterricht
 
-Der Anspruch auf ausreichenden und unentgeltlichen Grundschulunterricht ist gewährleistet.
-  Art. 20 Wissenschaftsfreiheit
+#### Art. 19 Anspruch auf Grundschulunterricht
+~~Der Anspruch auf ausreichenden und unentgeltlichen Grundschulunterricht ist gewährleistet.~~
 
+Der Anspruch auf ausreichende und unentgeltliche Bildung ist gewährleistet.
+
+#### Art. 20 Wissenschaftsfreiheit
 Die Freiheit der wissenschaftlichen Lehre und Forschung ist gewährleistet.
-  Art. 21 Kunstfreiheit
 
+#### Art. 21 Kunstfreiheit
 Die Freiheit der Kunst ist gewährleistet.
-  Art. 22 Versammlungsfreiheit
 
-1 Die Versammlungsfreiheit ist gewährleistet.
+#### Art. 22 Versammlungsfreiheit
+<sup>1</sup> Die Versammlungsfreiheit ist gewährleistet.
 
-2 Jede Person hat das Recht, Versammlungen zu organisieren, an Versammlungen teilzunehmen oder Versammlungen fernzubleiben.
-  Art. 23 Vereinigungsfreiheit
+<sup>2</sup> Jede Person hat das Recht, Versammlungen zu organisieren, an Versammlungen teilzunehmen oder Versammlungen fernzubleiben.
 
-1 Die Vereinigungsfreiheit ist gewährleistet.
+#### Art. 23 Vereinigungsfreiheit
+<sup>1</sup> Die Vereinigungsfreiheit ist gewährleistet.
 
-2 Jede Person hat das Recht, Vereinigungen zu bilden, Vereinigungen beizutreten oder anzugehören und sich an den Tätigkeiten von Vereinigungen zu beteiligen.
+<sup>2</sup> Jede Person hat das Recht, Vereinigungen zu bilden, Vereinigungen beizutreten oder anzugehören und sich an den Tätigkeiten von Vereinigungen zu beteiligen.
 
-3 Niemand darf gezwungen werden, einer Vereinigung beizutreten oder anzugehören.
-  Art. 24 Niederlassungsfreiheit
+<sup>3</sup> Niemand darf gezwungen werden, einer Vereinigung beizutreten oder anzugehören.
 
-1 Schweizerinnen und Schweizer haben das Recht, sich an jedem Ort des Landes niederzulassen.
+#### Art. 24 Niederlassungsfreiheit
+<sup>1</sup> Schweizerinnen und Schweizer haben das Recht, sich an jedem Ort des Landes niederzulassen.
 
-2 Sie haben das Recht, die Schweiz zu verlassen oder in die Schweiz einzureisen.
-  Art. 25 Schutz vor Ausweisung, Auslieferung und Ausschaffung
+<sup>2</sup> Sie haben das Recht, die Schweiz zu verlassen oder in die Schweiz einzureisen.
 
-1 Schweizerinnen und Schweizer dürfen nicht aus der Schweiz ausgewiesen werden; sie dürfen nur mit ihrem Einverständnis an eine ausländische Behörde ausgeliefert werden.
+#### Art. 25 Schutz vor Ausweisung, Auslieferung und Ausschaffung
+<sup>1</sup> Schweizerinnen und Schweizer dürfen nicht aus der Schweiz ausgewiesen werden; sie dürfen nur mit ihrem Einverständnis an eine ausländische Behörde ausgeliefert werden.
 
-2 Flüchtlinge dürfen nicht in einen Staat ausgeschafft oder ausgeliefert werden, in dem sie verfolgt werden.
+~~<sup>2</sup> Flüchtlinge dürfen nicht in einen Staat ausgeschafft oder ausgeliefert werden, in dem sie verfolgt werden.~~
 
-3 Niemand darf in einen Staat ausgeschafft werden, in dem ihm Folter oder eine andere Art grausamer und unmenschlicher Behandlung oder Bestrafung droht.
-  Art. 26 Eigentumsgarantie
+<sup>2</sup> Flüchtlinge dürfen nicht in einen anderen Staat ausgeschafft oder ausgeliefert werden.
 
-1 Das Eigentum ist gewährleistet.
+<sup>3</sup> Niemand darf in einen Staat ausgeschafft werden, in dem ihm Folter oder eine andere Art grausamer und unmenschlicher Behandlung oder Bestrafung droht.
+  
+#### Art. 26 Eigentumsgarantie
+~~<sup>1</sup> Das Eigentum ist gewährleistet.~~
 
-2 Enteignungen und Eigentumsbeschränkungen, die einer Enteignung gleichkommen, werden voll entschädigt.
-  Art. 27 Wirtschaftsfreiheit
+<sup>1</sup> Das persönliche Eigentum ist gewährleistet.
 
-1 Die Wirtschaftsfreiheit ist gewährleistet.
+~~<sup>2</sup> Enteignungen und Eigentumsbeschränkungen, die einer Enteignung gleichkommen, werden voll entschädigt.~~
 
-2 Sie umfasst insbesondere die freie Wahl des Berufes sowie den freien Zugang zu einer privatwirtschaftlichen Erwerbstätigkeit und deren freie Ausübung.
-  Art. 28 Koalitionsfreiheit
+<sup>2</sup> Enteignungen und Eigentumsbeschränkungen an persönlichem Eigentum, die einer Enteignung gleichkommen, werden voll entschädigt.
+  
+~~#### Art. 27 Wirtschaftsfreiheit~~
+#### Art. 27 Wahl des Berufes
+~~<sup>1</sup> Die Wirtschaftsfreiheit ist gewährleistet.~~
+
+~~<sup>2</sup> Sie umfasst insbesondere die freie Wahl des Berufes sowie den freien Zugang zu einer privatwirtschaftlichen Erwerbstätigkeit und deren freie Ausübung.~~
+
+<sup>2</sup> Die freie Wahl des Berufes ist gewährleistet.
+
+#### Art. 28 Koalitionsfreiheit
 
 1 Die Arbeitnehmerinnen und Arbeitnehmer, die Arbeitgeberinnen und Arbeitgeber sowie ihre Organisationen haben das Recht, sich zum Schutz ihrer Interessen zusammenzuschliessen, Vereinigungen zu bilden und solchen beizutreten oder fernzubleiben.
 
