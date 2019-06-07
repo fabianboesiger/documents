@@ -4,7 +4,7 @@ vom 18. April 1999 (Stand am 23. September 2018)
 ## Präambel
 ~~Im Namen Gottes des Allmächtigen!~~
 
-Im Namen aller Arbeiter der Welt!
+*Im Namen aller Arbeiter der Welt!*
 
 Das Schweizervolk und die Kantone,
 
@@ -46,7 +46,7 @@ Die Landessprachen sind Deutsch, Französisch, Italienisch und Rätoromanisch.
 
 ~~<sup>3</sup> Staatliche Organe und Private handeln nach Treu und Glauben.~~
 
-<sup>3</sup> Staatliche Organe und Produktivgenossenschaften handeln nach Treu und Glauben.
+*<sup>3</sup> Staatliche Organe und Produktivgenossenschaften handeln nach Treu und Glauben.*
 
 <sup>4</sup> Bund und Kantone beachten das Völkerrecht.
 
@@ -59,7 +59,9 @@ Jede Person nimmt Verantwortung für sich selber wahr und trägt nach ihren Krä
 ## 2. Titel: Grundrechte, Bürgerrechte und Sozialziele
 ### 1. Kapitel: Grundrechte
 #### Art. 7 Menschenwürde
-Die Würde des Menschen ist zu achten und zu schützen.
+~~Die Würde des Menschen ist zu achten und zu schützen.~~
+
+*Die Würde von Mensch und Tier ist zu achten und zu schützen.*
 
 #### Art. 8 Rechtsgleichheit
 <sup>1</sup> Alle Menschen sind vor dem Gesetz gleich.
@@ -122,10 +124,11 @@ Das Recht auf Ehe und Familie ist gewährleistet.
 #### Art. 18 Sprachenfreiheit
 Die Sprachenfreiheit ist gewährleistet.
 
-#### Art. 19 Anspruch auf Grundschulunterricht
+~~#### Art. 19 Anspruch auf Grundschulunterricht~~
+*#### Art. 19 Anspruch auf Bildung*
 ~~Der Anspruch auf ausreichenden und unentgeltlichen Grundschulunterricht ist gewährleistet.~~
 
-Der Anspruch auf ausreichende und unentgeltliche Bildung ist gewährleistet.
+*Der Anspruch auf ausreichende und unentgeltliche Bildung ist gewährleistet.*
 
 #### Art. 20 Wissenschaftsfreiheit
 Die Freiheit der wissenschaftlichen Lehre und Forschung ist gewährleistet.
@@ -155,95 +158,100 @@ Die Freiheit der Kunst ist gewährleistet.
 
 ~~<sup>2</sup> Flüchtlinge dürfen nicht in einen Staat ausgeschafft oder ausgeliefert werden, in dem sie verfolgt werden.~~
 
-<sup>2</sup> Flüchtlinge dürfen nicht in einen anderen Staat ausgeschafft oder ausgeliefert werden.
+*<sup>2</sup> Flüchtlinge dürfen nicht in einen anderen Staat ausgeschafft oder ausgeliefert werden.*
 
 <sup>3</sup> Niemand darf in einen Staat ausgeschafft werden, in dem ihm Folter oder eine andere Art grausamer und unmenschlicher Behandlung oder Bestrafung droht.
   
 #### Art. 26 Eigentumsgarantie
 ~~<sup>1</sup> Das Eigentum ist gewährleistet.~~
 
-<sup>1</sup> Das persönliche Eigentum ist gewährleistet.
+*<sup>1</sup> Das persönliche Eigentum ist gewährleistet.*
 
 ~~<sup>2</sup> Enteignungen und Eigentumsbeschränkungen, die einer Enteignung gleichkommen, werden voll entschädigt.~~
 
-<sup>2</sup> Enteignungen und Eigentumsbeschränkungen an persönlichem Eigentum, die einer Enteignung gleichkommen, werden voll entschädigt.
+*<sup>2</sup> Enteignungen und Eigentumsbeschränkungen an persönlichem Eigentum, die einer Enteignung gleichkommen, werden voll entschädigt.*
   
 #### Art. 27 Wirtschaftsfreiheit
 ~~<sup>1</sup> Die Wirtschaftsfreiheit ist gewährleistet.~~
 
-<sup>1</sup> Das Recht, Produktivgenossenschaften zu bilden, ist gewährleistet.
+*<sup>1</sup> Das Recht, Produktivgenossenschaften zu bilden, ist gewährleistet.*
 
 ~~<sup>2</sup> Sie umfasst insbesondere die freie Wahl des Berufes sowie den freien Zugang zu einer privatwirtschaftlichen Erwerbstätigkeit und deren freie Ausübung.~~
 
-<sup>2</sup> Die freie Wahl des Berufes ist gewährleistet.
+*<sup>2</sup> Die freie Wahl des Berufes ist gewährleistet.*
+
+*<sup>3</sup> Jeder Arbeiter hat den Anspruch auf den vollen Wert seiner Arbeit.*
 
 #### Art. 28 Koalitionsfreiheit
+~~<sup>1</sup> Die Arbeitnehmerinnen und Arbeitnehmer, die Arbeitgeberinnen und Arbeitgeber sowie ihre Organisationen haben das Recht, sich zum Schutz ihrer Interessen zusammenzuschliessen, Vereinigungen zu bilden und solchen beizutreten oder fernzubleiben.~~
 
-1 Die Arbeitnehmerinnen und Arbeitnehmer, die Arbeitgeberinnen und Arbeitgeber sowie ihre Organisationen haben das Recht, sich zum Schutz ihrer Interessen zusammenzuschliessen, Vereinigungen zu bilden und solchen beizutreten oder fernzubleiben.
+*<sup>1</sup> Alle Arbeiter haben das Recht, sich zum Schutz ihrer Interessen zusammenzuschliessen, Vereinigungen zu bilden und solchen beizutreten oder fernzubleiben.*
 
-2 Streitigkeiten sind nach Möglichkeit durch Verhandlung oder Vermittlung beizulegen.
+<sup>2</sup> Streitigkeiten sind nach Möglichkeit durch Verhandlung oder Vermittlung beizulegen.
 
-3 Streik und Aussperrung sind zulässig, wenn sie Arbeitsbeziehungen betreffen und wenn keine Verpflichtungen entgegenstehen, den Arbeitsfrieden zu wahren oder Schlichtungsverhandlungen zu führen.
+~~<sup>3</sup> Streik und Aussperrung sind zulässig, wenn sie Arbeitsbeziehungen betreffen und wenn keine Verpflichtungen entgegenstehen, den Arbeitsfrieden zu wahren oder Schlichtungsverhandlungen zu führen.~~
 
-4 Das Gesetz kann bestimmten Kategorien von Personen den Streik verbieten.
-  Art. 29 Allgemeine Verfahrensgarantien
+<sup>3</sup> Streik und Aussperrung sind zulässig, wenn sie Arbeitsbeziehungen betreffen.
 
-1 Jede Person hat in Verfahren vor Gerichts- und Verwaltungsinstanzen Anspruch auf gleiche und gerechte Behandlung sowie auf Beurteilung innert angemessener Frist.
+~~<sup>4</sup> Das Gesetz kann bestimmten Kategorien von Personen den Streik verbieten.~~
 
-2 Die Parteien haben Anspruch auf rechtliches Gehör.
+#### Art. 29 Allgemeine Verfahrensgarantien
+<sup>1</sup> Jede Person hat in Verfahren vor Gerichts- und Verwaltungsinstanzen Anspruch auf gleiche und gerechte Behandlung sowie auf Beurteilung innert angemessener Frist.
 
-3 Jede Person, die nicht über die erforderlichen Mittel verfügt, hat Anspruch auf unentgeltliche Rechtspflege, wenn ihr Rechtsbegehren nicht aussichtslos erscheint. Soweit es zur Wahrung ihrer Rechte notwendig ist, hat sie ausserdem Anspruch auf unentgeltlichen Rechtsbeistand.
-  Art. 29a1Rechtsweggarantie
+<sup>2</sup> Die Parteien haben Anspruch auf rechtliches Gehör.
 
-Jede Person hat bei Rechtsstreitigkeiten Anspruch auf Beurteilung durch eine richterliche Behörde. Bund und Kantone können durch Gesetz die richterliche Beurteilung in Ausnahmefällen ausschliessen.
+<sup>3</sup> Jede Person, die nicht über die erforderlichen Mittel verfügt, hat Anspruch auf unentgeltliche Rechtspflege, wenn ihr Rechtsbegehren nicht aussichtslos erscheint. Soweit es zur Wahrung ihrer Rechte notwendig ist, hat sie ausserdem Anspruch auf unentgeltlichen Rechtsbeistand.
 
-1 Angenommen in der Volksabstimmung vom 12. März 2000, in Kraft seit 1. Jan. 2007 (BB vom 8. Okt. 1999, BRB vom 17. Mai 2000, BB vom 8. März 2005 - AS 2002 3148, 2006 1059; BBl 1997 I 1, 1999 8633, 2000 2990, 2001 4202).
-  Art. 30 Gerichtliche Verfahren
+#### Art. 29a Rechtsweggarantie
+~~Jede Person hat bei Rechtsstreitigkeiten Anspruch auf Beurteilung durch eine richterliche Behörde. Bund und Kantone können durch Gesetz die richterliche Beurteilung in Ausnahmefällen ausschliessen.~~
 
-1 Jede Person, deren Sache in einem gerichtlichen Verfahren beurteilt werden muss, hat Anspruch auf ein durch Gesetz geschaffenes, zuständiges, unabhängiges und unparteiisches Gericht. Ausnahmegerichte sind untersagt.
+*Jede Person hat bei Rechtsstreitigkeiten Anspruch auf Beurteilung durch eine richterliche Behörde.*
 
-2 Jede Person, gegen die eine Zivilklage erhoben wird, hat Anspruch darauf, dass die Sache vom Gericht des Wohnsitzes beurteilt wird. Das Gesetz kann einen anderen Gerichtsstand vorsehen.
+#### Art. 30 Gerichtliche Verfahren
+<sup>1</sup> Jede Person, deren Sache in einem gerichtlichen Verfahren beurteilt werden muss, hat Anspruch auf ein durch Gesetz geschaffenes, zuständiges, unabhängiges und unparteiisches Gericht. Ausnahmegerichte sind untersagt.
 
-3 Gerichtsverhandlung und Urteilsverkündung sind öffentlich. Das Gesetz kann Ausnahmen vorsehen.
-  Art. 31 Freiheitsentzug
+<sup>2</sup> Jede Person, gegen die eine Zivilklage erhoben wird, hat Anspruch darauf, dass die Sache vom Gericht des Wohnsitzes beurteilt wird. Das Gesetz kann einen anderen Gerichtsstand vorsehen.
 
-1 Die Freiheit darf einer Person nur in den vom Gesetz selbst vorgesehenen Fällen und nur auf die im Gesetz vorgeschriebene Weise entzogen werden.
+<sup>3</sup> Gerichtsverhandlung und Urteilsverkündung sind öffentlich. Das Gesetz kann Ausnahmen vorsehen.
 
-2 Jede Person, der die Freiheit entzogen wird, hat Anspruch darauf, unverzüglich und in einer ihr verständlichen Sprache über die Gründe des Freiheitsentzugs und über ihre Rechte unterrichtet zu werden. Sie muss die Möglichkeit haben, ihre Rechte geltend zu machen. Sie hat insbesondere das Recht, ihre nächsten Angehörigen benachrichtigen zu lassen.
+#### Art. 31 Freiheitsentzug
+<sup>1</sup> Die Freiheit darf einer Person nur in den vom Gesetz selbst vorgesehenen Fällen und nur auf die im Gesetz vorgeschriebene Weise entzogen werden.
 
-3 Jede Person, die in Untersuchungshaft genommen wird, hat Anspruch darauf, unverzüglich einer Richterin oder einem Richter vorgeführt zu werden; die Richterin oder der Richter entscheidet, ob die Person weiterhin in Haft gehalten oder freigelassen wird. Jede Person in Untersuchungshaft hat Anspruch auf ein Urteil innert angemessener Frist.
+<sup>2</sup> Jede Person, der die Freiheit entzogen wird, hat Anspruch darauf, unverzüglich und in einer ihr verständlichen Sprache über die Gründe des Freiheitsentzugs und über ihre Rechte unterrichtet zu werden. Sie muss die Möglichkeit haben, ihre Rechte geltend zu machen. Sie hat insbesondere das Recht, ihre nächsten Angehörigen benachrichtigen zu lassen.
 
-4 Jede Person, der die Freiheit nicht von einem Gericht entzogen wird, hat das Recht, jederzeit ein Gericht anzurufen. Dieses entscheidet so rasch wie möglich über die Rechtmässigkeit des Freiheitsentzugs.
-  Art. 32 Strafverfahren
+<sup>3</sup> Jede Person, die in Untersuchungshaft genommen wird, hat Anspruch darauf, unverzüglich einer Richterin oder einem Richter vorgeführt zu werden; die Richterin oder der Richter entscheidet, ob die Person weiterhin in Haft gehalten oder freigelassen wird. Jede Person in Untersuchungshaft hat Anspruch auf ein Urteil innert angemessener Frist.
 
-1 Jede Person gilt bis zur rechtskräftigen Verurteilung als unschuldig.
+<sup>4</sup> Jede Person, der die Freiheit nicht von einem Gericht entzogen wird, hat das Recht, jederzeit ein Gericht anzurufen. Dieses entscheidet so rasch wie möglich über die Rechtmässigkeit des Freiheitsentzugs.
 
-2 Jede angeklagte Person hat Anspruch darauf, möglichst rasch und umfassend über die gegen sie erhobenen Beschuldigungen unterrichtet zu werden. Sie muss die Möglichkeit haben, die ihr zustehenden Verteidigungsrechte geltend zu machen.
+#### Art. 32 Strafverfahren
+<sup>1</sup> Jede Person gilt bis zur rechtskräftigen Verurteilung als unschuldig.
 
-3 Jede verurteilte Person hat das Recht, das Urteil von einem höheren Gericht überprüfen zu lassen. Ausgenommen sind die Fälle, in denen das Bundesgericht als einzige Instanz urteilt.
-  Art. 33 Petitionsrecht
+<sup>2</sup> Jede angeklagte Person hat Anspruch darauf, möglichst rasch und umfassend über die gegen sie erhobenen Beschuldigungen unterrichtet zu werden. Sie muss die Möglichkeit haben, die ihr zustehenden Verteidigungsrechte geltend zu machen.
 
-1 Jede Person hat das Recht, Petitionen an Behörden zu richten; es dürfen ihr daraus keine Nachteile erwachsen.
+<sup>3</sup> Jede verurteilte Person hat das Recht, das Urteil von einem höheren Gericht überprüfen zu lassen. Ausgenommen sind die Fälle, in denen das Bundesgericht als einzige Instanz urteilt.
 
-2 Die Behörden haben von Petitionen Kenntnis zu nehmen.
-  Art. 34 Politische Rechte
+#### Art. 33 Petitionsrecht
+<sup>1</sup> Jede Person hat das Recht, Petitionen an Behörden zu richten; es dürfen ihr daraus keine Nachteile erwachsen.
 
-1 Die politischen Rechte sind gewährleistet.
+<sup>2</sup> Die Behörden haben von Petitionen Kenntnis zu nehmen.
 
-2 Die Garantie der politischen Rechte schützt die freie Willensbildung und die unverfälschte Stimmabgabe.
-  Art. 35 Verwirklichung der Grundrechte
+#### Art. 34 Politische Rechte
+<sup>1</sup> Die politischen Rechte sind gewährleistet.
 
-1 Die Grundrechte müssen in der ganzen Rechtsordnung zur Geltung kommen.
+<sup>2</sup> Die Garantie der politischen Rechte schützt die freie Willensbildung und die unverfälschte Stimmabgabe.
 
-2 Wer staatliche Aufgaben wahrnimmt, ist an die Grundrechte gebunden und verpflichtet, zu ihrer Verwirklichung beizutragen.
+#### Art. 35 Verwirklichung der Grundrechte
+<sup>1</sup> Die Grundrechte müssen in der ganzen Rechtsordnung zur Geltung kommen.
 
-3 Die Behörden sorgen dafür, dass die Grundrechte, soweit sie sich dazu eignen, auch unter Privaten wirksam werden.
-  Art. 36 Einschränkungen von Grundrechten
+<sup>2</sup> Wer staatliche Aufgaben wahrnimmt, ist an die Grundrechte gebunden und verpflichtet, zu ihrer Verwirklichung beizutragen.
 
-1 Einschränkungen von Grundrechten bedürfen einer gesetzlichen Grundlage. Schwerwiegende Einschränkungen müssen im Gesetz selbst vorgesehen sein. Ausgenommen sind Fälle ernster, unmittelbarer und nicht anders abwendbarer Gefahr.
+<sup>3</sup> Die Behörden sorgen dafür, dass die Grundrechte, soweit sie sich dazu eignen, auch unter Privaten wirksam werden.
 
-2 Einschränkungen von Grundrechten müssen durch ein öffentliches Interesse oder durch den Schutz von Grundrechten Dritter gerechtfertigt sein.
+#### Art. 36 Einschränkungen von Grundrechten
+<sup>1</sup> Einschränkungen von Grundrechten bedürfen einer gesetzlichen Grundlage. Schwerwiegende Einschränkungen müssen im Gesetz selbst vorgesehen sein. Ausgenommen sind Fälle ernster, unmittelbarer und nicht anders abwendbarer Gefahr.
 
-3 Einschränkungen von Grundrechten müssen verhältnismässig sein.
+<sup>2</sup> Einschränkungen von Grundrechten müssen durch ein öffentliches Interesse oder durch den Schutz von Grundrechten Dritter gerechtfertigt sein.
 
-4 Der Kerngehalt der Grundrechte ist unantastbar.
+<sup>3</sup> Einschränkungen von Grundrechten müssen verhältnismässig sein.
+
+<sup>4</sup> Der Kerngehalt der Grundrechte ist unantastbar.
