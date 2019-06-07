@@ -276,3 +276,34 @@ Die Freiheit der Kunst ist gewährleistet.
 <sup>3</sup> Einschränkungen von Grundrechten müssen verhältnismässig sein.
 
 <sup>4</sup> Der Kerngehalt der Grundrechte ist unantastbar.
+
+### 2. Kapitel: Bürgerrecht und politische Rechte
+#### Art. 37 Bürgerrechte
+<sup>1</sup> Schweizerbürgerin oder Schweizerbürger ist, wer das Bürgerrecht einer Gemeinde und das Bürgerrecht des Kantons besitzt.
+
+~~<sup>2</sup> Niemand darf wegen seiner Bürgerrechte bevorzugt oder benachteiligt werden. Ausgenommen sind Vorschriften über die politischen Rechte in Bürgergemeinden und Korporationen sowie über die Beteiligung an deren Vermögen, es sei denn, die kantonale Gesetzgebung sehe etwas anderes vor.~~
+
+<sup>2</sup> Niemand darf wegen seiner Bürgerrechte bevorzugt oder benachteiligt werden. Ausgenommen sind Vorschriften über die politischen Rechte in Bürgergemeinden.
+
+#### Art. 38 Erwerb und Verlust der Bürgerrechte
+<sup>1</sup> Der Bund regelt Erwerb und Verlust der Bürgerrechte durch Abstammung, Heirat und Adoption. Er regelt zudem den Verlust des Schweizer Bürgerrechts aus anderen Gründen sowie die Wiedereinbürgerung.
+
+~~<sup>2</sup> Er erlässt Mindestvorschriften über die Einbürgerung von Ausländerinnen und Ausländern durch die Kantone und erteilt die Einbürgerungsbewilligung.~~
+
+<sup>3</sup> Er erleichtert die Einbürgerung von:
+  a. Personen der dritten Ausländergeneration;
+  b. staatenlosen Kindern.
+
+#### Art. 39 Ausübung der politischen Rechte
+<sup>1</sup> Der Bund regelt die Ausübung der politischen Rechte in eidgenössischen, die Kantone regeln sie in kantonalen und kommunalen Angelegenheiten.
+
+<sup>2</sup> Die politischen Rechte werden am Wohnsitz ausgeübt. Bund und Kantone können Ausnahmen vorsehen.
+
+<sup>3</sup> Niemand darf die politischen Rechte in mehr als einem Kanton ausüben.
+
+~~<sup>4</sup> Die Kantone können vorsehen, dass Neuzugezogene das Stimmrecht in kantonalen und kommunalen Angelegenheiten erst nach einer Wartefrist von höchstens drei Monaten nach der Niederlassung ausüben dürfen.~~
+
+#### Art. 40 Auslandschweizerinnen und Auslandschweizer
+<sup>1</sup> Der Bund fördert die Beziehungen der Auslandschweizerinnen und Auslandschweizer untereinander und zur Schweiz. Er kann Organisationen unterstützen, die dieses Ziel verfolgen.
+
+<sup>2</sup> Er erlässt Vorschriften über die Rechte und Pflichten der Auslandschweizerinnen und Auslandschweizer, namentlich in Bezug auf die Ausübung der politischen Rechte im Bund, die Erfüllung der Pflicht, Militär- oder Ersatzdienst zu leisten, die Unterstützung sowie die Sozialversicherungen.
