@@ -1,5 +1,17 @@
+# Vorwort
+## Stellung in der Rechtshierarchie
+Die Bundesverfassung steht auf der obersten Stufe des schweizerischen Rechtssystems. Ihr sind sämtliche Verordnungen und Erlasse des Bundes sowie die Verfassungen, Gesetze, Verordnungen und Erlasse der Kantone und der Gemeinden untergeordnet. Grundsätzlich dürfen diese daher der Bundesverfassung nicht widersprechen.
+
+Eine Ausnahme zu diesem Grundsatz bilden die Bundesgesetze. Sie müssen vom Bundesgericht und anderen Gerichten auch bei Verfassungswidrigkeit angewandt werden. Es gibt somit keine Verfassungsgerichtsbarkeit für Bundesgesetze. Diese spezielle Regelung ist Ausdruck der stärkeren Gewichtung des Demokratieprinzips gegenüber dem Rechtsstaatsprinzip: Die von der Volksvertretung erlassenen – und allenfalls in einem Referendum vom Stimmvolk angenommenen – Gesetze sollen nicht durch ein Gericht ausser Kraft gesetzt werden können.
+
+## Revisionsmöglichkeiten
+Die Bundesverfassung kann jederzeit abgeändert werden. Dabei bedarf die Abänderung der Zustimmung der Mehrheit des Volkes und der Kantone (Ständemehr). Inhaltlich ist der Abänderbarkeit dadurch Schranken gesetzt, dass die Verfassung zwingendes Völkerrecht nicht verletzen darf. Die Teilrevision darf zudem nicht gegen den Grundsatz der Einheit der Materie verstossen (Art. 193 und Art. 194 BV). Als ungeschriebene Voraussetzung ist auch die faktische Durchführbarkeit der Initiative anerkannt. Ob weitere inhaltliche Schranken bestehen, indem die Kernbereiche der fundamentalen Normen der Verfassung wie Grundrechte, Föderalismus, Demokratie und Rechtsstaat verbindlich sind, wird in der Praxis der Bundesversammlung bisher verneint, von der juristischen Lehre aber uneinheitlich beurteilt.
+
+Eine Verfassungsänderung kann durch einen Beschluss der Bundesversammlung oder vom Volk durch eine Volksinitiative verlangt werden. Die Bundesverfassung der Schweiz ist – im Gegensatz zum Beispiel zur Verfassung der Vereinigten Staaten – eine Verfassung, die häufig modifiziert wird.
+
 # Bundesverfassung der Schweizerischen Eidgenossenschaft
-vom 18. April 1999 (Stand am 23. September 2018)
+Vom 18. April 1999 (Stand am 23. September 2018)
+Quelle: https://www.admin.ch/opc/de/classified-compilation/19995395/index.html
 
 ## Präambel
 ~~Im Namen Gottes des Allmächtigen!~~
@@ -170,6 +182,8 @@ Die Freiheit der Kunst ist gewährleistet.
 ~~<sup>2</sup> Enteignungen und Eigentumsbeschränkungen, die einer Enteignung gleichkommen, werden voll entschädigt.~~
 
 *<sup>2</sup> Enteignungen und Eigentumsbeschränkungen an persönlichem Eigentum, die einer Enteignung gleichkommen, werden voll entschädigt.*
+
+*<sup>3</sup> Das private Eigentum ist untersagt.*
   
 #### Art. 27 Wirtschaftsfreiheit
 ~~<sup>1</sup> Die Wirtschaftsfreiheit ist gewährleistet.~~
@@ -245,7 +259,7 @@ Die Freiheit der Kunst ist gewährleistet.
 
 <sup>2</sup> Wer staatliche Aufgaben wahrnimmt, ist an die Grundrechte gebunden und verpflichtet, zu ihrer Verwirklichung beizutragen.
 
-<sup>3</sup> Die Behörden sorgen dafür, dass die Grundrechte, soweit sie sich dazu eignen, auch unter Privaten wirksam werden.
+<~~sup>3</sup> Die Behörden sorgen dafür, dass die Grundrechte, soweit sie sich dazu eignen, auch unter Privaten wirksam werden.~~
 
 #### Art. 36 Einschränkungen von Grundrechten
 <sup>1</sup> Einschränkungen von Grundrechten bedürfen einer gesetzlichen Grundlage. Schwerwiegende Einschränkungen müssen im Gesetz selbst vorgesehen sein. Ausgenommen sind Fälle ernster, unmittelbarer und nicht anders abwendbarer Gefahr.
