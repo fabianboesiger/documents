@@ -307,3 +307,29 @@ Die Freiheit der Kunst ist gewährleistet.
 <sup>1</sup> Der Bund fördert die Beziehungen der Auslandschweizerinnen und Auslandschweizer untereinander und zur Schweiz. Er kann Organisationen unterstützen, die dieses Ziel verfolgen.
 
 <sup>2</sup> Er erlässt Vorschriften über die Rechte und Pflichten der Auslandschweizerinnen und Auslandschweizer, namentlich in Bezug auf die Ausübung der politischen Rechte im Bund, die Erfüllung der Pflicht, Militär- oder Ersatzdienst zu leisten, die Unterstützung sowie die Sozialversicherungen.
+
+## 3. Kapitel: Sozialziele
+### Art. 41
+~~<sup>1</sup> Bund und Kantone setzen sich in Ergänzung zu persönlicher Verantwortung und privater Initiative dafür ein, dass:~~
+
+*<sup>1</sup> Bund und Kantone setzen sich dafür ein, dass:*
+
+  a. jede Person an der sozialen Sicherheit teilhat;
+
+  b. jede Person die für ihre Gesundheit notwendige Pflege erhält;
+
+  c. Familien als Gemeinschaften von Erwachsenen und Kindern geschützt und gefördert werden;
+
+  d. Erwerbsfähige ihren Lebensunterhalt durch Arbeit zu angemessenen Bedingungen bestreiten können;
+
+  e. Wohnungssuchende für sich und ihre Familie eine angemessene Wohnung zu tragbaren Bedingungen finden können;
+
+  f. Kinder und Jugendliche sowie Personen im erwerbsfähigen Alter sich nach ihren Fähigkeiten bilden, aus- und weiterbilden können;
+
+  g. Kinder und Jugendliche in ihrer Entwicklung zu selbstständigen und sozial verantwortlichen Personen gefördert und in ihrer sozialen, kulturellen und politischen Integration unterstützt werden.
+
+<sup>2</sup> Bund und Kantone setzen sich dafür ein, dass jede Person gegen die wirtschaftlichen Folgen von Alter, Invalidität, Krankheit, Unfall, Arbeitslosigkeit, Mutterschaft, Verwaisung und Verwitwung gesichert ist.
+
+<sup>3</sup> Sie streben die Sozialziele im Rahmen ihrer verfassungsmässigen Zuständigkeiten und ihrer verfügbaren Mittel an.
+
+<sup>4</sup> Aus den Sozialzielen können keine unmittelbaren Ansprüche auf staatliche Leistungen abgeleitet werden.
