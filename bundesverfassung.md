@@ -266,7 +266,7 @@ Die Freiheit der Kunst ist gewährleistet.
 
 <sup>2</sup> Wer staatliche Aufgaben wahrnimmt, ist an die Grundrechte gebunden und verpflichtet, zu ihrer Verwirklichung beizutragen.
 
-<~~sup>3</sup> Die Behörden sorgen dafür, dass die Grundrechte, soweit sie sich dazu eignen, auch unter Privaten wirksam werden.~~
+~~<sup>3</sup> Die Behörden sorgen dafür, dass die Grundrechte, soweit sie sich dazu eignen, auch unter Privaten wirksam werden.~~
 
 #### Art. 36 Einschränkungen von Grundrechten
 <sup>1</sup> Einschränkungen von Grundrechten bedürfen einer gesetzlichen Grundlage. Schwerwiegende Einschränkungen müssen im Gesetz selbst vorgesehen sein. Ausgenommen sind Fälle ernster, unmittelbarer und nicht anders abwendbarer Gefahr.
