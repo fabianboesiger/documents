@@ -1,4 +1,6 @@
 # Vorwort
+Quelle: https://de.wikipedia.org/wiki/Bundesverfassung_der_Schweizerischen_Eidgenossenschaft
+
 ## Stellung in der Rechtshierarchie
 Die Bundesverfassung steht auf der obersten Stufe des schweizerischen Rechtssystems. Ihr sind sämtliche Verordnungen und Erlasse des Bundes sowie die Verfassungen, Gesetze, Verordnungen und Erlasse der Kantone und der Gemeinden untergeordnet. Grundsätzlich dürfen diese daher der Bundesverfassung nicht widersprechen.
 
@@ -10,11 +12,11 @@ Die Bundesverfassung kann jederzeit abgeändert werden. Dabei bedarf die Abände
 Eine Verfassungsänderung kann durch einen Beschluss der Bundesversammlung oder vom Volk durch eine Volksinitiative verlangt werden. Die Bundesverfassung der Schweiz ist – im Gegensatz zum Beispiel zur Verfassung der Vereinigten Staaten – eine Verfassung, die häufig modifiziert wird.
 
 # Bundesverfassung der Schweizerischen Eidgenossenschaft
-Vom 18. April 1999 (Stand am 23. September 2018)
-
 Quelle: https://www.admin.ch/opc/de/classified-compilation/19995395/index.html
 
-Vorschläge für Entfernungen sind ~~durchgestrichen~~, Vorschläge für Erweiterung sind *kursiv*
+Vom 18. April 1999 (Stand am 23. September 2018)
+
+Vorschläge für Entfernungen sind ~~durchgestrichen~~, Vorschläge für Erweiterungen sind *kursiv*
 
 ## Präambel
 ~~Im Namen Gottes des Allmächtigen!~~
