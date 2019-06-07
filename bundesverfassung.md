@@ -1,6 +1,8 @@
 # Vorwort
 Quelle: https://de.wikipedia.org/wiki/Bundesverfassung_der_Schweizerischen_Eidgenossenschaft
 
+Zuletzt geändert am 6. Juni 2019
+
 ## Stellung in der Rechtshierarchie
 Die Bundesverfassung steht auf der obersten Stufe des schweizerischen Rechtssystems. Ihr sind sämtliche Verordnungen und Erlasse des Bundes sowie die Verfassungen, Gesetze, Verordnungen und Erlasse der Kantone und der Gemeinden untergeordnet. Grundsätzlich dürfen diese daher der Bundesverfassung nicht widersprechen.
 
