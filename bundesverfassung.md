@@ -291,8 +291,10 @@ Die Freiheit der Kunst ist gewährleistet.
 ~~<sup>2</sup> Er erlässt Mindestvorschriften über die Einbürgerung von Ausländerinnen und Ausländern durch die Kantone und erteilt die Einbürgerungsbewilligung.~~
 
 <sup>3</sup> Er erleichtert die Einbürgerung von:
-  a. Personen der dritten Ausländergeneration;
-  b. staatenlosen Kindern.
+
+a. Personen der dritten Ausländergeneration;
+  
+b. staatenlosen Kindern.
 
 #### Art. 39 Ausübung der politischen Rechte
 <sup>1</sup> Der Bund regelt die Ausübung der politischen Rechte in eidgenössischen, die Kantone regeln sie in kantonalen und kommunalen Angelegenheiten.
@@ -314,19 +316,19 @@ Die Freiheit der Kunst ist gewährleistet.
 
 *<sup>1</sup> Bund und Kantone setzen sich dafür ein, dass:*
 
-  a. jede Person an der sozialen Sicherheit teilhat;
+a. jede Person an der sozialen Sicherheit teilhat;
 
-  b. jede Person die für ihre Gesundheit notwendige Pflege erhält;
+b. jede Person die für ihre Gesundheit notwendige Pflege erhält;
 
-  c. Familien als Gemeinschaften von Erwachsenen und Kindern geschützt und gefördert werden;
+c. Familien als Gemeinschaften von Erwachsenen und Kindern geschützt und gefördert werden;
 
-  d. Erwerbsfähige ihren Lebensunterhalt durch Arbeit zu angemessenen Bedingungen bestreiten können;
+d. Erwerbsfähige ihren Lebensunterhalt durch Arbeit zu angemessenen Bedingungen bestreiten können;
 
-  e. Wohnungssuchende für sich und ihre Familie eine angemessene Wohnung zu tragbaren Bedingungen finden können;
+e. Wohnungssuchende für sich und ihre Familie eine angemessene Wohnung zu tragbaren Bedingungen finden können;
 
-  f. Kinder und Jugendliche sowie Personen im erwerbsfähigen Alter sich nach ihren Fähigkeiten bilden, aus- und weiterbilden können;
+f. Kinder und Jugendliche sowie Personen im erwerbsfähigen Alter sich nach ihren Fähigkeiten bilden, aus- und weiterbilden können;
 
-  g. Kinder und Jugendliche in ihrer Entwicklung zu selbstständigen und sozial verantwortlichen Personen gefördert und in ihrer sozialen, kulturellen und politischen Integration unterstützt werden.
+g. Kinder und Jugendliche in ihrer Entwicklung zu selbstständigen und sozial verantwortlichen Personen gefördert und in ihrer sozialen, kulturellen und politischen Integration unterstützt werden.
 
 <sup>2</sup> Bund und Kantone setzen sich dafür ein, dass jede Person gegen die wirtschaftlichen Folgen von Alter, Invalidität, Krankheit, Unfall, Arbeitslosigkeit, Mutterschaft, Verwaisung und Verwitwung gesichert ist.
 
