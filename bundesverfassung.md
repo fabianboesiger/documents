@@ -11,7 +11,10 @@ Eine Verfassungsänderung kann durch einen Beschluss der Bundesversammlung oder 
 
 # Bundesverfassung der Schweizerischen Eidgenossenschaft
 Vom 18. April 1999 (Stand am 23. September 2018)
+
 Quelle: https://www.admin.ch/opc/de/classified-compilation/19995395/index.html
+
+Vorschläge für Entfernungen sind ~~durchgestrichen~~, Vorschläge für Erweiterung sind *kursiv*
 
 ## Präambel
 ~~Im Namen Gottes des Allmächtigen!~~
