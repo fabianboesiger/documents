@@ -143,8 +143,8 @@ Das Recht auf Ehe und Familie ist gewährleistet.
 #### Art. 18 Sprachenfreiheit
 Die Sprachenfreiheit ist gewährleistet.
 
-~~#### Art. 19 Anspruch auf Grundschulunterricht~~
-*#### Art. 19 Anspruch auf Bildung*
+#### ~~Art. 19 Anspruch auf Grundschulunterricht~~
+#### *Art. 19 Anspruch auf Bildung*
 ~~Der Anspruch auf ausreichenden und unentgeltlichen Grundschulunterricht ist gewährleistet.~~
 
 *Der Anspruch auf ausreichende und unentgeltliche Bildung ist gewährleistet.*
