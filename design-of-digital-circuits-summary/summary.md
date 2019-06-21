@@ -246,6 +246,7 @@ F(A, B, C) = ΠM(0, 1, 2) = m1 + m2 + m3
 
 * Basic logic structures are constructed out of individual MOS transistors
 * Logic gates implement simple boolean functions
+* A set of gates is logically complete if we can build a circuit for any truth table we wish without any other kind of gate (Example: AND, OR, NOT)
 
 |Gate|MOS Transistor Construction|
 |---|---|
@@ -294,4 +295,269 @@ Does binary addition, similar to decimal addition.
 
 ![](full-adder.png)
 
+#### Tri-State Buffer
+
+Enables gating of different signals onto a wire.
+
+![](tri-state-buffer.png)
+
+`Z`: Signal that is not driven by any circuit
+
+#### Basic Storage Elements
+
+##### R-S Latch
+
+![](r-s-latch.png)
+
+##### Gated D Latch
+
+![](gated-d-latch.png)
+
+##### Gated-D-Latch-Based Register
+
+Multiple gated D latches to store more data.
+
+![](gated-d-latch-register.png)
+
+##### D Flip-Flop
+
+Modification of gated D latch to work with finite state machines. When the clock is low, the master propagates the signal to the slave, only when the clock is high, the slave latches the signal.
+
+![](d-flip-flop.png)
+
+##### D-Flip-Flop-Based Register
+
+Multiple D flip-flops to store more data.
+
+![](d-flip-flop-register.png)
+
+### Memory
+
+* Memory is locations that can be written to or read from
+* Every unique location in memory is indexed with a unique **address**. `n` locations require `log_2(n)` address bits.
+* **Addressability**: the number of bits of information stored in each location.
+* The entire set of unique locations in memory is referred to as the **address space**
+
+![](memory.png)
+
+### Sequential Logic Circuits
+
+#### Combinational
+
+* Only depends on current inputs
+
+#### Sequential
+
+* Depends on current and past inputs
+* The state of the logic circuits is a snapshot of all relevant elements at this moment
+* A clock dictates when to change state, at the start of the clock cycle, the system state changes
+
+![](state-diagram.png)
+
+State diagram of a lock
+
+### Finite State Machines
+
+* Finite state machines are dicrete-time models of a stateful system
+* A FSM shows the set of all possible states of a system and how the system transitions from one state to another
+* A FSM consists of five elements
+  * A finite number of states
+  * A finite number of external inputs
+  * A finite number of external outputs
+  * An explicit specification of all state transisitons
+  * An explicit specification of what determines each external output value
+* A FSM consists of three separate parts
+  * Next state logic
+  * State register
+  * Output logic
+* States can be encoded in different ways
+  * **Fully Encoded**: Minimizes the amount of flip-flops, but not necessarily the output logic (00, 01, 10, 11)
+  * **1-Hot Encoded**: Minimizes the next state logic, but maximizes the amount of flip-flops (0001, 0010, 0100, 1000)
+  * **Output Encoded**: Minimizes the output logic as the outputs are directly accessible in the state encoding, only works for moore machines (001, 010, 100, 110 for the swiss traffic light)
+
+* **Moore FSM**: Outputs depend only on the current state
+
+![](moore-finite-state-machine.png)
+![](moore-finite-state-machine-diagram.png)
+
+* **Mealy FSM**: Outputs depend on the current state and the inputs
+
+![](mealy-finite-state-machine.png)
+![](mealy-finite-state-machine-diagram.png)
+
+#### Transition Diagrams, State Transition Tables, Output Tables
+
+![](finite-state-machine-transition-diagram.png)
+
+|Current State|Inputs||Next State|
+|---|---|---|---|
+|S|T_A|T_B|S'|
+|S0|0|X|S1|
+|S0|1|X|S0|
+|S1|X|X|S2|
+|S2|X|0|S3|
+|S2|X|1|S2|
+|S3|X|X|S0|
+
+|State|Encoding|
+|---|---|
+|S0|00|
+|S1|01|
+|S2|10|
+|S3|11|
+
+```
+S'_1 = (¬S_1 * S_0) + (S_1 * ¬S_0 * ¬T_B) + (S_1 * ¬S_0 * T_B) = S_1 XOR S_0
+S'_0 = (¬S_1 * ¬S_0 * ¬T_A) + (S_1 * ¬S_0 * ¬T_B)
+```
+
+|Current State|Outputs||
+|---|---|---|
+|S|L_A|L_B|
+|S0|green|red|
+|S1|yellow|red|
+|S2|red|green|
+|S3|red|yellow|
+
+|Output|Encoding|
+|---|---|
+|green|00|
+|yellow|01|
+|red|10|
+
+```
+L_A1 = S_1
+L_A0 = ¬S_1 * S_0
+L_B1 = ¬S_1
+L_B0 = S_1 * S_0
+```
+
+From this information we can implement this finite state machine as a logic circuit. Furthermore we can draw the following timing diagram for any given clock, reset, and input signals.
+
+![](finite-state-machine-timing-diagram.png)
+
 ## Karnaugh Maps
+
+* Boolean expressions can be reduced to fewer terms
+* K-Maps help to visualize adjacencies in up to six dimensions
+
+![](k-map.png)
+
+## Verilog
+
+* Verilog is a hardware description language (HDL)
+* Can be used to simulate the behavior of circuits and synthesize portions of it
+* Modules are the main building block in Verilog
+
+![](verilog-modules.png)
+
+Modules
+
+```
+module test 
+(
+    input a,
+    input b,
+    output y 
+);
+
+endmodule
+```
+
+Multi-Bit Input/Outputs
+
+```
+input [31:0] a;
+```
+
+Wires
+
+* Wires are used to connect modules within other modules
+
+```
+module top (A, SEL, C, Y);
+    input A, SEL, C;
+    output Y;
+    wire n1;
+
+    small i_first(.A(A), .B(SEL), .Y(n1));
+    small i_second(.A(n1), .B(C), .Y(Y));
+
+endmodule
+```
+
+Bitwise Operators
+
+```
+module example (a, b, c, y);
+    input a;
+    input b;
+    input c;
+    output y;
+    
+    assign y1 = a & b;    // AND
+    assign y2 = a | b;    // OR
+    assign y3 = a ^ b;    // XOR
+    assign y4 = ~(a & b); // NAND
+    assign y5 = ~(a | b); // NOR
+
+endmodule
+```
+
+Reduction Operators
+
+```
+module and8 (
+    input [7:0] a,
+    output y
+);
+
+    assign y = &a;
+
+endmodule
+```
+
+Conditional Assignment
+```
+module mux2(
+    input [3:0] d0, d1,
+    input s,
+    output [3:0] y
+);
+
+    assign y = s ? d1 : d0;
+
+endmodule
+```
+
+Precedence of Operations
+
+* The operators on top have the highest precedence
+
+|Symbol|Operation|
+|---|---|
+|~|NOT|
+|*, /, %|mult, div, mod|
+|+, -|add, sub|
+|<<, >>|shift|
+|<<<, >>>|arithmetic shift|
+|<, <=, >, >=|comparison|
+|==, !=|equal, not equal|
+|&, ~&|AND, NAND|
+|^, ~^|XOR, XNOR|
+|\|, ~\||OR, NOR|
+|?:|ternary operator|
+
+Express Numbers
+
+`N'Bxx`
+* `N` Number of bits
+* `B` Base, can be `b` (binary), `h` (hexadecimal), `d` (decimal), `o` (octal)
+* `xx` Number, can have `X` and `Z` as values, underscores can be used to improve readability
+
+|Verilog|Stored Number|
+|---|---|
+|`4'b1001`|1001|
+|`4'd5`|0101|
+|`12'hFA3`|111110100011|
+|`12'h0`|000000000000|
