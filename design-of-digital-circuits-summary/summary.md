@@ -89,73 +89,7 @@ A machine has a 4 GB DRAM main memory system. Each row is refreshed every 64 ms.
 5. When this new refresh policy is applied, the refresh energy consumption drops significantly during a run of application B. In contrast, during a run of application A, the refresh energy consumption reduces only slightly. Is this possible? Why or why not?
    * This is possible. If application B has a large working set, it could access a large fraction of the memory rows (within the 64 ms refresh window) and hence these rows do not have to be refreshed explicitly. On the other hand, application A could have a much smaller working set and hence a large fraction of rows still have to be refreshed at the 64 ms rate.
 
-
-
-## What is a Computer
-
-* A computer has three main components
-  * Computation
-  * Communication
-  * Memory
-
-### FPGAs
-
-* Field Programmable Gate Array
-* Reconfigurable, flexible hardware
-* Two main building blocks
-  * **Look-Up Tables (LUT)**: Can implement any 3 bit input function
-  * **Switches**: Connect the LUTs
-* Programmable with Verilog or VHDL
-
-### Microprocessors
-
-* Common building block of comupters
-* Programmable with C, C++, Java, ...
-
-### MOS Transistors
-
-*Abstraction Layer: Devices*
-
-* **M**etal **O**xide **S**emiconductors are combined to build a transistor
-* By combining many transistors we can build simple logic gates
-* N-Type Transistor: If the gate is supplied with a high voltage, the connection from source to drain acts like a piece of wire, otherwise the connection is broken
-* P-Type Transistor: This transistor works analogous to the N-Type Transistor, except the gate is open when supplied with a low voltage
-
-### Logic Gates
-
-*Abstraction Layer: Logic*
-
-* Basic logic structures are constructed out of individual MOS transistors
-* Logic gates implement simple boolean functions
-
-|Gate|MOS Transistor Construction|
-|---|---|
-|NOT|![](not-gate.png)|
-|NAND|![](nand-gate.png)|
-|AND|![](and-gate.png)|
-
-* General form used to construct any inverting logic gate
-  * The networks may consist of transistors in series or in parallel
-  * When transistors are in parallel, the network is *ON* if one of the transistors is *ON*
-  * When transistors are in series, the network is *ON* only if all transistors are *ON*
-  * pMOS transistors are used for pull-up, they pass high voltages well
-  * nMOS transistors are used for pull-down, they pass low volatges well
-  * Exactly one network should be *ON*, and the other network should be *OFF* at any given time
-  * Series connections are slower than parallel connections, pseudo nMOS logic can be used as an alternative
-* **Dynamic Power Consumption**: `C * V^2 * f`, `C` is the capacitance of the circuit, `V` is the supply voltage, `f` is the charging frequency of the capacitor
-* **Static Power Consumption**: `V * I_leakage`
-
-![](logic-gates.png)
-
-* Logic gates can be extended to three or more inputs
-
-### Logic Circuits
-
-* A logic circuit is composed of inputs and outputs
-* The **functional specification** describes relationship between inputs and outputs
-* The **timing specification** describes the delay between inputs changing and outputs responding
-
-### Boolean Algebra
+## Boolean Algebra
 
 * not A: `Ā` (In this summary: `¬A`) 
 * A and B: `A • B` (In this summary: `A * B`)
@@ -242,6 +176,7 @@ Example
 In the truth table, we can build a minterm from each row, when a variable is zero, we write the variable inverted. We add all minterms where the result is true.
 
 Example
+
 |A|B|C|Minterms|
 |---|---|---|---|
 |0|0|0|`¬A * ¬B * ¬C = m1`|
@@ -263,6 +198,7 @@ Example
 In the truth table, we can build a maxterm from each row, when a variable is one, we write the variable inverted. We multiply all maxterms where the result is false.
 
 Example
+
 |A|B|C|Maxterms|
 |---|---|---|---|
 |0|0|0|`A * B * C = M1`|
@@ -273,3 +209,89 @@ Canonical form
 ```
 F(A, B, C) = ΠM(0, 1, 2) = m1 + m2 + m3
 ```
+
+## What is a Computer
+
+* A computer has three main components
+  * Computation
+  * Communication
+  * Memory
+
+### FPGAs
+
+* Field Programmable Gate Array
+* Reconfigurable, flexible hardware
+* Two main building blocks
+  * **Look-Up Tables (LUT)**: Can implement any 3 bit input function
+  * **Switches**: Connect the LUTs
+* Programmable with Verilog or VHDL
+
+### Microprocessors
+
+* Common building block of comupters
+* Programmable with C, C++, Java, ...
+
+### MOS Transistors
+
+*Abstraction Layer: Devices*
+
+* **M**etal **O**xide **S**emiconductors are combined to build a transistor
+* By combining many transistors we can build simple logic gates
+* N-Type Transistor: If the gate is supplied with a high voltage, the connection from source to drain acts like a piece of wire, otherwise the connection is broken
+* P-Type Transistor: This transistor works analogous to the N-Type Transistor, except the gate is open when supplied with a low voltage
+
+### Logic Gates
+
+*Abstraction Layer: Logic*
+
+* Basic logic structures are constructed out of individual MOS transistors
+* Logic gates implement simple boolean functions
+
+|Gate|MOS Transistor Construction|
+|---|---|
+|NOT|![](not-gate.png)|
+|NAND|![](nand-gate.png)|
+|AND|![](and-gate.png)|
+
+* General form used to construct any inverting logic gate
+  * The networks may consist of transistors in series or in parallel
+  * When transistors are in parallel, the network is *ON* if one of the transistors is *ON*
+  * When transistors are in series, the network is *ON* only if all transistors are *ON*
+  * pMOS transistors are used for pull-up, they pass high voltages well
+  * nMOS transistors are used for pull-down, they pass low volatges well
+  * Exactly one network should be *ON*, and the other network should be *OFF* at any given time
+  * Series connections are slower than parallel connections, pseudo nMOS logic can be used as an alternative
+* **Dynamic Power Consumption**: `C * V^2 * f`, `C` is the capacitance of the circuit, `V` is the supply voltage, `f` is the charging frequency of the capacitor
+* **Static Power Consumption**: `V * I_leakage`
+
+![](logic-gates.png)
+
+* Logic gates can be extended to three or more inputs
+
+### Logic Circuits
+
+* A logic circuit is composed of inputs and outputs
+* The **functional specification** describes relationship between inputs and outputs
+* The **timing specification** describes the delay between inputs changing and outputs responding
+
+### Combinational Building Blocks
+
+#### Decoder
+
+It has `n` inputs and `n^2` outputs, where exactly one output is 1 and the rest are 0s.
+
+![](decoder.png)
+
+#### Multiplexer
+
+Selects one of the `n` inputs to connect it to the output, needs a `log_2(n)`-bit control input.
+
+![](multiplexer.png)
+
+#### Full Adder
+
+Does binary addition, similar to decimal addition.
+
+![](full-adder.png)
+
+## Karnaugh Maps
