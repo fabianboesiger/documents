@@ -250,9 +250,9 @@ F(A, B, C) = ΠM(0, 1, 2) = m1 + m2 + m3
 
 |Gate|MOS Transistor Construction|
 |---|---|
-|NOT|![](not-gate.png)|
-|NAND|![](nand-gate.png)|
-|AND|![](and-gate.png)|
+|NOT|![](images/not-gate.png)|
+|NAND|![](images/nand-gate.png)|
+|AND|![](images/and-gate.png)|
 
 * General form used to construct any inverting logic gate
   * The networks may consist of transistors in series or in parallel
@@ -265,7 +265,7 @@ F(A, B, C) = ΠM(0, 1, 2) = m1 + m2 + m3
 * **Dynamic Power Consumption**: `C * V^2 * f`, `C` is the capacitance of the circuit, `V` is the supply voltage, `f` is the charging frequency of the capacitor
 * **Static Power Consumption**: `V * I_leakage`
 
-![](logic-gates.png)
+![](images/logic-gates.png)
 
 * Logic gates can be extended to three or more inputs
 
@@ -281,25 +281,25 @@ F(A, B, C) = ΠM(0, 1, 2) = m1 + m2 + m3
 
 It has `n` inputs and `n^2` outputs, where exactly one output is 1 and the rest are 0s.
 
-![](decoder.png)
+![](images/decoder.png)
 
 #### Multiplexer
 
 Selects one of the `n` inputs to connect it to the output, needs a `log_2(n)`-bit control input.
 
-![](multiplexer.png)
+![](images/multiplexer.png)
 
 #### Full Adder
 
 Does binary addition, similar to decimal addition.
 
-![](full-adder.png)
+![](images/full-adder.png)
 
 #### Tri-State Buffer
 
 Enables gating of different signals onto a wire.
 
-![](tri-state-buffer.png)
+![](images/tri-state-buffer.png)
 
 `Z`: Signal that is not driven by any circuit
 
@@ -307,29 +307,29 @@ Enables gating of different signals onto a wire.
 
 ##### R-S Latch
 
-![](r-s-latch.png)
+![](images/r-s-latch.png)
 
 ##### Gated D Latch
 
-![](gated-d-latch.png)
+![](images/gated-d-latch.png)
 
 ##### Gated-D-Latch-Based Register
 
 Multiple gated D latches to store more data.
 
-![](gated-d-latch-register.png)
+![](images/gated-d-latch-register.png)
 
 ##### D Flip-Flop
 
 Modification of gated D latch to work with finite state machines. When the clock is low, the master propagates the signal to the slave, only when the clock is high, the slave latches the signal.
 
-![](d-flip-flop.png)
+![](images/d-flip-flop.png)
 
 ##### D-Flip-Flop-Based Register
 
 Multiple D flip-flops to store more data.
 
-![](d-flip-flop-register.png)
+![](images/d-flip-flop-register.png)
 
 ### Memory
 
@@ -338,7 +338,7 @@ Multiple D flip-flops to store more data.
 * **Addressability**: the number of bits of information stored in each location.
 * The entire set of unique locations in memory is referred to as the **address space**
 
-![](memory.png)
+![](images/memory.png)
 
 ### Sequential Logic Circuits
 
@@ -352,7 +352,7 @@ Multiple D flip-flops to store more data.
 * The state of the logic circuits is a snapshot of all relevant elements at this moment
 * A clock dictates when to change state, at the start of the clock cycle, the system state changes
 
-![](state-diagram.png)
+![](images/state-diagram.png)
 
 State diagram of a lock
 
@@ -377,17 +377,17 @@ State diagram of a lock
 
 * **Moore FSM**: Outputs depend only on the current state
 
-![](moore-finite-state-machine.png)
-![](moore-finite-state-machine-diagram.png)
+![](images/moore-finite-state-machine.png)
+![](images/moore-finite-state-machine-diagram.png)
 
 * **Mealy FSM**: Outputs depend on the current state and the inputs
 
-![](mealy-finite-state-machine.png)
-![](mealy-finite-state-machine-diagram.png)
+![](images/mealy-finite-state-machine.png)
+![](images/mealy-finite-state-machine-diagram.png)
 
 #### Transition Diagrams, State Transition Tables, Output Tables
 
-![](finite-state-machine-transition-diagram.png)
+![](images/finite-state-machine-transition-diagram.png)
 
 |Current State|Inputs||Next State|
 |---|---|---|---|
@@ -434,14 +434,14 @@ L_B0 = S_1 * S_0
 
 From this information we can implement this finite state machine as a logic circuit. Furthermore we can draw the following timing diagram for any given clock, reset, and input signals.
 
-![](finite-state-machine-timing-diagram.png)
+![](images/finite-state-machine-timing-diagram.png)
 
 ## Karnaugh Maps
 
 * Boolean expressions can be reduced to fewer terms
 * K-Maps help to visualize adjacencies in up to six dimensions
 
-![](k-map.png)
+![](images/k-map.png)
 
 ## Verilog
 
@@ -449,7 +449,7 @@ From this information we can implement this finite state machine as a logic circ
 * Can be used to simulate the behavior of circuits and synthesize portions of it
 * Modules are the main building block in Verilog
 
-![](verilog-modules.png)
+![](images/verilog-modules.png)
 
 Modules
 
