@@ -349,6 +349,24 @@ Modification of gated D latch to work with finite state machines. When the clock
 
 ![](images/d-flip-flop.png)
 
+###### Enabled Flip-Flops
+
+The enable input (EN) controls when new data is stored.
+
+![](images/enabled-flip-flop.png)
+
+###### Resettable Flip-Flops
+
+The reset is used to set the output to 0, the **synchronous** resettable flip-flop resets only at the clock edge, the **asynchronous** resettable flip-flop resets immediately when reset is 1.
+
+![](images/resettable-flip-flop.png)
+
+###### Settable Flip-Flop
+
+If set is 1, the output is set to 1.
+
+![](images/settable-flip-flop.png)
+
 ##### D-Flip-Flop-Based Register
 
 Multiple D flip-flops to store more data.
@@ -645,3 +663,87 @@ endmodule
 mux2 mux2_8 (d0, d1, s, out);
 mux #(12) mux2_12 (d0, d1, s, out);
 ```
+
+Sequential Logic
+
+```
+module flop(
+    input clk, input[3:0] d, output reg[3:0] q);
+    
+    always@ (posedgeclk)
+        q <= d;
+        
+endmodule
+```
+
+* **Little Endian Format**: Bits are numbered from right to left, starting at the little end
+* **Big Endian Format**: Bits are numbered from left to right, starting at the big end
+
+## Instruction Set Architecture
+
+### MIPS Instruction Set Architecture
+
+### Exercise
+
+Rewrite the following program in MIPS assembly.
+
+```
+int fib(int n){
+    int a = 0;
+    int b = 1;
+    int c = a + b;
+    while (n > 1) {
+        c = a + b;
+        a = b;
+        b = c;
+        n--;
+    }
+    return c;
+}
+```
+
+```
+fib:
+    addi $sp, $sp, -16 // allocate stack space
+    sw   $16, 0($sp)   // save r16
+    add  $16, $4,  $0  // r16 for arg n
+    sw   $17, 4($sp)   // save r17
+    add  $17, $0,  $0  // r17 for a, init to 0
+    sw   $18, 8($sp)   // save r18
+    addi $18, $0,  1   // r18 for b, init to 1
+    sw   $31, 12($sp)  // save return address
+    add  $2,  $17, $18 // c = a + b
+branch:
+    slti $3,  $16, 2   // use r3 as temp
+    bne  $3,  $0,  done
+    add  $2,  $17, $18 // c = a + b
+    add  $17, $18, $0  // a = b
+    add  $18, $2,  $0  // b = c
+    addi $16, $16, -1  // n = n - 1j    branchdone:
+    lw   $31, 12($sp)  // restore r31
+    lw   $18, 8($sp)   // restore r18
+    lw   $17, 4($sp)   // restore r17
+    lw   $16, 0($sp)   // restore r16
+    addi $sp, $sp, 16  // restore stack pointer
+    jr   $31           // return to caller
+```
+
+Classify the following attributes as either a property of its microarchitecture or ISA.
+
+|Attribute|Microarchitecture|ISA|
+|---|---|---|
+|The machine does not have a subtract instruction||x|
+|The ALU of the machine does not have a subtract unit|x||
+|The machine does not have condition codes||x|
+|A 5-bit immediate can be specified in an ADD instruction||x|
+|It takes n cycles to execute an ADD instruction|x||
+|There are 8 general purpose registers||x|
+|A 2-to-1 mux feeds one of the inputs to ALU|x||
+|The register file has one input port and two output ports|x||
+
+1. If a given program runs on a processor with a higher frequency, does it imply that the processor always executes more instructions per second, compared to a processor with a lower frequency?
+   * No, it also depends on the amount of instructions per cycle (IPC).
+2. If a processor executes more of a given program’s instructions per second, does it imply that the processor always finishes the program faster, compared to a processor that executes fewer instructions per second?
+   * No, the total number of instructions required to execute a program may vary depending on the specific ISA.
+
+## Data Flow Programs
