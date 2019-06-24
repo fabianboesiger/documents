@@ -396,6 +396,21 @@ Draw an 8-input multiplexer on the module level using only 2-input multiplexers.
 
 State diagram of a lock
 
+#### Exercise
+
+Is the following code sequential or combinational?
+
+```
+module concat (input clk, input  data_in1, input data_in2, output reg  [1:0] data_out);
+    always @ (posedge clk, data_in1) if (data_in1)
+        data_out = {data_in1, data_in2};
+    else if (data_in2)
+        data_out = {data_in2, data_in1};
+endmodule
+```
+
+This code results in a sequential circuit, because `data_in2` is not in the sensitivity list, and thus `data_out` will always be `{data_in1, data_in2}`.
+
 ### Finite State Machines
 
 * Finite state machines are dicrete-time models of a stateful system
@@ -475,6 +490,15 @@ L_B0 = S_1 * S_0
 From this information we can implement this finite state machine as a logic circuit. Furthermore we can draw the following timing diagram for any given clock, reset, and input signals.
 
 ![](images/finite-state-machine-timing-diagram.png)
+
+### Exercise
+
+![](images/finite-state-machine-no-reset.png)
+
+1. Which critical component is missing in the FSM diagram above?
+   * The reset indication for the inital state.
+2. What kind of FSM is this?
+   * Moore FSM
 
 ## Karnaugh Maps
 
