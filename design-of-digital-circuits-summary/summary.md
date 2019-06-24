@@ -59,7 +59,7 @@
 * Observation: The overwhelming majority of DRAM rows can be refreshed much less often without losing data
 * Idea: Refresh weak rows more frequently, all other rows less frequently
 
-#### Example
+#### Exercise
 
 A supercomuter has a DRAM-based memory system with the following configuration:
 
@@ -189,6 +189,7 @@ F(A, B, C) = ∑m(3, 4, 5, 6, 7) = m3 + m4 + m5 + m6 + m7
 ```
 
 **Product of Sums Form, Conjunctive Normal Form, Maxterm Expansion**
+
 Example
 
 ```
@@ -209,6 +210,16 @@ Canonical form
 ```
 F(A, B, C) = ΠM(0, 1, 2) = m1 + m2 + m3
 ```
+
+The sum-of-products form and the product-of-sums form can be easily implemented with logic gates.
+
+Example: `Y = (¬A * ¬B * ¬C) + (A * ¬B * ¬C) + (A * ¬B * C)`
+
+![](images/logic-to-gates.png)
+
+Minterms and maxterms can be easily translated, for example `∑m(3, 4, 5, 6, 7) = ΠM(0, 1, 2)`, all indices except the ones in the first term are used to build the second term, and the other way around.
+
+Furthermore, if `F(A, B, C) = ∑m(3, 4, 5, 6, 7)`, then `¬F(A, B, C) = ∑m(0, 1, 2)`.
 
 ## What is a Computer
 
@@ -268,6 +279,19 @@ F(A, B, C) = ΠM(0, 1, 2) = m1 + m2 + m3
 ![](images/logic-gates.png)
 
 * Logic gates can be extended to three or more inputs
+
+#### Exercise
+
+Design the following circuits using only CMOS transistors (p-type and n-type MOS transistors).
+
+|Gate|MOS Transistor Construction|
+|---|---|
+|XOR|![](images/xor-gate.png)|
+|XNOR|![](images/xnor-gate.png)|
+
+We know that the gates AND, OR and NOT are logically complete. To show that the set of only a NOR gate is logically complete, build the AND, OR and NOT gates using only NOR gates.
+
+![](images/nor-gate-logically-complete.png)
 
 ### Logic Circuits
 
@@ -330,6 +354,22 @@ Modification of gated D latch to work with finite state machines. When the clock
 Multiple D flip-flops to store more data.
 
 ![](images/d-flip-flop-register.png)
+
+#### Programmable Logic Array
+
+With a PLA, any logic function can be implemented. The PLA consists of an array of AND gates followed by an array of OR gates, where the AND gates form the products in the sum-of-products form, and the OR gates form the sum.
+
+![](images/programmable-logic-array.png)
+
+#### Exercise
+
+Draw an 8-input multiplexer on the gate level using only AND, OR and NOT gates. Use as few gates as possible.
+
+![](images/8-1-multiplexer-gate-level.png)
+
+Draw an 8-input multiplexer on the module level using only 2-input multiplexers. Use as few multiplexers as possible.
+
+![](images/8-1-multiplexer-module-level.png)
 
 ### Memory
 
@@ -448,6 +488,8 @@ From this information we can implement this finite state machine as a logic circ
 * Verilog is a hardware description language (HDL)
 * Can be used to simulate the behavior of circuits and synthesize portions of it
 * Modules are the main building block in Verilog
+* **Structural HDL Implementation**: Module body contains gate-level description of the circuit
+* **Behavioral HDL Implementation**: Module body contains functional description of the circuit (Higher level of abstraction than structural HDL implementation)
 
 ![](images/verilog-modules.png)
 
@@ -561,3 +603,21 @@ Express Numbers
 |`4'd5`|0101|
 |`12'hFA3`|111110100011|
 |`12'h0`|000000000000|
+
+Parameterized Modules
+
+```
+module mux2 #(parameter width = 8) (
+    input [width-1:0] d0, d1,
+    input s,
+    output [width-1:0] y);
+     
+    assign y = s ? d1 : d0;
+
+endmodule
+
+// instantiation
+
+mux2 mux2_8 (d0, d1, s, out);
+mux #(12) mux2_12 (d0, d1, s, out);
+```
