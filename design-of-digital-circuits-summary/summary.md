@@ -398,23 +398,103 @@ Draw an 8-input multiplexer on the module level using only 2-input multiplexers.
 
 ![](images/memory.png)
 
-### Sequential Logic Circuits
+## Sequential and Combinational Logic Circuits
 
-#### Combinational
+### Combinational Logic Circuits
 
 * Only depends on current inputs
 
-#### Sequential
+#### Combinational Timing
+
+* Digital logic is an abstraction, in reality, outputs are delayed from the inputs as the transistors take a finite amount of time to switch
+* Delay is caused by
+  * The capacitance and resistance in a circuit
+  * The speed of light
+* The delay also depends on the voltage and temparature
+* **Contamination Delay** (`t_cd`): Delay until the output starts changing, the total contamination delay of a circuit is calculated by adding all the contamination delays in the shortest path
+* **Propagation Delay** (`t_pd`): Delay until the output finishes changing, the total propagation delay of a circuit is calculated by adding all the propagation delays in the longest path
+
+#### Glitches
+
+* **Glitch**: One input transition causes multiple output transitions
+* Glitches are visible in K-Maps
+
+![](images/glitch.png)
+
+* Glitches can be avoided by adding in the consensus term
+
+![](images/avoided-glitch.png)
+
+* We don't necessarily have to fix glitches as the circuit eventually is guaranteed to converge to the right value
+
+### Sequential Logic Circuits
 
 * Depends on current and past inputs
 * The state of the logic circuits is a snapshot of all relevant elements at this moment
 * A clock dictates when to change state, at the start of the clock cycle, the system state changes
 
-![](images/state-diagram.png)
+![](images/sequential-system-design.png)
 
-State diagram of a lock
+#### Sequential Timing
 
-#### Exercise
+* Signals must be stable when sampled by a flip-flop, specifically, the input must be stable at least `t_setup` before the clock edge and `t_hold` after the clock edge
+* **Setup Time** (`t_setup`): Time before the clock edge that data must be stable
+* **Hold Time** (`t_hold`): Time after the clock edge that data must be stable
+* **Aperture Time** (`t_a`): Time around the clock edge that data must be stable (`t_a = t_setup + t_hold`)
+
+![](images/sequential-timing.png)
+
+* **Contamination Delay clock-to-q** (`t_ccq`): Earliest time after the clock edge that the output of a flip-flop starts changing
+* **Propagation Delay clock-to-q** (`t_pcq`): Latest time after the clock edge that the output of a flip-flop stops changing
+
+![](images/flip-flop-output-timing.png)
+
+* **Sequencing Overhead**: The time wasted with not doing useful work `t_pcq + t_setup`
+* **Critical Path**: Path with the longest `t_pd`
+  * If too long, the design will run slowly
+  * If too short, each cycle will do very little useful work
+* **Clock Skew**: The clock does not reach all parts of the chip at the same time
+* **Safe Timing** 
+  * D2 must be stable for at least `t_setup` before the clock edge: Total time `T_c` of a sequential circuit is `T_c > t_pcq + t_pd + t_setup`
+  * D2 must be stable for at least `t_hold` after the clock edge: `t_ccq + t_cd > t_hold`, thus there needs to be a minimum contamination delay `t_cd > t_hold - t_ccq`, this is not dependant on `T_c`
+  * The maximum frequency `f_max = 1 / T_c`
+  * Requires considering the worst-case clock skew, which increases `t_setup` and `t_hold` by `t_skew`, the worst case skew
+
+![](images/total-sequential-time.png)
+
+### Circuit Verification
+
+* Is the circuit functionally corrrect?
+* Does the hardware meet all timing constraints?
+
+#### Functional Verification
+
+* Test the logical correctness of the design
+* Tested on a high level for performance gain
+
+```
+module testbench();
+    reg a, b, c;
+    wire y;
+    
+    sillyfunction dut(.a(a), .b(b), .c(c), .y(y));
+    initial begin
+        a = 0; b = 0; c = 0; #10; // apply input, wait 10ns
+        if(y !== 1) $display("000 failed."); // check result
+        c = 1; #10;
+        if(y !== 0) $display("001 failed.");
+        b = 1; c = 0; #10;
+        if(y !== 0) $display("010 failed.");
+    end
+endmodule
+```
+
+#### Timing Verification
+
+* Test the timing specifications of the design
+* Can be made with `#x` statements on a high level or on a low level after synthesizing the design to acutal circuits
+
+### Exercise
 
 Is the following code sequential or combinational?
 
@@ -524,6 +604,13 @@ From this information we can implement this finite state machine as a logic circ
 * K-Maps help to visualize adjacencies in up to six dimensions
 
 ![](images/k-map.png)
+
+## Tradeoffs in Circuit Design
+
+* **Area**: Circuit area is proportional to the cost of the device
+* **Speed**: Circuit should be as fast as possible
+* **Power**: Power consumption should be as small as possible
+* **Design Time**: Design time should be as small as possible, designers are expensive
 
 ## Verilog
 
@@ -666,11 +753,23 @@ mux #(12) mux2_12 (d0, d1, s, out);
 
 Sequential Logic
 
+* `posedge` defines a rising edge, the statement is executed when the stated signal rises
+* `negedge` defines a falling edge, the statement is executed when the stated signal falls
+* `always @ (*)` can be used to add all right-hand side signals to the sensitivity list
+* Assigned variables need to be declared as `reg`
+* `<=` describes a non-blocking assignment, all non-blocking assignments are made at the end of the block in parallel
+* `=` describes a blocking assignment, they are made immediately and the process blocks progress
+* `if ... else` can only be used in `always` blocks
+* The `always` block is combinational only if all `reg`s within the block are always assigned to a signal
+* `always @ (posedge clk)` and non-blocking assignments `<=` are used to model sequential logic
+* `always @ (*)` and blocking assignments `=` are used to model combinational logic
+* Assignments to the same signal cannot be made in more than one `always` block
+
 ```
 module flop(
     input clk, input[3:0] d, output reg[3:0] q);
     
-    always@ (posedgeclk)
+    always@ (posedge clk)
         q <= d;
         
 endmodule
