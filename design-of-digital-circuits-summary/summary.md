@@ -780,7 +780,108 @@ endmodule
 
 ## Instruction Set Architecture
 
+* **Instruction Set Architecture**: Agreed upon interface between software and hardware
+* **Microarchitecture**: Implementation of an ISA, not visible to software
+* **Instruction**: Most basic unit of computer processing
+  * Operate instructions execute instructions in the ALU
+  * Data movement instructions read or write from memory
+  * Control flow instructions change the sequence of execution
+
+* The ISA specifies
+  * The memory organization
+  * The register set
+  * The instruction set
+
+|Instruction|High Level|MIPS|LC-3|
+|---|---|---|---|
+|Addition|`a = b + c;`|`add $s0, $s1, $s2`|`ADD R0, R1, R2`|
+|Load Word|`a = A[2];`|`lw $s3, 2($s0)`|`LDR R3, R0, #2`|
+|Load Word|`a = A[2];`|`lw $s3, 2($s0)`|`LDR R3, R0, #2`|
+|Jump||`j target`|`JMP R2`|
+|Substract|`a = b + c - d`|`add $t0, $s0, $s1`<br/>`sub $s3, $t0, $s2`|`ADD R2, R0, R1`<br/>`NOT R4, R3    `<br/>`ADD R5, R4, #1`<br/>`ADD R6, R2, R5`|
+|Load Immediate|`a = 0x6d5e4f3c;`|`lui $s0, 0x6d5e`<br/>`ori $s0, 0x4f3c`||
+
+### Programming Constructs
+
+* To simplify programming, we break a task down to three basic constructs
+  * Sequential Construct: A task can be broken down into two subtasks, one following the other
+  * Conditional Construct: A task consists of doing either one of two subtasks
+  * Iterative Construct: A task consists of doing a subtask a number of times, as long as a condition is true
+
+### Instruction Cycle
+
+* Sequence of phases, that an instruction goes through
+  * Fetch
+    * Load MAR and Increment PC
+    * Access Memory
+    * Load IR with the conent of MDR
+  * Decode
+    * Identify the instruction
+  * Evaluate Address
+    * Calculate the address
+  * Fetch Operands
+    * Loads MAR and places the results in the MDR
+  * Execute
+    * Executes the instruction or changes the PC
+  * Store Result
+    * loads MDR into DR
+* Not all instructions have those six phases
+
+### LC-3
+
+![](images/lc-3-computer.png)
+
+* Unique address for each 16-bit data word
+* Has 8 general purpose registers
+* Only supports 2's complement integers
+
+#### Condition Codes
+
+* Each time a general purpose register is written, three single-bit registers are updatede
+  * If the written value is negative, N is set, Z and P are cleared
+  * If the written value is zero, Z is set, N and P are cleared
+  * If the written value is positive, P is set, Z and N are cleared
+* Conditional branch instructions check these registers to determine wether the code branches or not
+
 ### MIPS Instruction Set Architecture
+
+* Unique address for each 32-bit data word
+* MIPS is byte-addressable
+* has 32 registers for different things
+* Supports 2's complement integers, unsigned integers, floating point
+
+**R-Type Instruction Format**: 3 Register operands
+
+|Opcode (0)|Source Register (rs)|Source Register (rt)|Destination Register (rd)|Shift Amount (shamt)|Operation in R-Type Instructions (funct)|
+|---|---|---|---|---|---|
+|6 bits|5 bits|5 bits|5 bits|5 bits|6 bits|
+
+**I-Type Instruction Format**: 2 Register operands and immediate
+
+|Opcode (0)|Source Register (rs)|Source Register (rt)|Immediate (imm)|
+|---|---|---|---|
+|6 bits|5 bits|5 bits|16 bits|
+
+**I-Type Instruction Format**: Only immediate
+
+|Opcode (0)|Immediate (imm)|
+|---|---|
+|6 bits|26 bits|
+
+#### Function Calls
+
+* By convention, temporary registers `$t0 - $t9` are saved by the caller if needed, and registers `$s0 - $s7` are callee-saved
+* **Caller**
+  * Save further needed register to the stack by increasing the stack size `addi $sp, $sp, -8` to the needed amount, saving said registers with `sw $t0, 4($sp)`, `sw $t1, 0($sp)`
+  * Passes arguments to argument registers `$a0 - $a3`
+  * Jumps to callee using jump and link `jal`
+  * When the function returns, load the needed registers from the stack with `lw $t1, 0($sp)`, `lw $t0, 4($sp)` and free up space on the stack `addi $sp, $sp 8`
+
+* **Callee**
+  * Performs the procedure
+  * Returns the result to the caller by using value registers `$v0 - $v1`
+  * Returns to the point of call using jump register to return address `jr $ra`
+  * Must not overwrite registers or memory needed by the caller
 
 ### Exercise
 
@@ -827,6 +928,148 @@ branch:
     jr   $31           // return to caller
 ```
 
+## The Von Neumann Model
+
+* Dominant way of how a computer operates
+* A computer consists of
+  * Memory
+  * Processing unit
+  * Input
+  * Output
+  * Control unit
+* Instructions are stored in a linear memory array
+* The instructions are processed sequentially
+
+![](images/von-neumann-model.png)
+
+### Memory
+
+* The memory stores data and programs
+* The memory contains bits that are grouped into bytes and words
+* **Addressability**: Determines how the bits are addressed (word-addressabel or byte-addressable)
+* **Address Space**: Total number of addresses
+* **Reading**
+  * The memory address register (MAR) is loaded with the address
+  * The data is placed into the memory data register (MDR)
+* **Writing**
+  * Load the MAR with the address and the MDR with the data
+  * Activate the write enable signal
+
+### Processing Unit
+
+* Can consists of many functional units
+* Registers ensure fast access to operands
+
+#### Arithmetic and Logic Unit
+
+* Responsible for adding, substracting ...
+
+### Input and Output
+
+* Inputs are keyboards, mouses, scanners, disks ...
+* Outputs are monitors, printers, disks ...
+
+### Control Unit
+
+* Conducts the step-by-step process of executing a program
+* Keeps track of the instruction being executed in the instruction register (IR)
+* Keeps track of the next instruction to execute in the program counter (PC)
+
+* **Control Flow Order** (Used in the Von Neumann model): Instructions are fetched as specified by the instruction pointer, sequential unless explicit control flow instruction
+* **Data Flow Order**: Instructions are fetched when its operands are ready, there is no instruction pointer
+
+## Data Flow Programs
+
+* Program consists of data flow nodes
+* A node fires when all its inputs are ready
+
+## Exercise
+
+What does the following dataflow program do?
+
+![](images/dataflow-gcd.png)
+
+It is an implementation of the greatest common divisor.
+
+## Microarchitecture
+
+* Implementation of the ISA under specific design constraints and goals
+* Anything done in hardware without exposure to software
+* ISA defines an abstract finite state machine
+* **Single-Cycle Machine**
+  * Each instruction takes a single clock cycle
+  * All state updates are made at the end of an instruction's execution
+  * Disadvantage: The slowest instruction determines cycle time, long clock cycle time
+  * Control signals are generated in the same clock cycle as the one during which data signals are operated on
+  * Cycles per instruction `CPI = 1`
+* **Multi-Cycle Machines**:
+  * Instructions broken into multiple stages
+  * The behavior of the entire processor is specified fully by a finite state machine
+  * State updates can be made during an instruction’s execution
+  * Advantage: The slowest stage determines cycle time, higher clock frequency
+  * Disadvantage: Hardware overhead for registers
+  * Control signals needed in the next cycle can be generated in the current cycle
+  * `CPI` varies for each instruction
+* Our design executes `CPI * (1/f)` instructions per second where `CPI` is the cycles per instruction and `f` is the clock cycle time
+* An instruction processing engine consists of two components
+  * **Datapath**: Consists of hardware elements that deal with and transform data signals
+    * Functional units
+    * Hardware structures that enable flow of data
+    * Storage units
+  * **Control Logic**: Consists of hardware elements that determine control signals that specify what the datapath elements should do to the data
+
+* 5 generic steps
+  * Instruction Fetch (IF)
+  * Instruction decode, register operand fetch (ID/RF)
+  * Execute/Evaluate memory address (EX/AG)
+  * Memory operand fetch (MEM)
+  * Store/writeback result (WB)
+
+![](images/microarchitecture-simple.png)
+
+Now let's build it!
+
+1. Datapath for R-Type instructions
+
+![](images/r-type-datapath.png)
+
+2. Adding I-Type instructions
+
+![](images/r-type-i-type-datapath.png)
+
+3. Adding load/store functionality
+
+![](images/r-type-i-type-load-store-datapath.png)
+
+4. Adding branching
+
+![](images/r-type-i-type-load-store-branch-datapath.png)
+
+5. Putting it all together (JAL, JAR, JALR is omitted)
+
+![](images/microarchitecture-full.png)
+
+6. Another design
+
+![](images/microarchitecture-full-another.png)
+
+7. Making it multi-cycle
+
+![](images/microarchitecture-full-another-multi-cycle.png)
+
+|Control Signal|When De-Asserted|When Asserted|Equation|
+|---|---|---|---|
+|`RegDest`|Register write select according to `rt` (inst[20:16])|Register write select according to `rd` (inst[15:11])|`opcode == 0`|
+|`ALUSrc`|Second ALU input from second Register read port|Second ALU input fom sign-extended 16-bit immediate|`opcode != 0 && opcode != BEQ && opcode != BNE`|
+|`MemtoReg`|Steer ALU result to register write port|Steer memory load to register write port|`opcode == LW`|
+|`RegWrite`|Register write disabled|Register write enabled|`opcode != SW && opcode != Bxx && opcode != J && opcode != JR`|
+|`MemRead`|Memory read disabled|Memory read port return load value|`opcode == LW`|
+|`MemWrite`|Memory write disabled|Memory write enabled|`opcode == SW`|
+|`PCSrc_1`|According to `PCSrc_2`|Nex PC is based on 26-bit immediate jump target|`opcode == J || opcode = JAL`|
+|`PCSrc_2`|`PC = PC + 4`|Next PC is based on 16-bit immediate branch target|`opcode == Bxx && branch condition satisfied`|
+
+## Exercise
+
 Classify the following attributes as either a property of its microarchitecture or ISA.
 
 |Attribute|Microarchitecture|ISA|
@@ -845,4 +1088,150 @@ Classify the following attributes as either a property of its microarchitecture 
 2. If a processor executes more of a given program’s instructions per second, does it imply that the processor always finishes the program faster, compared to a processor that executes fewer instructions per second?
    * No, the total number of instructions required to execute a program may vary depending on the specific ISA.
 
-## Data Flow Programs
+Modify the datapath we build to support the JAL instruction.
+
+![](images/jal-modified-datapath.png)
+
+## Pipelining
+
+![](images/pipelined-processor.png)
+
+* Idea
+  * Divide the instruction processing cycle into distinct stages of processing
+  * Ensure there are enough hardware resources to process one instruction in each stage
+  * Process a different instruction in each stage
+* **Latency**
+* **Throughput**
+* **Stall**: When the pipeline stops moving, can be caused by
+  * **Resource Contention**: Two stages need the same resource, can be prevented by eliminating the cause of contention (separate instruction and data memories, multiple ports), or stall the pipeline
+  * **Dependences**: Resource is not avaible when needed
+    * **Data Dependence**
+      * **Flow Dependence**: Read after write, they always need to obeyed because they constitute a true dependence
+      * **Output Dependence**: Write after write
+      * **Anti Dependence**: Write after read
+      * Anti and output dependences are dependences on a name, not a value, they can be avoided
+    * **Control Dependence**
+  * **Long-Latency Operations**
+
+![](images/resource-dependence.png)
+
+Flow Dependence
+```
+r3 <= r1 op r2
+r5 <= r3 op r4
+```
+
+Anti Dependence
+```
+r3 <= r1 op r2
+r1 <= r4 op r5
+```
+
+Output Dependence
+```
+r3 <= r1 op r2
+r4 <= r5 op r6
+r3 <= r7 op r8
+```
+
+* If a stage takes longer than other stages, the workload of this stage can be divided to hardware blocks
+* The goal is to increase throughput with little increase in cost
+
+### Approaches to Dependence Detection
+
+#### Scoreboarding
+
+* Each register has a valid bit associated with it
+* An instruction that is writing to the register resets the valid bit
+* An instruction in the decode stage checks if all its source and destination registers are valid
+* Advantage: Simple, one bit per register
+* Disadvantage: Need to stall for all types of dependences
+
+#### Combinational Dependence Check Logic
+
+* Advantage: No need to stall on anti and output dependences
+* Disadvantage: Logic is more complex than a scoreboard
+
+### How to Handle Data Dependences
+
+* Detect and Wait (Stalling)
+* Detact and Forward/Bypass
+* Detect and Eliminate (Software level)
+* Predict and Verify (See branch prediction)
+* Do someting else (Switch to another thread)
+
+#### Data Forwarding/Bypassing
+
+* Add additional dependence check logic and data forwarding paths to supply the producer’s value to the consumer right after the value is available
+* Forward to execute stage from either the memory stage or the writeback stage (the memory stage has priority) if that stage will write a destination register that matches the source register from a following instruction
+
+#### Stalling
+
+* Insert NOPs on compile-time
+* Adding enable input to the fetch and decode pipeline registers
+
+#### Early Branch Resolution
+
+### Exceptions vs. Interrupts
+
+||Exceptions|Interrupts|
+|---|---|---|
+|Cause|Internal to the running thread|External to the running thread|
+|Handling|When detected, process level|When covenient, system level|
+|Cause|Internal to the running thread|External to the running thread|
+
+* **Precise Exceptions**: Ensure that the architectural state is precise
+* **Reorder Buffer**: Complete instructions out-of-order, reorder them before making results visible to the architectural state
+
+![](images/reorder-buffer.png)
+
+Reorder Buffer Entry
+
+|Valid|Destination Register ID|Destination Register Value|Store Address|Store Data|Program Counter|Valid Bits and Control Bits|Exception|
+|---|---|---|---|---|---|---|---|
+
+## Exercise
+
+Given the following code 
+
+```
+MUL R3, R1, R2
+ADD R5, R4, R3
+ADD R6, R4, R1
+MUL R7, R8, R9
+ADD R4, R3, R7
+MUL R10 , R5, R6
+```
+
+Calculate the number of cycles it takes to execute the given code on the following models, where
+
+* Each instruction is specified with the destination register first
+* For all machine models, use the basic instruction cycle as follows
+  * Fetch (1 clock cycle)
+  * Decode (1 clock cycle)
+  * Execute (MUL takes 6, ADD takes 4 clock cycles)
+  * Write-Back (1 clock cycle)
+
+1. Non-Pipelined machine
+
+```
+MUL: 1 + 1 + 6 + 1 = 9 cycles
+ADD: 1 + 1 + 4 + 1 = 7 cycles
+3 * 9 + 3 * 7 = 49 cycles
+```
+
+2. Pipelined machine with scoreboarding, five adders and five multipliers without data forwarding
+
+![](images/pipelined-machine-scoreboarding-five-adders-five-multipliers-no-data-forwarding.png)
+
+3. Pipelined machine with scoreboarding, five adders and five multipliers with data forwarding
+
+![](images/pipelined-machine-scoreboarding-five-adders-five-multipliers-data-forwarding.png)
+
+4. Pipelined machine with scoreboarding, one adder and one multiplier without data forwarding
+
+![](images/pipelined-machine-scoreboarding-one-adder-one-multiplier-no-data-forwarding.png)
+
+5. Pipelined machine with scoreboarding, one adder and one multiplier with data forwarding
+
+![](images/pipelined-machine-scoreboarding-one-adder-one-multiplier-data-forwarding.png)
