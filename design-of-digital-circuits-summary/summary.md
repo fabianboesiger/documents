@@ -1102,16 +1102,29 @@ Modify the datapath we build to support the JAL instruction.
   * Process a different instruction in each stage
 * **Latency**
 * **Throughput**
-* **Stall**: When the pipeline stops moving, can be caused by
-  * **Resource Contention**: Two stages need the same resource, can be prevented by eliminating the cause of contention (separate instruction and data memories, multiple ports), or stall the pipeline
-  * **Dependences**: Resource is not avaible when needed
-    * **Data Dependence**
-      * **Flow Dependence**: Read after write, they always need to obeyed because they constitute a true dependence
-      * **Output Dependence**: Write after write
-      * **Anti Dependence**: Write after read
-      * Anti and output dependences are dependences on a name, not a value, they can be avoided
-    * **Control Dependence**
-  * **Long-Latency Operations**
+* Register renaming eliminates false dependencies
+
+### Exceptions vs. Interrupts
+
+||Exceptions|Interrupts|
+|---|---|---|
+|Cause|Internal to the running thread|External to the running thread|
+|Handling|When detected, process level|When covenient, system level|
+|Cause|Internal to the running thread|External to the running thread|
+
+* **Precise Exceptions**: Ensure that the architectural state is precise
+
+### Dependences
+
+* **Resource Contention**: Two stages need the same resource, can be prevented by eliminating the cause of contention (separate instruction and data memories, multiple ports), or stall the pipeline
+* **Dependences**: Resource is not avaible when needed
+  * **Data Dependence**
+    * **Flow Dependence**: Read after write, they always need to obeyed because they constitute a true dependence
+    * **Output Dependence**: Write after write
+    * **Anti Dependence**: Write after read
+    * Anti and output dependences are dependences on a name, not a value, thus they are not true dependencies
+  * **Control Dependence**
+* **Long-Latency Operations**
 
 ![](images/resource-dependence.png)
 
@@ -1172,16 +1185,15 @@ r3 <= r7 op r8
 
 #### Early Branch Resolution
 
-### Exceptions vs. Interrupts
+#### Reorder Buffer
 
-||Exceptions|Interrupts|
-|---|---|---|
-|Cause|Internal to the running thread|External to the running thread|
-|Handling|When detected, process level|When covenient, system level|
-|Cause|Internal to the running thread|External to the running thread|
-
-* **Precise Exceptions**: Ensure that the architectural state is precise
 * **Reorder Buffer**: Complete instructions out-of-order, reorder them before making results visible to the architectural state
+  * Aids software debugging
+  * Enables easy recovery from exceptions
+  * Enables easy restartable processes
+  * Enables software implemented opcodes
+  * Advantages: Simple, can eliminate false dependencies
+  * Disadvantages: Reorder buffer needs to be accessed to get the results that are yet to be written to the register file
 
 ![](images/reorder-buffer.png)
 
@@ -1189,6 +1201,51 @@ Reorder Buffer Entry
 
 |Valid|Destination Register ID|Destination Register Value|Store Address|Store Data|Program Counter|Valid Bits and Control Bits|Exception|
 |---|---|---|---|---|---|---|---|
+
+* How to access the reorder buffer if a later instruction needs a value in it
+  * Access the register file fist to check if it is valid
+  * If it is not valid, the register file stores the ID of the reorder buffer entry that will contain the value of the register
+
+![](images/reorder-buffer-access.png)
+
+* In-Order Pipeline with reorder buffer
+  * Decode: Access regfile/ROB, allocate entry in ROB, check if instruction can execute, if so, dispatch instruction (send it to a functional unit)
+  * Execute: Executions can be complete out-of-order
+  * Completion: Write result to ROB
+  * Commit: Check for exceptions, if none, write result to architectural register file or memory, else, flush pipeline and start from exception handler
+
+#### Tomasulo's Algorithm
+
+General Out-of-Order Pipeline
+
+![](images/out-of-order.png)
+
+Tomasulo's Machine
+
+![](images/tomasulos-algorithm.png)
+
+Register Rename Table
+
+||Tag|Value|Valid|
+|---|---|---|---|
+|R0||||
+|R1||||
+|R2||||
+|...||||
+
+Example
+
+![](images/tomasulos-algorithm-cycle-0.png)
+![](images/tomasulos-algorithm-cycle-1.png)
+![](images/tomasulos-algorithm-cycle-2.png)
+![](images/tomasulos-algorithm-cycle-3.png)
+![](images/tomasulos-algorithm-cycle-4.png)
+![](images/tomasulos-algorithm-cycle-5.png)
+![](images/tomasulos-algorithm-cycle-6.png)
+![](images/tomasulos-algorithm-cycle-7.png)
+![](images/tomasulos-algorithm-cycle-8-1.png)
+![](images/tomasulos-algorithm-cycle-8-2.png)
+![](images/tomasulos-algorithm-cycle-8-3.png)
 
 ## Exercise
 
