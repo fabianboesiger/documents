@@ -2,7 +2,7 @@
 
 ## Introduction
 
-* **Moores Law**: Number of transistors double every tow years
+* **Moores Law**: Number of transistors double every two years
 * **Power of Abstraction**: A higher level only needs to know about the interface to the lower level, not how the lower level is implemented
 * **Hamming Distance**: Number of locations in which the corresponding symbols of two equal-length strings are different
 
@@ -397,6 +397,106 @@ Draw an 8-input multiplexer on the module level using only 2-input multiplexers.
 * The entire set of unique locations in memory is referred to as the **address space**
 
 ![](images/memory.png)
+
+#### Virtual vs. Physical Memory
+
+* Programmer sees virtual memory, can assume it is infinite
+* Physical memory size is much smaller than what the programmer assumes
+* The system maps virtual memory addresses to physical memory
+* Make memory large without making it slow
+  * **Banking**: Reduce the latency of memory by dividing it into multiple banks and thus enabling multiple accesses in parallel
+  * **DRAM**: Capacitor charge state indicates stored value, needs to be refreshed as it looses charge over time
+    * Slower access
+    * Lower cost
+    * Higher density
+    * Requires Refresh
+  * **SRAM**: Two cross coupled inverters store a single bit
+    * Faster access
+    * Higher cost
+    * Lower density
+    * No need hor refresh
+
+#### Memory Hierarchy
+
+* Have multiple levels of storage and ensure most of the data the processor needs is kept in the faster levels
+
+![](images/memory-hierarchy.png)
+
+* How to determine which data is most used
+  * **Temporal Locality**: If you just did something, it is very likely that you will do the same thing again soon
+  * **Spatial Locality**: If you did something, it is very likely you will do something similar/related
+* Latency can be defined recursively with `T_i = t_i + m_i * T_(i+1)`, where `T_i` is the percieved access time of the `i`-th level, `t_i` is the technology-intrinsic access time of this level and `m_i` is the miss rate of this level
+  * Keep `m_i`, ``T_(i+1)` low
+
+#### Caches
+
+* **Capacity (`C`)**: The number of data bytes a cache stores
+* **Block size (`b`)**: bytes of data brought into cache at once
+* **Number of blocks (`B = C/b`)**: number of blocks in cache: `B= C/b`
+* **Degree of associativity (`N`)**: number of blocks in a set
+* **Number of sets (`S = B/N`)**: each memory address maps to exactly one cache set
+* Cache organized into S sets
+* Each memory address maps to exactly one set
+* Caches categorized by number of blocks in a set
+  * Direct mapped: 1 block per set
+  * N-way set associative: N blocks per set
+  * Fully associative: all cache blocks are in a single set
+
+* Caching to exploit spatial locality
+  * Logically divide memory into equal size blocks
+  * Fetch to cache the accessed block in its entirety
+* Cache hierarchies are used to make caches larger while keeping the speed
+* Each block maps to a location in the cache, determined by the index bits in the address
+* Accessing the cache
+  * Index into the tag and data stores with index bits in address
+  * Check valid bit in tag store
+  * Compare tag bits in address with the stored tag in tag store
+
+
+![](images/cache-access.png)
+
+* Two blocks in memory that map to the same index in the cache cannot be present in the cache at the same time
+  * This can lead to 0% hit rate
+  * Degree of associativity: How many blocks can map to the same index?
+  * In fully associative caches, a block can be placed in any cache location
+  * Each block has a priority, the least recently used blocks get evicted first
+
+
+Fully associative cache
+
+![](images/fully-associative-cache.png)
+
+* A tag store contains
+  * Valid bit
+  * Tag
+  * Replacement policy bits
+  * Dirty bit
+* When do we write the modified data in a cache to the next level
+  * Write-Through: At the time the write happens
+  * Write-Back: When the block is evicted
+    * Need for a dirty bit
+* Data and instruction caches are mostly unified
+* Cache misses
+  * Compulsory Miss: First reference to an address always results in a miss
+  * Capacity Miss: Cache is too small to hold everything needed
+  * Conflict Miss: Any miss that is neither a compulsory nor a capacity miss
+* Three fundamental goals
+  * Reduce miss rate
+    * More associativity
+    * Better replacement/insertion policies
+  * Reduce miss latency or miss cost
+  * Reduce hit latency or hit cost
+  * Software approaches for higher hit rate
+    * Restructing data access patterns (`x[i+1, j]` follows `x[i, j]`, thus iterate through `i` first)
+    * Divide the working set so that each piece fits in the cache
+* Caches in a multi-core system
+  * **Private Cache**: Cache belongs to one core
+  * **Shared Cache**: Cache is shared by multiple cores
+    * Advantage: When a resource is left idle by one thread, another thread can use it, no need to replicate shared data
+    * Disadvantage: When the resource is not idle, another thread cannot use it
+* Cache Coherence
+  * Snoopy Bus: A processor/cache broadcasts its write/update to a memory location to all other processors, another cache that has the location either updates or invalidates its local copy
+  * Directory Based
 
 ## Sequential and Combinational Logic Circuits
 
@@ -978,11 +1078,6 @@ branch:
 * **Control Flow Order** (Used in the Von Neumann model): Instructions are fetched as specified by the instruction pointer, sequential unless explicit control flow instruction
 * **Data Flow Order**: Instructions are fetched when its operands are ready, there is no instruction pointer
 
-## Data Flow Programs
-
-* Program consists of data flow nodes
-* A node fires when all its inputs are ready
-
 ## Exercise
 
 What does the following dataflow program do?
@@ -1092,7 +1187,18 @@ Modify the datapath we build to support the JAL instruction.
 
 ![](images/jal-modified-datapath.png)
 
-## Pipelining
+## Approaches to Instruction Level Concurrency
+
+### Data Flow Programs
+
+* Program consists of data flow nodes
+* Availability of data determines order of execution
+* A node fires when all its inputs are ready
+* Data Flow implementations at the microarchitecture level while preserving Von Neumann semantics have been very successful (Out-of-order execution)
+* Advantage: Very good at exploiting irregular parallelism, only real dependencies constrain processing
+* Disadvantage: No precise state semantics
+
+### Pipelining
 
 ![](images/pipelined-processor.png)
 
@@ -1100,11 +1206,11 @@ Modify the datapath we build to support the JAL instruction.
   * Divide the instruction processing cycle into distinct stages of processing
   * Ensure there are enough hardware resources to process one instruction in each stage
   * Process a different instruction in each stage
-* **Latency**
-* **Throughput**
+* **Latency**: Time taken for an instruction to process
+* **Throughput**: Quantity of instructions within a unit of time
 * Register renaming eliminates false dependencies
 
-### Exceptions vs. Interrupts
+#### Exceptions vs. Interrupts
 
 ||Exceptions|Interrupts|
 |---|---|---|
@@ -1114,15 +1220,15 @@ Modify the datapath we build to support the JAL instruction.
 
 * **Precise Exceptions**: Ensure that the architectural state is precise
 
-### Dependences
+#### Dependencies
 
 * **Resource Contention**: Two stages need the same resource, can be prevented by eliminating the cause of contention (separate instruction and data memories, multiple ports), or stall the pipeline
-* **Dependences**: Resource is not avaible when needed
+* **Dependencies**: Resource is not avaible when needed
   * **Data Dependence**
     * **Flow Dependence**: Read after write, they always need to obeyed because they constitute a true dependence
     * **Output Dependence**: Write after write
     * **Anti Dependence**: Write after read
-    * Anti and output dependences are dependences on a name, not a value, thus they are not true dependencies
+    * Anti and output dependencies are dependencies on a name, not a value, thus they are not true dependencies
   * **Control Dependence**
 * **Long-Latency Operations**
 
@@ -1150,22 +1256,22 @@ r3 <= r7 op r8
 * If a stage takes longer than other stages, the workload of this stage can be divided to hardware blocks
 * The goal is to increase throughput with little increase in cost
 
-### Approaches to Dependence Detection
+#### Approaches to Dependence Detection
 
-#### Scoreboarding
+##### Scoreboarding
 
 * Each register has a valid bit associated with it
 * An instruction that is writing to the register resets the valid bit
 * An instruction in the decode stage checks if all its source and destination registers are valid
 * Advantage: Simple, one bit per register
-* Disadvantage: Need to stall for all types of dependences
+* Disadvantage: Need to stall for all types of dependencies
 
-#### Combinational Dependence Check Logic
+##### Combinational Dependence Check Logic
 
-* Advantage: No need to stall on anti and output dependences
+* Advantage: No need to stall on anti and output dependencies
 * Disadvantage: Logic is more complex than a scoreboard
 
-### How to Handle Data Dependences
+#### How to Handle Data dependencies
 
 * Detect and Wait (Stalling)
 * Detact and Forward/Bypass
@@ -1173,19 +1279,19 @@ r3 <= r7 op r8
 * Predict and Verify (See branch prediction)
 * Do someting else (Switch to another thread)
 
-#### Data Forwarding/Bypassing
+##### Data Forwarding/Bypassing
 
 * Add additional dependence check logic and data forwarding paths to supply the producer’s value to the consumer right after the value is available
 * Forward to execute stage from either the memory stage or the writeback stage (the memory stage has priority) if that stage will write a destination register that matches the source register from a following instruction
 
-#### Stalling
+##### Stalling
 
 * Insert NOPs on compile-time
 * Adding enable input to the fetch and decode pipeline registers
 
-#### Early Branch Resolution
+##### Early Branch Resolution
 
-#### Reorder Buffer
+##### Reorder Buffer
 
 * **Reorder Buffer**: Complete instructions out-of-order, reorder them before making results visible to the architectural state
   * Aids software debugging
@@ -1214,7 +1320,9 @@ Reorder Buffer Entry
   * Completion: Write result to ROB
   * Commit: Check for exceptions, if none, write result to architectural register file or memory, else, flush pipeline and start from exception handler
 
-#### Tomasulo's Algorithm
+##### Tomasulo's Algorithm
+
+* The dataflow graph is limited to the instruction window (All decoded, but not yet commited instructions)
 
 General Out-of-Order Pipeline
 
@@ -1247,7 +1355,22 @@ Example
 ![](images/tomasulos-algorithm-cycle-8-2.png)
 ![](images/tomasulos-algorithm-cycle-8-3.png)
 
-## Exercise
+##### Memory Dependence Handling
+
+* Need to obey memory dependencies in an out-of-order machine
+* Problem: Memory address is not known until a load/store executes
+* Approaches for dependence detecting
+  * Wait until all previous stores committed
+  * Keep a list of pending stores in a store buffer and check whether load address matches a previous store address
+* Approaches for scheduling
+  * Assume load dependent on all previous stores
+  * Assume load independent of all previous stores
+  * Predict the dependence of a load on an outstanding store
+* Modern processors use a load queue (LQ) and a store queue (SQ) for this
+  * When a store instruction finishes execution, it writes its address and data in its reorder buffer entry or SQ entry
+  * When a later load instruction generates its address, it searches the SQ with its address, accesses memory with its address, receives the value from the youngest older instruction that wrote to that address either from ROB or memory
+
+### Exercise
 
 Given the following code 
 
@@ -1292,3 +1415,221 @@ ADD: 1 + 1 + 4 + 1 = 7 cycles
 5. Pipelined machine with scoreboarding, one adder and one multiplier with data forwarding
 
 ![](images/pipelined-machine-scoreboarding-one-adder-one-multiplier-data-forwarding.png)
+
+### Superscalar Execution
+
+* Idea: Fetch, decode, execute, retire multiple instructions per cycle
+* Need to add the hardware resources for doing so
+* Hardware performs the dependence checking between concurrently-fetched instructions
+* Multiple copies of datapath: Can fetch/decode/execute multiple instructions per cycle
+* Advantages: Higher instructions per cycle
+* Disadvantages: Higher complexity for dependency checking
+
+### VILW
+
+* Compiler packs independent instructionsin a larger instruction bundles to be fetched and executed concurrently
+* No need for hardware dependency checking between concurrently-fetched instructions in the VLIW model
+* VLIW simplifies hardware, but requires complex compiler techniques
+* Packed instructions can be logically unrelated
+* Lock-step (all or none) execution: If any operation in a VLIW instruction stalls, all instructions stall
+* Advantages
+  * No need for dynamic scheduling hardware
+  * No need for dependency checking within a VLIW instruction
+* Disadvantages
+  * Compiler needs to find N independent operations per cycle
+  * Recompilation required when execution width (N), instruction latencies or functional units change
+  * Lockstep execution causes independent operations to stall
+
+### SIMD Processing
+
+* Single instruction operates on multiple data elements
+* Concurrency arises from performing the same operation on different pieces of data
+* Vector/SIMD machines are good at exploiting regular data-level parallelism
+* Performance improvement limited by vectorizabilityof code
+
+![](images/array-processor-vs-vector-processor.png)
+
+#### Array Processor
+
+* Instruction operates on multiple data elements at the same time using different spaces
+
+#### Vector Processor
+
+* Instruction operates on multiple data elements in consecutive time steps using the same space
+* No dependencies within a vector
+* Highly regular memory access pattern
+* Very inefficient if parallelism is irregular
+* A loop is vectorizableif each iteration is independent of any other
+
+##### Vector Registers
+
+* Each vector data register holds N M-bit values
+* Vector Mask Register VMASK Indicates which elements of vector to operate on
+
+##### Vector Functional Units
+
+* Use a deep pipeline to execute element operations with a fast clock cycle
+
+##### Loading/Storing Vectors from/to Memory
+
+* Elements can be loaded in consecutive cycles if we can start the load of one element per cycle
+* If the memory takes more than one cycle to access
+  * Memory is divided into banksthat can be accessed independently, banks share address and data buses
+  * Can sustain N parallel accesses if all N go to different banks
+
+## Branch Prediction
+
+|Type|Direction|Number of next possible fetch addresses|When is the address resolved|
+|---|---|---|---|
+|Conditional|Unknown|2|Execution|
+|Unconditional|Always taken|1|Decode|
+|Call|Always taken|1|Decode|
+|Return|Always taken|Many|Execution|
+|Indirect|Always taken|Many|Execution|
+
+* Potential solutions
+  * Stall the pipeline
+  * Guess the next fetch address (Branch prediction)
+  * Employ delayed branching (branch delay slot)
+  * Do something else (fine-grained multithreading)
+  * Eliminate control-flow (predicated execution)instructions
+  * Fetch from both possible paths (multipath execution)
+
+### Static Branch Prediction
+
+#### Always Not-Taken
+
+* Simple to implement: no need for BTB, no direction prediction
+* Low accuracy
+* Compiler can layout code such that the likely path is the not-taken path
+* 30-40% accuracy
+
+#### Always Taken
+
+* No direction prediction
+* Better accuracy
+* 60-70% accuracy
+
+#### Backward Taken, Forward Not Taken
+
+* Predict backward (loop) branches as taken, others not-taken
+
+#### Profile-Based
+
+* Compiler determines likely direction for each branch using a profile run
+* Encodes that direction as a hint bit in the branch instruction format
+
+#### Program-Based
+
+* Use heuristics based on program analysis to determine statically-predicted direction
+* Does not require profiling
+* Heuristics might be not representative or good
+
+#### Programmer-Based
+
+* Programmer provides the statically-predicted direction via pragmas
+* Does not require profiling or program analysis
+* Programmer may know some branches and their program better than other analysis techniques
+* Requires programming language, compiler, ISA support
+
+### Dynamic Branch Prediction
+
+#### Last Time Prediction
+
+* A single or more bits store wether the branch was taken the last time
+* Always mispredicts the last iteration and the first iteration of a loop branch
+* 85-90% accuracy
+
+#### Two Level Global Branch Prediction
+
+* Associate branch outcomes with global history of all branches
+* Make a prediction based on the outcome of the branch the last time the same global branch history was encountered
+* First level: Global branch history register stores the direction of the last N branches
+* Second level: Table of saturating counters for each history entry that indicates the direction the branch took the last time the same history was seen
+* Add more context information to the global predictor to take into account which branch is being predicted, by hashing the GHR with the Branch PC, for example
+
+#### Two Level Local Branch Prediction
+
+* Have a per-branch history register
+* Make a prediction based on the outcome of the branch the last time the same local branch history was encountered
+* First level: A set of local history registers, select the history register based on the PC of the branch
+* Second level: Table of saturating counters for each history entry that indicates the direction the branch took the last time the same history was seen
+
+#### Hybrid Branch Predictors
+
+* There is heterogeneity in predictability behavior of branches, exploit that heterogeneity by designing heterogeneous (hybrid) branch predictors
+* Better accuracy: different predictors are better for different branches
+* Reduced warmup time
+* Needs a selector to decide which predictor to use
+* 90-97% accuracy
+
+#### Other Branch Predictors
+
+* Loop branch detector and predictor
+  * Loop iteration count detector/predictor
+* Perceptron branch predictor
+  * Learns the direction correlations between individual branches
+  * Assigns weights to correlations
+* Hybrid history length based predictor
+  * Uses different tables with different history lengths
+
+### Delayed Branching
+
+* Change the semantics of a branch instruction
+  * Branch after N instructions
+  * Branch after N cycles
+* Keeps the pipeline full with useful instructions in a simple way
+* Disadvantage: How to find instructions to fill the delay slots
+
+### Systolic Arrays
+
+* Data flows from the computer memory in a rhythmic fashion, passing through many processing elements before it returns to memory
+* Advantage: Efficiently makes use of limited memory bandwidth, improved efficiency, simple design
+* Disadvantage: Not generally applicable
+
+![](images/systolic-arrays.png)
+
+### Decoupled Access/Execute 
+
+* Decouple operand access and execution via two separate instruction streams that communicate via ISA-visible queues
+* Execute stream can run ahead of the access stream and vice versa
+* If A is waiting for memory, E can perform useful work
+
+### Fine-Grained Multithreading
+
+* Hardware has multiple thread contexts (PC+registers), Each cycle, fetch engine fetches from a different thread
+* Switch to another thread every cycle such that no two instructions from a thread are in the pipeline concurrently
+* Advantages
+  * No logic needed for handling control and data dependences within a thread
+  * No need for dependency checking between instructions
+  * No need for branch prediction logic
+* Disadvantages
+  * Single thread performance suffers
+  * Extra logic for keeping thread contexts
+
+## GPUs
+
+* The instruction pipeline operates like a SIMD pipeline
+* However, the programming is done using threads, not SIMD instructions
+* **Programming Model**: How the programmer expresses the code
+* **Execution Model**: How the hardware executes the code underneath
+* **SPMD**: Single Program Multiple Data
+* **SIMT**: Single Instruction Multiple Threads
+* A GPU is a SIMD (SIMT) machine, except it is programmed using threads in the SPMD programming model
+* Each thread executes the same code but operates a different piece of data
+* **Warp**: A set of threads that executethe same instruction
+* A set of threads executing the same instruction are dynamically grouped into a warp by the hardware
+* Two Major SIMT Advantages
+  * Threads can be treated separately (MIMD processing)
+  * Threads can be grouped into warps flexibly
+* Latency can be hidden via warp-level fine-grained multithreading
+* Same instruction in different threads uses the thread id to index and access different data elements
+* Warps are not exposed to GPU programmers
+* Blocks consist of multiple warps
+* SIMT does not have to be lock step, contrary to SIMD, each thread can be treated individually
+* Each thread can have conditional control flow instructions (Branch divergence)
+  * We can find individual threads that are at the same PC
+  * We can group them together into a single warp dynamically
+  * This reduces branch divergence and improves SIMD utilization
+
+![](images/warp-merging.png)
