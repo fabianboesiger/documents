@@ -203,7 +203,7 @@ return f
 * Bedingte Wahrscheinlichkeit
 * **Satz der totalen Wahrscheinlichkeit**: Seien `A_1, ..., A_n` paarweise disjunkt und es gelte `B = ⊆ A_1 ∪ ... ∪ A_n`, dann folgt `Pr[B] = ∑(Pr[B|A_i] * Pr[A_i])`.
 * **Satz von Bayes**: Seien `A_1, ..., A_n` paarweise disjunkt und es gelte `B = ⊆ A_1 ∪ ... ∪ A_n` mit `Pr[B] > 0`, dann gilt für ein beliebiges `i = 1, ..., n`, dass `Pr[A_i|B] = Pr[A_i ∩ B] / Pr[B] = (Pr[B|A_i] * Pr[A_i]) / (∑(Pr[B|A_j] * Pr[A_j]))`.
-* Unabhängigkeit: Die Ereignisse `A` und `B` heissen unabhängig, falls `Pr[A ∩ B] = Pr[A]* Pr[B]`.
+* Unabhängigkeit: Die Ereignisse `A` und `B` heissen unabhängig, falls `Pr[A ∩ B] = Pr[A] * Pr[B]`.
 * Zufallsvariablen: Eine Abbildung `X: O -> R`, wobei `O` die Ergebnismengie eines Wahrscheinlichkeitsraumes ist.
 * Erwartungswert: `E[X] := ∑(x * Pr[X = x])`
 * Varianz: `Var[X] := E[(X - E[X])^2] = ∑((x - E[X])^2 * Pr[X = x])`
@@ -248,13 +248,28 @@ return f
 
 ### Randomisierte Algorithmen
 
-* Primzahltest
 * Target-Shooting
-* Finden von Duplikation
+
 * Min-Cut Algorithmus
+
+**`cut(G)`**, Laufzeit `O(n^2)`
+```
+while |V(G)| > 2
+    e = zufällige Kante in G
+    Kontrahiere Kante e in G
+return Grösse des eindeutigen des eindeutigen Schnitts in G
+```
+
+Dieser Algorithmus hat bei `d(n tief 2)`-maligen Wiederholung eine Laufzeit von `O(d * n^4)` und findet den kleinsten Schnitt mit einer Wahrscheinlichkeit von mindestens `1 - exp(-d)`.
+
 * Miller-Rabin Primzahltest
 
 * Lange Pfade
+  * Finde Pfad der Länge `k - 1`.
+  * Eine zufällige Färbung mit k Farben erzeugt einen bunten Pfad der Länge `k - 1` mit Wahrscheinlichkeit `p >= exp(-k)`.
+  * Bei wiederholten Färbungen mit `k` Farben ist der Erwartungswert der Anzahl Versuche bis man einen bunten Pfad der Länge `k - 1` enthält `1 / p = exp(k)`.
+  * Der Algorithmus hat eine Laufzeit von `O(d * (2e)^k * k * m)`, wobei `d` die Fehlerwahrscheinlichkeit ist.
+  * Hat der Graph einen Pfad der Länge `k - 1`, dann ist die Wahrscheinlichkeit, dass der Algorithmus mit `false` antwortet höchstens `exp(-d)`.
 
 * Quickselect
 
