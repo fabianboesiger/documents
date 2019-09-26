@@ -65,7 +65,7 @@
 |Armed Conflict Location and Event Data Project|[Website](https://www.acleddata.com/)|Kämpfe, Explosionen, Gewalt gegen Zivilisten, Proteste, Krawalle|Afrika, Süd- und Ostasien, Naher Osten, Europa, Lateinamerika|1997-2019|Geocodierte Daten zu politischer Gewalt und Protesten, Datum, Akteure, Gewalttypen, Ort, Anzahl Tote|
 |Social Conflict Analysis Database|[Website](https://www.strausscenter.org/scad.html)|Proteste, Krawalle, regionale Konflikte, Gewalt gegen Zivilisten|Afrika, Mexiko, Zentralamerika, Karibik|1990-2015|Ort, Zeit, Intensität, Akteure, Streitgrund, Reaktion der Reigerung|
 
-### Was sagen die Daten?
+### Was sagen die Daten
 
 * Zunahme von Bürgerkriegen mit Internationaler Beteiligung
 * Zwei aktive internationale Konflikte in 2018
