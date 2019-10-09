@@ -6,6 +6,7 @@ Im Folgenden wird angenommen, dass der Leser mit einigen Konzepten vertraut ist.
 
 * Differentialrechnung
 * Integralrechnung
+* Komplexe Zahlen
 
 ## Differentialgleichungen identifizieren
 
@@ -76,6 +77,8 @@ $$y = ze^{-A(x)}$$
 
 Wobei $z$ und $z$ konstant sind. Somit ist $y = ze^{-A(x)}$ unsere allgemeine Lösung für homogene lineare Differentialgleichungen erster Ordnung. Diese Lösung nennen wir die *homogene Lösung*.
 
+Zu beachten ist, dass die triviale Lösung $y = 0$ immer eine Lösung der homogenen Gleichung ist.
+
 Um inhomogene Differentialgleichungen erster Ordnung zu Lösen, verwenden wir eine Methode namens *Variation der Konstanten*. Dazu setzen wir die homogene Lösung in die inhomogene Differentialgleichung ein, ersetzen aber die Konstante $z$ mit einer Funktion $z(x)$, wir setzen also $y = z(x)e^{-A(x)}$ ein:
 
 $$y' + a(x)y = b(x)$$
@@ -96,6 +99,25 @@ $$y' + a(x)y = b_1(x) + b_2(x)$$
 
 Wenn wir die Lösungen $y_1$ für $y' + ay = b_1$ und $y_2$ für $y' + ay = b_2$ kennen, dann ist die Lösung der obigen Gleichung $y = y_1 + y_2$.
 
+### Lineare Differentialgleichungen zweiter Ordnung
+
+Zunächst bringen wir die Differentialgleichung in die Form:
+
+$$y'' + a_1(x)y' + a_0(x)y = b(x)$$
+
+Wir suchen die Basis $(f_1(x), f_2(x))$, indem wir die entsprechende homogene Differentialgleichung lösen:
+
+$$y'' + a_1(x)y' + a_0(x)y = 0$$
+
+Anschliessend formen wir die *partikuläre Lösung* der homogenen Differentialgleichung:
+
+$$f(x) = z_1(x) f_1(x) + z_2(x) f_2(x)$$
+
+Um $z_1(x)$ und $z_2(x)$ herauszufinden, müssen wir folgendes Gleichungssystem lösen:
+
+$$z_1' f_1' + z_2' f_2' = b$$
+$$z_1' f_1 + z_2' f_2 = 0$$
+
 ## Lineare Differentialgleichungen mit konstanten Koeffizienten
 
 Lineare Differentialgleichungen mit konstanten Koeffizienten haben die Form:
@@ -107,3 +129,34 @@ Zu beachten ist, dass $a_i, i \in \{0, ..., (k-1)\}$ keine Funktionen, sondern K
 Zunächst lösen wir wieder die entsprechende homogene Gleichung:
 
 $$y^{(k)} + a_{(k-1)}y^{(k-1)} + ... + a_1y' + a_0y = 0$$
+
+Wir nehmmuss zudem gelten, dass:en an, dass die Lösung die Form $y = e^{bx}$ hat. Somit hat die $k$-te Ableitung die Form $y^{(k)} = b^ke^{bx}$ hat. Wenn wir diese Lösungsform in die allgemeine homogene Gleichung einsetzen, erhalten wir:
+
+$$y^{(k)} + a_{(k-1)}y^{(k-1)} + ... + a_1y' + a_0y = 0$$
+$$b^ke^{bx} + a_{(k-1)}b^{(k-1)}e^{bx} + ... + a_1be^{bx} + a_0e^{bx} = 0$$
+$$(b^k + a_{(k-1)}b^{(k-1)} + ... + a_1b + a_0)e^{bx} = 0$$
+
+Wie vorher ist die triviale Lösung $y = 0$ immer eine Lösung der homogenen Gleichung.
+
+Wir können die obige Gleichung weiter vereinfachen:
+
+$$b^k + a_{(k-1)}b^{(k-1)} + ... + a_1b + a_0 = 0$$
+
+Diese Gleichung nennen wir die *charakteristische Gleichung* der gewöhnlichen Differentialgleichung. Einige Beispiele:
+
+|Differentialgleichung|Charakteristische Gleichung|
+|---|---|
+|$y'' + 2y' - 3y = 0$|$b^2 + 2b - 3 = 0$|
+|$y''' - 2y'' - 4y' + 8y = 0$|$b^3 - 2b^2 - 4b + 8 = 0$|
+
+Nach dem Fundamentalsatz der Algebra hat dieses *Charakteristische Polynom* im Bereich der komplexen Zahlen mindestens eine Nullstelle. Um die Lösung der charakteristischen Gleichung zu finden, bringen wir es in die folgende Form:
+
+$$(x - \alpha_1) ... (x - \alpha_k) = 0$$
+
+Die Lösungen der homogenen Differentialgleichung sind somit $y_i = e^{\alpha_ix}, 1 \leq i \leq k$. Die allgemeine Lösung der homogenen Differentialgleichung ist folgendermassen:
+
+$$y = z_1y_1 + ... + z_ky_k$$
+
+Wobei $z_i, i \in \{1, ..., k\}$ beliebige komplexe Zahlen sind.
+
+Als nächstens lösen wir die eigentliche inhomogene lineare Differentialgleichung.
