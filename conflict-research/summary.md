@@ -238,3 +238,45 @@ Staatsphilosoph, beschreibt im Werk *Il Principe* (Der Fürst):
 * Funktionelle Spezialisierung
 * Permanente Streitkräfte
 * Grössere Armeen
+
+## Nationalismus
+
+### Historische Entwicklung
+
+* Nach Absolutismus bildete sich die Idee der nationalen Selbstbestimmung
+* Napoleonische Kriege vermittelten liberale Ideen der französischen Revolution, stellten Monarchie in Europa in Frage
+* Entstehung eines nationalen Bewusstseins
+* Wiener Kongress 1815 mit dem Ziel, den Nationalismus einzudämmen und neue Nationalstaaten zu verhindern
+* Vereinigun Italiens und Deutschlands folgte
+
+### Definitionen
+
+**Nation**: Gefühlsmässige Gemeinschaft, deren adäquater Ausdruck ein eigener Staat wäre, die normalerweise die Tendenz hat, einen solchen aus sich hervorzutreiben.
+
+**Nationalismus**: Politisches Prinzip, das aussagt, dass die politischen und nationalen Einheiten kongruent sein sollen.
+
+#### Nationalismus als Ideologie
+
+* Verlangt Selbstbestimmung
+* Souveränität geht vom Volk aus
+* Gruppenzugehörigkeit
+* Wichtiges Prinzip der politischen Legitimität
+
+#### Typen von Nationalismus
+
+**Einigungsnationalismus**: Führt zu Vereinigung von Staaten.
+
+**Separatistischer Nationalismus**: Führt zum Zerfall von Staaten, verursacht durch Staats-zu-Nations-Defizit (Mehr Nationen als Staaten).
+
+**Staatsgeführter Nationalismus**: Nation entwickelt sich innerhalb von Staatsgrenzen, verursacht durch Staats-zu-Nations-Überschuss (Mehr Staaten als Nationen).
+
+### Neue Kriegsführung
+
+* Macht geht vom Volk aus
+* Nicht nur strategische Gewinne, sondern auch Unterwerfung gegnerischen Nationen als Ziel
+* Neue Form von Wehrpflicht, das gesamte Volk ist wehrpflichtig
+* Erster Weltkrieg als Spätzünder der französischen Revolution
+* Zweiter Weltkrieg als aggressive Form des Nationalismus
+* Kalter Krieg als Ende des Nationalismus
+* Dekolonialisierung durch nationalistische Bewegungen in unabhängigen Staaten
+* Ende des kalten Krieges und Aufkommen neuer nationalistischer Bewegungen
