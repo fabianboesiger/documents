@@ -31,7 +31,9 @@ Es muss also gelten, das die erste Ableitung unserer gesuchten Funktion der Funk
 
 ## Differentialgleichungen klassifizieren
 
-Zunächst sollten wir die Differentialgleichung klassifizieren, indem wir sie auf Linearität und Ordnung untersuchen. 
+Zunächst sollten wir die Differentialgleichung klassifizieren, indem wir sie auf Linearität und Ordnung untersuchen.
+
+### Gewöhnlichkeit
 
 Der erste Schritt besteht darin, zu erkennen ob die Differentialgleichung eine *gewöhnliche Differentialgleichung (Ordinary Differential Equation, ODE)* ist. Diese hat die allgemeine Form.
 
@@ -39,7 +41,11 @@ $$f(x, y, y', ..., y^{(n)}) = 0$$
 
 Falls es nicht möglich ist, die Differentialgleichung in diese Form zu bringen, ist es eine *partielle Differentialgleichung*. Partielle Differentialgleichungen werden hier nicht betrachtet.
 
+### Ordnung
+
 Die *Ordnung* der Differentialgleichung wird bestimmt durch die höchste vorkommende Ableitung der zu findenden Funktion. In der obigen allgemeinen Form ist die Ordnung somit $n$.
+
+### Linearität
 
 Als Nächstes untersuchen wir die Differentialgleichung auf Linearität. Dazu bringen wir sie in folgende Form:
 
@@ -49,9 +55,11 @@ Wobei $b, a_0, ..., a_{(k-1)}$ differenzierbar sind.
 
 Falls es möglich ist, die Differentialgleichung in diese Form zu bringen, nennen wir sie eine *lineare Differentialgleichung*.
 
+### Homogenität
+
 Wenn für die lineare Differentialgleichung gilt, dass $b(x) = 0$, ist die Differentialgleichung *homogen*, ansonsten isNein, da $-e^{x^2}$ in der Gleichung vorkommt.t sie *inhomogen*.
 
-Einige Beispiele:
+### Beispiele
 
 |Gleichung|Gewöhnlich|Linear|Linear homogen|
 |---|---|---|---|
