@@ -280,3 +280,87 @@ Staatsphilosoph, beschreibt im Werk *Il Principe* (Der Fürst):
 * Kalter Krieg als Ende des Nationalismus
 * Dekolonialisierung durch nationalistische Bewegungen in unabhängigen Staaten
 * Ende des kalten Krieges und Aufkommen neuer nationalistischer Bewegungen
+
+## Anarchie zwischen den Staaten
+
+**Sicherheitsdilemma**: Es existiert keine höhere rechtliche Instanz, die Gewalttaten und Verbrechen bestrafen kann, was Staaten unsicher macht und zu Aufrüstung führt.
+
+* Ungewissheit über Absichten anderer Saaten
+* Streben nach Sicherheit führt dazu, dass Staaten mehr Macht akkumulieren, was wiederum andere Staaten unsicher macht
+
+### Klassischer Realismus
+
+* Kriegszustand als Naturzustand
+* Keine Sicherheitsgarantie im Naturzustand
+* Überleben dank Stärke
+* Balance of Power
+
+### Neorealismus
+
+* Kene den Staaten übergeordnete Ordnungsmacht
+* Staaten als einheitliche rationale Akteure, die an Sicherheit und Überleben interessiert sind, Machtakkumulation erhöht die Sicherheit
+* Unsicherheit, was die Absichten anderer Staaten angeht
+* Erklärung für allgemeinen Kriegszustand
+
+### Balance of Power
+
+* Kriege entstehen durch Machtungleichheiten
+* Frieden am wahrscheinlichsten im Machtgleichgewicht
+
+### Hegemoniale Theorien
+
+* Dominanz eines Hegemons sorgt für Stabilität, garantiert Frieden
+* Kriegsgefahr nimmt bei Angleichung der Machtverhältnisse zu
+
+### Liberale Kritik
+
+* In wiederholten Spielen führen kooperative Strategien zur Überwindung des Gefangenendilemmas
+* Vertrauen kann einenicht-hierarchische Gruppe friedlich halten
+* Lernen aus Kriegsdesastern
+* Formen von Sicherheitsgemeinschaften
+
+## Demokratischer Frieden
+
+* Krieg als Reaktion auf innere Unruhen
+* Krieg als Ergebnis der Wirtschaftsstruktur
+* Es gab fast nie Krieg zwischen Demokratien
+
+### Strukturelle Erklärung
+
+* Akteure passen ihr Verhalten den äusseren Strukturen und den darausentstehenden Kosten und Nutzen an
+* Demokratische Institutionen erschweren es Entscheidungsträgern,die Bevölkerung in den Krieg zu führen
+
+### Normative Erklärung
+
+* Das Verhalten von Akteuren wird von bestimmten Normen und Werhaltungen beeinflusst
+* Demokratische Normen führen zu Verhaltensänderung auf internationaler Ebene
+* Prinzipien friedlicher Konfliktbewältigung machen Demokratienauch auf internationaler Ebene weniger aggressiv
+
+### Kritik
+
+* Empirische Abweichungen
+* Wenn demokratische Institutionen den Krieg erschweren, müssten Demokratien generell friedfertiger sein
+* Auch demokratische Normen müssten zugenerell friedlicherem Verhalten führen
+* Definition von Demokratie ist entscheidend
+* Frage der Kriegsdefinition
+* Frieden unter Demokratien schliesst Krieg gegen Autokratien nicht aus
+* Der Demokratische Frieden gilt nicht für Bürgerkriege
+* Demokratien sind möglicherweise anfälliger für Terrorismus
+
+### Ewiger Frieden nach Kant
+
+* Die Gründung einzelner Republiken führt zur Gründung weiterer Republiken
+* Der Zusammenschluss einzelner Republiken in einem Friedensbund führt zu einem Schneeball-Effekt
+* Neuordnung des internationalen Systems
+* Faktoren der Friedensförderung
+  * Staatsbürgerrecht (Republikanische Verfassung)
+  * Völkerrecht (Verband der Republiken)
+  * Weltbürgerrecht (Allgemeine Gastfreundschaft)
+
+### Kritik am ewigen Frieden nach Kant
+
+* Kant geht kaum auf die Herkunft republikanischer Staaten ein
+* Unterschätzt Verbindung zwischen Nationalismus und Krieg
+* Theorie sagt nichts über Bürgerkriege aus
+* Der ewige Frieden wird oft als allgemeingültiges Kausalgesetz missverstanden
+* Kern von Kants Vorhersage: Ein langfristiger Lernprozess mit Raum für Rückschläge
