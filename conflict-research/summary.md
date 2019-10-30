@@ -377,10 +377,56 @@ Staatsphilosoph, beschreibt im Werk *Il Principe* (Der Fürst):
 
 ### Inkompatibilität
 
-## Regierungskonflikt
+#### Regierungskonflikt oder Territorialkonflikt
 
-* Kontrolle über Staatsregierung, Streit über das politische System
+**Regierungskonflikt**: Kontrolle über Staatsregierung, Streit über das politische System.
 
-## Territorialkonflikt
+**Territorialkonflikt**: Kontrolle über ein bestimmtes Territorium.
 
-* Kontrolle über ein bestimmtes Territorium
+#### Ethnisch oder Ideologisch
+
+**Ethnische Konflikte**: Zwischen mehreren ethnischen Gruppen.
+
+**Ideologische Konflikte**: Unterschiedliche politische Ideologien.
+
+### Phasen
+
+#### Ausbruch
+
+* Gier
+    * Individuen wollen Nutzen maximieren
+    * Materialistischer Ansatz
+    * Kriege brechen aus, wo die Kosten Krieg zu führen tief sind
+        * Armut
+        * Handel und Plünderung natürlicher Ressourcen
+* Opportunismus
+    * Politische und institutionelle Faktoren
+    * Krieg bricht eher in schwachen Staaten aus
+* Unzufriedenheit
+    * Fokus auf Ungleichheiten in Gruppen
+    * Krieg wegen Ungleichheit
+* Of spielen mehrere Faktoren gleichzeitig eine Rolle
+* Auch internationale Faktoren beeinflussen Bürgerkriege
+    * Ethnische Verwandte in Nachbarländern
+    * Mobile Rebellen
+    * Demonstrationseffekte
+    * Flüchtlinge
+
+#### Prozesse während des Krieges
+
+* Unterschiedliche Dauer
+* Hohe Kosten, welche in Kauf genommen werden
+    * Menschliches Leid
+    * Verlust and handel und Investitionen
+    * Flüchtlingsströme
+    * 14 Jahre bis zum Einholen der verlorenen Entwicklung
+
+#### Nach dem Krieg
+
+* Wiederherstellung von Sicherheit und Ordnung
+* Je nach Ansatz:
+    * Reduktion von Ungleichheiten
+    * Politische Konzessionen
+    * Schnelle wirtschaftliche Entwicklung fördern
+    * Krieg soll finanziell unattraktiv werden
+    * Kapazität des Staates stärken
