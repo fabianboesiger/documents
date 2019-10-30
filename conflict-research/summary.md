@@ -364,3 +364,23 @@ Staatsphilosoph, beschreibt im Werk *Il Principe* (Der Fürst):
 * Theorie sagt nichts über Bürgerkriege aus
 * Der ewige Frieden wird oft als allgemeingültiges Kausalgesetz missverstanden
 * Kern von Kants Vorhersage: Ein langfristiger Lernprozess mit Raum für Rückschläge
+
+## Bürgerkriege
+
+**Bürgerkrieg**: Konflikt zwischen Regierung und einem nichtstaatlichen Herausforderer.
+
+**Bürgerkrieg mit internationaler Beteiligung**: Mindestens eine Seite wird von Truppen eines Drittstaates unterstützt.
+
+**Konventionelle Bürgerkriege**: Etwa gleich stark bewaffnete Opponenten.
+
+**Irreguläre Bürgerkriege**: Staatsarmee gegen weniger bewaffnete Rebellen.
+
+### Inkompatibilität
+
+## Regierungskonflikt
+
+* Kontrolle über Staatsregierung, Streit über das politische System
+
+## Territorialkonflikt
+
+* Kontrolle über ein bestimmtes Territorium
