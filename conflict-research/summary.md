@@ -405,7 +405,7 @@ Staatsphilosoph, beschreibt im Werk *Il Principe* (Der Fürst):
 * Unzufriedenheit
     * Fokus auf Ungleichheiten in Gruppen
     * Krieg wegen Ungleichheit
-* Of spielen mehrere Faktoren gleichzeitig eine Rolle
+* Oft spielen mehrere Faktoren gleichzeitig eine Rolle
 * Auch internationale Faktoren beeinflussen Bürgerkriege
     * Ethnische Verwandte in Nachbarländern
     * Mobile Rebellen
@@ -430,3 +430,9 @@ Staatsphilosoph, beschreibt im Werk *Il Principe* (Der Fürst):
     * Schnelle wirtschaftliche Entwicklung fördern
     * Krieg soll finanziell unattraktiv werden
     * Kapazität des Staates stärken
+
+## Systematische Gewalt gegen Zivilisten
+
+**Systematische Gewalt gegen Zivilisten**: Vorsätzliche Anwendung von Gewalt durch die Regierung eines Staates oder einer formell organisierten Gruppe gegen Zivilisten, mit mindestens 25 Toten in einem Jahr.
+
+**Zivilisten**: Unbewaffnete Leute, die nicht aktive Mitglieder von Sicherheitskr aften des Staates, oder Mitglieder einer organisierten Miliz oder Oppositionsgruppe sind. Regierungsvertreter, z.B. Mitglieder des Parlaments, Gouverneure oder Räte, zählen nicht als Zivlisten, sondern als Regierungsvertrer.
