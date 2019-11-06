@@ -436,3 +436,49 @@ Staatsphilosoph, beschreibt im Werk *Il Principe* (Der Fürst):
 **Systematische Gewalt gegen Zivilisten**: Vorsätzliche Anwendung von Gewalt durch die Regierung eines Staates oder einer formell organisierten Gruppe gegen Zivilisten, mit mindestens 25 Toten in einem Jahr.
 
 **Zivilisten**: Unbewaffnete Leute, die nicht aktive Mitglieder von Sicherheitskr aften des Staates, oder Mitglieder einer organisierten Miliz oder Oppositionsgruppe sind. Regierungsvertreter, z.B. Mitglieder des Parlaments, Gouverneure oder Räte, zählen nicht als Zivlisten, sondern als Regierungsvertrer.
+
+* Häufig während Bürgerkriegen
+* Verschiedene Formen
+* Nicht Kampfhandlungen, die Zivilisten zufällig treffen
+* Einteilung zwischen Ziviltoten und Gefectstoten dient zur besseren Einteilung von verschiedenen Kriegen
+
+### Ursachen
+
+* Frühere Forschung: Gewalt gegen Zivilisten zufällig
+* Heutige Forschung: Gewalt gegen Zivilisten absichtich mit militärischen beziehungsweise politischen Zielen
+* Motivation und Konditionen umstritten
+    * Militärische Vorteile
+    * Demobilisierung von politischen Gegnern
+    * Rache
+* Stärke der Rebellen beeinflusst Gewalt gegen Zivilisten
+    * Nicht stark genug um Vorteile durch Unterstützung zu bieten
+    * Nicht stark genug um Kooperation zu erzwingen
+* Unabhängigkeit von Zivilisten führt eher zu Gewalt gegen Zivilisten
+* Keine Sanktionsmechanismen innerhalb einer bewaffneter Gruppe
+* Abschreckung
+* Vernichtung von Unterstützung der Gegnerseite unter den Zivilisten
+* Steigerung von Kosten für die Regierung
+* Als Zeichen, dass die Regierung unfähig ist, die Zivilisten zu schützen
+* Rebellen sind generell eher abhängig von der Zivilbevölkerung
+* Rebellen in demokratischen Ländern und autokratische Regierungen sind gewalttätiger als ihre Gegner
+
+### Ethnizität
+
+**Ethnische Konflikte**: Gewaltsame Konflikte, die sich gezielt gegen Mitglieder bestimmter ethnischen Gruppen richten.
+
+**Ethnozid**: Vorsätzlicher Versuch, eine ethnische Identität zu zerstören.
+
+**Ethnische Säuberung**: Vorsätzlicher Versuch, Mitglieder einer ethnischen Gruppe mit Gewalt aus einem Gebiet zu entfernen.
+
+**Völkermord/Genozid**: Vorsätzlicher Versuch, eine ganze ethnische Gruppe auszulöschen.
+
+* Wichtige Dimension in vielen Bürgerkriegen
+* Beeinflusst Risiko für Gewalt gegen Zivilisten, erlabut Konfliktparteien eine gute Freund/Feind-Unterscheidung
+* Gewalt gegen Zivilisten vertärkt wiederum ethnische Teilungen
+* Im Extremfall ethnische Säuberungen und Genozid
+
+### Fallbeispiele
+
+#### Bosnien und Hezegowina und Ruanda
+
+* Beides ethnische Konflikte
