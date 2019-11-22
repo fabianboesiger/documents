@@ -1,29 +1,31 @@
-# Numerical Methods for Computational Science and Engineering
+---
+title: "Summary for Numerical Methods for Computational Science and Engineering"
+geometry: "margin=2cm"
+toc: yes
+---
 
-## Computing with Matrices and Vectors
+# Computing with Matrices and Vectors
 
-### Machine Arithmetic
+## Machine Arithmetic
 
 As machines can't compute in real numbers but compute with machine numbers, there are some constraints. Over- and underflow exist, the amount of numbers is finite. Thus, instead of checking for equality, we check if the difference of two numbers is smaller than some maximal relative error.
 
-### Cancellation
+## Cancellation
 
-Cancellation occurs whenSubstrachting we attempt to:
+Cancellation occurs when Substrachting we attempt to:
 
 * Substract numbers of the same size.
 * Divide by a small number close to zero.
 
 To avoid cancellation, we simply avoid such kinds of substractions and divisions by recastion expressions or use tricks like taylor approximations.
 
-## Gaussian Elimination
+# Direct Methods for Square Linear Systems of Equations
 
-### Theory
+## Gaussian Elimination
 
 $A$ is *invertible* or *regular* if and only if there exists an unique solution $x$ for $Ax = b$, that is $x = A^{-1}b$.
 
-### Code and Complexity
-
-In Eigen, we use the following code to solve $Ax = b$:
+In Eigen, we use the following code to solve $Ax = b$, and remember to exploit structure by using the appropriate function:
 
 ```
 MatrixXd A;
@@ -112,9 +114,9 @@ Same as CRS, but with column pointers and row indices instead.
 SparseMatrix<double, ColMajor> A(rows, cols);
 ```
 
-## Linear Least Square Problems
+# Direct Methods Linear Least Square Problems
 
-### Example: Linear Parameter Estimation
+## Example: Linear Parameter Estimation
 
 Assume we take $m$ measurements and find the pairs $(x_i, y_i)$. We can express these measurements in the following overdetermined linear system:
 
@@ -138,7 +140,7 @@ y_m
 \end{bmatrix}
 $$
 
-### Solution Concepts
+## Solution Concepts
 
 For given $A$, $b$, the vector $x$ is a least squares solution of $Ax = b$, if:
 
@@ -152,21 +154,7 @@ $$A^T Ax = A^T b$$
 
 If $m \geq n$ and $Kernel(A) = 0$, then the linear system of equations $Ax = b$ has a unique least squares solution $x = (A^T A)^{-1} A^T b$.
 
-### Moore-Penrose Pseudoinverse
-
-As there are many potential least square solutions, we define the *generalized solution* $x^+$ of a linear system of equations as:
-
-$$x^+ = argmin\{\|x\|_2, x \in lsq(A, b)\}$$
-
-The generalized solution $x^+$ of the linear systems of equations $Ax = b$ is given by:
-
-$$x^+ = V (V^T A^T AV)^{-1} (V^T A^T b)$$
-
-Where the matrix $V (V^T A^T AV)^{-1} V^T$ is called the *Moore-Penrose pseudoinverse* of $A$.
-
-### Code
-
-We want to solve $A^T Ax = A^T b$. To do this, we use the following procedure:
+We want to solve the *normal equation* $A^T Ax = A^T b$. To do this, we use the following procedure:
 
 1. Compute the regular matrix $C = A^T A$.
 2. Compute the right hand side vector $c = A^T b$.
@@ -179,3 +167,23 @@ VectorXd x = C.llt().solve(c);
 ```
 
 The asymptotic complexity is $O(n^2 m + n^3)$.
+
+## Moore-Penrose Pseudoinverse
+
+As there are many potential least square solutions, we define the *generalized solution* $x^+$ of a linear system of equations as:
+
+$$x^+ = argmin\{\|x\|_2, x \in lsq(A, b)\}$$
+
+The generalized solution $x^+$ of the linear systems of equations $Ax = b$ is given by:
+
+$$x^+ = V (V^T A^T AV)^{-1} (V^T A^T b)$$
+
+Where the matrix $V (V^T A^T AV)^{-1} V^T$ is called the *Moore-Penrose pseudoinverse* of $A$.
+
+## Orthogononal Transformation Methods
+
+Transform $Ax = b$ to $\tilde A \tilde x = \tilde b$ such that $lsq(A, b) = lsq(\tilde A, \tilde b)$ and $\tilde A \tilde x = \tilde B$ is easy to solve.
+
+### OR-Decomposition
+
+### Householder

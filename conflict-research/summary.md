@@ -6,7 +6,7 @@
 
 **Gewalt**: Jeder Versuch, unter Einsatz von physischen oder psychischen Zwangsmitteln den eigenen Willen gegen den Willen anderer Durchzusetzen.
 
-**Politische Gewalt**: Die *direkte physische Schädigung* von Menschen durch Menschen, die *zu politischen Zwecken* stattfindet, d.h. darauf abzielt von oder für die Gesellschaft getroffene Entscheidungen zu verhindern oder zu erzwingen oder die auf die Regeln des gesllschaftlichen Zusammenlebens zielt und versucht bestehende Leitideen zu verteidigen oder durch neue zu ersetzen, die ausserem im öffentlichen Raum *vor den Augen der Öffentlichkeit* und an die Öffentlichkeit als Unterstützer, Publikum oder Schiedsrichter appellierend stattfindet.
+**Politische Gewalt**: Die *direkte physische Schädigung* von Menschen durch Menschen, die *zu politischen Zwecken* stattfindet, d.h. darauf abzielt von oder für die Gesellschaft getroffene Entscheidungen zu verhindern oder zu erzwingen oder die auf die Regeln des gesllschaftlichen Zusammenlebens zielt und versucht bestehende Leitideen zu verteidigenb oder durch neue zu ersetzen, die ausserem im öffentlichen Raum *vor den Augen der Öffentlichkeit* und an die Öffentlichkeit als Unterstützer, Publikum oder Schiedsrichter appellierend stattfindet.
 
 **Gewalt gegen Zivilisten**: Die absichtliche Verwendung von Gewalt gegen Zivilisten.
 
@@ -477,8 +477,96 @@ Staatsphilosoph, beschreibt im Werk *Il Principe* (Der Fürst):
 * Gewalt gegen Zivilisten vertärkt wiederum ethnische Teilungen
 * Im Extremfall ethnische Säuberungen und Genozid
 
-### Fallbeispiele
+## Terrorismus
 
-#### Bosnien und Hezegowina und Ruanda
+* Gewalt nichtstaatlicher Akteure
+* Gegen ungeschützte Opfer
+* Um ein Publikum einzuschüchtern
+* Damit Druck auf den Adressaten entsteht, der zu politischenVeränderungen führt
+* Asymmetrie zwischen Täter und Adressat
+* Oft im Wechsel mit anderen Strategien, zum Beispiel der Guerillakriegsführung
 
-* Beides ethnische Konflikte
+* **Nationaler Terrorismus**: Beschränkt auf ein Gebiet eines Staates
+* **Internationaler Terrorismus**: Handlungen im Ausland, ziele auf einen Staat beschränkt
+* **Transnationaler Terrorismus**: Handlungen in vielen Gebieten der Welt
+
+### Ziele
+
+* Verschiedenste langfristige Ziele
+* Sicherung von Gehorsam
+* Werbung
+* Schwächung/Desorientierung/Provokation des Gegners
+* Terrorismus als Kommunikationsstrategie
+
+### Unterschiede
+
+|Typ|Ziele/Opfer|Kurzfristige Zielsetzung|
+|---|---|---|
+|Terrorismus|Zivilisten|Einschüchterung eines Publikums|
+|Guerillakrieg|Militärische Ziele|Territoriale Gewinne, Erschöpfung des Gegners|
+
+|Typ|Strategie|Täter|
+|---|---|---|
+|Terrorismus|Kommunikation|Nichtstaatliche Akteure|
+|Gewalt gegen Zivilisten|Politische/Militärische Strategie|Regierungen oder nichtstaatliche Akteure|
+
+### Geschichte
+
+* Vier Wellen des Terrorismus
+    * Anarchischer Terrorismus
+    * Antikolonialer Terrorismus
+    * Linksradikaler Terrorismus
+    * Religiöser Terrorismus
+
+#### Anarchischer Terrorismus
+
+Anschlag auf Zar Alexander II.
+
+#### Zionistischer Terrorismus
+
+Der jüdische Terrorismus greift Araber und Briten an, vor der Anerkennung von Israel als Staat.
+
+#### Antikolonialer Terrorismus
+
+Nationale Befreiungsfront, viele Attentate gegen Algerienfranzosen.
+
+#### Internationaler Terrorismus
+
+Entführung von Sportler durch palistinänsische Terroristen an den olympischen Spielen.
+
+#### Religiöser Terrorismus
+
+Beispiel Al-Qaida.
+
+#### Transnationaler Terrorismus
+
+Anschlag am 11. September, oder auch Aktivitäten des IS.
+
+### Ursachen
+
+* Psychologische Gründe, Frustration
+* Rekrutierung durch Organisationen
+* Religiöse Gründe
+* Bestimmte Staatsstrukturen (Demokratien/Autokratien)
+* Armut/Ungleichheit
+* Transnationale Faktoren
+
+### Lösungen
+
+* Gezielte und ungezielte Rückschläge
+* Informationsgewinnung
+* Rückgewinnung von Gebieten
+* Schutzmassnahmen
+* Waffenzugangskontrolle
+* Bekämpfung der Unzufriedenheit
+* Friedensabkommen
+* Vertrauensbildende Massnahmen
+* Involvierung dritter Parteien
+* Vorbeugung durch Integration
+
+In der EU: Prävention (Bekämpfung Propaganda, Informationsaustausch), Schutz (Strengere Kontrollen), Verfolgung (Fluggastdatensätze), Reaktion
+
+## Nuklearstrategie
+
+* Atomwaffen als Abschreckung, *nukleare Abschreckung*
+* Abschreckung wird mit einer Drohung gegen einen Herausforderer eingesetzt, um diesen von einem Angriff abzuhalten
