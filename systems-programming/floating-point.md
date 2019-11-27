@@ -23,8 +23,8 @@ $$(-1)^s \cdot M \cdot 2^E$$
 |Values|Condition|Exponent Encoding|Significand Encoding|
 |---|---|---|---|
 |Normalized Values|$exp \neq 000...0$, $exp \neq 111...1$|$exp - bias$|Implied leading one|
-|Denormalized Values|$exp = 000...0$|
-Special Values|$exp = 111...1$|$1 - bias$, *not* $0 - bias$|Implied leading zero|
+|Denormalized Values|$exp = 000...0$|$1 - bias$, *not* $0 - bias$|Implied leading zero|
+Special Values|$exp = 111...1$|||
 
 # Conversion
 
