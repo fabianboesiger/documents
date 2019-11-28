@@ -1,6 +1,6 @@
 ---
 title: "Summary for Numerical Methods for Computational Science and Engineering"
-geometry: "margin=2cm"
+geometry: "margin=3cm"
 toc: yes
 ---
 
@@ -18,6 +18,10 @@ Cancellation occurs when Substrachting we attempt to:
 * Divide by a small number close to zero.
 
 To avoid cancellation, we simply avoid such kinds of substractions and divisions by recastion expressions or use tricks like taylor approximations.
+
+## Increasing Speed of Algorithms
+
+For the following algorithms and formulas described, take into consideration that in many cases, the execution speed of a program can be increased significantly by simply precomputing things that would be computed multiple times, for example in a `for`-loop.
 
 # Direct Methods for Square Linear Systems of Equations
 
@@ -187,3 +191,125 @@ Transform $Ax = b$ to $\tilde A \tilde x = \tilde b$ such that $lsq(A, b) = lsq(
 ### OR-Decomposition
 
 ### Householder
+
+# Data Interpolation and Data Fitting in 1D
+
+Given some data points $(t_i, y_i)$, $i = 0, ..., n$, find a interpolant function $f$ satisfying $f(t_i) = y_i$ and belonging to a set $V$ of specific functions.
+
+## Global Polynomial Interpolation
+
+The set of functions is $V = \mathcal P_k = {f \mid f(t) = \alpha_k t^k + ... + \alpha_0 t^0, \alpha_j \in \mathbb R}$.
+
+Polynomials are usefull because ...
+
+* ... they span a finite-dimensional vector space.
+* ... they are smooth.
+* ... they are easy to evaluate, differentiate and integrate.
+
+Notice that $dim \mathcal P_k = k + 1$. For $n$ data points, we construct a $n + 1$-dimensional Polynomial from $\mathcal P_n$. The polynomial will be unique.
+
+We introduce the Lagrange polynomials as a helpful tool:
+
+$$
+L_i(t) = \frac
+{(t - t_0) ... (t - t_{i-1})(t - t_{i+1}) ... (t - t_n)}
+{(t_i - t_0) ... (t_i - t_{i-1})(t_i - t_{i+1}) ... (t_i - t_n)}
+$$
+
+Note that: 
+
+$$
+L_i(t_j) = 
+\begin{cases}
+1, & j = i\\
+0, & \text{else}
+\end{cases}
+$$
+
+The polynomial is built by summing up the parts:
+
+$$
+p(x) = \sum_{j = 0}^{n} y_j L_j(x)
+$$
+
+We can use the *Aitken-Neville* algorithm for increased efficiency, where $l$ is the first and $k$ is the last point included in the interpolation, such that $p_{0, n} = p$.
+
+$$
+p_{k, k}(x) = y_k
+$$
+
+$$
+p_{k, l}(x) = \frac{(x - t_k) p_{k+1, l}(x) - (x - t_l) p_{k, l-1}(x)}{t_l - t_k}
+$$
+
+Another advantage is the update-friendliness of this algorithm, because there is no need to recompute the whole formula if another point is added.
+
+Because adding another point affects all Lagrange polynomials, we introduce the new *Newton basis* with the purpose of being update-friendlier.
+
+$$
+N_0(t) = 1, N_1(t) = (t - t_0), ..., N_n(t) = \prod_{i = 0}^{n - 1}(t - t_i)
+$$
+
+$$
+p(t) = \sum_{i = 0}^{i \leq n} a_i N_i
+$$
+
+To find $a_i$, we have to solve the following equations:
+
+$$
+p(t_i) = y_i
+$$
+
+Which leads us a triangular linear system to solve:
+
+$$
+\begin{bmatrix}
+1 & 0 & \hdots & 0 \\
+1 & (t_1 - t_0) & & \vdots \\
+\vdots & \vdots & & 0 \\
+1 & (t_n - t_0) & \hdots & \prod_{i = 0}^{n - 1}(t_n - t_i)
+\end{bmatrix}
+\begin{bmatrix}
+a_0 \\
+a_1 \\
+\vdots \\
+a_n
+\end{bmatrix}
+=
+\begin{bmatrix}
+y_0 \\
+y_1 \\
+\vdots \\
+y_n
+\end{bmatrix}
+$$
+
+We observe a similar recursion like before, and we can define analogous to $p_{l, m}$:
+
+$$
+a_{l,m} = \frac{a_{l + 1, m} - a_{l, m - 1}}{t_m - t_l}
+$$
+
+Instead of solving the triangular linear system, we use the *divided differences* algoritm.
+
+$$
+y[t_i] = y_i
+$$
+
+$$
+y[t_i, ..., t_{i + k}] = \frac{y[t_{i + 1}, ..., t_{i + k}] - y[t_i, ..., t_{i + k - 1}]}{t_{i + k} - t_i}
+$$
+
+$$
+a_i = y[t_0, ..., t_i]
+$$
+
+## Shape Preserving Interpolation
+
+## Cubic Hermite Interpolation
+
+## Splines
+
+## Trigonometric Interpolation
+
+## Least Squares Data Fitting
