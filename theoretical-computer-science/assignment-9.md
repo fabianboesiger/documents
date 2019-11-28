@@ -28,7 +28,7 @@ MTM, die beide Schranken für Platz und Zeit einhält.
 
 ## (a)
 
-Wir zeigen $VC \leq_p SCP$. Zuerst modellieren wir die Eingabe $(G, k)$ für $VC$ um zu einer Eingabe für $SCP$: Wir wählen $(E, S_G, k)$, wobei $E_v$ die Menge der Kanten ist, die zu $v$ inzident sind, also $E_v = \{e \in E | v ist inzident zu e\}$. $S_G$ definieren wir als $S_G = \{E_v | v \in V\}$. Diese Ummodellierung können wir in polynomieller Zeit durchführen.
+Wir zeigen $VC \leq_p SCP$. Zuerst modellieren wir die Eingabe $(G, k)$ für $VC$ um zu einer Eingabe für $SCP$: Wir wählen $(E, S_G, k)$, wobei $E_v$ die Menge der Kanten ist, die zu $v$ inzident sind, also $E_v = \{e \in E$ $|$ $v$ $ist$ $inzident$ $zu$ $e\}$. $S_G$ definieren wir als $S_G = \{E_v | v \in V\}$. Diese Ummodellierung können wir in polynomieller Zeit durchführen.
 
 Wir zeigen $(G, k) \in VC \Leftrightarrow (E_v, S_G, k) \in SCP$: 
 
