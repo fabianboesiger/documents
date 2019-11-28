@@ -1,8 +1,12 @@
-# Konfliktforschung: Politische Gewalt
+---
+title: "Konfliktforschung: Politische Gewalt"
+geometry: "margin=2cm"
+toc: yes
+---
 
-## Einführung
+# Einführung
 
-### Definitionen
+## Definitionen
 
 **Gewalt**: Jeder Versuch, unter Einsatz von physischen oder psychischen Zwangsmitteln den eigenen Willen gegen den Willen anderer Durchzusetzen.
 
@@ -24,7 +28,7 @@
 
 **Informell organisierte Gruppe**: Eine Gruppe, die keinen Namen veröffentlicht hat, welche jedoch an Gewaltakten teilnimmt, die im Voraus geplant wurde.
 
-### Typen
+## Typen
 
 * Zwischenstaatliche Kriege
 * Bürgerkriege
@@ -32,31 +36,31 @@
 * Terrorismus
 * Systematische Gewalt gegen die Zivilbevölkerung
 
-### Akteure
+## Akteure
 
 * Regierung
 * Opposition
 * Gesellschaftliche Gruppen und Bewegungen
 * Extremistische Aussenseiter
 
-## Methoden
+# Methoden
 
 **Friedens- oder Konfliktforschung**: Forschung, die sich mit den Ursachen von bewaffneten Konflikten und deren Bewältigung beschäftigt.
 
-### Quantitative Konfliktforschung
+## Quantitative Konfliktforschung
 
 * Grosse Datensätze
 * Länder- und regionenübergreifende Vergleiche
 * Statistische Analysemethoden
 * Computersimulationen, Umfragen
 
-### Qualitative Friedensforschung
+## Qualitative Friedensforschung
 
 * Fallstudien
 * Vergleich ausgewählter Fälle
 * Ethnographisch, Inhaltsanalysen, Experimente
 
-## Daten
+# Daten
 
 |Organisation|Website|Datentypen|Ort|Zeitraum|Sonstiges|
 |---|---|---|---|---|---|
@@ -65,19 +69,19 @@
 |Armed Conflict Location and Event Data Project|[Website](https://www.acleddata.com/)|Kämpfe, Explosionen, Gewalt gegen Zivilisten, Proteste, Krawalle|Afrika, Süd- und Ostasien, Naher Osten, Europa, Lateinamerika|1997-2019|Geocodierte Daten zu politischer Gewalt und Protesten, Datum, Akteure, Gewalttypen, Ort, Anzahl Tote|
 |Social Conflict Analysis Database|[Website](https://www.strausscenter.org/scad.html)|Proteste, Krawalle, regionale Konflikte, Gewalt gegen Zivilisten|Afrika, Mexiko, Zentralamerika, Karibik|1990-2015|Ort, Zeit, Intensität, Akteure, Streitgrund, Reaktion der Reigerung|
 
-### Was sagen die Daten
+## Was sagen die Daten
 
 * Zunahme von Bürgerkriegen mit Internationaler Beteiligung
 * Zwei aktive internationale Konflikte in 2018
 * Bei Unterstützung von Drittstaaten kommt es zu grösserer Intensität und Dauer des Konfliktes, die aushandlung von Friedensverträgen wird schwieriger.
 * Abnahme von Gefechtstoten seit 2014
 
-## Geschichte der Konfliktforschung
+# Geschichte der Konfliktforschung
 
 * Seit Ende des ersten Weltkriegs
 * In der Schweiz beinflusst von Genf als standort internationaler Organisationen
 
-## Historische Entwicklung
+# Historische Entwicklung
 
 ||||
 |:---|:---:|---:|
@@ -87,7 +91,7 @@
 
 **Staat**: Der Staat ist diejenige menschliche Gemeinschaft, welche innerhalb eines bestimmten Gebietes das Monopol legitimer Gewaltsamkeit für sich beansprucht.
 
-### Feudalismus
+## Feudalismus
 
 **Feudalismus**: Dezentralisiertes politisches System, das auf persönlichen Verbindungen basiert.
 
@@ -109,27 +113,27 @@
 ||Lehensmänner||
 ||Bauern||
 
-### Städtebünde
+## Städtebünde
 
 * Macht dank Profit durch Handel
 * Formen direkter Demokratie und Verfassungen
 * Kontrolle des Handels in Nordeuropa
 * Land weiterhin unter Feudalherrschaft
 
-### Stadtstaaten
+## Stadtstaaten
 
 * Kleine Territorialstaaten mit eigener Aussenpolitik
 * Zersplitterte innenpolitische Organisation
 * Hierarchie aufgrund adliger Verwandtschaftsverhältnissen
 * Kein Bund, es herrscht gegenseitige Rivalität
 
-### Territorialstaaten
+## Territorialstaaten
 
 * Aufkommen um 1500 n. Chr.
 * Flächenstaatene mit zentalisierter und bürokratischer Machtausübung
 * Stadtstaaten zu klein und zu schwach gegenüber Territorialstaaten
 
-### Frühmodernes Europa
+## Frühmodernes Europa
 
 * Abnahme der geopolitischen Spieler
 * Monarchen mit absoluter Souverenität
@@ -137,7 +141,7 @@
 * Zwischenstaatliche Beziehungen durch Diplomatie und Krieg
 * Klar abgegrenzte Gebiete
 
-### Westfählischer Frieden
+## Westfählischer Frieden
 
 * Ende der Religionskriege (Dreissigjähriger Kriege)
 * 1648 Friedensvertrag, basis für moderne internationale Beziehungen
@@ -146,12 +150,12 @@
     * Internes Gewaltmonopol
     * Externe Unabhängigkeit
 
-### Das europäische Gleichgewicht
+## Das europäische Gleichgewicht
 
 * Diplomatie, Allianzen und Rüstungsmassnahmen um zu verhindern, dass ein Staat dominiert
 * Friede von Utrecht 1713 führt das Gleichgewichtsprinzip völkerrechtlich ein
 
-### Niccolò Machiavelli
+## Niccolò Machiavelli
 
 Staatsphilosoph, beschreibt im Werk *Il Principe* (Der Fürst):
 
@@ -163,26 +167,26 @@ Staatsphilosoph, beschreibt im Werk *Il Principe* (Der Fürst):
 
 > Ein Herrscher hat nämlich zweierlei zu fürchten: Einmal die Gefahren im Innern von Seiten seiner Untertanen und ferner die äusseren Gefahren von Seiten fremder Machthaber.
 
-### Jean Bodin
+## Jean Bodin
 
 * Wichtigste Eigenschaft des Staates ist die Souveränität
 * Staat als Ort höchster politischer Entscheidung
 * Souveränität kann nur von einer Person ausgeübt werden
 
-### Thomas Hobbes
+## Thomas Hobbes
 
 * Herrschaftsvertrag zwischene Volk und Herrscher
 * Naturzustand ist ohne Sicherheit
 * Herrschaftskontrolle der Gewaltanwendung als Notwendigkeit
 * "Leviathan"-Theorie: Volk muss Souverän gehorchen, wenn dieser Frieden gewährleistet
 
-### Hugo Grotius
+## Hugo Grotius
 
 * Naturrechtliche Prinzipien für zwischenstaatliche Regulierung und Gewaltbegrenzung
 
-## Verknüpfung von Staaten und Kriegen
+# Verknüpfung von Staaten und Kriegen
 
-### Aktivitäten des Staates
+## Aktivitäten des Staates
 
 * Interne Staatenbildung
 * Externe Kriegsführung
@@ -190,7 +194,7 @@ Staatsphilosoph, beschreibt im Werk *Il Principe* (Der Fürst):
 * Besteuerung
 * Direkte Herrschaft
 
-### Wie Kriege Staaten schaffen und umgekehrt
+## Wie Kriege Staaten schaffen und umgekehrt
 
 * Zunahme zwischenstaatlicher Kriege seit Mittelalter
 * Aber Abnahme von Kriegen mit Grossmächten
@@ -208,40 +212,40 @@ Staatsphilosoph, beschreibt im Werk *Il Principe* (Der Fürst):
 9. Grössere Effektivität
 10. **Grössere Kriege**
 
-### Kriegsverursachende Faktoren
+## Kriegsverursachende Faktoren
 
 * Selektion: Schwächere Einheiten wurden absorbiert
 * Imitation: Rüstungswettkampf, Imitation von erfolgreichen kriegsführenden Staaten
 * Teritorriale Ziele statt Familienansprüche
 * Schneeballeffekt durch die Reduktion der Anzahl Staaten
 
-### Alternative Erklärungen für Staatsformation
+## Alternative Erklärungen für Staatsformation
 
 * Wirtschaftliche Faktoren: Handel, Urbanisierung
 * Wirtschaftliche Entwicklung und Expansion
 
-### Kriegsführung
+## Kriegsführung
 
-#### Mittelalter
+### Mittelalter
 
 * Unkoordiniert
 * Persönlich
 
-#### Militärische Revolution
+### Militärische Revolution
 
 * Söldner
 * Feuerwaffen
 * Fortifikation
 
-#### Neuzeit
+### Neuzeit
 
 * Funktionelle Spezialisierung
 * Permanente Streitkräfte
 * Grössere Armeen
 
-## Nationalismus
+# Nationalismus
 
-### Historische Entwicklung
+## Historische Entwicklung
 
 * Nach Absolutismus bildete sich die Idee der nationalen Selbstbestimmung
 * Napoleonische Kriege vermittelten liberale Ideen der französischen Revolution, stellten Monarchie in Europa in Frage
@@ -249,20 +253,20 @@ Staatsphilosoph, beschreibt im Werk *Il Principe* (Der Fürst):
 * Wiener Kongress 1815 mit dem Ziel, den Nationalismus einzudämmen und neue Nationalstaaten zu verhindern
 * Vereinigun Italiens und Deutschlands folgte
 
-### Definitionen
+## Definitionen
 
 **Nation**: Gefühlsmässige Gemeinschaft, deren adäquater Ausdruck ein eigener Staat wäre, die normalerweise die Tendenz hat, einen solchen aus sich hervorzutreiben.
 
 **Nationalismus**: Politisches Prinzip, das aussagt, dass die politischen und nationalen Einheiten kongruent sein sollen.
 
-#### Nationalismus als Ideologie
+### Nationalismus als Ideologie
 
 * Verlangt Selbstbestimmung
 * Souveränität geht vom Volk aus
 * Gruppenzugehörigkeit
 * Wichtiges Prinzip der politischen Legitimität
 
-#### Typen von Nationalismus
+### Typen von Nationalismus
 
 **Einigungsnationalismus**: Führt zu Vereinigung von Staaten.
 
@@ -270,7 +274,7 @@ Staatsphilosoph, beschreibt im Werk *Il Principe* (Der Fürst):
 
 **Staatsgeführter Nationalismus**: Nation entwickelt sich innerhalb von Staatsgrenzen, verursacht durch Staats-zu-Nations-Überschuss (Mehr Staaten als Nationen).
 
-### Neue Kriegsführung
+## Neue Kriegsführung
 
 * Macht geht vom Volk aus
 * Nicht nur strategische Gewinne, sondern auch Unterwerfung gegnerischen Nationen als Ziel
@@ -281,62 +285,62 @@ Staatsphilosoph, beschreibt im Werk *Il Principe* (Der Fürst):
 * Dekolonialisierung durch nationalistische Bewegungen in unabhängigen Staaten
 * Ende des kalten Krieges und Aufkommen neuer nationalistischer Bewegungen
 
-## Anarchie zwischen den Staaten
+# Anarchie zwischen den Staaten
 
 **Sicherheitsdilemma**: Es existiert keine höhere rechtliche Instanz, die Gewalttaten und Verbrechen bestrafen kann, was Staaten unsicher macht und zu Aufrüstung führt.
 
 * Ungewissheit über Absichten anderer Saaten
 * Streben nach Sicherheit führt dazu, dass Staaten mehr Macht akkumulieren, was wiederum andere Staaten unsicher macht
 
-### Klassischer Realismus
+## Klassischer Realismus
 
 * Kriegszustand als Naturzustand
 * Keine Sicherheitsgarantie im Naturzustand
 * Überleben dank Stärke
 * Balance of Power
 
-### Neorealismus
+## Neorealismus
 
 * Kene den Staaten übergeordnete Ordnungsmacht
 * Staaten als einheitliche rationale Akteure, die an Sicherheit und Überleben interessiert sind, Machtakkumulation erhöht die Sicherheit
 * Unsicherheit, was die Absichten anderer Staaten angeht
 * Erklärung für allgemeinen Kriegszustand
 
-### Balance of Power
+## Balance of Power
 
 * Kriege entstehen durch Machtungleichheiten
 * Frieden am wahrscheinlichsten im Machtgleichgewicht
 
-### Hegemoniale Theorien
+## Hegemoniale Theorien
 
 * Dominanz eines Hegemons sorgt für Stabilität, garantiert Frieden
 * Kriegsgefahr nimmt bei Angleichung der Machtverhältnisse zu
 
-### Liberale Kritik
+## Liberale Kritik
 
 * In wiederholten Spielen führen kooperative Strategien zur Überwindung des Gefangenendilemmas
 * Vertrauen kann einenicht-hierarchische Gruppe friedlich halten
 * Lernen aus Kriegsdesastern
 * Formen von Sicherheitsgemeinschaften
 
-## Demokratischer Frieden
+# Demokratischer Frieden
 
 * Krieg als Reaktion auf innere Unruhen
 * Krieg als Ergebnis der Wirtschaftsstruktur
 * Es gab fast nie Krieg zwischen Demokratien
 
-### Strukturelle Erklärung
+## Strukturelle Erklärung
 
 * Akteure passen ihr Verhalten den äusseren Strukturen und den darausentstehenden Kosten und Nutzen an
 * Demokratische Institutionen erschweren es Entscheidungsträgern,die Bevölkerung in den Krieg zu führen
 
-### Normative Erklärung
+## Normative Erklärung
 
 * Das Verhalten von Akteuren wird von bestimmten Normen und Werhaltungen beeinflusst
 * Demokratische Normen führen zu Verhaltensänderung auf internationaler Ebene
 * Prinzipien friedlicher Konfliktbewältigung machen Demokratienauch auf internationaler Ebene weniger aggressiv
 
-### Kritik
+## Kritik
 
 * Empirische Abweichungen
 * Wenn demokratische Institutionen den Krieg erschweren, müssten Demokratien generell friedfertiger sein
@@ -347,7 +351,7 @@ Staatsphilosoph, beschreibt im Werk *Il Principe* (Der Fürst):
 * Der Demokratische Frieden gilt nicht für Bürgerkriege
 * Demokratien sind möglicherweise anfälliger für Terrorismus
 
-### Ewiger Frieden nach Kant
+## Ewiger Frieden nach Kant
 
 * Die Gründung einzelner Republiken führt zur Gründung weiterer Republiken
 * Der Zusammenschluss einzelner Republiken in einem Friedensbund führt zu einem Schneeball-Effekt
@@ -357,7 +361,7 @@ Staatsphilosoph, beschreibt im Werk *Il Principe* (Der Fürst):
   * Völkerrecht (Verband der Republiken)
   * Weltbürgerrecht (Allgemeine Gastfreundschaft)
 
-### Kritik am ewigen Frieden nach Kant
+## Kritik am ewigen Frieden nach Kant
 
 * Kant geht kaum auf die Herkunft republikanischer Staaten ein
 * Unterschätzt Verbindung zwischen Nationalismus und Krieg
@@ -365,7 +369,7 @@ Staatsphilosoph, beschreibt im Werk *Il Principe* (Der Fürst):
 * Der ewige Frieden wird oft als allgemeingültiges Kausalgesetz missverstanden
 * Kern von Kants Vorhersage: Ein langfristiger Lernprozess mit Raum für Rückschläge
 
-## Bürgerkriege
+# Bürgerkriege
 
 **Bürgerkrieg**: Konflikt zwischen Regierung und einem nichtstaatlichen Herausforderer.
 
@@ -375,23 +379,23 @@ Staatsphilosoph, beschreibt im Werk *Il Principe* (Der Fürst):
 
 **Irreguläre Bürgerkriege**: Staatsarmee gegen weniger bewaffnete Rebellen.
 
-### Inkompatibilität
+## Inkompatibilität
 
-#### Regierungskonflikt oder Territorialkonflikt
+### Regierungskonflikt oder Territorialkonflikt
 
 **Regierungskonflikt**: Kontrolle über Staatsregierung, Streit über das politische System.
 
 **Territorialkonflikt**: Kontrolle über ein bestimmtes Territorium.
 
-#### Ethnisch oder Ideologisch
+### Ethnisch oder Ideologisch
 
 **Ethnische Konflikte**: Zwischen mehreren ethnischen Gruppen.
 
 **Ideologische Konflikte**: Unterschiedliche politische Ideologien.
 
-### Phasen
+## Phasen
 
-#### Ausbruch
+### Ausbruch
 
 * Gier
     * Individuen wollen Nutzen maximieren
@@ -412,7 +416,7 @@ Staatsphilosoph, beschreibt im Werk *Il Principe* (Der Fürst):
     * Demonstrationseffekte
     * Flüchtlinge
 
-#### Prozesse während des Krieges
+### Prozesse während des Krieges
 
 * Unterschiedliche Dauer
 * Hohe Kosten, welche in Kauf genommen werden
@@ -421,7 +425,7 @@ Staatsphilosoph, beschreibt im Werk *Il Principe* (Der Fürst):
     * Flüchtlingsströme
     * 14 Jahre bis zum Einholen der verlorenen Entwicklung
 
-#### Nach dem Krieg
+### Nach dem Krieg
 
 * Wiederherstellung von Sicherheit und Ordnung
 * Je nach Ansatz:
@@ -431,7 +435,7 @@ Staatsphilosoph, beschreibt im Werk *Il Principe* (Der Fürst):
     * Krieg soll finanziell unattraktiv werden
     * Kapazität des Staates stärken
 
-## Systematische Gewalt gegen Zivilisten
+# Systematische Gewalt gegen Zivilisten
 
 **Systematische Gewalt gegen Zivilisten**: Vorsätzliche Anwendung von Gewalt durch die Regierung eines Staates oder einer formell organisierten Gruppe gegen Zivilisten, mit mindestens 25 Toten in einem Jahr.
 
@@ -442,7 +446,7 @@ Staatsphilosoph, beschreibt im Werk *Il Principe* (Der Fürst):
 * Nicht Kampfhandlungen, die Zivilisten zufällig treffen
 * Einteilung zwischen Ziviltoten und Gefectstoten dient zur besseren Einteilung von verschiedenen Kriegen
 
-### Ursachen
+## Ursachen
 
 * Frühere Forschung: Gewalt gegen Zivilisten zufällig
 * Heutige Forschung: Gewalt gegen Zivilisten absichtich mit militärischen beziehungsweise politischen Zielen
@@ -462,7 +466,7 @@ Staatsphilosoph, beschreibt im Werk *Il Principe* (Der Fürst):
 * Rebellen sind generell eher abhängig von der Zivilbevölkerung
 * Rebellen in demokratischen Ländern und autokratische Regierungen sind gewalttätiger als ihre Gegner
 
-### Ethnizität
+## Ethnizität
 
 **Ethnische Konflikte**: Gewaltsame Konflikte, die sich gezielt gegen Mitglieder bestimmter ethnischen Gruppen richten.
 
@@ -477,7 +481,7 @@ Staatsphilosoph, beschreibt im Werk *Il Principe* (Der Fürst):
 * Gewalt gegen Zivilisten vertärkt wiederum ethnische Teilungen
 * Im Extremfall ethnische Säuberungen und Genozid
 
-## Terrorismus
+# Terrorismus
 
 * Gewalt nichtstaatlicher Akteure
 * Gegen ungeschützte Opfer
@@ -490,7 +494,7 @@ Staatsphilosoph, beschreibt im Werk *Il Principe* (Der Fürst):
 * **Internationaler Terrorismus**: Handlungen im Ausland, ziele auf einen Staat beschränkt
 * **Transnationaler Terrorismus**: Handlungen in vielen Gebieten der Welt
 
-### Ziele
+## Ziele
 
 * Verschiedenste langfristige Ziele
 * Sicherung von Gehorsam
@@ -498,7 +502,7 @@ Staatsphilosoph, beschreibt im Werk *Il Principe* (Der Fürst):
 * Schwächung/Desorientierung/Provokation des Gegners
 * Terrorismus als Kommunikationsstrategie
 
-### Unterschiede
+## Unterschiede
 
 |Typ|Ziele/Opfer|Kurzfristige Zielsetzung|
 |---|---|---|
@@ -510,7 +514,7 @@ Staatsphilosoph, beschreibt im Werk *Il Principe* (Der Fürst):
 |Terrorismus|Kommunikation|Nichtstaatliche Akteure|
 |Gewalt gegen Zivilisten|Politische/Militärische Strategie|Regierungen oder nichtstaatliche Akteure|
 
-### Geschichte
+## Geschichte
 
 * Vier Wellen des Terrorismus
     * Anarchischer Terrorismus
@@ -518,31 +522,31 @@ Staatsphilosoph, beschreibt im Werk *Il Principe* (Der Fürst):
     * Linksradikaler Terrorismus
     * Religiöser Terrorismus
 
-#### Anarchischer Terrorismus
+### Anarchischer Terrorismus
 
 Anschlag auf Zar Alexander II.
 
-#### Zionistischer Terrorismus
+### Zionistischer Terrorismus
 
 Der jüdische Terrorismus greift Araber und Briten an, vor der Anerkennung von Israel als Staat.
 
-#### Antikolonialer Terrorismus
+### Antikolonialer Terrorismus
 
 Nationale Befreiungsfront, viele Attentate gegen Algerienfranzosen.
 
-#### Internationaler Terrorismus
+### Internationaler Terrorismus
 
 Entführung von Sportler durch palistinänsische Terroristen an den olympischen Spielen.
 
-#### Religiöser Terrorismus
+### Religiöser Terrorismus
 
 Beispiel Al-Qaida.
 
-#### Transnationaler Terrorismus
+### Transnationaler Terrorismus
 
 Anschlag am 11. September, oder auch Aktivitäten des IS.
 
-### Ursachen
+## Ursachen
 
 * Psychologische Gründe, Frustration
 * Rekrutierung durch Organisationen
@@ -551,7 +555,7 @@ Anschlag am 11. September, oder auch Aktivitäten des IS.
 * Armut/Ungleichheit
 * Transnationale Faktoren
 
-### Lösungen
+## Lösungen
 
 * Gezielte und ungezielte Rückschläge
 * Informationsgewinnung
@@ -566,7 +570,51 @@ Anschlag am 11. September, oder auch Aktivitäten des IS.
 
 In der EU: Prävention (Bekämpfung Propaganda, Informationsaustausch), Schutz (Strengere Kontrollen), Verfolgung (Fluggastdatensätze), Reaktion
 
-## Nuklearstrategie
+# Nuklearstrategie
 
 * Atomwaffen als Abschreckung, *nukleare Abschreckung*
 * Abschreckung wird mit einer Drohung gegen einen Herausforderer eingesetzt, um diesen von einem Angriff abzuhalten
+    * Der Herausforderer muss einen Angriffsanreiz haben und manipulierbar sein
+    * Abschreckungsversuch muss korrekt wahrgenommen werden
+    * Rationale Entscheidung muss getroffen werden
+
+# Territorium als Konfliktgegenstand
+
+* Zentrale Frage: Worüber wird gekämpft?
+* Gewältsame Eskalation hängt von Art des Streitgegenstands ab
+* Kann zwischenstaatlich oder innerstaatlich sein
+
+## Typologie von Konflikten
+
+* Territorial
+* Wirtschaftlich
+* Menschenrechtsfragen
+* Ideologisch
+
+## Territorium und Krieg
+
+* Ein Grossteil der zwischen- und innerstaatlichen Kriege sind Territorialkonflikte
+* Eskalationspotenzial von Gebietsstreitigkeiten deutlich grösser als andere Streitpunkte
+* Territorialkonflikte dauern länger und fordern mehr Todesopfer
+Frieden nach Ablauf von Territorialkonflikten oftmals fragil
+
+## Erklärungsansätze
+
+### Evolutionspsychologisch
+
+* Kontrolle von Territorium zwecks Überleben und Fortpflanzung
+* Urtrieb als Erklärung für Landeigentum, Staatenbildung und Krieg
+* Biologische Triebe sind konstant, Konfliktverhalten zeigt aber grosse historische und geographische Variation auf
+
+### Materiell
+
+* Internationale Politik als Wettbewerb zwischen Staaten
+* Streit um strategisch oder ökonomisch wichtige Gebiete
+* Nur teilweise Erklärung, umstrittene Gebiete besitzen oft wenigmateriellen Wert
+* Strategische/Ökonomische Bedeutung von Territorien hat abgenommen, Territorialkonflikte bleiben aber verbreitet
+
+### Symbolisch
+
+* Immaterielle Güter oft als unteilbar betrachtet, Verhandlungslösungen sind besonders schwierig
+    * Reputationsverlust (Herausforderung des Gewaltmonopols eines Staates)
+    * Nationalismus (Separatismus, Irredentismus)
