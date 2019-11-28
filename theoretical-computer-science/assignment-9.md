@@ -19,15 +19,30 @@ Laut Aufgabenstellung kann jede innere Konfiguration einer Berechnung in $O(n) =
 
 ## (b)
 
-Für jede Sprache $L$ in $NSPACE(f(n)) \cap NTIME(f(n)^k)$ gilt $L \in NSPACE(f(n))$ und $L \in NTIME(f(n)^k)$. Also gibt es eine nichtdeterministische MTM $M_1$ mit $L(M_1) = L$ und $Space_{M_1}(n) \in O(f(n))$ und auch eine nichtdeterministische MTM $M_2$ mit $L(M_2)= L$ und $Time_{M_2}(n) \in O((f(n))^k)$.
+Für jede Sprache $L \in NSPACE(f(n)) \cap NTIME(f(n)^k) \Leftrightarrow L \in NSPACE(f(n))$ und $L \in NTIME(f(n)^k)$. Somit gibt es eine nichtdeterministische MTM $M_1$ mit $L(M_1) = L$ und $Space_{M_1}(n) \in O(f(n))$ sowie auch eine nichtdeterministische MTM $M_2$ mit $L(M_2)= L$ und $Time_{M_2}(n) \in O((f(n))^k)$.
 
-Es kann also sein, dass es eine MTM gibt, die $L$ mit kleiner Platzkomplexität entscheidet, und eine andere MTM, die $L$ mit geringer Zeitkomplexität entscheidet.
+Es ist somit möglich, dass es eine MTM gibt, die $L$ mit kleiner Platzkomplexität entscheidet, und eine andere MTM, die $L$ mit geringer Zeitkomplexität entscheidet. Wir können aber nicht einen Beweis wie in $a)$ führen, denn dafür bräuchten wir eine nichtdeterministische
+MTM, die beide Schranken für Platz und Zeit einhält.
 
 # Aufgabe 25
 
 ## (a)
 
+Wir zeigen $VC \leq_p SCP$. Zuerst modellieren wir die Eingabe $(G, k)$ für $VC$ um zu einer Eingabe für $SCP$: Wir wählen $(E, S_G, k)$, wobei $E_v$ die Menge der Kanten ist, die zu $v$ inzident sind, also $E_v = \{e \in E | v ist inzident zu e\}$. $S_G$ definieren wir als $S_G = \{E_v | v \in V\}$. Diese Ummodellierung können wir in polynomieller Zeit durchführen.
+
+Wir zeigen $(G, k) \in VC \Leftrightarrow (E_v, S_G, k) \in SCP$: 
+
+Sei $(G, k) \in VC$. Dementsprechend existiert eine Knotenmenge $M = \{v_1, v_2,...,v_k\}$, die alle Kanten überdeckt. Da die überdeckten Kanten der Vereinigung aller $E_{v_i}$ für $v_i \in M$ entsprechen, existiert ein Set-Cover mit Grösse k, weshalb gilt, dass $(E_v, S_G, k) \in SCP$.
+
+Sei $(E_v, S_G, k) \in SCP$. Dann gibt es eine Teilmenge $C$ von $S_G$ mit Kardinalität k, dessen Vereinigung $E$ ergibt. Das heisst, dass diejenigen $k$ Knoten, die nach der Ummodellierung auf Mengen aus $C$ entsprechen, alle Kanten aus $E$ überdecken und somit ein Vertex-Cover der Grösse $k$ bilden.
+
 ## (b)
+
+Wir zeigen $SCP \leq_p DS$. Zuerst modellieren wir die Eingabe $X = \{x_1, x_2,...,x_n\}$ und $S = S_1, S_2,...., S_m$ und eine natürliche Zahl $k$ für SCP zu einer Eingabe für DS: Wir erstellen einen Graphen $G = (V, E)$. Wir modellieren alle $x_i \in X$ und alle $S_i \in S$ als Knoten. Wir definieren folgende Kanten für alle $x_i \in X$ und alle $S_i \in S$: $e = \{x_i, s_j\} \Leftrightarrow x_i \ in S_j$. Zudem erstellen wir zusätzliche Kanten, so dass die Knoten $S_j$ untereinander einen vollständigen Graph bilden. Diese Modellierung können wir in polynomieller Zeit durchführen. 
+
+Sei $(E_v, S_G, k) \in SCP$. Dann gibt es eine Teilmenge $C$ von $S_G$ mit Kardinalität $k$, dessen Vereinigung $E$ ergibt. Die den Elementen aus $C$ entsprechenden Knoten aus $V$ bilden somit ein Dominating-Set $D$ der Grösse $k$, da jeder Knoten, der einem $x_i$ entspricht, mit einem Knoten $S_j$ verbunden ist und jedes $S_k$ mit einem $S_j$ verbunden ist, das Teil von $C$ und somit $D$ ist.
+
+Sei $D$ ein Dominating-Set der Grösse $k$. Wenn $D$ nur aus Knoten $S_j$ besteht, gilt offensichtlich, dass die entsprechenden $S_j$ zusammen ein Set-Cover bilden, da alle $x_i$ zu mindestens einem dieser $S_j$ adjazent sind. Wenn aber $D$ auch noch aus anderen Knoten besteht, können wir einfach den Knoten dieses $x_i$ mit einem adjazenten Knoten $S_j$ vertauschen (bemerke, dass somit beide dominiert bleiben und dass alle Nachbarn von $x$ trotz dem Vertauschen dominiert bleiben).
 
 # Aufgabe 26
 
