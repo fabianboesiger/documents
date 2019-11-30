@@ -306,7 +306,26 @@ $$
 
 ## Shape Preserving Interpolation
 
+Data $(t_i, y_i)$ is called *monotonic* if $y_i \geq y_{i - 1} or y_i \leq y_{i - 1}$ for $i = 1, ..., n$.
+
+Data $(t_i, y_i)$ is called *convex* (*concave*) if $s_j \leq (\geq) s_j+1$ for $i = 1, ..., n - 1$, where $s_j = \frac{y_j - y_{j-1}}{t_j - t_{j-1}}$.
+
+Interpolation is *shape preserving* if the shape features of the interpolant are the same as the shape features for the data.
+
+If the shape is preserved (positivity/negativity, increasing/decreasing, convexity/concavity) for every peace of the interpolation, we say that the interpolant is *locally shape preserving*.
+
 ## Cubic Hermite Interpolation
+
+Given some data points $(t_j, y_j), j = 0, ..., n$ and slopes $c_j \in \mathbb R$, find a piecewise cubic hermite interpolant $s$ such that $s_{[t_{i-1}, t_i]} \in \mathcal P_3, i = 1, ..., n$ and further $s(t_i) = y_i, s'(t_i) = c_i, i = 0, ..., n$. 
+
+$s$ is representated locally by $s(t) = y_{i-1} H_1(t) + y_i H_2(t) + c_{i-1} H_3(t) + c_i H_4(t)$, where $t \in [t_{i-1}, t_i]$ and the basis polynimials defined as follows:
+
+$$
+h_i = t_i - t_{i-1}
+$$
+
+$$
+$$
 
 ## Splines
 

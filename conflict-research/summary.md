@@ -2,6 +2,7 @@
 title: "Konfliktforschung: Politische Gewalt"
 geometry: "margin=2cm"
 toc: yes
+toc-title: "Inhalt"
 ---
 
 # Einführung

@@ -22,7 +22,7 @@ Laut Aufgabenstellung kann jede innere Konfiguration einer Berechnung in $O(n) =
 Für jede Sprache $L \in NSPACE(f(n)) \cap NTIME(f(n)^k) \Leftrightarrow L \in NSPACE(f(n))$ und $L \in NTIME(f(n)^k)$. Somit gibt es eine nichtdeterministische MTM $M_1$ mit $L(M_1) = L$ und $Space_{M_1}(n) \in O(f(n))$ sowie auch eine nichtdeterministische MTM $M_2$ mit $L(M_2)= L$ und $Time_{M_2}(n) \in O((f(n))^k)$.
 
 Es ist somit möglich, dass es eine MTM gibt, die $L$ mit kleiner Platzkomplexität entscheidet, und eine andere MTM, die $L$ mit geringer Zeitkomplexität entscheidet. Wir können aber nicht einen Beweis wie in (a) führen, denn dafür bräuchten wir eine nichtdeterministische MTM, die beide Schranken für Platz und Zeit einhält.
-
+    
 # Aufgabe 25
 
 ## (a)
