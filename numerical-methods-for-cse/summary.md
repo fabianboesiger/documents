@@ -313,3 +313,14 @@ $$
 ## Trigonometric Interpolation
 
 ## Least Squares Data Fitting
+
+# Approximation of Functions in 1D
+
+## Approximation by Global Polynomials
+
+### Chebychev Interpolation
+
+## Approximation by Piecewise Polynomials
+
+# Numerical Quadrature
+
