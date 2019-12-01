@@ -221,8 +221,8 @@ Note that:
 $$
 L_i(t_j) = 
 \begin{cases}
-1, & j = i\\
-0, & \text{else}
+1 &, j = i\\
+0 &, \text{else}
 \end{cases}
 $$
 
@@ -324,22 +324,67 @@ $$
 h_i = t_i - t_{i-1}
 $$
 
+TODO
 $$
+$$
+
+The next task is to find $c_i$ such that monotonicity is preserved.
+
+$$
+d_j = \frac{y_j - y_{j_1}}{t_j - t_{j-1}}, j = 1, ..., n
+$$
+
+$$
+c_i = 
+\begin{cases}
+0 & , sgn(d_i) \neq sgn(d_{i + 1}) \\
+\text{some average of } d_i, d_{i + 1} & \text{, otherwise}
+\end{cases}
 $$
 
 ## Splines
 
-## Trigonometric Interpolation
+The vector space of *spline functions* of degree $d$ and order $d + 1$ is defined by $\mathcal S_{d, \mathcal M} = \{s \in C^{d-1}(I): s_j = s_{[t_{j-1}, t_j]} \in \mathcal P_d, j = 1, ..., n\}$ on an interval $I = [a, b]$ and a *mesh* $\mathcal M$.
+
+### Linear Interpolation
+
+Linear interpolation is just a spline interpolation $\mathcal S_{1, \mathcal M}$, where the interpolation nodes are $\mathcal M$.
+
+### Cubic Spline Interpolation
+
+Interpolation into $\mathcal S_{3, \mathcal M}$. The natural cubic spline interpolant minimizes the elastic curvature energy among all interpolating functions, but it is locally weak.
+
+We reuse the local representation of a cubic spline $s$ through a cubic Hermite cardinal basis polynomials from above. We just need to finde the slopes $s(t_j)$ in the knots of the mesh $\mathcal M$.
+
+Because $s \in C^2$, $s''_{[t_{j-1}, t_j]}(t_j) = s''_{[t_j, t_{j+1}]}(t_j)$.
+
+#### Complete Cubic Spline Interpolation
+
+#### Natural Cubic Spline Interpolation
+
+#### Periodic Cubic Spline Interpolation
 
 ## Least Squares Data Fitting
 
+Given some data points $(t_i, y_i), i = 1, ..., m$, we need to find a continuous function $f$ in some set $S \subset C^0$ satisfying $f \in argmin_{g \in S}\sum_{i=1}^m \|g(t_i) - y_i\|_2^2$. The function $f$ is called the *best least squares fit* for the data in $S$.
+
 # Approximation of Functions in 1D
 
+Given a function $f$, often in *procedural form*, e.g. `double f(double)`, find a "simple" (for example polynomials) function $\tilde f$ such that the approximation error $f - \tilde f$ is small.
+
+$f \rightarrow_{sampling} (t_i, y_i) \rightarrow_{interpolation} \tilde f$
+
+We now have the freedom to select the nodes $t_i$.
+
 ## Approximation by Global Polynomials
+
+Taylor polynomials can be used to approximate a function $f(t) \approx \sum_{l=0}^k \frac{f^{(l)}(t_0)}{l!}(t - t_0)^l, f \in C^k$.
 
 ### Chebychev Interpolation
 
 ## Approximation by Piecewise Polynomials
+
+### Piecewise Lagrange Interpolation
 
 # Numerical Quadrature
 
