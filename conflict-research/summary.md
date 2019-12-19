@@ -619,3 +619,20 @@ Frieden nach Ablauf von Territorialkonflikten oftmals fragil
 * Immaterielle Güter oft als unteilbar betrachtet, Verhandlungslösungen sind besonders schwierig
     * Reputationsverlust (Herausforderung des Gewaltmonopols eines Staates)
     * Nationalismus (Separatismus, Irredentismus)
+
+# Aktuelle Trends und Erklärungen
+
+## Trends
+
+* Weniger zwischenstaatliche Kriege
+* Teilweise Abnahme der Bürgerkriege
+* Weniger Gefechtstote
+* Kleinere Kriege
+
+## Erklärungen
+
+* Nukleare Abschrickung
+* Bipolare/Unipolare Weltordnung
+* Verbreitung von Demokratie
+* Wirtschaftliche Abhängigkeit
+* Internationale Normen und Regeln
