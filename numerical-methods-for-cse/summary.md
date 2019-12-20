@@ -194,11 +194,15 @@ Transform $Ax = b$ to $\tilde A \tilde x = \tilde b$ such that $lsq(A, b) = lsq(
 
 # Data Interpolation and Data Fitting in 1D
 
-Given some data points $(t_i, y_i)$, $i = 0, ..., n$, find a interpolant function $f$ satisfying $f(t_i) = y_i$ and belonging to a set $V$ of specific functions.
+Given some data points $(t_i, y_i)$, $i = 0, ..., n$, find an interpolant function $f$ satisfying $f(t_i) = y_i$ and belonging to a set $V$ of specific functions.
+
+Note that we can use the *Horner scheme* to evaluate polynomials efficiently for the following polynomial evalutations:
+
+$$\alpha_k t^k + \alpha_{k-1} t^{k-1} + ... + \alpha_0 = t( ... t(t(\alpha_n t + \alpha_{n-1}) + \alpha_{n-2}) + ... + \alpha_1) + \alpha_0$$
 
 ## Global Polynomial Interpolation
 
-The set of functions is $V = \mathcal P_k = {f \mid f(t) = \alpha_k t^k + ... + \alpha_0 t^0, \alpha_j \in \mathbb R}$.
+The set of functions is $V = \mathcal P_k = \{f \mid f(t) = \alpha_k t^k + ... + \alpha_0 t^0, \alpha_j \in \mathbb R\}$.
 
 Polynomials are usefull because ...
 
@@ -306,7 +310,7 @@ $$
 
 ## Shape Preserving Interpolation
 
-Data $(t_i, y_i)$ is called *monotonic* if $y_i \geq y_{i - 1} or y_i \leq y_{i - 1}$ for $i = 1, ..., n$.
+Data $(t_i, y_i)$ is called *monotonic* if $y_i \geq y_{i - 1}$ or $y_i \leq y_{i - 1}$ for $i = 1, ..., n$.
 
 Data $(t_i, y_i)$ is called *convex* (*concave*) if $s_j \leq (\geq) s_j+1$ for $i = 1, ..., n - 1$, where $s_j = \frac{y_j - y_{j-1}}{t_j - t_{j-1}}$.
 
@@ -380,11 +384,121 @@ We now have the freedom to select the nodes $t_i$.
 
 Taylor polynomials can be used to approximate a function $f(t) \approx \sum_{l=0}^k \frac{f^{(l)}(t_0)}{l!}(t - t_0)^l, f \in C^k$.
 
+We can also use Lagrange interpolation as an approximation method, which gives us the error bound $O(n^{-r})$ on the Interval $[1, -1]$ for polynomial approximation, we can use this to our advantage and do a *pullback* from the interval $[a, b]$ to $[-1, 1]$ by using the function $\Phi(\hat t) = a + \frac 1 2 (\hat t + 1) (b - a), -1 \leq \hat t \leq 1$.
+
+### Types of Asymptotic Convergence
+
+We distinguish the following types of asymptotic behavior for a bound $T(n)$:
+
+||||
+|---|---|---|
+|*Algebraic Convergence* with rate $p > 0$|$\forall n \in \mathbb N,\ \exists p > 0: T(n) \leq n^{-p}$|Data points on a line on a log-log plot|
+|*Exponential Convergence*|$\forall n \in \mathbb N,\ \exists 0 < q < 1: T(n) \leq q^n$|Data points on a line on a lin-log plot|
+
+Some examples:  
+
+||$f \in C^{\infty}$, \newline$f(t) = t^{\frac 3 2}, \Omega = [1, 2]$, $f(t) = 2t^{\frac 3 2}, \Omega = [2, 4]$|$f \in C^r$, \newline$f(t) = t^{\frac 5 2}, \Omega = [0, 1]$, $f(t) = 2t^{\frac 5 2}, \Omega = [0, 2]$, $f(t) = |t|, \Omega = [-1, 1]$, $f(t) = |t|, \Omega = [-2, 2]$|$f \in \mathcal P$|
+|---|---|---|
+|Chebychev Interpolation|Exponential|Algebraic|
+|Gauss-Legendre Quadrature|Exponential|Algebraic|Integrated with a certain amount of steps|
+|Composite Trapezoidal Quadrature|Algebraic|Algebraic|Algebraisch|
+|Composite Simpson Quadrature|Algebraic|Algebraic|Algebraic|
+|Composite 2-point Gauss Quadrature|Algebraic|Algebraic|Algebraic|
+
 ### Chebychev Interpolation
+
+For equidistant linear interpolation points we observe a blowup of the error at the endpoints due to oscillation. With Chebychev interpolation, our goal is to avoid this by choosing our nodes $t_0, ..., t_n$ such that this blowup is minimal. To reach this goal, we introduce the $n$-th Chebychev polynomial:
+
+$$T_n(t) := cos(n\ arccos(t))$$
+
+We choose our sampling data points at the $n$ positions where the $n$-th Chebychev polynomial intersects the $x$-axis, which gives us the points:
+
+$$t_k := a + \frac 1 2 (b - a) (cos(\frac{2k + 1}{2(n + 1)} \pi) + 1),\ k = 0, ..., n$$
 
 ## Approximation by Piecewise Polynomials
 
+The idea is to use piecewise polynomials with respect to a mesh $\mathcal M := \{a = x_0 < x_1 < ... < x_{m-1} < x_m = b\}$, wich gives us the advantage of locality.
+
 ### Piecewise Lagrange Interpolation
+
+We use Lagrange Interpolation on each mesh cell.
 
 # Numerical Quadrature
 
+The task is to approximate an Integral $\int_a^b f(t) dt$.
+
+## Quadrature Formulas
+
+We approximate the Integral by a weighted sum of point values of the integrand:
+
+$$\int_a^b f(t) dx \approx \sum_{j=1}^n w_j f(c_j)$$
+
+Because we have the weights and evaluation points only on the interval $[-1, 1]$, we again use a transformation to the target interval $[a, b]$:
+
+$$\Phi(\hat t) = a + \frac 1 2 (\hat t + 1) (b - a), -1 \leq \hat t \leq 1$$
+
+Given some weights and nodes $(\hat w_j, \hat c_j)$ on the interval $[-1, 1]$. Using $\Phi$ as a transformation function we get:
+
+$$\int_a^b f(t) dx \approx \frac 1 2 (b-a) \sum_{j=1}^n \hat w_j \hat f(\hat c_j)$$
+
+$$c_j = \frac 1 2 (1-\hat c_j)a + \frac 1 2 (1+\hat c_j)b$$
+
+$$w_j = \frac 1 2 (b-a)\hat w_j$$
+
+## Polynomial Quadrature Formulas
+
+The idea is to replace the integrand $f$ with a Lagrange interpolant of $f$:
+
+$$\int_a^b f(x) dt \approx \int_a^b p_{n-1}(t) dt = \sum_{i=0}^{n-1} f(t_i) \int_a^b L_i(t) dt$$
+
+This leads us to:
+
+$$c_i = t_{i-1}$$
+
+$$w_i = \int_a^b L_{i-1}(t) dt$$
+
+### Midpoint Rule
+
+If we use $n=1$ in the formula above, we get:
+
+$$\int_a^b f(t) dt \approx (b - a) f(\frac 1 2 (a + b))$$
+
+### Trapezoidal Rule
+
+For $n=2$, we get:
+
+$$\int_a^b f(t) dt \approx \frac{b-a}{2} (f(a) + f(b))$$
+
+For $n > 2$, we call these rules the *Newton-Cotes formulas* on an argument $m = n - 1$.
+
+## Gauss Quadrature
+
+The *order* of a quadrature rule $\mathcal Q_n$ is defined as the maximal degree plus one of polynomials for which the quadrature rule is guaranteed to be exact:legendre
+
+$$order(\mathcal Q_n) := max\{m \in \mathbb N: \mathcal Q_n(p) = \int_a^b p(t) \forall p \in \mathcal P_m\} + 1$$
+
+A $n$-point polynomial quadrature rule has order $n$. The maximal order of an $n$-point quadrature rule is $2n$. In fact, for all non-zero polynomials $\bar P_n$ that satisfy
+
+* $\bar P_n \in \mathcal P_n$
+* $\int_{-1}^1 q(t)$
+
+TODO
+
+The $n$-point Quadrature formulas whose nodes, the Gauss points, are given by the zeros of the $n$-th Legendre polynomial, and whose weights are chosen according to the rule seen above are called *Gauss-Legendre quadrature formulas*. The legendre polynomial $P_n \in \mathcal P_n$
+
+TODO
+
+Note that the gauss points are equal to the zeros of the Legendre polynomial.
+
+
+
+## Composite Quadrature
+
+The idea of composite quadrature is to apply the quadrature formulas from above locally on some mesh intervals and then sum up the result.
+
+## Adaptive Quadrature
+
+For and adaptive quadrature approximate, we choose the nodes depending on the integrand $f$. We distinguish between two types of adaptive quadrature:
+
+1. *A priori* adaptive quadrature, where the nodes are fixed before the evaluation of the quadrature formula. For example, we choose the mesh such that the cell errors are equally distributed.
+2. *A posteriori* adaptive quatrature, where the node positions can be chosen or improved based on information recieved during the computation of the formula. It terminates as soon as sufficient accuracy has been reached. An example for is if we in each loop iteration add a node inside the mesh intervals with the largest error contributions.

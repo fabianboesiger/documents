@@ -148,15 +148,24 @@ geometry: "margin=2cm"
 
 **Symbolischer Ansatz**: Immaterielle Güter oft als unteilbar betrachtet, Teilung führt zu Reputationsverlust (Herausforderung des Gewaltmonopols eines Staates), auch Nationalismus Kann eine Rolle Spielen.
 
-# Trends
-
-* Rückgang zwischenstaatlicher Kriege seit 1945
-* Teilweise Abnahme der Bürgerkriege seit 1990
-* Krieg als Todesursache heute deutlich seltener
-* Kriege sind heute kleiner und regional konzentriert
+# Aktuelle Trends und Erklärungen
 
 **Negativer Frieden**: Abwesenheitvon Gewalt
 
 **Positiver Frieden**: Dauerhaftkooperatives Verhältnis, gegenseitiges Vertrauen, Gewalt wird undenkbar
 
-**Erklärungen**: Nukleare Abschreckung, Bipolare/Unipolare Weltordnung, Verbreitung von Demokratie, Wirtschaftliche Interdependenz, Internationale Normen und Regeln
+## Trends
+
+* Weniger zwischenstaatliche Kriege
+* Teilweise Abnahme der Bürgerkriege
+* Weniger Gefechtstote
+* Kleinere Kriege
+
+## Erklärungen
+
+* Nukleare Abschrickung
+* Bipolare/Unipolare Weltordnung
+* Verbreitung von Demokratie
+* Wirtschaftliche Abhängigkeit
+* Internationale Normen und Regeln
+>>>>>>> fa3441cfe72cf200cc59d73cf4821ba46be8b5c9
