@@ -268,10 +268,10 @@ Which leads us a triangular linear system to solve:
 
 $$
 \begin{bmatrix}
-1 & 0 & \hdots & 0 \\
+1 & 0 & \cdots & 0 \\
 1 & (t_1 - t_0) & & \vdots \\
 \vdots & \vdots & & 0 \\
-1 & (t_n - t_0) & \hdots & \prod_{i = 0}^{n - 1}(t_n - t_i)
+1 & (t_n - t_0) & \cdots & \prod_{i = 0}^{n - 1}(t_n - t_i)
 \end{bmatrix}
 \begin{bmatrix}
 a_0 \\

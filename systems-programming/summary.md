@@ -120,6 +120,26 @@ Let $n$ be the number of blocks, $m$ the number of free blocks.
 
 **Garbage Collection**: Automatic reclamation of heap-allocated storage, such that the application never has to free itself.
 
+## Linking
+
+### Linker Symbols
+
+**Global Symbols**: Symbols in module that can be referenced by other modules (non-static functions and variables).
+
+**External Symbols**: Globals symbols that are referenced but defined by some other module.
+
+**Local Symbols**: Symbols that are defined and referenced exclusively by this module (static functions and variables, not local program variables).
+
+**`.data`-Section**: Code.
+
+**`.data`-Section**: Initialized global variables.
+
+**`.bss`-Section**: Uninitialized global variables.
+
+**Strong Symbols**: Procedures and initialized globals, multiple strong symbols not allowed.
+
+**Weak Symbols**: Uninitialized globals, strong symbols are chosen over weak symbols.
+
 # Basic x86 Architecture
 
 **Instruction Set Architecture (ISA)**: Parts of a processor design that needs to be understanded to write assembly code.
@@ -178,3 +198,37 @@ Condition codes can be read using the `setx` instructions. The corresponding `jx
 |`setle`|Less or equal (Signed)|
 |`seta`|Above (Unsigned)|
 |`setb`|Below (Unsigned)|
+
+## Compiling C
+
+# Architecture
+
+## Optimization
+
+**CPE**: Cycles per Element.
+
+**Superscalar Processor**: Multiple instructions in one cycle, can take advantage of instruction level parallelism.
+
+## Caches
+
+A cache consists of sets which consist of lines/blocks.
+
+The address is is splitted up into a tag, the set index and the block offset.
+
+**Miss Rate**: Fraction of memory references not found in cache.
+
+**Hit Time**: Time to deliver a line in the cache to the processor.
+
+**Miss Penalty**: Additional time required because of a miss.
+
+Direct Mapped Cache: One line per set.
+
+n-Way Set-Associative Cache: n lines per set.
+
+## Exceptions
+
+Transfer of control to the OS in response to some event.
+
+**Synchronous Exceptions**: Exceptions caused by the processor.
+
+**Asynchronous Exceptions**: Exceptions caused by an external device.

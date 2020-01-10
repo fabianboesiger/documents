@@ -12,7 +12,18 @@ fontsize: 10pt
 
 # Lookup Table
 
-## Common Derivatives
+## Differentiation and Integration
+
+### Differentiation Rules
+
+$$y = \frac{u}{v} \Rightarrow y' = \frac{u'v - v'u}{v^2}$$
+
+### Integration Rules
+
+$$\int_a^b f(x) g(x) dx = \Big[F(x) g(x)\Big]_a^b - \int_a^b F(x) g'(x) dx$$
+
+
+### Common Derivatives
 
 |Function|Derivative|
 |---|---|
@@ -23,7 +34,7 @@ fontsize: 10pt
 |$\arccos(x)$|$-\frac{1}{\sqrt{1-x^2}}$|
 |$\arctan(x)$|$\frac{1}{1+x^2}$|
 
-## Common Antiderivatives
+### Common Antiderivatives
 
 |Function|Antiderivative|
 |---|---|
@@ -31,9 +42,32 @@ fontsize: 10pt
 |$\cos(x)$|$\sin(x) + C$|
 |$\frac{1}{x}$|$\log(|x|) + C$|
 
-## Differentiation Rules
+## Trigonometric Functions
 
-## Integration Rules
+### Trigonometric Values
+
+||$0$|$\frac{\pi}{6}$|$\frac{\pi}{4}$|$\frac{\pi}{3}$|$\frac{\pi}{2}$|
+|---|---|---|---|---|---|
+|$\sin$|$0$|$\frac{1}{2}$|$\frac{\sqrt2}{2}$|$\frac{\sqrt3}{2}$|$1$|
+|$\cos$|$1$|$\frac{\sqrt3}{2}$|$\frac{\sqrt2}{2}$|$\frac{1}{2}$|$0$|
+|$\tan$|$0$|$\frac{1}{\sqrt3}$|$1$|$\sqrt3$|undefined|
+
+### Taylor Series of Trigonometric Functions
+
+$$\sin(x) = \sum_{n=0}^\infty (-1)^n \frac{x^{2n+1}}{(2n + 1)!}$$
+$$\cos(x) = \sum_{n=0}^\infty (-1)^n \frac{x^{2n}}{(2n)!}$$
+
+### Euler Formulas
+
+$$\sin(x) = \frac{e^{ix} - e^{-ix}}{2i}$$
+$$\cos(x) = \frac{e^{ix} + e^{-ix}}{2}$$
+
+### Trigonometric Equations
+
+$$\sin^2(x) = \frac{1}{2} (1-\cos(2x))$$
+$$\sin^3(x) = \frac{1}{4} (3 \sin(x)-\sin(3x))$$
+$$\cos^2(x) = \frac{1}{2} (1+\cos(2x))$$
+$$\cos^3(x) = \frac{1}{4} (3 \cos(x)+\cos(3x))$$
 
 # Ordinary Differential Equations
 
@@ -225,15 +259,27 @@ The full solution space is again $f + f_0$. If we have some initial conditions g
 
 ## Other Methods
 
+### Change of Variable
+
+If we replace $f(x)$ with $h(x) = f(g(x))$ and we can find a result for $h(x)$, then $f(x) = h(g^{-1}(x))$.
+
+### Separation of Variable
+
+If a differential equation of order 1 can be written as $(g(y))' = g(y)' y' = b$, this can be solved by writing $g(f(x)) = B(x)$ and then $f(x) = g^{-1}(B(x))$.
+
 # Differential Calculus in $\mathbb{R}^n$
 
 ## Continuity in $\mathbb{R}^n$
 
 ### Continuity of Functions
 
+A sequence $(x_k)$ *converges* to $y$ as $k \to \infty$ if for all $\epsilon > 0$, there exists $N \geq 1$ such that for all $n \geq N$, we have $\|x_k - y\| \leq \epsilon$.
+
 $f$ is *continuous* at $x_0$ if for all $\epsilon > 0$, there exists $\delta > 0$ such that, if $\|x - x_0\| < \delta$, then $\|f(x) - f(x_0)\| < \epsilon$.
 
 $f$ is *continuous* on $X$, if it is continuous for all $x \in X$.
+
+The composite of continuous functions is continuous.
 
 ### Limit
 
@@ -247,27 +293,54 @@ A subset $X \subset \mathbb{R}^n$ is *bounded* if the set of $\|x\|$ for $x \in 
 
 A subset $X \subset \mathbb{R}^n$ is *closed* if for every sequence $(x_k)$ in $X$ that converges in $\mathbb{R}^n$ to some vector $y$, we have $y \in X$.
 
-A subset $X$ is *compact* if it is bounded and closed in $X$.
+A subset $X$ is *compact* if it is bounded and closed.
+
+If $f$ is continuous and $Y$ is closed, then $f^{-1}(Y)$ is closed.
 
 ## Partial Derivatives
 
+### Open Sets
+
+A subset $X \subset R^n$ is *open* if, for any $x = (x_1, \dotsc, x_n) \in X$, there exists $\delta > 0$ such that the set $\{y = (x_1, \dotsc, y_n) \in R^n: |x_i - y_i| < \delta \text{ for all } i\}$ is contained in $X$.
+
+A set $X \subset R^n$ is open if and only if the complement $Y = \{x \in R^n: x \in X\}$ is closed.
+
+If $f$ is continuous and $Y$ is open, then $f^{-1}(Y)$ is open.
+
+### Derivatives
+
+$\frac{\partial f}{\partial x_i}(x) = \partial_{x_i} f(x) = \partial_i f(x)$ is the derivative of $f$ in respect to the $i$-th variable.
+
 ### Jacobi Matrix
 
-For $f(x) = (f_1(x), \dotsc, f_m(x))$, the Jacobi matrix is defined as $J_f(x) = (\partial_{x_j} f_i(x))_{1 \leq i \leq m, 1 \leq j \leq n}$
+For $f(x) = (f_1(x), \dotsc, f_m(x))$, the Jacobi matrix is defined as $J_f(x) = (\partial_{x_j} f_i(x))_{1 \leq i \leq m, 1 \leq j \leq n}$. An example:
+
+$$
+f(x, y) =
+\begin{pmatrix}
+\cos(x^2 + y) \\
+e^{\sin(\pi x y)}-1 \\
+y + \frac{1}{x^2 + 1}
+\end{pmatrix}
+, J_f(x, y) =
+\begin{pmatrix}
+-2x \sin(x^2 + y) & -\sin(x^2 + y) \\
+\pi y \cos(\pi x y) e^{\sin(\pi x y)} & \pi x \cos(\pi x y) e^{\sin(\pi x y)} \\
+\frac{-2x}{(1 + x^2)^2} & 1
+\end{pmatrix}
+$$
 
 ### Gradient
 
 $\nabla f(x_0) = \begin{pmatrix}  \partial_{x_1} f(x_0) \\ \cdots \\ \partial_{x_n} f(x_0) \end{pmatrix}$
-
-### Hessian Matrix
-
-$H_f(x) = (\partial_{x_i, x_j} f)_{1 \leq i, j \leq n}$
 
 ## The Differential
 
 $f$ is *differentiable* at $x_0$ with the differential $u$ if $\lim_{x \to x_0} \frac{1}{\|x - x_0\|} (f(x) - f(x_0) - u(x - x_0)) = 0$. We denote $df(x_0) = u$.
 
 $f$ is *differentiable* on $X$ if $f$ is differentiable for all $x \in X$.
+
+If $X$ is open and $f: X \to R^m$ a function that is differentiable on $X$, then $f$ is continuous on $X$ and admits derivatives with respect to each variable.
 
 ### Directional Derivative
 
@@ -279,14 +352,138 @@ We can simply compute it using the gradient $D_u f(a) = \nabla f(a) \cdot u$.
 
 ## Higher Derivatives
 
+For higher derivatives, we have commutativity, $\partial_{x, y} f = \partial_{y, x} f$, $\partial_{x, y, z} f = \partial_{y, x, z} f = \partial_{z, x, y} f = \dotsb$ and so on.
+
+### Hessian Matrix
+
+The Hessian Matrix is defined as $H_f(x) = (\partial_{x_i, x_j} f)_{1 \leq i, j \leq n}$. An example:
+
+$$
+f(x, y, z) = x^2 y - \cos(x z^3)
+$$
+$$
+\partial_x f = 2xy + z^3 \sin(xz^3), \partial_y f = x^2, \partial_z f = 3xz^2 \sin(xz^3)
+$$
+$$
+H_f(x, y, z) =
+\begin{pmatrix}
+2y + z^6 \sin(xz^3) & 2x & 3z^2 \sin(xz^3) + xz^6 \cos(xz^3) \\
+2x & 0 & 0 \\
+3z^2 \sin(xz^3) + xz^6 \cos(xz^3) & 0 & 6xz \sin(xz^3) + 9x^2z^6 \cos(xz^3)
+\end{pmatrix}
+$$
+
 ## Change of Variable
+
+The derivative of $h = f \circ g$ is given by:
+
+$$\partial_{y_1}h = \frac{\partial f}{\partial x_1} \frac{\partial g_1}{\partial y_1} + \dotsb + \frac{\partial f}{\partial x_n} \frac{\partial g_n}{\partial y_1}$$
+
+Or often written as:
+
+$$\partial_{y_1}f = \frac{\partial f}{\partial x_1} \frac{\partial x_1}{\partial y_1} + \dotsb + \frac{\partial f}{\partial x_n} \frac{\partial x_n}{\partial y_1}$$
 
 ## Taylor Polynomials
 
+Let $m! = m_1! \dotsm m_n!$, $|m| = m_1 + \dotsb + m_n$, $y^m  = y_1^{m_1} \dotsm y_n^{m_n}$:
+
+$$T_k f(y; x_0) = \sum_{|m| \leq k} \frac{1}{m!} \partial_x^m f(x_0) y^m$$
+
+$$T_2 f(y; x_0) = f(x_0) + \nabla f(x_0) y + \frac{1}{2} y^t H_f(x_0) y$$
+
 ## Critical Points
 
-## Lagrange Multipliers
+The point $x$ is a *critical point*, if $\nabla f(x) = 0$.
 
-### Directional Derivative
+Let $p$ and $q$ be the number of positive and negative eigenvalues of $H_f(x)$:
+
+1. If $p = n$, $f$ has a local minimum at $x$.
+2. If $q = n$, $f$ has a local maximum at $x$.
+3. If $pq \neq 0$, $f$ has a saddle point at $x$.
+
+Or in other words:
+
+1. $\det(H_f(x)) > 0$ and $f_{xx}(x) > 0$, then $x$ is a local minimum of $f$.
+2. $\det(H_f(x)) > 0$ and $f_{xx}(x) < 0$, then $x$ is a local maximum of $f$.
+3. $\det(H_f(x)) < 0$, then $x$ is a saddle point of $f$.
+4. $\det(H_f(x)) = 0$, then the test is inconclusive.
 
 # Integration in $\mathbb{R}^n$
+
+## Line Integrals
+
+The *line integeral* of $f$, where $f$ is often called a *vector field*, along $\gamma: [a, b] \to \mathbb{R}^n$ is denoted:
+
+$$\int_\gamma f(s) ds = \int_a^b f(\gamma(t)) \gamma'(t) dt$$
+
+### Conservative Vector Fields
+
+A vector field $f$ is *conservative*, if for any $x_1$, $x_2$, the line integral from $x_1$ to $x_2$ is independent from the choice of $\gamma$. Equivalently, $f$ is conservative if and only if the line integral over $\gamma$ is zero if $\gamma(a) = \gamma(b)$.
+
+If $f$ is conservative, then there exists a $C^1$ function $g$ such that $f = \nabla g$.
+
+Further, if $f$ is conservative, then we have $\frac{\partial f_i}{\partial x_j} = \frac{\partial f_j}{\partial x_i}$ for all $i \neq j$.
+
+A subset $X \subset \mathbb{R}^n$ is *star-shaped* around $x_0$ if there exists an $x_0 \in X$ such that, for all $x \in X$, the line segment joining $x_0$ to $x$ is contained in $X$.
+
+If $\frac{\partial f_i}{\partial x_j} = \frac{\partial f_j}{\partial x_i}$ for all $i \neq j$ on a star-shaped open subset of $\mathbb{R}^n$, then $f$ is conservative.
+
+The *potential* $\omega(x, y)$ is the scalar field whose gradient is the given vector field $f = \nabla \omega(x, y)$.
+
+### Curl
+
+$$\text{curl}(f) = \nabla \times f =
+\begin{pmatrix}
+\partial_y f_3 - \partial_z f_2 \\
+\partial_z f_1 - \partial_x f_3 \\
+\partial_x f_2 - \partial_y f_1
+\end{pmatrix}
+ = \det
+\begin{pmatrix}
+e_1 & e_2 & e_3 \\
+\partial_x & \partial_y & \partial_z \\
+f_1 & f_2 & f_3
+\end{pmatrix}
+$$
+
+$f$ is conservative if and only if $\text{curl}(f) = 0$.
+
+## The Riemann Integral in $\mathbb{R}^n$
+
+## Improper Integrals
+
+$$\lim_{x \to \infty} \int_{[a, x] \times I} f(x, y) dx dy = \lim_{x \to \infty} \int_a^x \Big( \int_I f(x, y) dy \Big) dx = \lim_{x \to \infty} \int_I \Big( \int_a^x f(x, y) dx \Big) dy$$
+
+## The Change of Variable Formula
+
+Let $\varphi: X \to Y$, $f$ a continuous function. We have:
+
+$$\int_X f(\varphi(x)) |\det(J_{\varphi}(x))|dx = \int_Y f(y)dy$$
+
+From this follows:
+
+$$\text{Vol}(AX) = |\det(A)|\text{Vol}(X)$$
+
+## Geometric Applications of Integrals
+
+### Center of Mass
+
+Let $\bar x = (\bar x_n, \dotsc, \bar x_n)$ be the *center of mass* of $X$.
+
+$$\bar x_i = \frac{1}{\text{Vol}(X)} \int_X x_i dx$$
+
+### Surface Area
+
+The *surface area* of the set $\Gamma = \{(x, y, z) \in \mathbb{R}^3: (x, y) \in [a, b] \times [c, d], z = f(x, y)\}$ where $f: [a, b] \times [c, d] \to \mathbb{R}$ is given by:
+
+$$\int_a^b \int_c^d \sqrt{1 + (\partial_x f(x, y))^2 + (\partial_y f(x, y))^2} dx dy$$
+
+## The Green Formula
+
+$$\int_X \Big( \frac{\partial f_2}{\partial x} - \frac{\partial f_1}{\partial y} \Big) dx dy = \sum_{i=1}^k \int_{\gamma_i} f \cdot ds$$
+
+If we want to compute the area, $\Big( \frac{\partial f_2}{\partial x} - \frac{\partial f_1}{\partial y} \Big) = 1$ and thus $f = (0, x)$.
+
+From this, we get:
+
+$$\text{Vol}(X) = \sum_{i=1}^k \int_{a_i}^{b_i} \gamma_{i,1}(t) \gamma_{i,2}'(t)dt$$
