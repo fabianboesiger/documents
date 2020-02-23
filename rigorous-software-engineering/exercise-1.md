@@ -22,6 +22,8 @@ This change in design doesn't change the interface provided. The only difference
 
 ## a)
 
+An unnecessary cloning operation would be done if we set the entry of a shared list where we don't actually need the other reference to the `elems` array.
+
 ## b)
 
 ## c)
