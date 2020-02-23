@@ -68,3 +68,10 @@ Further, if $f$ is conservative, then we have $\frac{\partial f_i}{\partial x_j}
 A subset $X \subset \mathbb{R}^n$ is *star-shaped* around $x_0$ if there exists an $x_0 \in X$ such that, for all $x \in X$, the line segment joining $x_0$ to $x$ is contained in $X$.
 
 If $\frac{\partial f_i}{\partial x_j} = \frac{\partial f_j}{\partial x_i}$ for all $i \neq j$ on a star-shaped open subset of $\mathbb{R}^n$, then $f$ is conservative.
+
+todo
+
+curl
+potential of vector field
+eulers formulas
+O notations for sin/cos

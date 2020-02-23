@@ -1,0 +1,35 @@
+# 1
+
+## a)
+
+This makes sense if the source and target nodes are modified after the class was constructed.
+
+## b)
+
+Yes, it always exists, but it is possible that the list is empty.
+
+## c)
+
+### (i)
+
+We could compute the shortest path list not when the `shortestPath` method is executed, but rather when we set a new source and target using the `setST` or `addEdge` methods or the constructor such that the shortest path is only computed when the graph or the source or target changes.
+
+### (ii)
+
+This change in design doesn't change the interface provided. The only difference visible tho the client is are the runtimes of the provided methods.
+
+# 2
+
+## a)
+
+## b)
+
+## c)
+
+# 3
+
+## a)
+
+## b)
+
+## c)
