@@ -45,15 +45,6 @@ $$
 
 ### Taylor Polynomials
 
-Let $m! = m_1! \dotsm m_n!$, $y^m = y_1^{m_1} \dotsm y_n^{m_n}$
-
-$$T_k f(y; x_0) = \sum_{|m| \leq k} \frac{1}{m!} \partial_x^m f(x_0) y^m$$
-
-For the case $k = 1$ we obtain:
-
-$$T_2 f(y; x_0) = f(x_0) + (grad) f(x_0) y + \frac{1}{2} y^t H_f(x_0) y$$
-
-$$$$
 
 The *line integeral* of $f$, where $f$ is often called a *vector field*, along $\gamma: [a, b] \to \mathbb{R}^n$ is denoted:
 
