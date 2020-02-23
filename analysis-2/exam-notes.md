@@ -40,6 +40,8 @@ $$\int_a^b f(x) g(x) dx = \Big[F(x) g(x)\Big]_a^b - \int_a^b F(x) g'(x) dx$$
 |---|---|
 |$\sin(x)$|$-\cos(x) + C$|
 |$\cos(x)$|$\sin(x) + C$|
+|$\arcsin(x)$|$x \arcsin(x) + \sqrt{1 - x^2} + C$|
+|$\arccos(x)$|$x \arccos(x) - \sqrt{1 - x^2} + C$|
 |$\frac{1}{x}$|$\log(|x|) + C$|
 
 ## Trigonometric Functions
@@ -68,6 +70,29 @@ $$\sin^2(x) = \frac{1}{2} (1-\cos(2x))$$
 $$\sin^3(x) = \frac{1}{4} (3 \sin(x)-\sin(3x))$$
 $$\cos^2(x) = \frac{1}{2} (1+\cos(2x))$$
 $$\cos^3(x) = \frac{1}{4} (3 \cos(x)+\cos(3x))$$
+
+$$\sin(2x) = 2 \sin(x) \cos(x)$$
+$$\cos(2x) = \cos^2(x)- \sin^2(x) = 2 \cos^2(x) - 1 = 1 - 2 \sin^2(x)$$
+$$\sin(3x) = 3 \sin(x) - 4 \sin^3(x)$$
+$$\cos(3x) = 4 \cos^3(x) - 3 \cos(x)$$
+ 
+### Derivatives and Antiderivatives of Squared Trigonometric Functions
+
+$$(\sin^2(x))' = 2 \cos(x) \sin(x)$$
+$$(\cos^2(x))' = -2 \cos(x) \sin(x)$$
+$$(\sin(x) \cos(x))' = \cos^2(x) - \sin^2(x)$$
+
+$$\int \sin^2(x) dx = \frac{2x - \sin(2x)}{4} + C$$
+$$\int \cos^2(x) dx = \frac{\sin(2x) + 2x}{4} + C$$
+$$\int \sin(x) \cos(x) dx = \frac{\sin^2(x)}{2} + C = - \frac{\cos^2(x)}{2}$$
+
+## Other Formulas
+
+### Solution Formula for Quadratic Equations
+
+To solve $ax^2 + bx + c = 0$:
+
+$$x_1, x_2 = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
 
 # Ordinary Differential Equations
 
@@ -176,6 +201,11 @@ Suppose that $\alpha$ is a multiple root of order $j$. Then the $j$ functions $f
 ### Solving the Inhomogeneus Equation
 
 #### Special Tricks to Avoid Variation of Constants
+
+1. If $b(x) = x^d e^{\beta x}$ for some integer $d \geq 0$ and some number $\beta$ which is not a root of $P$, then we look for a solution of the form $f(x) = Q(x) e^{\beta x}$ where $Q$ is a polynomial of degree $d$.
+2. If $b(x) = x^d \cos(\beta x)$ or $b(x) = x^d \sin(\beta x)$ for some integer $d \geq 0$ and some number $\beta$ which is not a root of $P$, then we look for a solution of the form $f(x) = Q_1(x) \cos(\beta x) + Q_2(x) \sin(\beta x)$ where $Q_1$ and $Q_2$ are polynomials of degree $d$.
+3. If 1. or 2. apply with $\beta$ is a root of $P$, then we look for an analogue solution but with $Q$ being a polynomial of degree $d + 1$.
+4. If $\beta = 0$ and $0$ is a root of $P$, we look for a $Q$ of degree $d + j$, where $j$ is the multiplicity of $0$ as a root of $P$.
 
 #### Variation of Constants
 
@@ -332,7 +362,7 @@ $$
 
 ### Gradient
 
-$\nabla f(x_0) = \begin{pmatrix}  \partial_{x_1} f(x_0) \\ \cdots \\ \partial_{x_n} f(x_0) \end{pmatrix}$
+$$\nabla f(x_0) = \begin{pmatrix}  \partial_{x_1} f(x_0) \\ \cdots \\ \partial_{x_n} f(x_0) \end{pmatrix}$$
 
 ## The Differential
 
@@ -385,7 +415,7 @@ $$\partial_{y_1}f = \frac{\partial f}{\partial x_1} \frac{\partial x_1}{\partial
 
 ## Taylor Polynomials
 
-Let $m! = m_1! \dotsm m_n!$, $|m| = m_1 + \dotsb + m_n$, $y^m  = y_1^{m_1} \dotsm y_n^{m_n}$:
+Let $m! = m_1! \dotsm m_n!$, $|m| = m_1 + \dotsb + m_n$, $y^m  = y_1^{m_1} \dotsm y_n^{m_n}$ ($y = x - x_0$ for approximations of $f$ at point $x$):
 
 $$T_k f(y; x_0) = \sum_{|m| \leq k} \frac{1}{m!} \partial_x^m f(x_0) y^m$$
 
@@ -464,6 +494,27 @@ From this follows:
 
 $$\text{Vol}(AX) = |\det(A)|\text{Vol}(X)$$
 
+We have:
+
+$$
+\gamma =
+\begin{pmatrix}
+r \cos(\varphi) \\
+r \sin(\varphi)
+\end{pmatrix},
+|\det(J_\gamma)| = r
+$$
+
+$$
+\gamma =
+\begin{pmatrix}
+r \cos(\theta) \sin(\varphi) \\
+r \sin(\theta) \sin(\varphi) \\
+r \cos(\varphi)
+\end{pmatrix},
+|\det(J_\gamma)| = r^2 \sin(\varphi)
+$$
+
 ## Geometric Applications of Integrals
 
 ### Center of Mass
@@ -480,9 +531,9 @@ $$\int_a^b \int_c^d \sqrt{1 + (\partial_x f(x, y))^2 + (\partial_y f(x, y))^2} d
 
 ## The Green Formula
 
-$$\int_X \Big( \frac{\partial f_2}{\partial x} - \frac{\partial f_1}{\partial y} \Big) dx dy = \sum_{i=1}^k \int_{\gamma_i} f \cdot ds$$
+$$\int_X \Big( \frac{\partial f_2}{\partial x} - \frac{\partial f_1}{\partial y} \Big) dx dy = \sum_{i=1}^k \int_{\gamma_i} f \cdot ds = \sum_{i=1}^k \int_{a_i}^{b_i} f(\gamma_i(t)) \cdot \gamma_i'(t) t$$
 
-If we want to compute the area, $\Big( \frac{\partial f_2}{\partial x} - \frac{\partial f_1}{\partial y} \Big) = 1$ and thus $f = (0, x)$.
+If we want to compute the area, $\Big( \frac{\partial f_2}{\partial x} - \frac{\partial f_1}{\partial y} \Big) = 1$ and thus $f = (0, x)$, $f = (0, -y)$, and infinitely others.
 
 From this, we get:
 
