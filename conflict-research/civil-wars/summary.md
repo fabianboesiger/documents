@@ -42,11 +42,12 @@ Verhandlungen funktionieren nur:
 
 #### Verdienstmöglichkeiten
 
-**Gier**: Profitmöglichkeiten (Bodenschätze).
+**Gier**: Profitmöglichkeiten (Bodenschätze, Spenden der Diaspora, Unterstützung fremder Staaten).
 
 **Opportunität**: Günstige Bedingungen (Schwache Staaten, Ressourcenfluch, Gebirgiges Gelände, Unterstützung der Lokalbevölkerung).
 
-**Missstände**: Sind omnipräsent, werden immer irrelevanter. Gier und Opportunitätsansätze relevanter in der Theorie der neuen Kriege.
+**Missstände**: Sind omnipräsent, werden immer irrelevanter. Gier und Opportunitätsansätze relevanter in der Theorie der neuen Kriege (Ethnische Konflikte sind abnehmend).
+    * Horizontale Ungleichheit: Ungleichheit zwischen kulturellen Gruppierungen
 
 **Mikroansätze**: Qualitiative Methoden (Natürliche Experimente, Umfragen, hochauflösende Datensätze).
 
