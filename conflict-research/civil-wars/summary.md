@@ -58,6 +58,55 @@ Entstaatlichung durch Kriminalisierung und Kommersialisierung:
 * **Kriminalisierung**: Warlords profitieren vom Krieg, rekrutieren Mittellose.
 * **Kommerzialisierung**: Gewinnorientierte, globale, Marktkräften ausgesetzte Organisationen bieten mit Kriegsführung verbundene Dienste (Durchsetzung, Beratung, Ausbildung, Logistik) an. Folgen dem Privatisierungstrend.
 
+### Territorialkonflikte
+
+* Grenzpolitik innerhalb und zwischen Staaten gehören nach wie vor zu den wichtigsten Fragen in der internationalen Politik.
+* Widerspricht dem "Ende des Nationalstaates".
+* Separatistische Bewegungen zunehmend.
+* Anzahl unabhängiger Staaten zunehmend.
+
+**Ethnizität**: Gruppe von Menschen, die sich durch den Glauben an eine gemeinsame Kultur und Abstammung definiert.
+
+**Nation**: Gefühlsmässige Gemeinschaft (Sprache, Religion, Kultur, Geschichte und Heimatland), deren adäquater Ausdruck ein eigener Staat wäre. Beruhen oft auf Ethnizität.
+
+**Nationalismus**: Politisches Prinzip, das besagt, dass politische und nationale Einheiten deckungsgleich sein sollen. Nationen suchen Selbstbestimmung.
+
+**Separatismus**: Der Versuch einer nationalen Minderheit, sich und ihre Region der Kontrolle des Staates zu entziehen.
+
+**Sezessionismus**: Separatismus mit dem Ziel eines eigenen Staates.
+
+**Irredentismus**: Das Bestreben, nationale Minderheiten mit ihrem benachbarten Heimatstaat zu vereinigen. Sezession vom "Gaststaat" und Annexion durch den Heimatstaat.
+
+#### Voraussetzungen
+
+* Regionale ethnische Minderheit
+* Ausgeprägtes Nationalbewusstsein
+* Klar definiertes Territorium
+* Glaubwürdige Forderung
+* Für Irredentismus: Existenz eines Heimatstaates
+
+#### Auslöser
+
+* Politische Ungleichheit
+* Ökonomische Ungleichheit
+* Autonomieverlust
+* Kollaps von Imperien
+* Ressourcenreichtum
+
+#### Erklarungsansätze
+
+* Umstrittene Gebiete besitzen oft grossen Symbolischen Wert
+* Imaterielle Güter werden als unteilbar betrachtet
+* Konflikte um Teile eines Staatsgebiets können als existentielle Bedrohung angesehen werden
+
+#### Konfliktdämpfende Faktoren
+
+* Machtteilung und regionale Autonomie
+* Internationale Normen und Gesetze gegen gewaltsame Grenzveränderungen
+* Zisammenarbeit in internationalen Organisationen
+* Abkommen zum Schutz regionaler Minderheiten
+* Wirtschaftliche Interpendenz
+
 ## Während des Kriegs
 
 ## Ende des Kriegs
