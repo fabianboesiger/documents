@@ -107,8 +107,86 @@ Entstaatlichung durch Kriminalisierung und Kommersialisierung:
 * Abkommen zum Schutz regionaler Minderheiten
 * Wirtschaftliche Interpendenz
 
+### Natürliche Ressourcen
+
+|Typ|Beispiele|Marktwert|Intensivität|
+|---|---|---|---|
+|Erneuerbare Ressourcen|Wasser, Landwirtschaftliche Erzeugnisse|Niedrig|Arbeitsintensiv|
+|Nicht erneuerbare Ressourcen|Öl, Gas, Metalle, Edelsteine|Hoch|Kapitalintensiv|
+
+Wichtige Eigenschaften sind:
+
+* Lootable vs. non-lootable
+* Geografische Konzentration
+* Onshore vs. Offshore
+
+#### Erneuerbare Ressourcen
+
+* Keine Hinweise auf zwischenstaatliche Wasserkriege
+* Verteilungskonflikte existieren
+
+**Malthusianismus**:
+
+* (Land)wirtschaftliche Entwicklung hält nicht mit dem Bevölkerungswachstum Schritt
+* Knappheit gefärdet Lebensunterhalt
+* Verteilungskonflikte und Kampf ums Überleben
+
+#### Nicht erneuerbare Ressourcen 
+
 ## Während des Kriegs
 
+### Die Dauer der Bürgerkriege
+
+* Dauer von Bürgerkriegen nimmt zu
+
+#### Outcomes der Bürgerkriege
+
+* Friedensabkommen (Nicht dasselbe wie ein Waffenstillstand, kein Übereinkommen der Kernprobleme)
+* Sieg der Regierung
+* Sieg der Aufständischen
+* Abnahme der Kampfhandlungen (am häufigsten)
+
+#### Erklärungsansätze für die unterschiedliche Dauer der Bürgerkriege
+
+* Dauer hängt ab von der Wahrscheinlichkeit, eine der Outcomes zu erreichen
+* Kürzere Dauer
+  * Konventionelle Kriege (Klare Frontlinien, schwere Waffen)
+  * Eine Seite ist militärisch deutlich überlegen
+  * Staatsstreiche, Revolutionen
+  * Konflikte nach dem Fall des Kommunismus
+  * Dekolonialisierungskriege
+  * Ideologische Kriege
+* Längere Dauer
+  * Irreguläre Kriege (Guerilla-Kriege)
+  * Kriege mit ethnischer Komponente (Sons-of-the-Soil Konflikte)
+  * Kriege mit Finanzierung über schmuggel
+
 ## Ende des Kriegs
+
+### Konfliktlösung in ethnisch gespaltenen Gesellschaften
+
+#### Das Madisonische Modell
+
+* Angelsächsische Majorzdemokratie
+* Individualrechte
+* Gewaltenteilung
+
+#### Power Sharing
+
+* Power Sharing als Reaktion zur Majorzdemokratie
+* Nicht alle Entscheidungen müssen auf Mehrheiten basieren
+* Konkordanzdemokratie
+  * Grosse Koalition (Alle Vertreter verschiedener Gruppen entscheiden zusammen)
+  * Gegenseitiges Veto
+  * Proportionalität
+  * Segmentielle Autonomie (Föderalismus)
+* Kritik aus dem Majorzlager
+  * Kompromissfindung funktioniert nicht, falls schon Konflikte exisiteren
+  * Tiefere ethnische Spaltungen
+
+||Dafür|Dagegen|
+|---|---|---|
+|Zentrales Power Sharing|Erleichtert zwischenethnische Kooperation durch Sozialisierung der Eliten|Zementiert ethnische klüfte und ist ineffizient|
+|Territoriales Power Sharing|Unterstützt Kompromisslösungen in heterogenen Systemen|Vertieft Klüfte und fördert Separatismus|
 
 ## Nach dem Krieg
