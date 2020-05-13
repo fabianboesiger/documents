@@ -1,5 +1,6 @@
 ---
 title: "Wahrscheinlichkeit und Statistik"
+geometry: "margin=2cm"
 ---
 
 ## Wahrscheinlichkeiten
@@ -61,7 +62,7 @@ Bei diskreten, d.h. endlichen bzw. abzählbaren Wahrscheinlichkeitsräumen gilt 
 
 **Verteilungsfunktion** $F_x: \mathbb R \to [0, 1]$: $F_X(t) := P[X \leq t] := P[\{w \mid X(w) \leq t\}]$.
 
-**Gewichtsfunktion** $F_x: \mathbb W(X) \to [0, 1]$: $p_X(x_k) := P[X = x_k] = P[\{w \mid X(w) = x_k\}]$.
+**Gewichtsfunktion** $p_x: \mathbb W(X) \to [0, 1]$: $p_X(x_k) := P[X = x_k] = P[\{w \mid X(w) = x_k\}]$.
 
 ### Erwartungswerte
 
@@ -79,3 +80,17 @@ Bei diskreten, d.h. endlichen bzw. abzählbaren Wahrscheinlichkeitsräumen gilt 
 **Standardabweichung**: $\sigma(X) = \sqrt{\text{Var}[X]}$.
 
 ### Gemeinsame Verteilungen und unabhängige Zufallsvariablen
+
+
+
+||Diskrete Zufallsvariablen|Allgemeine Zufallsvariablen|
+|---|---|---|
+|Verteilungsfunktion|$F_X(t) := P[X \leq t] := P[\{w \mid X(w) \leq t\}]$|Analog zum diskreten Fall mit $F_X$ stetig|
+|Monoton wachsend|$\forall s \leq t: F_X(s) \leq F_X(t)$||
+|Rechtsstetig|$\forall u > t, u \to t: F_X(u) \to F_X(t)$||
+||$\lim \limits_{t \to \infty} F_X(t) = 1$, $\lim \limits_{t \to -\infty} F_X(t) = 0$|$$|
+|Gewichtsfunktion, Dichtefunktion|$p_X(x_k) := P[X = x_k] = P[\{w \mid X(w) = x_k\}]$|$f_X(t) = \frac{d}{dt} F_X(t)$|
+|||$\int \limits_{-\infty}^{\infty} f_X(s) ds = 1$|
+|Erwartungswert|$E[X] = \sum \limits_{-\infty}^{\infty} x f(x) dx$|$E[X] = \int \limits_{-\infty}^{\infty} x f(x) dx$|
+|Varianz|$\text{Var}(X) = E[X^2] - E[X]^2$|Analog|
+||Geometrische Verteilung|Exponentialverteilung|
