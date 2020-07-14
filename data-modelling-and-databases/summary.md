@@ -8,19 +8,27 @@ toc: yes
 
 ## Relational Model
 
-### Database Schema
+#### Database Schema
 
 A set of relation schemas.
 
-### Relation Schema
+#### Relation Schema
 
 A name and a set of fields/attributes.
 
 For a relation $R(f_1: D_1, \dots, f_n: D_n)$, an Instance $I_R$ is a set of tuples $I_R \subseteq D_1 \times \cdots \times D_n$.
 
-### Fields/Attributes
+#### Fields/Attributes
 
 A name and a domain (e.g. Integer, String).
+
+#### Primary Keys
+
+There can be no duplicate keys, each key identifies an entry uniquely. Primary keys can consist of multiple fields.
+
+#### Secondary Keys
+
+
 
 ### Relational Algebra
 
