@@ -221,10 +221,6 @@ Seien $X$ and $Y$ diskrete Zufallsvariablen mit gemeinsamer Gewichtsfunktion $p(
 
 ## Allgemeine Zufallsvariablen
 
-### Grundbegriffe
-
-Siehe Tabelle *Allgemeine Zufallsvariablen*.
-
 ### Übersicht
 
 ||Diskrete Zufallsvariablen|Allgemeine Zufallsvariablen|
@@ -252,7 +248,7 @@ Siehe Tabelle *Allgemeine Zufallsvariablen*.
 
 |Verteilung|Dichtefunktion $f_X(t)$|Verteilungsfunktion $F_X(t)$|Erwartungswert $E[X]$|Varianz $\text{Var}[X]$|
 |---|---|---|---|---|
-|Gleichverteilung $X \sim \mathcal{U}(a, b)$|$\begin{cases} \frac{1}{b - a} & a \leq t \leq b \\ 0 & \text{sonst} \end{cases}$|$\begin{cases} 0 & t < a \\ \frac{t - a}{b - a} & a \leq t \leq b \\ 1 & t > b \end{cases}$|$\frac{a + b}{2}$|
+|Gleichverteilung $X \sim \mathcal{U}(a, b)$|$\begin{cases} \frac{1}{b - a} & a \leq t \leq b \\ 0 & \text{sonst} \end{cases}$|$\begin{cases} 0 & t < a \\ \frac{t - a}{b - a} & a \leq t \leq b \\ 1 & t > b \end{cases}$|$\frac{a + b}{2}$|$\frac{1}{12}(b - a)^2$|
 |Exponentialverteilung $X \sim \text{Exp}(\lambda)$|$\begin{cases} \lambda e^{-\lambda t} & t \geq 0 \\ 0 & t < 0 \end{cases}$|$\begin{cases} 1 - e^{-\lambda t} & t \geq 0 \\ 0 & t < 0 \end{cases}$|$\frac{1}{\lambda}$|$\frac{1}{\lambda^2}$|
 |Normalverteilung $X \sim \mathcal{N}(\lambda, \sigma^2)$|$\frac{1}{\sigma \sqrt{2 \pi}} \exp({-\frac{(t-\mu)^2}{2 \sigma^2}})$||$\mu$|$\sigma^2$|
 
@@ -265,14 +261,6 @@ Ist $X \sim \mathcal{N}(\mu, \sigma^2)$, so ist $\frac{X - \mu}{\sigma} \sim \ma
 #### Abhängige Zufallsvariablen (Satz 4.1)
 
 Sei $X$ eine Zufallsvariable und $Y = g(X)$ eine weitere Zufallsvarable. Ist $X$ stetig mit Dichte $f_X(x)$, so ist $E[Y] = E[g(X)] = \int \limits_{-\infty}^\infty g(x) f_X(x) dx$.
-
-### Gemeinsame Verteilungen und unabhängige Zufallsvariablen
-
-Siehe Tabelle *Allgemeine Zufallsvariablen*.
- 
-### Funktionen und Transformationen von Zufallsvariablen
-
-Siehe Tabelle *Allgemeine Zufallsvariablen*.
 
 ## Ungleichungen und Grenzwertsätze
 
@@ -321,15 +309,29 @@ $S_n$ hat den Erwartungswert $E[S_n] = n \mu$ und Varianz $\text{Var}[S_n] = n \
 
 $$\boxed{P[S_n^* \leq x] \approx \Phi(x) \quad S_n^* \sim \mathcal{N}(0, 1)}$$
 
-### Grosse Abweichungen und Chernoff-Schranken
+#### Kontinuitätsstruktur
 
-TODO: Ist dieses Kapitel Prüfunsrelevant?
+Für $S_n \sim \text{Bin}(n, p)$ ist $\mathcal{N}(np, np(1 - p))$ und:
+
+$$P[a < S_n \leq b] = P \bigg[ \frac{a-np}{\sqrt{np(1-p)}} < S_n^* \leq \frac{b-np}{\sqrt{np(1-p)}} \bigg] \approx \Phi \bigg( \frac{b + \frac{1}{2} - np}{\sqrt{np(1-p)}} \bigg) - \Phi \bigg( \frac{a + \frac{1}{2} - np}{\sqrt{np(1-p)}} \bigg)$$
+
+### Grosse Abweichungen und Chernoff-Schranken
 
 #### Momenterzeugende Funktion
 
-Die momenterzeugende Funktion einer Zufallsvariable $X$ ist $M_X(t) := E[e^{tX}] = \int \limits_{-\infty}^\infty e^{tx} f(x)$ für $t \in \mathbb{R}$.
+Die momenterzeugende Funktion einer Zufallsvariable $X$ ist $M_X(t) := E[e^{tX}] = \int \limits_{-\infty}^\infty e^{tx} f(x) dx$ für $t \in \mathbb{R}$.
 
 #### (Satz 5.6)
+
+Seien $X_1, \dots, X_n$ Zufallsvariablen, für weliche die momenterzeugende Funktion $M_X(t)$ für alle $t \in \mathbb{R}$ endlich ist. Für jedes $b \in \mathbb{R}$ gilt dann:
+
+$$P[S_n \geq b] \leq \exp(\inf \limits_{t \in \mathbb{R}} (n \log M_X(t) - tb))$$
+
+#### Chernoff-Schranke (Satz 5.7)
+
+Seien $X_1, \dots, X_n$ unabhängig mit $_i \sim \text{Be}(p_i)$ und $S_n = \sum \limits_{i=1}^n X_i$. Sei ferner $\mu_n = E[S_n] = \sum \limits_{i=1}^n p_i$ und $\delta > 0$. Dann gilt:
+
+$$\boxed{P[S_n \geq (1 + \delta) \mu_n] \leq \bigg(\frac{e^\delta}{(1 + \delta)^{1 + \delta}}\bigg)^{\mu_n}}$$
 
 ## Schätzer
 
@@ -494,7 +496,7 @@ Der kritische Bereich ist von der folgenden Form mit Niveau $\alpha$:
 
 * $H_A: \vartheta > \vartheta_0$ mit $K_> = (c_>, \infty)$ und $c_> = \Phi^{-1}(1 - \alpha) := z_{1-\alpha}$ wegen der Bedingung $\alpha = P_{\vartheta_0}[T \in K_>] = P_{\vartheta_0}[T > c_>] = 1 - P_{\vartheta_0}[T \leq c_>] = 1 - \Phi(c_>)$.
 * $H_A: \vartheta < \vartheta_0$ mit $K_< = (-\infty, c_<)$ und $c_< = -\Phi^{-1}(1 - \alpha) := -z_{1-\alpha}$ wegen der Bedingung $\alpha = P_{\vartheta_0}[T \in K_<] = P_{\vartheta_0}[T < c_<] = \Phi(c_<)$.
-* $H_A: \vartheta \neq \vartheta_0$ mit $K_{\neq} = (-\infty, c_{\neq}) \cup (c_{\neq}, \infty)$ und $c_{\neq} = \Phi^{-1}(1 - \frac{\alpha}{2}) := z_{1-\frac{\alpha}{2}}$ wegen der Bedingung $\alpha = P_{\vartheta_0}[T \in K_{\neq}] = P_{\vartheta_0}[T < -c_{\neq}] + P_{\vartheta_0}[T > c_{\neq}] = \Phi(-c_{\neq}) + 1 - \Phi(c_{\neq}) = 2(1 - \Phi(c_{\neq}))$.
+* $H_A: \vartheta \neq \vartheta_0$ mit $K_{\neq} = (-\infty, -c_{\neq}) \cup (c_{\neq}, \infty)$ und $c_{\neq} = \Phi^{-1}(1 - \frac{\alpha}{2}) := z_{1-\frac{\alpha}{2}}$ wegen der Bedingung $\alpha = P_{\vartheta_0}[T \in K_{\neq}] = P_{\vartheta_0}[T < -c_{\neq}] + P_{\vartheta_0}[T > c_{\neq}] = \Phi(-c_{\neq}) + 1 - \Phi(c_{\neq}) = 2(1 - \Phi(c_{\neq}))$.
 
 Die Nullhypothese wird verworfen, wenn für die Realisierung der Teststatistik gilt $t \in H_a$.
 
