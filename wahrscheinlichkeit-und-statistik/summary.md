@@ -197,6 +197,8 @@ $X_1$ und $X_2$ sind unkorreliert, wenn gilt $\text{Cov}(X_1, X_2) = 0$.
 
 Unabhängigkeit impliziert Unkorreliertheit, die andere Richtung folgt jedoch nicht.
 
+Aus Korreliertheit folgt Abhängigkeit.
+
 #### Produkte von Zufallsvariablen (Satz 2.5)
 
 Seien $X_1, \dots, X_n$ diskrete Zufallsvariablen mit endlichen Erwartungswerten. Falls $X_1, \dots, X_n$ unabhängig sind, so gilt: $E\bigg[ \prod \limits_{i=1}^n X_i \bigg] = \prod \limits_{i=1}^n E[X_i]$. Ausserdem sind dann $X_1, \dots, X_n$ unkorreliert und es gilt: $\text{Var} \bigg[ \prod \limits_{i=1}^n X_i \bigg] = \prod \limits_{i=1}^n \text{Var}[X_i]$.
@@ -214,7 +216,7 @@ Seien $X$ and $Y$ diskrete Zufallsvariablen mit gemeinsamer Gewichtsfunktion $p(
 |Diskrete Gleichverteilung|$\frac{1}{n}$|$\frac{\lfloor t \rfloor}{n}$|$\frac{a + b}{2}$|$\frac{(b - a + 2) (b - a)}{12}$|
 |Bernoulli-Verteilung $X \sim \text{Be}(p)$|$p^k (1 - p)^{1-k}$|$1-p$|$p$|$p(1 - p)$|
 |Binomialverteilung $X \sim \text{Bin}(n, p)$|${n \choose k} p^k (1 - p)^{n-k}$||$np$|$np(1 - p)$|
-|Geometrische Verteilung $X \sim \text{Geom}(p)$|$p (1 - p)^{k-1}$||$\frac{1}{p}$|$\frac{1 - p}{p^2}$|
+|Geometrische Verteilung $X \sim \text{Geom}(p)$|$p (1 - p)^{k-1}$|$1-(1-p)^t$|$\frac{1}{p}$|$\frac{1 - p}{p^2}$|
 |Negativbinomiale Verteilung $X \sim \text{NB}(r, p)$|${{k - 1} \choose {r - 1}} p^r (1 - p)^{k-r}$||$\frac{r}{p}$|$\frac{r(1 - p)}{p^2}$|
 |Hypergeometrische Verteilung|$\frac{{r \choose k} {{n - r} \choose {m - k}}}{{n \choose m}}$||$m\frac{r}{n}$|$m\frac{r}{n}(1-\frac{r}{n})\frac{n-m}{n-1}$|
 |Poisson-Verteilung $X \sim \mathcal{P}(\lambda)$|$e^{-\lambda} \frac{\lambda^k}{k!}$||$\lambda$|$\lambda$|
@@ -242,6 +244,7 @@ Seien $X$ and $Y$ diskrete Zufallsvariablen mit gemeinsamer Gewichtsfunktion $p(
 |Randdichte||$f_X(x) = \int \limits_{-\infty}^{\infty} f(x, y) dy$, $f_Y(y) = \int \limits_{-\infty}^{\infty} f(x, y) dx$|
 |Unabhängigkeit|$p(x_1, \dots, x_n) = p_{X_1}(x_1) \cdots p_{X_n}(x_n)$|$f(x_1, \dots, x_n) = f_{X_1}(x_1) \cdots f_{X_n}(x_n)$|
 |Erwartungswert|$E[X] = \sum \limits_{-\infty}^{\infty} x p(x)$, für nichtnegative ganzzahlige Zufallsvariablen: $E[X] = \sum \limits_{i = 1}^{\infty} P[X \geq i]$|$E[X] = \int \limits_{-\infty}^{\infty} x f(x) dx$|
+|Bedingter Erwartungswert||$E[X \mid Y = y] = \int \limits_{-\infty}^{\infty} x f_{X \mid Y = y}(y) dx = \int \limits_{-\infty}^{\infty} x \frac{f_{X, Y}(x, y)}{f_Y(y)} dx$, weiter vereinfachen falls $X$, $Y$ unabhängig, siehe Unabhängigkeit|
 |Varianz|$\text{Var}(X) = E[X^2] - E[X]^2$|Analog|
 
 ### Wichtige stetige Verteilungen
@@ -254,7 +257,7 @@ Seien $X$ and $Y$ diskrete Zufallsvariablen mit gemeinsamer Gewichtsfunktion $p(
 
 #### Standard-Normalverteilung
 
-Für die Standard-Normalverteilung $\mathcal{N}(0, 1)$ gilt $F_X(t) = \Phi(t)$.
+Für die Standard-Normalverteilung $\mathcal{N}(0, 1)$ gilt $F_X(t) = \Phi(t)$. Es gilt $\Phi(-t) = 1 - \Phi(t)$.
 
 Ist $X \sim \mathcal{N}(\mu, \sigma^2)$, so ist $\frac{X - \mu}{\sigma} \sim \mathcal{N}(0, 1)$. *$\Phi(t)$ ist tabelliert.*
 
@@ -303,7 +306,7 @@ $$\boxed{P[\{\omega \in \Omega \mid \bar X_n(\omega) \xrightarrow{n \to \infty} 
 
 Sei $X_1, X_2, \dots$ eine Folge von Zufallsvariablen mit $E[X_i] = \mu$ und $\text{Var}[X_i] = \sigma^2$. Für die Summe $S_n = \sum \limits_{i = 1}^n X_i$ gilt dann:
 
-$$\boxed{\lim \limits_{n \to \infty} P\bigg[\frac{S_n - n \mu}{\sigma \sqrt{n}} \leq x\bigg] = \Phi(x) \quad \forall x \in \mathbb{R}}$$
+$$\boxed{\lim \limits_{n \to \infty} P\bigg[\frac{S_n - n \mu}{\sigma \sqrt{n}} \leq x\bigg] = \lim \limits_{n \to \infty} P\bigg[\frac{S_n - E[S_n]}{\sqrt{\text{Var}[S_n]}} \leq x\bigg] = \Phi(x) \quad \forall x \in \mathbb{R}}$$
 
 $S_n$ hat den Erwartungswert $E[S_n] = n \mu$ und Varianz $\text{Var}[S_n] = n \sigma^2$. Also ist $S_n^* = \frac{S_n - n \mu}{\sigma \sqrt{n}} = \frac{S_n - E[S_n]}{\sqrt{\text{Var}[S_n]}}$ die Standartisierung von $S_n$ mit $E[S_n^*] = 0$ und $\text{Var}[S_n] = 1$. Deshalb gilt für grosse $n$:
 
@@ -432,21 +435,31 @@ Seien $X_1, \dots, X_n \sim \mathcal{N}(\mu, \sigma^2)$. Dann gilt:
 
 ### Grundbegriffe
 
-#### Hypothese
-
-$H_0: \vartheta \in \Theta_0$
-
 #### Niveau
 
 Je kleiner das Niveau $\alpha$, desto kleiner ist die Wahrscheinlichkeit, dass die Nullhypothese $H_0$ abgelehnt wird, obwohl sie richtig ist.
 
-#### Alternative
+#### p-Wert
+
+Auch Signifikanzwert genannt, entspricht dem kleinsten Signifikanzniveau $\alpha$, bei dem die Nullhypothese $H_0$ gerade noch verworfen werden kann.
+
+#### Nullhypothese
+
+$H_0: \vartheta \in \Theta_0$
+
+#### Alternativhypothese
 
 $H_A: \vartheta \in \Theta_A$, wobei $\Theta_A = \Theta_0^c$, falls keine explizite Alternative spezifizert wurde.
 
-#### Realisierung
+#### Teststatistik
 
-$\tilde{K} = \{T \in K\} = \{\omega \mid T(\omega) \in K\}$ ist eine Teilmenge von $\Omega$ mit $P_\vartheta[\tilde{K}] = P_\vartheta[T \in K]$.
+$T = t(X_1, \dots, X_n)$, wobei $t$ eine Abbildung $t: \mathbb{R}^n \to \mathbb{R}$ ist.
+
+#### Kritischer Bereich
+
+Der kritische Bereich oder Verwerfungsbereich hat die Form $K \subseteq \mathbb{R}$. Die Hypothese wird genau dann verworfen, wenn der realisierte Wert $t(x_1, \dots, x_n) = T(\omega)$ in $K$ liegt.
+
+#### Vertrauensintervall
 
 #### Fehler erster Art
 
@@ -458,8 +471,8 @@ $\vartheta \in \Theta_A$ und $T \notin K$.
 
 #### Vorgehen
 
-1. *Minimierung des Fehlers erster Art.* Wähle Signifikanzniveau $\alpha \in (0, 1)$ so dass $\sup \limits_{\theta \in \Theta_0} P_\theta[T \in K] \leq \alpha$.
-2. *Minimierung des Fehlers zweiter Art.* Maximiere die Macht des Tests $\beta(\theta) := P_\theta[T \in K]$.
+1. *Minimierung des Fehlers erster Art.* Wähle Signifikanzniveau $\alpha \in (0, 1)$ so dass $\sup \limits_{\vartheta \in \Theta_0} P_\vartheta[T \in K] \leq \alpha$.
+2. *Minimierung des Fehlers zweiter Art.* Maximiere die Macht des Tests $\beta(\vartheta) := P_\vartheta[T \in K]$.
 
 ### Konstruktion von Tests
 
@@ -516,15 +529,23 @@ Der kritische Bereich ist von der folgenden Form mit Niveau $\alpha$:
 
 Die Nullhypothese wird verworfen, wenn für die Realisierung der Teststatistik gilt $t \in H_a$.
 
-#### Gepaarter Zweistichproben-Test
-
-#### Ungepaarter Zweistichproben-Test
-
 ## Konfidenzbereiche
 
 ### Konfidenzintervall
 
 $C(X_1, \dots, X_n)$ heisst der Konfidenzbereich zum Niveau $1-\alpha$, falls gilt $P_\vartheta [\vartheta \in C(X_1, \dots, X_n)] \geq 1 - \alpha$.
+
+Beispiel für eine Verteilung mit bekannter Standardabweichung und $\overline{X} \sim \mathcal{N}(\mu, \sigma^2)$, es gilt:
+
+$$P(-z_{1-\alpha/2} < \frac{\overline{X} - \mu}{\sigma / \sqrt{n}} < z_{1-\alpha/2}) = 1 - \alpha$$
+
+Durch Umformen erhalten wir:
+
+$$P(\overline{X}-z_{1-\alpha/2}\frac{\sigma}{\sqrt{n}} < \mu < \overline{X}+z_{1-\alpha/2}\frac{\sigma}{\sqrt{n}}) = 1 - \alpha$$
+
+Somit ist das Vertrauensintervall gegeben durch:
+
+$$\overline X \pm z_{1-\alpha/2} \frac{\sigma}{\sqrt{n}}$$
 
 #### Konfidenzintervall des Erwartungswerts
 
@@ -555,3 +576,9 @@ $\int \limits_{\varphi(a)}^{\varphi(b)} f(x) dx = \int \limits_a^b f(\varphi(u))
 #### Partielle Integration
 
 $\int \limits_a^b f'(x) g(x) dx = [f(x) g(x)]_a^b - \int \limits_a^b f(x) g'(x) dx$
+
+#### Integration von Indikatorfunktionen
+
+$\int \limits_{-\infty}^\infty 1_{(a, b)}(h) dh = \int \limits_a^b dh$
+
+$\int \limits_0^1 1_{(0, p)}(h) dp \int \limits_h^1 dp$
