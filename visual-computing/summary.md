@@ -168,7 +168,7 @@ Linear Filtering: Pixels are linear combination of neighbors.
 
 Shift-invariant: Doing the same for each pixel.
 
-Separable kernels: Kernels are separable if they can be written as: $K(m,n) = f(m)g(n)$
+Separable kernels: Kernels are separable if they can be written as: $K(m,n) = f(m)g(n)$, and the rank is 1.
 
 ### Correlation
 
@@ -217,11 +217,11 @@ The sampling frequency must be at least twice the highest frequency (otherwise u
 
 ### Kucas-Kanade Algorithm
 
-Assume *brightness constancy*. Brightness of pixel at old and new position is the same:
+Assume *brightness constancy (intensity of objects in the scene do not change in time)* . Brightness of pixel at old and new position is the same:
 
 $$I(x, y, t) = I(x + dx, y + dy, t + dt)$$
 
-Assume *small motion* and approximate with Taylor expansion:
+Assume *small motion (objects move very slowly from frame to frame)* and approximate with Taylor expansion:
 
 $$I(x, y, t) = I(x, y, t) + \frac{\partial I}{\partial x} dx + \frac{\partial I}{\partial y} dy + \frac{\partial I}{\partial t} dt$$
 
@@ -231,7 +231,7 @@ $$\frac{\partial I}{\partial x} \frac{dx}{dt} + \frac{\partial I}{\partial y} \f
 
 $$I_x * u + I_y * v + I_t = 0$$
 
-Assume *spatial coherence* and use multiple points because we have two unknowns:
+Assume *spatial coherence (all points in neighborhood have the same motion)* and use multiple points because we have two unknowns:
 
 $$
 \begin{bmatrix}
@@ -335,7 +335,7 @@ Interpolation between three values.
 
 ## Physics Simulation 1
 
-## Edge Detection
+## Edge Detection 1
 
-## Video Compression
+## Video Compression 1
 

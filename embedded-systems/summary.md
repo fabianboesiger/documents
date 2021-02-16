@@ -9,31 +9,76 @@ toc: yes
 toc-depth: 4
 ---
 
-## Communication
+\newpage
 
-### UART
+## Hardware Software Interface
 
-#### Start/Stop Bits
+### Storage
 
-Used for synchronization.
+#### SRAM
 
-#### Data Bits
+Single bit stored in a bi-stable circuit.
 
-Actually transfers the data.
+#### DRAM
 
-#### Parity Bit
+Single bit stored as a charge in a capacitor. Requires periodic refresh.
 
-Detects potential errors.
+#### Flash Memory
 
-#### Baudrate
+Modifiable, non-volatile storage.
 
-Speed of communication over a channel.
+### Input and Output
 
-### Interrupts
+#### UART
+
+Asynchronoous serial communication, no shared clock signal for communication.
+
+**Start/Stop Bits**: Used for synchronization.
+
+**Data Bits**: Actually transfers the data.
+
+**Parity Bit**:  Detects potential errors.
+
+**Baudrate**: Speed of communication over a channel.
+
+#### SPI
+
+Used to communicate across short distances.
+
+**SCLK**: Clock signal.
+
+**MOSI**: Master out slave in.
+
+**MISO**: Master in slave out.
+
+**SS**: Selects slave chip.
+
+#### Interrupts
 
 Interrupts are implemented in hardware, always have a higher priority than any other task.
 
-### Polling
+The *Vector interrupt controller* enables and disables interrupts, allows to mask interrupts,
+and registers interrupt service routines.
+
+#### Polling
+
+Continously gets the signal. This is better than intterupts if events happen frequently.
+
+### Clocks and Timers
+
+#### Clocks
+
+Microcontrollers usually have many different clock sources that have different frequencies, energy consumption and stability.
+
+#### Watchdog Timer
+
+The watchdog timer profides system fail-safety. If the couter rolls over, the processor is reset.
+
+#### Timer
+
+Timers can capture current time or time differences, generate interrupts if a certain time is reached or when counters overflow, generate periodic interrupts.
+
+## Programming Paradigms
 
 ## Scheduling
 
@@ -58,7 +103,7 @@ A schedule is feasible/correct if:
 1. The period $P$ is a common multiple of all task periods
 2. The period $P$ is a multiple of the frame length $f$
 3. The frame $f$ has to be sufficiently long: $\forall 1 \leq k \leq \frac{P}{f}: \sum \limits_{i \mid f_{i,j} = k} C_i \leq f$
-4. The realese times are respected (Or offsets have to be determined such that instances start after release time: $\forall \tau_i: \phi_i = \min \limits_{1 \leq j \leq P/T_i} (f_{i,j} - 1)f-(j-1) T_i)$)
+4. The release times are respected (Or offsets have to be determined such that instances start after release time: $\forall \tau_i: \phi_i = \min \limits_{1 \leq j \leq P/T_i} (f_{i,j} - 1)f-(j-1) T_i)$)
 5. The deadlines are respected: $\forall \tau_i, 1 \leq j \leq \frac{P}{T_i}: (j - 1) T_i + \phi_i + D_i \geq f_{i,j} f$
 
 ### Aperiodic Task Scheduling
@@ -178,14 +223,15 @@ $\sum \limits_{i=1}^n \frac{C_i}{D_i} \leq n(2^{1/n} - 1)$
 
 #### Necessasry RM and DM Schedulability Test
 
-Order Tasks according to their priorities increasing, then execute the algorithm:
+Order Tasks according to their priorities increasing, then execute the algorithm, starting with task with lowest priority first:
 
 ```text
-for each t_i in T
+for each t_i in T with priorities increasing
     I = 0
     do
         R = I + C_i
         if R > D_i return UNSCHEDULABLE
+        I = 0
         for j in 1..i - 1
             I += ceil(R / T_j) * C_j
     while I + C_i > R
@@ -196,7 +242,7 @@ return SCHEDULABLE
 
 #### Polling Server
 
-Introduce an artificial periodic task $(C_s, T_s)$ which serves the aperiodic requests to RM or DM scheduling.
+Introduce an artificial periodic task $(C_s, T_s)$ which serves the aperiodic requests to RM or DM scheduling. Aperiodic tasks have to finish within the same period in the artificial periodic task.
 
 ##### RM Sufficient Test
 
@@ -218,17 +264,20 @@ Utilization for Total Bandwith Server: $U_s = \frac{C_s}{T_s}$
 
 Utilization for the periodic tasks: $U_p = \sum \limits_{i=1}^N \frac{C_i}{T_i}$.
 
-Assignment of deadlines to aperiodic requests: $d_k = \max(r_k, d_{k-1})+\frac{C_k}{U_s}$
-
-## Shared Resources
+Assignment of deadlines to aperiodic requests: $d_k = \max(r_k, d_{k-1})+\frac{C_k}{U_s}$, where $r_k$ is the arrival time.
 
 ## Power and Energy
-
 ### Dynamic Voltage and Frequency Scaling
 
-Break-even time: Minimum idle interval, for which it is worthwile for the processor to go into sleep mode: $\frac{\text{Energy Overhead}}{\text{Minimum Power}}$
+Break-even time: Minimum idle interval, for which it is worthwile for the processor to go into sleep mode.
 
 Workload-conserving schedule: Schedule that always executes a job when ready queue is not empty.
+
+In general, the **minimal energy consumption** is reached when:
+
+1. Processor runs on a constant frequency (YDS will lead to same conclusion)
+2. Fully utilizes the processor (YDS will lead to same conclusion)
+3. Minimizes energy consumption for each period
 
 #### YDS Algorithm
 
@@ -287,6 +336,54 @@ In every time interval, determine optimal u^*(t) for the next T intervals using:
 
 ## Architecture Synthesis
 
-## Hardware Components
+### Design Space Exploration
 
-### SRAM
+Goal: Find balance between number of resources and latency for program execution.
+
+#### Pareto Dominance
+
+A solution weakly Pareto-dominates another solution, if it is at least as good in all objectives.
+
+#### Pareto Points
+
+Points that are not dominated by any other points.
+
+### Dependence Graphs
+
+#### Scheduling
+
+##### ASAP Scheduling
+
+Assumes no ressource constrains. Schedule operations as soon as possible, thus minimizes latency.
+
+##### ALAP Scheduling
+
+Assumes no ressource constrains. Schedule operations as late as possible, thus minimizies latency.
+
+##### LIST Scheduling
+
+* Priority is assigned statically to operations (usually operations farthest away from end in the graph having most priority)
+* $U_k$ is the set of operations that are runnable on resource $v_k$
+* $T_k$ denotes currently running operations mapped to $v_k$
+* $S_k \subset U_k$ are the operations that start in the current timestep
+
+```plain
+t = 1
+repeat
+    for v_k in V_T
+        determine candidates to be scheduled U_k
+        determine running operations T_k
+        choose S_k from U_k with maximal priority
+    t++
+until v_n planned
+```
+
+## Shared Resources
+
+### Priority Inversion
+
+![Priority inversion](images/priority-inversion.PNG)
+
+#### Priority Inheritance Protocol
+
+When a task blocks one or more higher priority tasks, it temporarily assumes a higher priority.
