@@ -1,0 +1,182 @@
+\documentclass{article}
+
+\usepackage{biblatex}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\addbibresource{viper.bib}
+\addbibresource{silicon.bib}
+
+\parskip=1em
+\parindent=0pt
+
+\definecolor{codegray}{rgb}{0.95,0.95,0.95}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{codegray},
+    captionpos=b,
+    numbers=left,
+}
+\lstset{style=mystyle}
+
+\title{Avoiding Structural Equality Checks on Immutable Syntax Trees}
+\author{
+    Fabian Bösiger\\
+    Supervised by Dr. Malte Schwerhoff
+}
+\date{\today}
+
+\begin{document}
+
+    \pagenumbering{gobble}
+    \maketitle
+    \newpage
+    \pagenumbering{arabic}
+
+    \section{Introduction} \label{introduction}
+    Viper \cite{viper} is a verification infrastructure on top of which verification tools
+    for different programming languages can be built. Silicon \cite{silicon} is a backend for Viper,
+    which is based on symbolic execution.
+    
+    To advance program verification in practice, fast verification is cruicial as
+    it profides a more streamlined experience for developers. This is the reason
+    why one of Silicons stated goals is performance:
+
+    \begin{quotation}
+        The verifier should enable an IDE-like experience: it should be
+        sufficiently fast such that users can continuously work on verifying
+        programs [...] \cite{silicon}
+    \end{quotation}
+
+    Because Silicon is a shared backend for many verification frontends, faster
+    verification in Silicon is directly beneficial for the developer using
+    such tools like Gobra for Go, Nagini for Python or Prusti for Rust.
+
+    Silicon internally builds an abstract syntax tree (AST) from the Viper input
+    program. This AST is checked for structural equality multiple times within
+    the execution of Silicon. Currently, Silicon recursively checks for structural
+    equality of ASTs. For big ASTs and many equality checks, this process of becomes
+    very inefficient.
+
+    \begin{lstlisting}[language=Scala, caption=Example of a term equality check.]
+TODO
+class Plus(val p0: Term, val p1: Term) extends Term
+    
+object Plus {
+    def apply(e0: Term, e1: Term) = new Plus(e0, e1)
+}
+    \end{lstlisting}
+    
+    We can't avoid equality checks themselves, but what we can do is implementing
+    equality checks in a more performant way. This is the core topic of this thesis.
+    
+    Currently, every time a term is applied, a new instance of this term is created.
+    This happens even if we apply the same term twice, leaving us with no other choice
+    than checking equality structurally and recursively. 
+
+    \begin{lstlisting}[language=Scala, caption=How term instances currently are created.]
+class Plus(val p0: Term, val p1: Term) extends Term
+    
+object Plus {
+    def apply(e0: Term, e1: Term) = new Plus(e0, e1)
+}
+    \end{lstlisting}
+
+    We see that everytime \texttt{apply} is called, a new instance of
+    \texttt{class Plus} is created. We want to avoid creating a new instance on
+    every call to \texttt{apply} by using the flyweight pattern.
+  
+    \section{Approach}
+    In a first step, we want to analyze the performance of the Silicon backend,
+    which allows us in the future to relate possible performance improvements to 
+    changes made during the project. We use existing benchmarking infrastructure 
+    and, if necessary, create new benchmarks.
+
+    The general idea is to utilize the flyweight pattern to the AST which is immutable.
+    To do this, we maintain a pool of pairwise structurally unequal terms. Whenever a term
+    is applied, we first compare the new term that is to be created with our
+    pool of existing terms. If a structurally equivalent term already exists, we
+    avoid creating a new instance of this term and instead return a reference to the 
+    equivalent object in the pool.
+
+    This gives us the guarantee that there are no two instances of the
+    same term, i.e. every two structurally equivalent terms point to the same
+    underlying object in memory. Comparing terms for structural equality boils
+    down to a cheap pointer comparison, recursive equality checks can be avoided.
+
+    \begin{lstlisting}[language=Scala, caption=How a memory pool may be used to avoid creating structurally equivalent terms.]
+class Plus(val p0: Term, val p1: Term) extends Term
+    
+object Plus {
+    def apply(e0: Term, e1: Term) = {
+        val plus = new Plus(e0, e1)
+        if (pool.contains(plus))
+            pool.get(plus)
+        else
+            plus
+    }
+}
+    \end{lstlisting}
+
+The Scala compiler automatically generates the \texttt{equals} method for case classes,
+where the default implementation recursively checks each field for equality. To avoid
+this process of recursive equality checking, we instead override the default \texttt{equals}
+method to do a simple reference equality check.
+
+    \begin{lstlisting}[language=Scala, caption=We override the the default equals method to do a simple reference equality check.]
+sealed trait Term extends Node {
+    // Override the default equals method:
+    override def equals(other: Any) =
+        this.eq(other.asInstanceOf[AnyRef]) 
+    // ...
+}
+    \end{lstlisting}
+
+    \section{Goals}
+    \subsection{Core Goals}
+    \begin{enumerate}
+        \item \textbf{Research other potential solutions} that may have been
+        tried for similar problems. The general problem of recursive equality
+        checks may have been solved in the past.
+        \\\textit{1 Week}
+        \item \textbf{Implement the solution approach} described in section
+        \ref{introduction} without the use of macros. This allows for a first
+        evaluation of performance before auto-generating code using macro
+        annotations.
+        \\\textit{3 Weeks}
+        \item \textbf{Evaluate performance improvments} and discuss
+        the impact of our changes on the time needed for verification.
+        \\\textit{2 Weeks}
+        \item \textbf{Build macro annotations} for automatic code generation.
+        This allows for easy implementation of terms that may be needed in the
+        future. Macro annotations also help keeping the codebase well-arranged. 
+        \\\textit{4 Weeks}
+        \item \textbf{Add IDE support} for our macro annotations. Because
+        Scala macros are still in an experimental phase, we make sure that
+        IntelliJ picks up code generated by our macro annotations.
+        \\\textit{4 Weeks}
+    \end{enumerate}
+    \subsection{Extension Goals}
+    \begin{enumerate}
+        \item \textbf{Utilizing better suited data structures} to possibly achieve
+        further performance improvments by in Silicon. If the performance of
+        equality checks was improved in the previous steps, some data
+        structures may become preferrable performance-wise, e.g. hashmaps become
+        more performant over a simple iteration over a list.
+        \item \textbf{Evaluate further performance improvments} that may be
+        achieved in the previous step.
+        \item \textbf{Research ways to extend AST simplifications} as a furter step
+        to increase performance. Not only local simplifications, but also global
+        simplifications are imaginable.
+        \item \textbf{Implement better AST simplifications} found in the previous step.
+        \item \textbf{Evaluate further performance improvments} that may be
+        achieved in the previous step.
+        \item \textbf{Use a DSL} in combination with Scala macros to
+        auto-generate AST simplifications. This would allow to easily add or modify
+        AST simplifications in the future.
+
+    \end{enumerate}
+
+    \printbibliography
+    
+\end{document}
