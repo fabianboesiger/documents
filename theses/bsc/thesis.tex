@@ -1,21 +1,102 @@
-\documentclass{article}
+% !TEX program = xelatex
+% !BIB program = biber
 
-\usepackage{epigraph}
+\documentclass[11pt]{article}
+
+\usepackage{biblatex}
 \usepackage{listings}
-\usepackage{minted}
+\usepackage{xcolor}
+\usepackage{fontspec}
+\usepackage{graphicx}
 
-\title{Avoiding Structural Equality Checks on Immutable Syntax Trees}
-\author{
-    Fabian Bösiger\\
-    Supervised by Dr. Malte Schwerhoff
+\setmonofont[
+  Contextuals={Alternate},
+  Scale=0.8
+]{Fira Code}
+
+\addbibresource{viper.bib}
+\addbibresource{silicon.bib}
+\addbibresource{quote.bib}
+
+\parskip=1em
+\parindent=0pt
+
+\definecolor{codegrey}{rgb}{0.95,0.95,0.95}
+\definecolor{commentgrey}{rgb}{0.5,0.5,0.5}
+
+\lstdefinestyle{mystyle}{
+    basicstyle=\ttfamily,
+    keywordstyle=\bfseries,
+    commentstyle=\color{commentgrey},
+    backgroundcolor=\color{codegrey},
+    frame=single,
+    numbers=left,
 }
-\date{\today}
+\lstset{style=mystyle}
 
 \begin{document}
+
     \pagenumbering{gobble}
-    \maketitle
+    \begin{titlepage}
+        \begin{center}
+            \textbf{\huge Flyweight ASTs}\\
+            \vspace{0.2cm}
+            \textit{Bachelor's Thesis}\\
+            \vspace{1cm}
+            \includegraphics[width=0.5\textwidth]{fly}
+            \vfill   
+            Fabian Bösiger\\
+            Supervised by Dr. Malte Schwerhoff\\
+            \vspace{0.2cm}
+            Programming Methodology Group\\
+            Department of Computer Science\\
+            ETH Zürich\\
+            \vspace{0.2cm}
+            \today
+        \end{center}
+    \end{titlepage}
     \newpage
+
+    \begin{abstract}
+        \parskip=1em
+        \parindent=0pt
+        \noindent
+
+        Abstract here.
+    \end{abstract}
+    \newpage
+
+    \renewcommand{\abstractname}{Acknowledgements}
+    \begin{abstract}
+        \parskip=1em
+        \parindent=0pt
+        \noindent
+
+        I would like to thank my supervisor, Malte Schwerhoff, who provided
+        me with the opportunity to write this thesis. I am very grateful for the time
+        and effort he expended.
+
+        I would also like to thank Peter Müller for leading the Programming Methodology
+        Group, which always appears in an open and welcoming way. 
+
+        Finally, I'd like to express my gratitude towards my family for providing
+        me with a very pleasant home office environment.
+    \end{abstract}
+    \newpage
+
+    \tableofcontents
+    \newpage
+
     \pagenumbering{arabic}
 
-    \section{Abstract}
+    \section{Introduction}
+
+    \section{Approach}
+
+    \section{Implementation}
+
+    \section{Evaluation}
+
+    \printbibliography
+    
 \end{document}

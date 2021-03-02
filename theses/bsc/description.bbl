@@ -19,7 +19,47 @@
 
 \refsection{0}
   \datalist[entry]{nty/global//global/global}
-    \entry{viper}{article}{}
+    \entry{patterns}{book}{}
+      \name{author}{4}{}{%
+        {{hash=abd927bf30d6566be0ac66a66e893fdd}{%
+           family={Gamma},
+           familyi={G\bibinitperiod},
+           given={Erich},
+           giveni={E\bibinitperiod}}}%
+        {{hash=233f891813bda0f3920985f97a4a7554}{%
+           family={Helm},
+           familyi={H\bibinitperiod},
+           given={Richard},
+           giveni={R\bibinitperiod}}}%
+        {{hash=fd79e5e249b219ff553fc2d811104d78}{%
+           family={Johnson},
+           familyi={J\bibinitperiod},
+           given={Ralph},
+           giveni={R\bibinitperiod}}}%
+        {{hash=e032589f0b9a38804483ab7cf5ccad7f}{%
+           family={Vlissides},
+           familyi={V\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{4d2492409a24d4ed208ae6670cb91945}
+      \strng{fullhash}{5cb4a6d7baf30d11bae6682eca698b4f}
+      \strng{bibnamehash}{4d2492409a24d4ed208ae6670cb91945}
+      \strng{authorbibnamehash}{4d2492409a24d4ed208ae6670cb91945}
+      \strng{authornamehash}{4d2492409a24d4ed208ae6670cb91945}
+      \strng{authorfullhash}{5cb4a6d7baf30d11bae6682eca698b4f}
+      \field{sortinit}{G}
+      \field{sortinithash}{62eb2aa29549e4fdbd3cb154ec5711cb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{978-0201633610}
+      \field{title}{Design Patterns: Elements of Reusable Object-Oriented Software}
+      \field{year}{2016}
+    \endentry
+    \entry{viper}{inbook}{}
       \name{author}{3}{}{%
         {{hash=57f66066d804db9a6a0f631aa4beba38}{%
            family={Müller},
@@ -31,52 +71,101 @@
            familyi={S\bibinitperiod},
            given={Malte},
            giveni={M\bibinitperiod}}}%
-        {{hash=f7310b26963f8a146f4d0ead9b95b5f3}{%
+        {{hash=c64cc45b0a3a3d1bdae99ad4c2fb79f5}{%
            family={Summers},
            familyi={S\bibinitperiod},
+           given={Alexander\bibnamedelima J.},
+           giveni={A\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \name{editor}{3}{}{%
+        {{hash=ce303c40115b5be71de89930153cdda3}{%
+           family={Pretschner},
+           familyi={P\bibinitperiod},
            given={Alexander},
            giveni={A\bibinitperiod}}}%
+        {{hash=e733022c023bf0b871c95a0ecc9d0427}{%
+           family={Peled},
+           familyi={P\bibinitperiod},
+           given={Doron},
+           giveni={D\bibinitperiod}}}%
+        {{hash=fdfa77f893b7f1c279c049cba61dead1}{%
+           family={Hutzelmann},
+           familyi={H\bibinitperiod},
+           given={Thomas},
+           giveni={T\bibinitperiod}}}%
       }
-      \strng{namehash}{ae2afb3fa5c6791f5fdfaa23b6adf7be}
-      \strng{fullhash}{ae2afb3fa5c6791f5fdfaa23b6adf7be}
-      \strng{bibnamehash}{ae2afb3fa5c6791f5fdfaa23b6adf7be}
-      \strng{authorbibnamehash}{ae2afb3fa5c6791f5fdfaa23b6adf7be}
-      \strng{authornamehash}{ae2afb3fa5c6791f5fdfaa23b6adf7be}
-      \strng{authorfullhash}{ae2afb3fa5c6791f5fdfaa23b6adf7be}
+      \list{language}{1}{%
+        {en}%
+      }
+      \list{location}{1}{%
+        {Amsterdam}%
+      }
+      \list{publisher}{1}{%
+        {IOS Press BV}%
+      }
+      \strng{namehash}{3a2d659019b3b196f0387f8c50f8b34b}
+      \strng{fullhash}{3a2d659019b3b196f0387f8c50f8b34b}
+      \strng{bibnamehash}{3a2d659019b3b196f0387f8c50f8b34b}
+      \strng{authorbibnamehash}{3a2d659019b3b196f0387f8c50f8b34b}
+      \strng{authornamehash}{3a2d659019b3b196f0387f8c50f8b34b}
+      \strng{authorfullhash}{3a2d659019b3b196f0387f8c50f8b34b}
+      \strng{editorbibnamehash}{49901cf39170f2d59aac3324beb58e6e}
+      \strng{editornamehash}{49901cf39170f2d59aac3324beb58e6e}
+      \strng{editorfullhash}{49901cf39170f2d59aac3324beb58e6e}
       \field{sortinit}{M}
       \field{sortinithash}{2e5c2f51f7fa2d957f3206819bf86dc3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{isbn}{978-3-662-49121-8}
-      \field{title}{Viper: A Verification Infrastructure for Permission-Based Reasoning}
-      \field{year}{2016}
+      \field{booktitle}{Dependable Software Systems Engineering}
+      \field{isbn}{978-1-61499-809-9}
+      \field{journaltitle}{NATO Science for Peace and Security Series - D: Information and Communication Security}
+      \field{title}{Viper: A verification infrastructure for permission-based reasoning}
+      \field{volume}{50}
+      \field{year}{2017}
+      \field{pages}{104\bibrangedash 125}
+      \range{pages}{22}
       \verb{doi}
-      \verb 10.1007/978-3-662-49122-5_2
+      \verb 10.3233/978-1-61499-810-5-104
       \endverb
+      \keyw{program verification; separation logic; verification tools; intermediate language}
     \endentry
-    \entry{silicon}{article}{}
+    \entry{silicon}{thesis}{}
       \name{author}{1}{}{%
-        {{hash=670e5d6953276d13d7a31e86f8264427}{%
+        {{hash=77a2dc7ab9ff2a64b1ed49c34d127c08}{%
            family={Schwerhoff},
            familyi={S\bibinitperiod},
-           given={Malte},
-           giveni={M\bibinitperiod}}}%
+           given={Malte\bibnamedelima H.},
+           giveni={M\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {ETH Zurich}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \list{location}{1}{%
+        {Zürich}%
       }
       \list{publisher}{1}{%
         {ETH Zürich}%
       }
-      \strng{namehash}{670e5d6953276d13d7a31e86f8264427}
-      \strng{fullhash}{670e5d6953276d13d7a31e86f8264427}
-      \strng{bibnamehash}{670e5d6953276d13d7a31e86f8264427}
-      \strng{authorbibnamehash}{670e5d6953276d13d7a31e86f8264427}
-      \strng{authornamehash}{670e5d6953276d13d7a31e86f8264427}
-      \strng{authorfullhash}{670e5d6953276d13d7a31e86f8264427}
+      \strng{namehash}{77a2dc7ab9ff2a64b1ed49c34d127c08}
+      \strng{fullhash}{77a2dc7ab9ff2a64b1ed49c34d127c08}
+      \strng{bibnamehash}{77a2dc7ab9ff2a64b1ed49c34d127c08}
+      \strng{authorbibnamehash}{77a2dc7ab9ff2a64b1ed49c34d127c08}
+      \strng{authornamehash}{77a2dc7ab9ff2a64b1ed49c34d127c08}
+      \strng{authorfullhash}{77a2dc7ab9ff2a64b1ed49c34d127c08}
       \field{sortinit}{S}
       \field{sortinithash}{c319cff79d99c853d775f88277d4e45f}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Advancing Automated, Permission-Based Program Verification Using Symbolic Execution}
+      \field{type}{phdthesis}
       \field{year}{2016}
+      \verb{doi}
+      \verb 10.3929/ethz-a-010835519
+      \endverb
+      \keyw{VERIFICATION (SOFTWARE ENGINEERING); VERTEILTE PROGRAMMIERUNG + PARALLELE PROGRAMMIERUNG (PROGRAMMIERMETHODEN); VERIFIKATION (SOFTWARE ENGINEERING); KORREKTHEIT (THEORIE DER PROGRAMMIERUNG); CORRECTNESS (THEORY OF PROGRAMMING); CONCURRENT PROGRAMMING + DISTRIBUTED PROGRAMMING + PARALLEL PROGRAMMING (PROGRAMMING METHODS)}
     \endentry
   \enddatalist
 \endrefsection
