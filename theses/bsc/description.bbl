@@ -59,6 +59,14 @@
       \field{title}{Design Patterns: Elements of Reusable Object-Oriented Software}
       \field{year}{2016}
     \endentry
+    \entry{intellij}{misc}{}
+      \field{sortinit}{I}
+      \field{sortinithash}{9417e9a1288a9371e2691d999083ed39}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://blog.jetbrains.com/scala/2015/10/14/intellij-api-to-build-scala-macros-support/}}
+      \field{note}{Accessed: March 3, 2021}
+      \field{title}{IntelliJ API to Build Scala Macros Support}
+    \endentry
     \entry{viper}{inbook}{}
       \name{author}{3}{}{%
         {{hash=57f66066d804db9a6a0f631aa4beba38}{%

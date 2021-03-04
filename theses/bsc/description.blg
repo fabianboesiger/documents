@@ -1,27 +1,32 @@
 [0] Config.pm:304> INFO - This is Biber 2.13
 [0] Config.pm:307> INFO - Logfile is 'description.blg'
-[46] biber-MSWIN32:315> INFO - === 
-[111] Biber.pm:375> INFO - Reading 'description.bcf'
-[249] Biber.pm:905> INFO - Found 3 citekeys in bib section 0
-[271] Biber.pm:4196> INFO - Processing section 0
-[331] Utils.pm:75> INFO - Globbing data source 'viper.bib'
-[367] Utils.pm:91> INFO - Globbed data source 'viper.bib' to viper.bib
-[367] Utils.pm:75> INFO - Globbing data source 'silicon.bib'
-[367] Utils.pm:91> INFO - Globbed data source 'silicon.bib' to silicon.bib
-[367] Utils.pm:75> INFO - Globbing data source 'patterns.bib'
-[367] Utils.pm:91> INFO - Globbed data source 'patterns.bib' to patterns.bib
-[397] Biber.pm:4373> INFO - Looking for bibtex format file 'viper.bib' for section 0
-[414] bibtex.pm:1462> INFO - LaTeX decoding ...
-[435] bibtex.pm:1281> INFO - Found BibTeX data source 'viper.bib'
-[553] Biber.pm:4373> INFO - Looking for bibtex format file 'silicon.bib' for section 0
-[570] bibtex.pm:1462> INFO - LaTeX decoding ...
-[598] bibtex.pm:1281> INFO - Found BibTeX data source 'silicon.bib'
-[609] Biber.pm:4373> INFO - Looking for bibtex format file 'patterns.bib' for section 0
-[641] bibtex.pm:1462> INFO - LaTeX decoding ...
-[650] bibtex.pm:1281> INFO - Found BibTeX data source 'patterns.bib'
-[677] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[677] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[677] Biber.pm:4024> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-US'
-[677] Biber.pm:4030> INFO - No sort tailoring available for locale 'en-US'
-[683] bbl.pm:648> INFO - Writing 'description.bbl' with encoding 'UTF-8'
-[686] bbl.pm:751> INFO - Output to description.bbl
+[39] biber-MSWIN32:315> INFO - === 
+[61] Biber.pm:375> INFO - Reading 'description.bcf'
+[195] Biber.pm:905> INFO - Found 4 citekeys in bib section 0
+[217] Biber.pm:4196> INFO - Processing section 0
+[220] Utils.pm:75> INFO - Globbing data source 'viper.bib'
+[231] Utils.pm:91> INFO - Globbed data source 'viper.bib' to viper.bib
+[232] Utils.pm:75> INFO - Globbing data source 'silicon.bib'
+[232] Utils.pm:91> INFO - Globbed data source 'silicon.bib' to silicon.bib
+[232] Utils.pm:75> INFO - Globbing data source 'patterns.bib'
+[232] Utils.pm:91> INFO - Globbed data source 'patterns.bib' to patterns.bib
+[232] Utils.pm:75> INFO - Globbing data source 'intellij.bib'
+[232] Utils.pm:91> INFO - Globbed data source 'intellij.bib' to intellij.bib
+[247] Biber.pm:4373> INFO - Looking for bibtex format file 'viper.bib' for section 0
+[251] bibtex.pm:1462> INFO - LaTeX decoding ...
+[258] bibtex.pm:1281> INFO - Found BibTeX data source 'viper.bib'
+[333] Biber.pm:4373> INFO - Looking for bibtex format file 'silicon.bib' for section 0
+[337] bibtex.pm:1462> INFO - LaTeX decoding ...
+[343] bibtex.pm:1281> INFO - Found BibTeX data source 'silicon.bib'
+[351] Biber.pm:4373> INFO - Looking for bibtex format file 'patterns.bib' for section 0
+[354] bibtex.pm:1462> INFO - LaTeX decoding ...
+[359] bibtex.pm:1281> INFO - Found BibTeX data source 'patterns.bib'
+[370] Biber.pm:4373> INFO - Looking for bibtex format file 'intellij.bib' for section 0
+[374] bibtex.pm:1462> INFO - LaTeX decoding ...
+[378] bibtex.pm:1281> INFO - Found BibTeX data source 'intellij.bib'
+[398] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[398] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[398] Biber.pm:4024> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-US'
+[398] Biber.pm:4030> INFO - No sort tailoring available for locale 'en-US'
+[405] bbl.pm:648> INFO - Writing 'description.bbl' with encoding 'UTF-8'
+[408] bbl.pm:751> INFO - Output to description.bbl

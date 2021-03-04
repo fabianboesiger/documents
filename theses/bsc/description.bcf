@@ -2129,12 +2129,14 @@
     <bcf:datasource type="file" datatype="bibtex">viper.bib</bcf:datasource>
     <bcf:datasource type="file" datatype="bibtex">silicon.bib</bcf:datasource>
     <bcf:datasource type="file" datatype="bibtex">patterns.bib</bcf:datasource>
+    <bcf:datasource type="file" datatype="bibtex">intellij.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
     <bcf:citekey order="1">viper</bcf:citekey>
     <bcf:citekey order="2">silicon</bcf:citekey>
     <bcf:citekey order="3">silicon</bcf:citekey>
-    <bcf:citekey order="4">patterns</bcf:citekey>
+    <bcf:citekey order="4">intellij</bcf:citekey>
+    <bcf:citekey order="5">patterns</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nty">
