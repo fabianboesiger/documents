@@ -18,55 +18,7 @@
 
 
 \refsection{0}
-  \datalist[entry]{nty/global//global/global}
-    \entry{patterns}{book}{}
-      \name{author}{4}{}{%
-        {{hash=abd927bf30d6566be0ac66a66e893fdd}{%
-           family={Gamma},
-           familyi={G\bibinitperiod},
-           given={Erich},
-           giveni={E\bibinitperiod}}}%
-        {{hash=233f891813bda0f3920985f97a4a7554}{%
-           family={Helm},
-           familyi={H\bibinitperiod},
-           given={Richard},
-           giveni={R\bibinitperiod}}}%
-        {{hash=fd79e5e249b219ff553fc2d811104d78}{%
-           family={Johnson},
-           familyi={J\bibinitperiod},
-           given={Ralph},
-           giveni={R\bibinitperiod}}}%
-        {{hash=e032589f0b9a38804483ab7cf5ccad7f}{%
-           family={Vlissides},
-           familyi={V\bibinitperiod},
-           given={John},
-           giveni={J\bibinitperiod}}}%
-      }
-      \list{language}{1}{%
-        {en}%
-      }
-      \strng{namehash}{4d2492409a24d4ed208ae6670cb91945}
-      \strng{fullhash}{5cb4a6d7baf30d11bae6682eca698b4f}
-      \strng{bibnamehash}{4d2492409a24d4ed208ae6670cb91945}
-      \strng{authorbibnamehash}{4d2492409a24d4ed208ae6670cb91945}
-      \strng{authornamehash}{4d2492409a24d4ed208ae6670cb91945}
-      \strng{authorfullhash}{5cb4a6d7baf30d11bae6682eca698b4f}
-      \field{sortinit}{G}
-      \field{sortinithash}{62eb2aa29549e4fdbd3cb154ec5711cb}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{isbn}{978-0201633610}
-      \field{title}{Design Patterns: Elements of Reusable Object-Oriented Software}
-      \field{year}{2016}
-    \endentry
-    \entry{intellij}{misc}{}
-      \field{sortinit}{I}
-      \field{sortinithash}{9417e9a1288a9371e2691d999083ed39}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://blog.jetbrains.com/scala/2015/10/14/intellij-api-to-build-scala-macros-support/}}
-      \field{note}{Accessed: March 3, 2021}
-      \field{title}{IntelliJ API to Build Scala Macros Support}
-    \endentry
+  \datalist[entry]{none/global//global/global}
     \entry{viper}{inbook}{}
       \name{author}{3}{}{%
         {{hash=57f66066d804db9a6a0f631aa4beba38}{%
@@ -120,8 +72,8 @@
       \strng{editorbibnamehash}{49901cf39170f2d59aac3324beb58e6e}
       \strng{editornamehash}{49901cf39170f2d59aac3324beb58e6e}
       \strng{editorfullhash}{49901cf39170f2d59aac3324beb58e6e}
-      \field{sortinit}{M}
-      \field{sortinithash}{2e5c2f51f7fa2d957f3206819bf86dc3}
+      \field{sortinit}{1}
+      \field{sortinithash}{50c6687d7fc80f50136d75228e3c59ba}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Dependable Software Systems Engineering}
@@ -163,8 +115,8 @@
       \strng{authorbibnamehash}{77a2dc7ab9ff2a64b1ed49c34d127c08}
       \strng{authornamehash}{77a2dc7ab9ff2a64b1ed49c34d127c08}
       \strng{authorfullhash}{77a2dc7ab9ff2a64b1ed49c34d127c08}
-      \field{sortinit}{S}
-      \field{sortinithash}{c319cff79d99c853d775f88277d4e45f}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Advancing Automated, Permission-Based Program Verification Using Symbolic Execution}
@@ -174,6 +126,54 @@
       \verb 10.3929/ethz-a-010835519
       \endverb
       \keyw{VERIFICATION (SOFTWARE ENGINEERING); VERTEILTE PROGRAMMIERUNG + PARALLELE PROGRAMMIERUNG (PROGRAMMIERMETHODEN); VERIFIKATION (SOFTWARE ENGINEERING); KORREKTHEIT (THEORIE DER PROGRAMMIERUNG); CORRECTNESS (THEORY OF PROGRAMMING); CONCURRENT PROGRAMMING + DISTRIBUTED PROGRAMMING + PARALLEL PROGRAMMING (PROGRAMMING METHODS)}
+    \endentry
+    \entry{intellij}{misc}{}
+      \field{sortinit}{4}
+      \field{sortinithash}{e071e0bcb44634fab398d68ad04e69f4}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://blog.jetbrains.com/scala/2015/10/14/intellij-api-to-build-scala-macros-support/}}
+      \field{note}{Accessed: March 3, 2021}
+      \field{title}{IntelliJ API to Build Scala Macros Support}
+    \endentry
+    \entry{patterns}{book}{}
+      \name{author}{4}{}{%
+        {{hash=abd927bf30d6566be0ac66a66e893fdd}{%
+           family={Gamma},
+           familyi={G\bibinitperiod},
+           given={Erich},
+           giveni={E\bibinitperiod}}}%
+        {{hash=233f891813bda0f3920985f97a4a7554}{%
+           family={Helm},
+           familyi={H\bibinitperiod},
+           given={Richard},
+           giveni={R\bibinitperiod}}}%
+        {{hash=fd79e5e249b219ff553fc2d811104d78}{%
+           family={Johnson},
+           familyi={J\bibinitperiod},
+           given={Ralph},
+           giveni={R\bibinitperiod}}}%
+        {{hash=e032589f0b9a38804483ab7cf5ccad7f}{%
+           family={Vlissides},
+           familyi={V\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {en}%
+      }
+      \strng{namehash}{4d2492409a24d4ed208ae6670cb91945}
+      \strng{fullhash}{5cb4a6d7baf30d11bae6682eca698b4f}
+      \strng{bibnamehash}{4d2492409a24d4ed208ae6670cb91945}
+      \strng{authorbibnamehash}{4d2492409a24d4ed208ae6670cb91945}
+      \strng{authornamehash}{4d2492409a24d4ed208ae6670cb91945}
+      \strng{authorfullhash}{5cb4a6d7baf30d11bae6682eca698b4f}
+      \field{sortinit}{5}
+      \field{sortinithash}{5dd416adbafacc8226114bc0202d5fdd}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{978-0201633610}
+      \field{title}{Design Patterns: Elements of Reusable Object-Oriented Software}
+      \field{year}{2016}
     \endentry
   \enddatalist
 \endrefsection

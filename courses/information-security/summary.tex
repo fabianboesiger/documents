@@ -1,0 +1,231 @@
+% !TEX program = xelatex
+% !BIB program = biber
+
+\documentclass[11pt]{article}
+
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{fontspec}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\DeclareMathOperator{\Enc}{Enc}
+\DeclareMathOperator{\Dec}{Dec}
+\DeclareMathOperator{\xor}{xor}
+
+\setmonofont[
+  Contextuals={Alternate},
+  Scale=0.8
+]{Fira Code}
+
+\parskip=1em
+\parindent=0pt
+
+\definecolor{codegrey}{rgb}{0.95,0.95,0.95}
+\definecolor{commentgrey}{rgb}{0.5,0.5,0.5}
+
+\title{Information Security Summary}
+\author{Fabian Bösiger}
+
+\lstdefinestyle{mystyle}{
+    basicstyle=\ttfamily,
+    keywordstyle=\bfseries,
+    commentstyle=\color{commentgrey},
+    backgroundcolor=\color{codegrey},
+    frame=single,
+    numbers=left,
+}
+\lstset{style=mystyle}
+
+\begin{document}
+
+    \pagenumbering{gobble}
+    \maketitle
+    \newpage
+
+    \tableofcontents
+    \newpage
+    \pagenumbering{arabic}
+
+    \section{Introduction}
+    
+    Key space: $\mathcal{K}$\\
+    Plaintext space: $\mathcal{M}$\\
+    Ciphertext space: $\mathcal{C}$\\
+    Encryption algorithm: $\Enc_k(m): \mathcal{K} \times \mathcal{M} \to \mathcal{C}$\\
+    Decryption algorithm: $\Dec_k(c): \mathcal{K} \times \mathcal{C} \to \mathcal{M}$\\
+    Encryption scheme: $(\Enc_k, \Dec_k)$
+    Correctness: $\forall k: \Dec_k(\Enc_k(m)) = m$
+
+    \section{Historical Ciphers}
+
+    \subsection{Caesars's Shift Cipher}
+
+    $\mathcal{M} = \{A, \dotsc, Z\} = \{0, \dotsc, 25\}$\\
+    $\mathcal{K} = \{0, \dotsc, 25\}$\\
+    $\Enc_k(m_0, \dotsc, m_n) = (m_0 + k \mod 25, \dotsc, m_n + k \mod 25)$\\
+    $\Dec_k(c_0, \dotsc, c_n) = (c_0 - k \mod 25, \dotsc, c_n - k \mod 25)$
+    
+    \subsubsection{Vulnerabilities}
+
+    Brute force attack.
+
+    \subsection{Substitution Cipher}
+
+    $\mathcal{M} = \{A, \dotsc, Z\} = \{0, \dotsc, 25\}$\\
+    $\mathcal{K} = \{0, \dotsc, 25\}$\\
+    $\Enc_k(m_0, \dotsc, m_n) = (\pi(m_0), \dotsc, \pi(m_n))$\\
+    $\Dec_k(c_0, \dotsc, c_n) = (\pi^{-1}(c_0), \dotsc, \pi^{-1}(c_n))$
+
+    \subsubsection{Vulnerabilities}
+
+    Statistical patterns of the language.
+
+    \subsection{Vigenere Cipher}
+
+    TODO
+
+    \subsubsection{Vulnerabilities}
+
+    \section{Information-Theoretic Security}
+
+    If the key $k$ is chosen randomly and $c := \Enc_k(m)$ is given
+    to the adversary, the adversary should not learn any additional
+    information about the plaintext $m$.
+
+    An encryption scheme is perfectly secret if for some random variables $M$, $C$
+    and every $m$, $c$: $P(M = m) = P(M = m \mid C = c)$.
+    
+    Equivalently: $M$ and $C$ are independet.
+
+    Equivalently: The distribution of $C$ does not depend on $M$.
+    
+    Equivalently: For every $m_0$, $m_1$ we have that $\Enc(k, m_0)$ and
+    $\Enc(K, m_1)$ have the same distribution.
+
+    In every perfectly secret encryption scheme, we have $|\mathcal{K}| \geq |\mathcal{M}|$.
+
+    \subsection{One-Time Pad}
+
+    $\mathcal{M} = \mathcal{K} = \{0, 1\}^t$\\
+    $\Enc_k(m) = k \xor m$\\
+    $\Dec_k(c) = k \xor c$
+
+    \subsubsection{Correctness}
+
+    $\Dec_k(\Enc_k(m)) = k \xor (k \xor m)$
+
+    \subsubsection{Perfect Secrecy}
+
+    \begin{align}
+        P(C = c \mid M = m)\\
+        = P(M \xor K = c | M = m)\\
+        = P(m \xor K = c)\\
+        = P(K = m \xor c)\\
+        = 2^{-t}\\
+        = P(C = c \mid M = m_0) = P(C = c \mid M = m_1)
+    \end{align}
+
+    \subsubsection{Vulnerabilities}
+
+    Perfectly secret. But the key is as long as the message and cannot be reused.
+
+    \section{Computational Security}
+
+    A system $X$ is $(t, \epsilon)$-secure if every Turing Machine
+    that operates in time $t$ can break $X$ with probability of at most $\epsilon$.
+
+    A function $\mu: \mathbb{N} \to \mathbb{R}$ is negligible, if for every natural number
+    $c$ there exists $n_0$ such that for all $x > n_0$: $|\mu(x)| < \frac{1}{x^c}$ 
+
+    $M$ and $C$ are independet from the point of view of a
+    computationally limited adversary with high probability.
+
+    More formally: $X$ is secure if for all probabilistic poly-time turing machines $M$,
+    $P(M \textrm{ breaks the scheme } X)$ is negligible.
+
+    Equivalently: No poly-time adversary can distinguish the distributions
+    $\Enc(K, m_0) = \Enc(K, m_1)$ with non-negligible probability.
+
+    \subsection{Chosen-Plaintext Attack}
+
+    Learning phase: Adversary can repeatedly send message $m$ that is encrypted using some
+    unknown $k$ and receives $c = \Enc(k, m)$.
+
+    Challenge phase: Adversary sends $m_0$ and $m_1$, receives $c = \Enc(k, m_b)$ for some 
+    unknown $b$, has to guess b.
+
+    CPA-security: Every randomized poly-time adversary guesses $b$ correctly with
+    probability of at most $\frac{1}{2} + \epsilon(n)$ where $\epsilon$ is negligible.
+
+    CPA-secure encryptions have to be randomized or have a state.
+
+    If a CPA-secure encryption exists with $|k| \leq |m|$, then $P \neq NP$.
+
+    \section{Pseudorandom Functions}
+
+    Select random permutation $F: \{0, 1\}^m \to  \{0, 1\}^m$, give it to both parties
+    similar to secret key.
+
+    Problem: $F$ requires $m * 2^m$ space.
+
+    Solution: Pseudorandom functions using a key $F_k: \{0, 1\}^* \times \{0, 1\}^* \to \{0, 1\}^*$.
+
+    A keyed permutation $F_k$ is pseudorandom if it cannot be distinguished from a completely
+    random function. More formally assume two scenarios where a distinguisher $D$ tries to distinguish
+    random from pseudorandom function:
+
+    Scenario 0: $D$ sends $t$ random messages which are encrypted using the same pseudorandom function $F_k$
+    with random keys.
+
+    Scenario 1: $D$ sends $t$ random messages which are encrypted using a true random function $F$.
+
+    $F_k$ is a pseudorandom function if all probabilistic poly-time distinguishers $D$ cannot distinguish
+    scenarios 0 and 1 with a non-negligible advantage.
+
+    If a distinguisher additionaly has access to the inverted function $F$, we get the definition of a strong
+    pseudorandom function.
+
+    \section{Block Ciphers}
+
+    Block ciphers are pseudorandom permutations $F_k$. THey use a key of $K$ bits to specify a random
+    subset of $2^K$ mappings. If the section of mappings is random, the resulting cypher
+    will be a good approximation of the ideal block cypher.
+
+    \subsection{Shannon's Confusion and Diffusion Principle}
+
+    Diffusion: Ciphertext bits should depend on the plaintext bits in a complex way.
+    If a plaintext bit is changed, ciphertext bits should change with $p=\frac{1}{2}$.
+
+    Confusion: Each bit of the ciphertext should depend on the whole key.
+    If one bit of the key is changed, the ciphertext should change entirely.
+
+    \subsection{Confusion-Diffusion Paradigm}
+
+    Confusion: Implement large $F_k(m)$ using smaller $f_i(k, m_i)$, called substitution boxes.
+    $F_k(m_1 m_2 \dotsc m_n) = f_1(k, m_1) f_2(k, m_2) \dotsm f_n(k, m_n)$.
+
+    Diffusion: Permute (Mix) the output $F_k$.
+
+    Key idea: Run the confusion and diffusion multiple times.
+
+    \subsection{Data Encryption Standard (DES)}
+
+    $\textrm{Input} \to \textrm{Initial Permutation } IP \to \textrm{Feistel Network depending on } k \to \textrm{Final Permutation } IP^{-1} \to \textrm{Output}$
+
+    TODO
+
+    A 3-round feistel network is a pseudorandom permutation.
+
+    A 4-round feistel network is a strong pseudorandom permutation.
+
+    To fully describe a feistel network we need to describe a key schedule algoritm and the pseudorandom permutation function $f$.
+
+    \subsubsection{Vulnerabilities}
+
+    Key is too short, brute force attack is possible.
+
+    Unclear role of the NSA in the design.
+
+\end{document}
