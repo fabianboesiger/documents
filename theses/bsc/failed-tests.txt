@@ -1,0 +1,47 @@
+[info] - all/issues/silicon/0183.vpr [Silicon-Silver] *** FAILED *** (659 milliseconds)
+[info]   4 errors
+[info]   
+[info]   The following outputs was specified to occur erroneously (UnexpectedOutput) according to the test annotations, but did not occur during testing:
+[info]     assert.failed:assertion.false (0183.vpr:46)
+[info]     assert.failed:insufficient.permission (0183.vpr:38)
+[info]     assert.failed:assertion.false (0183.vpr:28)
+[info]     not.wellformed:insufficient.permission (0183.vpr:20) (AnnotationBasedTestSuite.scala:63)
+[info]   + Verifier used: Silicon 1.1-SNAPSHOT (df2de96d). 
+[info]   + Time required: 12 msec (Parsing), 3 msec (Semantic Analysis), 2 msec (Translation), 3 msec (Consistency Check), 633 msec (Verification). 
+
+
+
+[info] - all/issues/silver/0175.vpr [Silicon-Silver] *** FAILED *** (1 second, 884 milliseconds)
+[info]   1 errors
+[info]   
+[info]   The following outputs were expected according to the test annotations, but did not occur during testing:
+[info]     not.wellformed:seq.index.length (0175.vpr:9) (AnnotationBasedTestSuite.scala:63)
+[info]   + Verifier used: Silicon 1.1-SNAPSHOT (df2de96d). 
+[info]   + Time required: 8 msec (Parsing), 2 msec (Semantic Analysis), 2 msec (Translation), 1 msec (Consistency Check), 1.87 sec (Verification). 
+
+
+
+ [info] - quantifiedpermissions/issues/issue_0205.vpr [Silicon-Silver] *** FAILED *** (4 seconds, 797 milliseconds)
+[info]   6 errors
+[info]   
+[info]   The following output occurred during testing, but should not have according to the test annotations:
+[info]     [z3.interaction.failed] Interaction with Z3 (instance 11) failed: Unexpected output of Z3. Expected 'success' but found: (error "line 7101 column 5: canceled") (<no position>)
+[info]   
+[info]   The following outputs were expected according to the test annotations, but did not occur during testing:
+[info]     assert.failed:assertion.false (issue_0205.vpr:123)
+[info]     assert.failed:assertion.false (issue_0205.vpr:104)
+[info]     assert.failed:assertion.false (issue_0205.vpr:85)
+[info]     assert.failed:assertion.false (issue_0205.vpr:66)
+[info]   
+[info]   The following outputs was specified to occur erroneously (UnexpectedOutput) according to the test annotations, but did not occur during testing:
+[info]     assert.failed:assertion.false (issue_0205.vpr:24) (AnnotationBasedTestSuite.scala:63)
+[info]   + Verifier used: Silicon 1.1-SNAPSHOT (df2de96d). 
+[info]   + Time required: 43 msec (Parsing), 12 msec (Semantic Analysis), 5 msec (Translation), 10 msec (Consistency Check), 4.73 sec (Verification). 
+
+
+
+Die letzte Ausgabe, die ich erhalte:
+
+[info] - quantifiedpermissions/third_party/blom03.vpr [Silicon-Silver] (2 seconds, 270 milliseconds)
+[info]   + Verifier used: Silicon 1.1-SNAPSHOT (df2de96d). 
+[info]   + Time required: 29 msec (Parsing), 8 msec (Semantic Analysis), 2 msec (Translation), 3 msec (Consistency Check), 2.23 sec (Verification). 

@@ -40,7 +40,7 @@
     \pagenumbering{gobble}
     \begin{titlepage}
         \begin{center}
-            \textbf{\huge Flyweight ASTs:\\A Study in Applied Lazyness}\\
+            \textbf{\huge Flyweight ASTs:\\A Study in Applied Laziness}\\
             \vspace{0.2cm}
             \textit{Bachelor's Project Description}\\
             \vspace{1cm}
@@ -69,7 +69,7 @@
 
     Many operations on ASTs, including equality checks, have to be implemented for
     every AST node type individually. But these implementations usually follow a simple
-    pattern and only differ in the arity and type of the node's parameters. Such repetitve
+    pattern and only differ in the arity and type of the node's parameters. Such repetitive
     code is generally known as boilerplate code and should be reduced to a minimum, for example
     with automatic code generation using metaprogramming techniques.
 
@@ -83,7 +83,7 @@
     Viper \cite{viper} is a verification infrastructure on top of which verification tools
     for different programming languages can be built. Silicon \cite{silicon} is a backend for Viper,
     which is based on symbolic execution. To advance program verification in practice,
-    fast verification is cruicial as it provides a more streamlined experience for developers.
+    fast verification is crucial as it provides a more streamlined experience for developers.
     This is the reason why one of Silicon's stated goals is performance:
 
     \begin{quote} 
@@ -132,7 +132,7 @@ relevantChunks.sortWith((ch1, ch2) => {
 
     We can't avoid equality checks themselves, but what we can do is implementing
     equality checks in a more performant way. Currently in Silicon, new term instances are
-    created independetly of already existing ones, which potentially leads 
+    created independently of already existing ones, which potentially leads 
     to the coexistence of multiple structurally equal term instances. Subterm equality is checked in a
     structural and recursive manner.
 
@@ -185,19 +185,19 @@ object Plus extends ((Term, Term) => Plus) {
     \texttt{Plus} is no longer a case class, which means that the default \texttt{equals}
     method no longer recursively checks for structural equality, but instead
     simply does a reference equality check. Because Scala's equality operator (\texttt{==})
-    and datastructures such as \texttt{HashMap} use the \texttt{equals} method behind
+    and data structures such as \texttt{HashMap} use the \texttt{equals} method behind
     the scenes, this will most likely lead to performance improvements.
 
     \subsection{Automate Boilerplate Generation using Macros} \label{approach:macros}
 
     Silicon's AST representation of the Viper language consists of nearly 100 different terms,
     all with boilerplate implementations for different operations, as discussed in section \ref{introduction}.
-    Our changes introdroduce additional boilerplate code to each term companion object, as seen in the case
+    Our changes introduce additional boilerplate code to each term companion object, as seen in the case
     of the \texttt{Plus} term in listing 3.
 
     Our ASTs shouldn't only be flyweight in the sense of the implementation pattern, but also
     regarding development time and effort. This is why we want to avoid such boilerplate
-    code and instead automatically generate companion objects seen in listing 3 using Scalas macro annotations.
+    code and instead automatically generate companion objects seen in listing 3 using Scala's macro annotations.
     Additional benefits of using macro annotations include improvements in code
     readability and maintainability. Experimenting with code changes will become a matter
     of editing a single macro instead of editing each term individually.
@@ -233,13 +233,13 @@ case class Plus(left: Term, right: Term) extends Term
     \begin{enumerate}
         \item Profiling parts of Silicon that perform many operations on
         terms. Possibly adapt such parts to better utilize performance improvements
-        regarding equality checks, some datastructures for example may perform better
+        regarding equality checks, some data structures for example may perform better
         over others with fast equality checks. Evaluate performance improvements.
         \item Investigate if the same approach as discussed in
         section \ref{approach} can be applied to the Viper AST.
         If possible, implement our approach and evaluate the changes made.
-        \item Research, implement and evaluate ways to extend AST simplifications as a furter step to increase performance.
-        \texttt{Plus(t, IntLiteral(0))} for example can be directly simplifed to \texttt{t}.
+        \item Research, implement and evaluate ways to extend AST simplifications as a further step to increase performance.
+        \texttt{Plus(t, IntLiteral(0))} for example can be directly simplified to \texttt{t}.
         Usage of a domain-specific language in combination with Scala macros to auto-generate AST
         simplifications. This would allow to easily add or modify
         AST reductions in the future. 
