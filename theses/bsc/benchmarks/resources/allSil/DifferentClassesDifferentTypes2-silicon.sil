@@ -1,0 +1,168 @@
+// Generated on 2021-03-23 at 23:30:34
+domain TYPE {
+  
+  unique function class_java_DOT_lang_DOT_Object(): TYPE
+  
+  unique function class_A(): TYPE
+  
+  unique function class_B(): TYPE
+  
+  unique function class_DifferentClassesDifferentTypes2(): TYPE
+  
+  unique function class_EncodedGlobalVariables(): TYPE
+  
+  function directSuperclass(t: TYPE): TYPE
+  
+  function type_of(val: Ref): TYPE
+  
+  axiom java_DOT_lang_DOT_Object_directSuperclass {
+    directSuperclass(class_java_DOT_lang_DOT_Object()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom A_directSuperclass {
+    directSuperclass(class_A()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom B_directSuperclass {
+    directSuperclass(class_B()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom DifferentClassesDifferentTypes2_directSuperclass {
+    directSuperclass(class_DifferentClassesDifferentTypes2()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom EncodedGlobalVariables_directSuperclass {
+    directSuperclass(class_EncodedGlobalVariables()) == class_java_DOT_lang_DOT_Object()
+  }
+}
+
+function instanceof_TYPE_TYPE(t: TYPE, u: TYPE): Bool
+  ensures result == (t == u || directSuperclass(t) == u)
+
+
+method java_DOT_lang_DOT_Object_Object_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Object()
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Object_internal_Object_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Object()
+{
+  inhale false
+}
+
+method A_A_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_A()
+{
+  inhale false
+}
+
+method A___contract_unsatisfiable__internal_A_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+}
+
+method A_internal_A_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_A()
+{
+  var diz__1: Ref
+  diz__1 := new()
+  inhale type_of(diz__1) == class_A()
+  sys__result := diz__1
+  // assert
+  assert sys__result != null && type_of(sys__result) == class_A()
+  inhale false
+}
+
+method B_B_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_B()
+{
+  inhale false
+}
+
+method B___contract_unsatisfiable__internal_B_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+}
+
+method B_internal_B_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_B()
+{
+  var diz__2: Ref
+  diz__2 := new()
+  inhale type_of(diz__2) == class_B()
+  sys__result := diz__2
+  // assert
+  assert sys__result != null && type_of(sys__result) == class_B()
+  inhale false
+}
+
+method DifferentClassesDifferentTypes2_foo_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale false
+}
+
+method DifferentClassesDifferentTypes2___contract_unsatisfiable__internal_foo_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+}
+
+method DifferentClassesDifferentTypes2_internal_foo_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  var a__3: Ref
+  var b__4: Ref
+  a__3 := A_A_EncodedGlobalVariables(globals)
+  b__4 := B_B_EncodedGlobalVariables(globals)
+  // assert
+  assert a__3 != null && instanceof_TYPE_TYPE(type_of(a__3), class_B())
+}
+
+method DifferentClassesDifferentTypes2_DifferentClassesDifferentTypes2_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_DifferentClassesDifferentTypes2()
+{
+  inhale false
+}
+
+method DifferentClassesDifferentTypes2___contract_unsatisfiable__internal_DifferentClassesDifferentTypes2_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+}
+
+method DifferentClassesDifferentTypes2_internal_DifferentClassesDifferentTypes2_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_DifferentClassesDifferentTypes2()
+{
+  var diz__5: Ref
+  diz__5 := new()
+  inhale type_of(diz__5) == class_DifferentClassesDifferentTypes2()
+  sys__result := diz__5
+  // assert
+  assert sys__result != null && type_of(sys__result) == class_DifferentClassesDifferentTypes2()
+  inhale false
+}

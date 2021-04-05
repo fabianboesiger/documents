@@ -1,5 +1,4 @@
 % !TEX program = xelatex
-% !BIB program = biber
 
 \documentclass[11pt]{article}
 
@@ -13,6 +12,9 @@
 \DeclareMathOperator{\Enc}{Enc}
 \DeclareMathOperator{\Dec}{Dec}
 \DeclareMathOperator{\xor}{xor}
+\DeclareMathOperator{\Tag}{Tag}
+\DeclareMathOperator{\Vrfy}{Vrfy}
+
 
 \setmonofont[
   Contextuals={Alternate},
@@ -227,5 +229,41 @@
     Key is too short, brute force attack is possible.
 
     Unclear role of the NSA in the design.
+
+    \subsubsection{Triple Encryption}
+
+    \subsection{Advanced Encryption Standard (AES)}
+
+    TODO: Topic 2
+
+    \section{Stream Ciphers}
+
+    Pseudorandom generators used in practice are called stream ciphers.
+
+    \subsection{Pseudorandom Generators}
+
+    \subsection{RC4}
+
+    \subsubsection{Vulnerabilities}
+
+    Some bytes of the output are biased.
+
+    The first few bytes sometimes leak information about the key.
+
+    \subsection{ChaCha}
+
+    \section{Hash Functions and MACs}
+
+    \subsection{Message Authentication Codes (MACs)}
+
+    Key space: $\mathcal{K}$\\
+    Plaintext space: $\mathcal{M}$\\
+    Set of tags: $\mathcal{T}$\\
+    Tagging algorithm: $\Tag: \mathcal{K} \times \mathcal{M} \to \mathcal{T}$\\
+    Verification algorithm: $\Vrfy: \mathcal{K} \times \mathcal{M} \times \mathcal{T} \to \{0, 1\}$\\
+    MAC scheme: $(\Tag, \Vrfy)$
+
+    We say that  $(\Tag, \Vrfy)$ is secure, if for all poly-time adversaries $A$,
+    $P(A \textbf{ breaks } (\Tag, \Vrfy)) = \epsilon(n)$
 
 \end{document}

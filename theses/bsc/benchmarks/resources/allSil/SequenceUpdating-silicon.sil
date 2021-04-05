@@ -1,0 +1,67 @@
+// Generated on 2021-03-23 at 23:39:09
+domain TYPE {
+  
+  unique function class_Test(): TYPE
+  
+  unique function class_java_DOT_lang_DOT_Object(): TYPE
+  
+  unique function class_EncodedGlobalVariables(): TYPE
+  
+  function directSuperclass(t: TYPE): TYPE
+  
+  function type_of(val: Ref): TYPE
+  
+  axiom Test_directSuperclass {
+    directSuperclass(class_Test()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom EncodedGlobalVariables_directSuperclass {
+    directSuperclass(class_EncodedGlobalVariables()) == class_java_DOT_lang_DOT_Object()
+  }
+}
+
+function instanceof_TYPE_TYPE(t: TYPE, u: TYPE): Bool
+  ensures result == (t == u || directSuperclass(t) == u)
+
+
+method Test___contract_unsatisfiable__test1_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+}
+
+method Test_test1_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  var xs__1: Seq[Int]
+  var __flatten_1__2: Seq[Int]
+  __flatten_1__2 := Seq(1, 2, 3, 4, 5)
+  xs__1 := __flatten_1__2
+  // assert
+  assert xs__1[2 := 42] == Seq(1, 2, 42, 4, 5)
+  // assert
+  assert xs__1[2 := 42][2] == 42
+}
+
+method Test___contract_unsatisfiable__test2_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+}
+
+method Test_test2_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  var xs__3: Seq[Int]
+  var __flatten_2__4: Seq[Int]
+  __flatten_2__4 := Seq(1)
+  xs__3 := __flatten_2__4
+  // assert
+  assert xs__3[0 := 1][0 := 2][0 := 3][0] == 3
+}

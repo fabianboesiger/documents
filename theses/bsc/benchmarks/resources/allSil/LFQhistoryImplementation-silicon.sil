@@ -1,0 +1,1040 @@
+// Generated on 2021-03-23 at 23:34:15
+domain Process {
+  
+  function p_is_choice(p1: Process, p2: Process): Bool
+  
+  function p_empty(): Process
+  
+  function p_merge(p1: Process, p2: Process): Process
+  
+  function p_choice(p1: Process, p2: Process): Process
+  
+  function p_seq(p1: Process, p2: Process): Process
+  
+  function p_put(e: Int): Process
+  
+  function p_try_put(e: Int, success: Bool): Process
+  
+  function p_get(e: Int): Process
+  
+  axiom empty_1L {
+    (forall p: Process :: { p_merge(p_empty(), p) } p_merge(p_empty(), p) == p)
+  }
+  
+  axiom empty_2L {
+    (forall p: Process :: { p_seq(p_empty(), p) } p_seq(p_empty(), p) == p)
+  }
+  
+  axiom empty_2R {
+    (forall p: Process :: { p_seq(p, p_empty()) } p_seq(p, p_empty()) == p)
+  }
+  
+  axiom choice_L {
+    (forall p1: Process, p2: Process :: { p_is_choice(p_choice(p1, p2), p1) } p_is_choice(p_choice(p1, p2), p1))
+  }
+  
+  axiom choice_R {
+    (forall p1: Process, p2: Process :: { p_is_choice(p_choice(p1, p2), p2) } p_is_choice(p_choice(p1, p2), p2))
+  }
+  
+  axiom choice_dist {
+    (forall p1: Process, p2: Process, p3: Process :: { p_seq(p_choice(p1, p2), p3) } p_seq(p_choice(p1, p2), p3) == p_choice(p_seq(p1, p3), p_seq(p2, p3)))
+  }
+  
+  axiom seq_assoc {
+    (forall p1: Process, p2: Process, p3: Process :: { p_seq(p_seq(p1, p2), p3) } p_seq(p_seq(p1, p2), p3) == p_seq(p1, p_seq(p2, p3)))
+  }
+  
+  axiom put_def_2 {
+    (forall p: Process, e: Int :: { p_seq(p, p_put(e)) } p_seq(p, p_put(e)) == p_seq(p, p_seq(p_put(e), p_empty())))
+  }
+  
+  axiom try_put_def_2 {
+    (forall p: Process, e: Int, success: Bool :: { p_seq(p, p_try_put(e, success)) } p_seq(p, p_try_put(e, success)) == p_seq(p, p_seq(p_try_put(e, success), p_empty())))
+  }
+  
+  axiom get_def_2 {
+    (forall p: Process, e: Int :: { p_seq(p, p_get(e)) } p_seq(p, p_get(e)) == p_seq(p, p_seq(p_get(e), p_empty())))
+  }
+}
+
+domain TYPE {
+  
+  unique function class_History(): TYPE
+  
+  unique function class_java_DOT_lang_DOT_Object(): TYPE
+  
+  unique function class_Integer(): TYPE
+  
+  unique function class_Node(): TYPE
+  
+  unique function class_AtomicNode(): TYPE
+  
+  unique function class_Queue(): TYPE
+  
+  unique function class_EncodedGlobalVariables(): TYPE
+  
+  function directSuperclass(t: TYPE): TYPE
+  
+  function type_of(val: Ref): TYPE
+  
+  axiom History_directSuperclass {
+    directSuperclass(class_History()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom java_DOT_lang_DOT_Object_directSuperclass {
+    directSuperclass(class_java_DOT_lang_DOT_Object()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom Integer_directSuperclass {
+    directSuperclass(class_Integer()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom Node_directSuperclass {
+    directSuperclass(class_Node()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom AtomicNode_directSuperclass {
+    directSuperclass(class_AtomicNode()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom Queue_directSuperclass {
+    directSuperclass(class_Queue()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom EncodedGlobalVariables_directSuperclass {
+    directSuperclass(class_EncodedGlobalVariables()) == class_java_DOT_lang_DOT_Object()
+  }
+}
+
+domain frac {
+  
+  function frac_val(a: frac): Perm
+  
+  axiom frac_eq {
+    (forall a: frac, b: frac :: { frac_val(a),frac_val(b) } (frac_val(a) == frac_val(b)) == (a == b))
+  }
+  
+  axiom frac_bound {
+    (forall a: frac :: { frac_val(a) } 0 / 1 < frac_val(a) && frac_val(a) <= 1 / 1)
+  }
+}
+
+domain zfrac {
+  
+  function zfrac_val(a: zfrac): Perm
+  
+  axiom zfrac_eq {
+    (forall a: zfrac, b: zfrac :: { zfrac_val(a),zfrac_val(b) } (zfrac_val(a) == zfrac_val(b)) == (a == b))
+  }
+  
+  axiom zfrac_bound {
+    (forall a: zfrac :: { zfrac_val(a) } 0 / 1 <= zfrac_val(a) && zfrac_val(a) <= 1 / 1)
+  }
+}
+
+//  a field 
+field History_q_hist_value: Seq[Int]
+
+//  a field 
+field History_q_hist_init: Seq[Int]
+
+//  a field 
+field History_q_hist_act: Seq[Int]
+
+//  a field 
+field History_q_hist_write: Seq[Int]
+
+//  a field 
+field History_q_hist_free: Seq[Int]
+
+//  a field 
+field History_q_hist_hist: Seq[Int]
+
+//  a field 
+field History_q_hist_action: Seq[Int]
+
+//  a field 
+field Integer_val: Int
+
+//  a field 
+field Node_val: Int
+
+//  a field 
+field Node_next: Ref
+
+//  a field 
+field AtomicNode_ref: Ref
+
+//  a field 
+field Queue_hist_active: Bool
+
+//  a field 
+field Queue_hist: Ref
+
+//  a field 
+field Queue_begin: Ref
+
+//  a field 
+field Queue_head: Ref
+
+//  a field 
+field Queue_tail: Ref
+
+//  a field 
+field Queue_last: Ref
+
+function instanceof_TYPE_TYPE(t: TYPE, u: TYPE): Bool
+  ensures result == (t == u || directSuperclass(t) == u)
+
+
+function new_frac(x: Perm): frac
+  requires 0 / 1 < x && x <= 1 / 1
+  ensures frac_val(result) == x
+
+
+function new_zfrac(x: Perm): zfrac
+  requires 0 / 1 <= x && x <= 1 / 1
+  ensures zfrac_val(result) == x
+
+
+predicate History_hist_do_put_Fraction_Process(diz: Ref, fr: frac, proc: Process) 
+
+predicate History_hist_do_try_put_Fraction_Process(diz: Ref, fr: frac, proc: Process) 
+
+predicate History_hist_do_get_Fraction_Process(diz: Ref, fr: frac, proc: Process) 
+
+predicate History_hist_idle_Fraction_Process(diz: Ref, fr: frac, proc: Process) 
+
+predicate Queue_reachable_EncodedGlobalVariables_Node_Node(diz: Ref, globals: Ref, n1: Ref, n2: Ref) {
+  diz != null && (n1 != n2 ==> acc(n1.Node_next, wildcard) && acc(n1.Node_next.AtomicNode_ref, wildcard) && n1.Node_next.AtomicNode_ref != null && acc(Queue_reachable_EncodedGlobalVariables_Node_Node(diz, globals, n1.Node_next.AtomicNode_ref, n2), write))
+}
+
+predicate Queue_chain_EncodedGlobalVariables_Node_Node_Sequence$Integer$(diz: Ref, globals: Ref, n1: Ref, n2: Ref, vals: Seq[Int]) {
+  diz != null && (n1 != null && n2 != null && (n1 == n2 ? vals == Seq[Int]() : 0 < |vals| && (acc(n1.Node_next, wildcard) && acc(n1.Node_next.AtomicNode_ref, wildcard) && n1.Node_next.AtomicNode_ref != null && (acc(n1.Node_next.AtomicNode_ref.Node_val, write) && n1.Node_next.AtomicNode_ref.Node_val == vals[0])) && acc(Queue_chain_EncodedGlobalVariables_Node_Node_Sequence$Integer$(diz, globals, n1.Node_next.AtomicNode_ref, n2, vals[1..]), write)))
+}
+
+predicate Queue_csl_invariant_EncodedGlobalVariables(diz: Ref, globals: Ref) {
+  diz != null && (acc(diz.Queue_begin, wildcard) && (acc(diz.Queue_head, wildcard) && acc(diz.Queue_head.AtomicNode_ref, write)) && acc(Queue_reachable_EncodedGlobalVariables_Node_Node(diz, globals, diz.Queue_begin, diz.Queue_head.AtomicNode_ref), wildcard) && (acc(diz.Queue_tail, wildcard) && acc(diz.Queue_tail.AtomicNode_ref, write)) && acc(Queue_reachable_EncodedGlobalVariables_Node_Node(diz, globals, diz.Queue_begin, diz.Queue_tail.AtomicNode_ref), wildcard) && acc(diz.Queue_last, write) && acc(Queue_reachable_EncodedGlobalVariables_Node_Node(diz, globals, diz.Queue_begin, diz.Queue_last), wildcard) && acc(diz.Queue_hist_active, 1 / 2) && acc(diz.Queue_hist, wildcard) && (diz.Queue_hist_active ==> acc(diz.Queue_hist.History_q_hist_value, write) && acc(diz.Queue_hist.History_q_hist_hist, write) && acc(Queue_chain_EncodedGlobalVariables_Node_Node_Sequence$Integer$(diz, globals, diz.Queue_head.AtomicNode_ref, diz.Queue_last, diz.Queue_hist.History_q_hist_value), write)) && (acc(diz.Queue_last.Node_next, wildcard) && acc(diz.Queue_last.Node_next.AtomicNode_ref, write) && diz.Queue_last.Node_next.AtomicNode_ref == null))
+}
+
+method History_put_begin_Fraction_Process_Integer(diz: Ref, fr: frac, proc: Process, e: Int)
+  requires diz != null
+  requires frac_val(fr) != none
+  requires acc(History_hist_idle_Fraction_Process(diz, fr, proc), write)
+  requires write != none
+  requires acc(diz.History_q_hist_value, write)
+  requires acc(diz.History_q_hist_hist, write)
+  ensures frac_val(fr) != none
+  ensures acc(History_hist_do_put_Fraction_Process(diz, fr, proc), write)
+  ensures acc(diz.History_q_hist_act, write)
+  ensures acc(diz.History_q_hist_value, write)
+  ensures acc(diz.History_q_hist_write, write)
+  ensures acc(diz.History_q_hist_action, write)
+  ensures diz.History_q_hist_value == diz.History_q_hist_act
+  ensures diz.History_q_hist_value == old(diz.History_q_hist_value)
+{
+  inhale false
+}
+
+method History_put_commit_Fraction_Process_Integer(diz: Ref, fr: frac, proc: Process, e: Int)
+  requires diz != null
+  requires frac_val(fr) != none
+  requires acc(History_hist_do_put_Fraction_Process(diz, fr, proc), write)
+  requires write != none
+  requires acc(diz.History_q_hist_act, write)
+  requires acc(diz.History_q_hist_value, write)
+  requires acc(diz.History_q_hist_write, write)
+  requires acc(diz.History_q_hist_action, write)
+  requires diz.History_q_hist_value == diz.History_q_hist_act ++ Seq(e)
+  ensures frac_val(fr) != none
+  ensures acc(History_hist_idle_Fraction_Process(diz, fr, p_seq(proc, p_put(e))), write)
+  ensures acc(diz.History_q_hist_value, write)
+  ensures acc(diz.History_q_hist_hist, write)
+  ensures diz.History_q_hist_value == old(diz.History_q_hist_value)
+{
+  inhale false
+}
+
+method History_try_put_begin_Fraction_Process_Integer_Boolean(diz: Ref, fr: frac, proc: Process, e: Int, success: Bool)
+  requires diz != null
+  requires frac_val(fr) != none
+  requires acc(History_hist_idle_Fraction_Process(diz, fr, proc), write)
+  requires write != none
+  requires acc(diz.History_q_hist_value, write)
+  requires acc(diz.History_q_hist_hist, write)
+  ensures frac_val(fr) != none
+  ensures acc(History_hist_do_try_put_Fraction_Process(diz, fr, proc), write)
+  ensures acc(diz.History_q_hist_act, write)
+  ensures acc(diz.History_q_hist_value, write)
+  ensures acc(diz.History_q_hist_write, write)
+  ensures acc(diz.History_q_hist_action, write)
+  ensures diz.History_q_hist_value == diz.History_q_hist_act
+  ensures diz.History_q_hist_value == old(diz.History_q_hist_value)
+{
+  inhale false
+}
+
+method History_try_put_commit_Fraction_Process_Integer_Boolean(diz: Ref, fr: frac, proc: Process, e: Int, success: Bool)
+  requires diz != null
+  requires frac_val(fr) != none
+  requires acc(History_hist_do_try_put_Fraction_Process(diz, fr, proc), write)
+  requires write != none
+  requires acc(diz.History_q_hist_act, write)
+  requires acc(diz.History_q_hist_value, write)
+  requires acc(diz.History_q_hist_write, write)
+  requires acc(diz.History_q_hist_action, write)
+  requires success ==> diz.History_q_hist_value == diz.History_q_hist_act ++ Seq(e)
+  requires !success ==> diz.History_q_hist_value == diz.History_q_hist_act
+  ensures frac_val(fr) != none
+  ensures acc(History_hist_idle_Fraction_Process(diz, fr, p_seq(proc, p_try_put(e, success))), write)
+  ensures acc(diz.History_q_hist_value, write)
+  ensures acc(diz.History_q_hist_hist, write)
+  ensures diz.History_q_hist_value == old(diz.History_q_hist_value)
+{
+  inhale false
+}
+
+method History_get_begin_Fraction_Process_Integer(diz: Ref, fr: frac, proc: Process, e: Int)
+  requires diz != null
+  requires frac_val(fr) != none
+  requires acc(History_hist_idle_Fraction_Process(diz, fr, proc), write)
+  requires write != none
+  requires acc(diz.History_q_hist_value, write)
+  requires acc(diz.History_q_hist_hist, write)
+  ensures frac_val(fr) != none
+  ensures acc(History_hist_do_get_Fraction_Process(diz, fr, proc), write)
+  ensures acc(diz.History_q_hist_act, write)
+  ensures acc(diz.History_q_hist_value, write)
+  ensures acc(diz.History_q_hist_write, write)
+  ensures acc(diz.History_q_hist_action, write)
+  ensures diz.History_q_hist_value == diz.History_q_hist_act
+  ensures diz.History_q_hist_value == old(diz.History_q_hist_value)
+{
+  inhale false
+}
+
+method History_get_commit_Fraction_Process_Integer(diz: Ref, fr: frac, proc: Process, e: Int)
+  requires diz != null
+  requires frac_val(fr) != none
+  requires acc(History_hist_do_get_Fraction_Process(diz, fr, proc), write)
+  requires write != none
+  requires acc(diz.History_q_hist_act, write)
+  requires acc(diz.History_q_hist_value, write)
+  requires acc(diz.History_q_hist_write, write)
+  requires acc(diz.History_q_hist_action, write)
+  requires diz.History_q_hist_act == Seq(e) ++ diz.History_q_hist_value
+  requires (forall q2: Seq[Int] :: diz.History_q_hist_act ++ q2 == Seq(e) ++ (diz.History_q_hist_value ++ q2))
+  ensures frac_val(fr) != none
+  ensures acc(History_hist_idle_Fraction_Process(diz, fr, p_seq(proc, p_get(e))), write)
+  ensures acc(diz.History_q_hist_value, write)
+  ensures acc(diz.History_q_hist_hist, write)
+  ensures diz.History_q_hist_value == old(diz.History_q_hist_value)
+{
+  inhale false
+}
+
+method History_History() returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_History()
+  ensures acc(sys__result.History_q_hist_value, write)
+  ensures acc(sys__result.History_q_hist_write, write)
+  ensures acc(sys__result.History_q_hist_free, write)
+  ensures sys__result.History_q_hist_value == Seq[Int]()
+{
+  var __flatten_1__2: Seq[Int]
+  var diz__1: Ref
+  diz__1 := new(History_q_hist_value, History_q_hist_init, History_q_hist_act, History_q_hist_write, History_q_hist_free, History_q_hist_hist, History_q_hist_action)
+  inhale type_of(diz__1) == class_History()
+  __flatten_1__2 := Seq[Int]()
+  History_hist_set_q_Sequence$Integer$(diz__1, __flatten_1__2)
+  sys__result := diz__1
+  // assert
+  assert sys__result != null && type_of(sys__result) == class_History() && acc(sys__result.History_q_hist_value, write) && acc(sys__result.History_q_hist_write, write) && acc(sys__result.History_q_hist_free, write) && sys__result.History_q_hist_value == Seq[Int]()
+  inhale false
+}
+
+method History_hist_set_q_Sequence$Integer$(diz: Ref, value: Seq[Int])
+  requires diz != null
+  requires acc(diz.History_q_hist_value, write)
+  requires acc(diz.History_q_hist_write, write)
+  ensures acc(diz.History_q_hist_value, write) && diz.History_q_hist_value == value
+  ensures acc(diz.History_q_hist_write, write)
+{
+  inhale false
+}
+
+method History_begin_hist(diz: Ref)
+  requires diz != null
+  requires acc(diz.History_q_hist_value, write)
+  requires acc(diz.History_q_hist_write, write)
+  requires acc(diz.History_q_hist_free, write)
+  ensures acc(diz.History_q_hist_value, write)
+  ensures acc(diz.History_q_hist_hist, write)
+  ensures acc(diz.History_q_hist_init, write)
+  ensures diz.History_q_hist_value == old(diz.History_q_hist_value)
+  ensures diz.History_q_hist_init == old(diz.History_q_hist_value)
+  ensures acc(History_hist_idle_Fraction_Process(diz, new_frac(write), p_empty()), write)
+{
+  inhale false
+}
+
+method History_split_Fraction_Process_Fraction_Process(diz: Ref, frac1: frac, proc1: Process, frac2: frac, proc2: Process)
+  requires diz != null
+  requires frac_val(frac1) + frac_val(frac2) <= write
+  requires acc(History_hist_idle_Fraction_Process(diz, new_frac(frac_val(frac1) + frac_val(frac2)), p_merge(proc1, proc2)), write)
+  ensures acc(History_hist_idle_Fraction_Process(diz, frac1, proc1), write)
+  ensures acc(History_hist_idle_Fraction_Process(diz, frac2, proc2), write)
+{
+  inhale false
+}
+
+method History_merge_Fraction_Process_Fraction_Process(diz: Ref, frac1: frac, proc1: Process, frac2: frac, proc2: Process)
+  requires diz != null
+  requires frac_val(frac1) + frac_val(frac2) <= write
+  requires acc(History_hist_idle_Fraction_Process(diz, frac1, proc1), write)
+  requires acc(History_hist_idle_Fraction_Process(diz, frac2, proc2), write)
+  ensures acc(History_hist_idle_Fraction_Process(diz, new_frac(frac_val(frac1) + frac_val(frac2)), p_merge(proc1, proc2)), write)
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Object_Object_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Object()
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Object_internal_Object_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Object()
+{
+  inhale false
+}
+
+method Integer___contract_unsatisfiable__Integer_EncodedGlobalVariables_Integer(diz: Ref, globals: Ref, v: Int)
+  requires diz != null
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+}
+
+method Integer_Integer_EncodedGlobalVariables_Integer(globals: Ref, v: Int) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_Integer()
+  ensures acc(sys__result.Integer_val, wildcard)
+  ensures sys__result.Integer_val == v
+{
+  var diz__3: Ref
+  diz__3 := new(Integer_val)
+  inhale type_of(diz__3) == class_Integer()
+  diz__3.Integer_val := v
+  sys__result := diz__3
+  // assert
+  assert sys__result != null && type_of(sys__result) == class_Integer() && acc(sys__result.Integer_val, wildcard) && sys__result.Integer_val == v
+  inhale false
+}
+
+method Node___contract_unsatisfiable__Node_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+}
+
+method Node_Node_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_Node()
+  ensures acc(sys__result.Node_val, write) && sys__result.Node_val == 0
+  ensures acc(sys__result.Node_next, write) && sys__result.Node_next == null
+{
+  var diz__4: Ref
+  diz__4 := new(Node_val, Node_next)
+  inhale type_of(diz__4) == class_Node()
+  diz__4.Node_val := 0
+  diz__4.Node_next := null
+  sys__result := diz__4
+  // assert
+  assert sys__result != null && type_of(sys__result) == class_Node() && (acc(sys__result.Node_val, write) && sys__result.Node_val == 0) && (acc(sys__result.Node_next, write) && sys__result.Node_next == null)
+  inhale false
+}
+
+method AtomicNode_AtomicNode_EncodedGlobalVariables_Node(globals: Ref, n: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_AtomicNode()
+  ensures acc(sys__result.AtomicNode_ref, write) && sys__result.AtomicNode_ref == n
+{
+  var diz__5: Ref
+  diz__5 := new(AtomicNode_ref)
+  inhale type_of(diz__5) == class_AtomicNode()
+  diz__5.AtomicNode_ref := n
+  sys__result := diz__5
+  // assert
+  assert sys__result != null && type_of(sys__result) == class_AtomicNode() && (acc(sys__result.AtomicNode_ref, write) && sys__result.AtomicNode_ref == n)
+  inhale false
+}
+
+method Queue___contract_unsatisfiable__end_history_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale true && (acc(diz.Queue_hist, wildcard) && (acc(diz.Queue_hist_active, 1 / 2) && diz.Queue_hist_active == true))
+  // assert
+  assert false
+  inhale false
+}
+
+method Queue_end_history_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+  requires acc(diz.Queue_hist, wildcard)
+  requires acc(diz.Queue_hist_active, 1 / 2) && diz.Queue_hist_active == true
+  ensures acc(diz.Queue_hist, wildcard)
+  ensures acc(diz.Queue_hist_active, 1 / 2) && diz.Queue_hist_active == false
+  ensures acc(diz.Queue_hist.History_q_hist_value, write)
+  ensures acc(diz.Queue_hist.History_q_hist_hist, write)
+{
+  inhale acc(Queue_csl_invariant_EncodedGlobalVariables(diz, globals), write)
+  unfold acc(Queue_csl_invariant_EncodedGlobalVariables(diz, globals), write)
+  diz.Queue_hist_active := false
+  fold acc(Queue_csl_invariant_EncodedGlobalVariables(diz, globals), write)
+  exhale acc(Queue_csl_invariant_EncodedGlobalVariables(diz, globals), write)
+}
+
+method Queue___contract_unsatisfiable__Queue_EncodedGlobalVariables_History(diz: Ref, globals: Ref, hist: Ref)
+  requires diz != null
+{
+  inhale true && (acc(hist.History_q_hist_value, write) && acc(hist.History_q_hist_hist, write) && hist.History_q_hist_value == Seq[Int]())
+  // assert
+  assert false
+  inhale false
+}
+
+method Queue_Queue_EncodedGlobalVariables_History(globals: Ref, hist: Ref) returns (sys__result: Ref)
+  requires acc(hist.History_q_hist_value, write)
+  requires acc(hist.History_q_hist_hist, write)
+  requires hist.History_q_hist_value == Seq[Int]()
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_Queue()
+  ensures acc(sys__result.Queue_hist, wildcard)
+  ensures sys__result.Queue_hist == hist
+  ensures acc(sys__result.Queue_hist_active, 1 / 2) && sys__result.Queue_hist_active == true
+{
+  var __flatten_12__12: Ref
+  var __flatten_10__11: Ref
+  var __flatten_8__10: Ref
+  var __flatten_6__9: Ref
+  var __flatten_5__8: Ref
+  var __flatten_3__7: Ref
+  var diz__6: Ref
+  diz__6 := new(Queue_hist_active, Queue_hist, Queue_begin, Queue_head, Queue_tail, Queue_last)
+  inhale type_of(diz__6) == class_Queue()
+  diz__6.Queue_hist := hist
+  diz__6.Queue_hist_active := true
+  __flatten_3__7 := Node_Node_EncodedGlobalVariables(globals)
+  diz__6.Queue_begin := __flatten_3__7
+  __flatten_5__8 := diz__6.Queue_begin
+  __flatten_6__9 := AtomicNode_AtomicNode_EncodedGlobalVariables_Node(globals, null)
+  __flatten_5__8.Node_next := __flatten_6__9
+  __flatten_8__10 := AtomicNode_AtomicNode_EncodedGlobalVariables_Node(globals, diz__6.Queue_begin)
+  diz__6.Queue_head := __flatten_8__10
+  __flatten_10__11 := AtomicNode_AtomicNode_EncodedGlobalVariables_Node(globals, diz__6.Queue_begin)
+  diz__6.Queue_tail := __flatten_10__11
+  __flatten_12__12 := diz__6.Queue_begin
+  diz__6.Queue_last := __flatten_12__12
+  fold acc(Queue_reachable_EncodedGlobalVariables_Node_Node(diz__6, globals, diz__6.Queue_begin, diz__6.Queue_head.AtomicNode_ref), write)
+  fold acc(Queue_reachable_EncodedGlobalVariables_Node_Node(diz__6, globals, diz__6.Queue_begin, diz__6.Queue_tail.AtomicNode_ref), write)
+  fold acc(Queue_reachable_EncodedGlobalVariables_Node_Node(diz__6, globals, diz__6.Queue_begin, diz__6.Queue_last), write)
+  fold acc(Queue_chain_EncodedGlobalVariables_Node_Node_Sequence$Integer$(diz__6, globals, diz__6.Queue_begin, diz__6.Queue_last, hist.History_q_hist_value), write)
+  sys__result := diz__6
+  // assert
+  assert sys__result != null && type_of(sys__result) == class_Queue() && acc(sys__result.Queue_hist, wildcard) && sys__result.Queue_hist == hist && (acc(sys__result.Queue_hist_active, 1 / 2) && sys__result.Queue_hist_active == true)
+  inhale false
+}
+
+method Queue___contract_unsatisfiable__append_lemma_EncodedGlobalVariables_Node_Node_Node_Sequence$Integer$_Integer(diz: Ref, globals: Ref, n1: Ref, n2: Ref, n3: Ref, ovals: Seq[Int], nval: Int)
+  requires diz != null
+{
+  inhale true && (acc(Queue_chain_EncodedGlobalVariables_Node_Node_Sequence$Integer$(diz, globals, n1, n2, ovals), write) && (acc(n2.Node_next, wildcard) && acc(n2.Node_next.AtomicNode_ref, wildcard) && n2.Node_next.AtomicNode_ref != null && (acc(n2.Node_next.AtomicNode_ref.Node_val, write) && n2.Node_next.AtomicNode_ref.Node_val == nval)) && n2.Node_next.AtomicNode_ref == n3 && n1 != n3 && n2 != n3)
+  // assert
+  assert false
+  inhale false
+}
+
+method Queue_append_lemma_EncodedGlobalVariables_Node_Node_Node_Sequence$Integer$_Integer(diz: Ref, globals: Ref, n1: Ref, n2: Ref, n3: Ref, ovals: Seq[Int], nval: Int)
+  requires diz != null
+  requires acc(Queue_chain_EncodedGlobalVariables_Node_Node_Sequence$Integer$(diz, globals, n1, n2, ovals), write)
+  requires acc(n2.Node_next, wildcard)
+  requires acc(n2.Node_next.AtomicNode_ref, wildcard)
+  requires n2.Node_next.AtomicNode_ref != null
+  requires acc(n2.Node_next.AtomicNode_ref.Node_val, write) && n2.Node_next.AtomicNode_ref.Node_val == nval
+  requires n2.Node_next.AtomicNode_ref == n3
+  requires n1 != n3
+  requires n2 != n3
+  ensures acc(Queue_chain_EncodedGlobalVariables_Node_Node_Sequence$Integer$(diz, globals, n1, n3, ovals ++ Seq(nval)), write)
+{
+  var val__13: Int
+  var __flatten_13__14: Ref
+  var __flatten_14__15: Ref
+  var __flatten_15__16: Ref
+  __flatten_14__15 := n2.Node_next
+  __flatten_13__14 := __flatten_14__15.AtomicNode_ref
+  val__13 := __flatten_13__14.Node_val
+  if (n1 == n2) {
+    unfold acc(Queue_chain_EncodedGlobalVariables_Node_Node_Sequence$Integer$(diz, globals, n1, n2, ovals), write)
+    fold acc(Queue_chain_EncodedGlobalVariables_Node_Node_Sequence$Integer$(diz, globals, n3, n3, Seq[Int]()), write)
+    fold acc(Queue_chain_EncodedGlobalVariables_Node_Node_Sequence$Integer$(diz, globals, n2, n3, Seq(nval)), write)
+    // assert
+    assert acc(Queue_chain_EncodedGlobalVariables_Node_Node_Sequence$Integer$(diz, globals, n1, n3, ovals ++ Seq(nval)), write)
+    goto __return_append_lemma
+  } else {
+    unfold acc(Queue_chain_EncodedGlobalVariables_Node_Node_Sequence$Integer$(diz, globals, n1, n2, ovals), write)
+    // assert
+    assert ovals == Seq(ovals[0]) ++ ovals[1..]
+    __flatten_15__16 := n1.Node_next
+    Queue_append_lemma_EncodedGlobalVariables_Node_Node_Node_Sequence$Integer$_Integer(diz, globals, __flatten_15__16.AtomicNode_ref, n2, n3, ovals[1..], nval)
+    // assert
+    assert acc(Queue_chain_EncodedGlobalVariables_Node_Node_Sequence$Integer$(diz, globals, n1.Node_next.AtomicNode_ref, n3, ovals[1..] ++ Seq(nval)), write)
+    // assert
+    assert Seq(ovals[0]) ++ (ovals[1..] ++ Seq(nval)) == ovals ++ Seq(nval)
+    fold acc(Queue_chain_EncodedGlobalVariables_Node_Node_Sequence$Integer$(diz, globals, n1, n3, ovals ++ Seq(nval)), write)
+    // assert
+    assert acc(Queue_chain_EncodedGlobalVariables_Node_Node_Sequence$Integer$(diz, globals, n1, n3, ovals ++ Seq(nval)), write)
+    goto __return_append_lemma
+  }
+  label __return_append_lemma
+}
+
+method Queue___contract_unsatisfiable__try_deq_EncodedGlobalVariables_Fraction_Process(diz: Ref, globals: Ref, p: frac, P: Process) returns (sys__result: Ref)
+  requires diz != null
+{
+  inhale true && (frac_val(p) != none && acc(diz.Queue_hist, wildcard) && acc(History_hist_idle_Fraction_Process(diz.Queue_hist, p, P), write) && acc(diz.Queue_head, wildcard) && acc(diz.Queue_tail, wildcard) && (acc(diz.Queue_hist_active, frac_val(p) / 2) && diz.Queue_hist_active == true))
+  // assert
+  assert false
+  inhale false
+}
+
+method Queue_try_deq_EncodedGlobalVariables_Fraction_Process(diz: Ref, globals: Ref, p: frac, P: Process) returns (sys__result: Ref)
+  requires diz != null
+  requires frac_val(p) != none
+  requires acc(diz.Queue_hist, wildcard)
+  requires acc(History_hist_idle_Fraction_Process(diz.Queue_hist, p, P), write)
+  requires acc(diz.Queue_head, wildcard)
+  requires acc(diz.Queue_tail, wildcard)
+  requires acc(diz.Queue_hist_active, frac_val(p) / 2) && diz.Queue_hist_active == true
+  ensures acc(diz.Queue_head, wildcard)
+  ensures acc(diz.Queue_tail, wildcard)
+  ensures acc(diz.Queue_hist, wildcard)
+  ensures acc(diz.Queue_hist_active, frac_val(p) / 2) && diz.Queue_hist_active == true
+  ensures sys__result != null ==> acc(sys__result.Integer_val, wildcard) && acc(History_hist_idle_Fraction_Process(diz.Queue_hist, p, p_seq(P, p_get(sys__result.Integer_val))), write)
+  ensures sys__result == null ==> acc(History_hist_idle_Fraction_Process(diz.Queue_hist, p, P), write)
+{
+  var inline_2_res__39: Bool
+  var inline_2_sys__local__result__38: Bool
+  var inline_2_v__37: Ref
+  var inline_2_e__36: Ref
+  var inline_2_globals__35: Ref
+  var csl_result_3__34: Bool
+  var sys__local__result__17: Ref
+  var n1__18: Ref
+  var n2__19: Ref
+  var tmp__20: Bool
+  var res__21: Ref
+  var csl_result_1__22: Ref
+  var inline_0_globals__23: Ref
+  var inline_0_sys__local__result__24: Ref
+  var __flatten_17__25: Ref
+  var csl_result_2__26: Ref
+  var inline_1_globals__27: Ref
+  var inline_1_sys__local__result__28: Ref
+  var __flatten_19__29: Ref
+  var __flatten_20__30: Ref
+  var __flatten_22__31: Ref
+  var __flatten_25__32: Ref
+  var __flatten_26__33: Ref
+  res__21 := null
+  inhale acc(Queue_csl_invariant_EncodedGlobalVariables(diz, globals), write)
+  unfold acc(Queue_csl_invariant_EncodedGlobalVariables(diz, globals), write)
+  inline_0_globals__23 := globals
+  __flatten_17__25 := diz.Queue_head
+  inline_0_sys__local__result__24 := __flatten_17__25.AtomicNode_ref
+  // assert
+  assert true
+  goto inline_0___return_get
+  label inline_0___return_get
+  csl_result_1__22 := inline_0_sys__local__result__24
+  goto csl_return_1
+  label csl_return_1
+  fold acc(Queue_csl_invariant_EncodedGlobalVariables(diz, globals), write)
+  exhale acc(Queue_csl_invariant_EncodedGlobalVariables(diz, globals), write)
+  n1__18 := csl_result_1__22
+  inhale acc(Queue_csl_invariant_EncodedGlobalVariables(diz, globals), write)
+  unfold acc(Queue_csl_invariant_EncodedGlobalVariables(diz, globals), write)
+  Queue_lemma_readable_or_last_EncodedGlobalVariables_Node_Node(diz, globals, diz.Queue_begin, n1__18)
+  inline_1_globals__27 := globals
+  __flatten_19__29 := n1__18.Node_next
+  inline_1_sys__local__result__28 := __flatten_19__29.AtomicNode_ref
+  // assert
+  assert true
+  goto inline_1___return_get
+  label inline_1___return_get
+  csl_result_2__26 := inline_1_sys__local__result__28
+  goto csl_return_2
+  label csl_return_2
+  fold acc(Queue_csl_invariant_EncodedGlobalVariables(diz, globals), write)
+  exhale acc(Queue_csl_invariant_EncodedGlobalVariables(diz, globals), write)
+  n2__19 := csl_result_2__26
+  if (n2__19 != null) {
+    inhale acc(Queue_csl_invariant_EncodedGlobalVariables(diz, globals), write)
+    unfold acc(Queue_csl_invariant_EncodedGlobalVariables(diz, globals), write)
+    __flatten_20__30 := diz.Queue_head
+    if (__flatten_20__30.AtomicNode_ref == n1__18) {
+      unfold acc(Queue_chain_EncodedGlobalVariables_Node_Node_Sequence$Integer$(diz, globals, n1__18, diz.Queue_last, diz.Queue_hist.History_q_hist_value), write)
+      History_get_begin_Fraction_Process_Integer(diz.Queue_hist, p, P, n2__19.Node_val)
+      __flatten_22__31 := diz.Queue_hist
+      History_hist_set_q_Sequence$Integer$(diz.Queue_hist, __flatten_22__31.History_q_hist_value[1..])
+      History_get_commit_Fraction_Process_Integer(diz.Queue_hist, p, P, n2__19.Node_val)
+    }
+    inline_2_globals__35 := globals
+    inline_2_e__36 := n1__18
+    inline_2_v__37 := n2__19
+    __flatten_25__32 := diz.Queue_head
+    inline_2_res__39 := __flatten_25__32.AtomicNode_ref == inline_2_e__36
+    if (inline_2_res__39) {
+      __flatten_26__33 := diz.Queue_head
+      __flatten_26__33.AtomicNode_ref := inline_2_v__37
+    }
+    inline_2_sys__local__result__38 := inline_2_res__39
+    // assert
+    assert true
+    goto inline_2___return_compareAndSet
+    label inline_2___return_compareAndSet
+    csl_result_3__34 := inline_2_sys__local__result__38
+    goto csl_return_3
+    label csl_return_3
+    fold acc(Queue_csl_invariant_EncodedGlobalVariables(diz, globals), write)
+    exhale acc(Queue_csl_invariant_EncodedGlobalVariables(diz, globals), write)
+    tmp__20 := csl_result_3__34
+    if (tmp__20) {
+      res__21 := Integer_Integer_EncodedGlobalVariables_Integer(globals, n2__19.Node_val)
+    }
+  }
+  sys__local__result__17 := res__21
+  // assert
+  assert acc(diz.Queue_head, wildcard) && acc(diz.Queue_tail, wildcard) && acc(diz.Queue_hist, wildcard) && (acc(diz.Queue_hist_active, frac_val(p) / 2) && diz.Queue_hist_active == true) && (sys__local__result__17 != null ==> acc(sys__local__result__17.Integer_val, wildcard) && acc(History_hist_idle_Fraction_Process(diz.Queue_hist, p, p_seq(P, p_get(sys__local__result__17.Integer_val))), write)) && (sys__local__result__17 == null ==> acc(History_hist_idle_Fraction_Process(diz.Queue_hist, p, P), write))
+  goto __return_try_deq
+  label __return_try_deq
+  sys__result := sys__local__result__17
+  // assert
+  assert acc(diz.Queue_head, wildcard) && acc(diz.Queue_tail, wildcard) && acc(diz.Queue_hist, wildcard) && (acc(diz.Queue_hist_active, frac_val(p) / 2) && diz.Queue_hist_active == true) && (sys__result != null ==> acc(sys__result.Integer_val, wildcard) && acc(History_hist_idle_Fraction_Process(diz.Queue_hist, p, p_seq(P, p_get(sys__result.Integer_val))), write)) && (sys__result == null ==> acc(History_hist_idle_Fraction_Process(diz.Queue_hist, p, P), write))
+  inhale false
+}
+
+method Queue___contract_unsatisfiable__lemma_readable_or_last_EncodedGlobalVariables_Node_Node(diz: Ref, globals: Ref, n1: Ref, n2: Ref)
+  requires diz != null
+{
+  inhale true && (acc(diz.Queue_last, 1 / 2) && (acc(diz.Queue_last.Node_next, wildcard) && acc(diz.Queue_last.Node_next.AtomicNode_ref, write)) && acc(Queue_reachable_EncodedGlobalVariables_Node_Node(diz, globals, n1, n2), wildcard) && acc(Queue_reachable_EncodedGlobalVariables_Node_Node(diz, globals, n1, diz.Queue_last), wildcard))
+  // assert
+  assert false
+  inhale false
+}
+
+method Queue_lemma_readable_or_last_EncodedGlobalVariables_Node_Node(diz: Ref, globals: Ref, n1: Ref, n2: Ref)
+  requires diz != null
+  requires acc(diz.Queue_last, 1 / 2)
+  requires acc(diz.Queue_last.Node_next, wildcard)
+  requires acc(diz.Queue_last.Node_next.AtomicNode_ref, write)
+  requires acc(Queue_reachable_EncodedGlobalVariables_Node_Node(diz, globals, n1, n2), wildcard)
+  requires acc(Queue_reachable_EncodedGlobalVariables_Node_Node(diz, globals, n1, diz.Queue_last), wildcard)
+  ensures acc(diz.Queue_last, 1 / 2)
+  ensures acc(diz.Queue_last.Node_next, wildcard)
+  ensures acc(diz.Queue_last.Node_next.AtomicNode_ref, write)
+  ensures diz.Queue_last == old(diz.Queue_last)
+  ensures diz.Queue_last.Node_next.AtomicNode_ref == old(diz.Queue_last.Node_next.AtomicNode_ref)
+  ensures n2 != diz.Queue_last ==> acc(n2.Node_next, wildcard) && acc(n2.Node_next.AtomicNode_ref, wildcard) && n2.Node_next.AtomicNode_ref != null && acc(Queue_reachable_EncodedGlobalVariables_Node_Node(diz, globals, n1, n2.Node_next.AtomicNode_ref), write) && acc(n2.Node_next.AtomicNode_ref.Node_next, wildcard)
+{
+  var __flatten_28__40: Ref
+  if (n2 != diz.Queue_last) {
+    unfold acc(Queue_reachable_EncodedGlobalVariables_Node_Node(diz, globals, n1, n2), wildcard)
+    unfold acc(Queue_reachable_EncodedGlobalVariables_Node_Node(diz, globals, n1, diz.Queue_last), wildcard)
+    if (n1 == n2) {
+      unfold acc(Queue_reachable_EncodedGlobalVariables_Node_Node(diz, globals, n2, diz.Queue_last), wildcard)
+      unfold acc(Queue_reachable_EncodedGlobalVariables_Node_Node(diz, globals, n2.Node_next.AtomicNode_ref, diz.Queue_last), wildcard)
+      fold acc(Queue_reachable_EncodedGlobalVariables_Node_Node(diz, globals, n2.Node_next.AtomicNode_ref, n2.Node_next.AtomicNode_ref), write)
+      fold acc(Queue_reachable_EncodedGlobalVariables_Node_Node(diz, globals, n1, n2.Node_next.AtomicNode_ref), write)
+    } else {
+      // assert
+      assert acc(Queue_reachable_EncodedGlobalVariables_Node_Node(diz, globals, n1.Node_next.AtomicNode_ref, diz.Queue_last), wildcard)
+      __flatten_28__40 := n1.Node_next
+      Queue_lemma_readable_or_last_EncodedGlobalVariables_Node_Node(diz, globals, __flatten_28__40.AtomicNode_ref, n2)
+      fold acc(Queue_reachable_EncodedGlobalVariables_Node_Node(diz, globals, n1, n2.Node_next.AtomicNode_ref), write)
+    }
+  }
+}
+
+method Queue___contract_unsatisfiable__try_enq_EncodedGlobalVariables_Node_Fraction_Process(diz: Ref, globals: Ref, nn: Ref, p: frac, P: Process) returns (sys__result: Bool)
+  requires diz != null
+{
+  inhale true && (frac_val(p) != none && acc(diz.Queue_head, wildcard) && acc(diz.Queue_tail, wildcard) && acc(diz.Queue_hist, wildcard) && acc(History_hist_idle_Fraction_Process(diz.Queue_hist, p, P), write) && acc(nn.Node_val, write) && (acc(nn.Node_next, wildcard) && acc(nn.Node_next.AtomicNode_ref, write) && nn.Node_next.AtomicNode_ref == null) && (acc(diz.Queue_hist_active, frac_val(p) / 2) && diz.Queue_hist_active == true))
+  // assert
+  assert false
+  inhale false
+}
+
+method Queue_try_enq_EncodedGlobalVariables_Node_Fraction_Process(diz: Ref, globals: Ref, nn: Ref, p: frac, P: Process) returns (sys__result: Bool)
+  requires diz != null
+  requires frac_val(p) != none
+  requires acc(diz.Queue_head, wildcard)
+  requires acc(diz.Queue_tail, wildcard)
+  requires acc(diz.Queue_hist, wildcard)
+  requires acc(History_hist_idle_Fraction_Process(diz.Queue_hist, p, P), write)
+  requires acc(nn.Node_val, write)
+  requires acc(nn.Node_next, wildcard)
+  requires acc(nn.Node_next.AtomicNode_ref, write)
+  requires nn.Node_next.AtomicNode_ref == null
+  requires acc(diz.Queue_hist_active, frac_val(p) / 2) && diz.Queue_hist_active == true
+  ensures acc(diz.Queue_head, wildcard)
+  ensures acc(diz.Queue_tail, wildcard)
+  ensures acc(diz.Queue_hist, wildcard)
+  ensures acc(diz.Queue_hist_active, frac_val(p) / 2) && diz.Queue_hist_active == true
+  ensures (sys__result ? acc(History_hist_idle_Fraction_Process(diz.Queue_hist, p, p_seq(P, p_put(old(nn.Node_val)))), write) : acc(History_hist_idle_Fraction_Process(diz.Queue_hist, p, P), write) && acc(nn.Node_val, write) && (acc(nn.Node_next, wildcard) && acc(nn.Node_next.AtomicNode_ref, write) && nn.Node_next.AtomicNode_ref == null))
+{
+  var inline_6_res__71: Bool
+  var inline_6_sys__local__result__70: Bool
+  var inline_6_v__69: Ref
+  var inline_6_e__68: Ref
+  var inline_6_globals__67: Ref
+  var csl_result_7__66: Bool
+  var inline_5_res__65: Bool
+  var inline_5_sys__local__result__64: Bool
+  var inline_5_v__63: Ref
+  var inline_5_e__62: Ref
+  var inline_5_globals__61: Ref
+  var csl_result_6__60: Bool
+  var sys__local__result__41: Bool
+  var n1__42: Ref
+  var n2__43: Ref
+  var res__44: Bool
+  var val__45: Int
+  var csl_result_4__46: Ref
+  var inline_3_globals__47: Ref
+  var inline_3_sys__local__result__48: Ref
+  var __flatten_30__49: Ref
+  var csl_result_5__50: Ref
+  var inline_4_globals__51: Ref
+  var inline_4_sys__local__result__52: Ref
+  var __flatten_32__53: Ref
+  var __flatten_34__54: Ref
+  var __flatten_35__55: Ref
+  var __flatten_38__56: Ref
+  var __flatten_39__57: Seq[Int]
+  var __flatten_42__58: Ref
+  var __flatten_43__59: Ref
+  res__44 := false
+  inhale acc(Queue_csl_invariant_EncodedGlobalVariables(diz, globals), write)
+  unfold acc(Queue_csl_invariant_EncodedGlobalVariables(diz, globals), write)
+  inline_3_globals__47 := globals
+  __flatten_30__49 := diz.Queue_tail
+  inline_3_sys__local__result__48 := __flatten_30__49.AtomicNode_ref
+  // assert
+  assert true
+  goto inline_3___return_get
+  label inline_3___return_get
+  csl_result_4__46 := inline_3_sys__local__result__48
+  goto csl_return_4
+  label csl_return_4
+  fold acc(Queue_csl_invariant_EncodedGlobalVariables(diz, globals), write)
+  exhale acc(Queue_csl_invariant_EncodedGlobalVariables(diz, globals), write)
+  n1__42 := csl_result_4__46
+  inhale acc(Queue_csl_invariant_EncodedGlobalVariables(diz, globals), write)
+  unfold acc(Queue_csl_invariant_EncodedGlobalVariables(diz, globals), write)
+  Queue_lemma_readable_or_last_EncodedGlobalVariables_Node_Node(diz, globals, diz.Queue_begin, n1__42)
+  inline_4_globals__51 := globals
+  __flatten_32__53 := n1__42.Node_next
+  inline_4_sys__local__result__52 := __flatten_32__53.AtomicNode_ref
+  // assert
+  assert true
+  goto inline_4___return_get
+  label inline_4___return_get
+  csl_result_5__50 := inline_4_sys__local__result__52
+  goto csl_return_5
+  label csl_return_5
+  fold acc(Queue_csl_invariant_EncodedGlobalVariables(diz, globals), write)
+  exhale acc(Queue_csl_invariant_EncodedGlobalVariables(diz, globals), write)
+  n2__43 := csl_result_5__50
+  if (n2__43 == null) {
+    inhale acc(Queue_csl_invariant_EncodedGlobalVariables(diz, globals), write)
+    unfold acc(Queue_csl_invariant_EncodedGlobalVariables(diz, globals), write)
+    Queue_lemma_readable_or_last_EncodedGlobalVariables_Node_Node(diz, globals, diz.Queue_begin, n1__42)
+    inline_5_globals__61 := globals
+    inline_5_e__62 := null
+    inline_5_v__63 := nn
+    __flatten_34__54 := n1__42.Node_next
+    inline_5_res__65 := __flatten_34__54.AtomicNode_ref == inline_5_e__62
+    if (inline_5_res__65) {
+      __flatten_35__55 := n1__42.Node_next
+      __flatten_35__55.AtomicNode_ref := inline_5_v__63
+    }
+    inline_5_sys__local__result__64 := inline_5_res__65
+    // assert
+    assert true
+    goto inline_5___return_compareAndSet
+    label inline_5___return_compareAndSet
+    csl_result_6__60 := inline_5_sys__local__result__64
+    goto csl_return_6
+    label csl_return_6
+    if (csl_result_6__60) {
+      val__45 := nn.Node_val
+      Queue_lemma_shift_last_EncodedGlobalVariables_Node_Node(diz, globals, n1__42, nn)
+      History_put_begin_Fraction_Process_Integer(diz.Queue_hist, p, P, old(nn.Node_val))
+      __flatten_38__56 := diz.Queue_hist
+      __flatten_39__57 := Seq(old(nn.Node_val))
+      History_hist_set_q_Sequence$Integer$(diz.Queue_hist, __flatten_38__56.History_q_hist_value ++ __flatten_39__57)
+      History_put_commit_Fraction_Process_Integer(diz.Queue_hist, p, P, old(nn.Node_val))
+    }
+    fold acc(Queue_csl_invariant_EncodedGlobalVariables(diz, globals), write)
+    exhale acc(Queue_csl_invariant_EncodedGlobalVariables(diz, globals), write)
+    res__44 := csl_result_6__60
+  } else {
+    inhale acc(Queue_csl_invariant_EncodedGlobalVariables(diz, globals), write)
+    unfold acc(Queue_csl_invariant_EncodedGlobalVariables(diz, globals), write)
+    inline_6_globals__67 := globals
+    inline_6_e__68 := n1__42
+    inline_6_v__69 := n2__43
+    __flatten_42__58 := diz.Queue_tail
+    inline_6_res__71 := __flatten_42__58.AtomicNode_ref == inline_6_e__68
+    if (inline_6_res__71) {
+      __flatten_43__59 := diz.Queue_tail
+      __flatten_43__59.AtomicNode_ref := inline_6_v__69
+    }
+    inline_6_sys__local__result__70 := inline_6_res__71
+    // assert
+    assert true
+    goto inline_6___return_compareAndSet
+    label inline_6___return_compareAndSet
+    csl_result_7__66 := inline_6_sys__local__result__70
+    goto csl_return_7
+    label csl_return_7
+    fold acc(Queue_csl_invariant_EncodedGlobalVariables(diz, globals), write)
+    exhale acc(Queue_csl_invariant_EncodedGlobalVariables(diz, globals), write)
+  }
+  sys__local__result__41 := res__44
+  // assert
+  assert acc(diz.Queue_head, wildcard) && acc(diz.Queue_tail, wildcard) && acc(diz.Queue_hist, wildcard) && (acc(diz.Queue_hist_active, frac_val(p) / 2) && diz.Queue_hist_active == true) && (sys__local__result__41 ? acc(History_hist_idle_Fraction_Process(diz.Queue_hist, p, p_seq(P, p_put(old(nn.Node_val)))), write) : acc(History_hist_idle_Fraction_Process(diz.Queue_hist, p, P), write) && acc(nn.Node_val, write) && (acc(nn.Node_next, wildcard) && acc(nn.Node_next.AtomicNode_ref, write) && nn.Node_next.AtomicNode_ref == null))
+  goto __return_try_enq
+  label __return_try_enq
+  sys__result := sys__local__result__41
+  // assert
+  assert acc(diz.Queue_head, wildcard) && acc(diz.Queue_tail, wildcard) && acc(diz.Queue_hist, wildcard) && (acc(diz.Queue_hist_active, frac_val(p) / 2) && diz.Queue_hist_active == true) && (sys__result ? acc(History_hist_idle_Fraction_Process(diz.Queue_hist, p, p_seq(P, p_put(old(nn.Node_val)))), write) : acc(History_hist_idle_Fraction_Process(diz.Queue_hist, p, P), write) && acc(nn.Node_val, write) && (acc(nn.Node_next, wildcard) && acc(nn.Node_next.AtomicNode_ref, write) && nn.Node_next.AtomicNode_ref == null))
+  inhale false
+}
+
+method Queue___contract_unsatisfiable__lemma_shift_last_EncodedGlobalVariables_Node_Node(diz: Ref, globals: Ref, n1: Ref, n2: Ref)
+  requires diz != null
+{
+  inhale true && (acc(diz.Queue_last, write) && diz.Queue_last == n1 && (acc(diz.Queue_last.Node_next, wildcard) && acc(diz.Queue_last.Node_next.AtomicNode_ref, write) && diz.Queue_last.Node_next.AtomicNode_ref == n2) && (acc(n2.Node_next, wildcard) && acc(n2.Node_next.AtomicNode_ref, write) && n2.Node_next.AtomicNode_ref == null) && acc(n2.Node_val, write) && acc(diz.Queue_hist, wildcard) && (acc(diz.Queue_hist.History_q_hist_value, 1 / 2) && acc(diz.Queue_hist.History_q_hist_hist, 1 / 2)) && acc(diz.Queue_head, wildcard) && acc(diz.Queue_head.AtomicNode_ref, 1 / 2) && acc(Queue_chain_EncodedGlobalVariables_Node_Node_Sequence$Integer$(diz, globals, diz.Queue_head.AtomicNode_ref, diz.Queue_last, diz.Queue_hist.History_q_hist_value), write) && acc(diz.Queue_begin, wildcard) && acc(Queue_reachable_EncodedGlobalVariables_Node_Node(diz, globals, diz.Queue_begin, diz.Queue_last), wildcard) && acc(Queue_reachable_EncodedGlobalVariables_Node_Node(diz, globals, diz.Queue_begin, diz.Queue_head.AtomicNode_ref), wildcard))
+  // assert
+  assert false
+  inhale false
+}
+
+method Queue_lemma_shift_last_EncodedGlobalVariables_Node_Node(diz: Ref, globals: Ref, n1: Ref, n2: Ref)
+  requires diz != null
+  requires acc(diz.Queue_last, write)
+  requires diz.Queue_last == n1
+  requires acc(diz.Queue_last.Node_next, wildcard)
+  requires acc(diz.Queue_last.Node_next.AtomicNode_ref, write)
+  requires diz.Queue_last.Node_next.AtomicNode_ref == n2
+  requires acc(n2.Node_next, wildcard)
+  requires acc(n2.Node_next.AtomicNode_ref, write)
+  requires n2.Node_next.AtomicNode_ref == null
+  requires acc(n2.Node_val, write)
+  requires acc(diz.Queue_hist, wildcard)
+  requires acc(diz.Queue_hist.History_q_hist_value, 1 / 2)
+  requires acc(diz.Queue_hist.History_q_hist_hist, 1 / 2)
+  requires acc(diz.Queue_head, wildcard)
+  requires acc(diz.Queue_head.AtomicNode_ref, 1 / 2)
+  requires acc(Queue_chain_EncodedGlobalVariables_Node_Node_Sequence$Integer$(diz, globals, diz.Queue_head.AtomicNode_ref, diz.Queue_last, diz.Queue_hist.History_q_hist_value), write)
+  requires acc(diz.Queue_begin, wildcard)
+  requires acc(Queue_reachable_EncodedGlobalVariables_Node_Node(diz, globals, diz.Queue_begin, diz.Queue_last), wildcard)
+  requires acc(Queue_reachable_EncodedGlobalVariables_Node_Node(diz, globals, diz.Queue_begin, diz.Queue_head.AtomicNode_ref), wildcard)
+  ensures acc(diz.Queue_last, write)
+  ensures diz.Queue_last == n2
+  ensures acc(diz.Queue_last.Node_next, wildcard)
+  ensures acc(diz.Queue_last.Node_next.AtomicNode_ref, write)
+  ensures diz.Queue_last.Node_next.AtomicNode_ref == null
+  ensures acc(diz.Queue_begin, wildcard)
+  ensures acc(Queue_reachable_EncodedGlobalVariables_Node_Node(diz, globals, diz.Queue_begin, diz.Queue_last), wildcard)
+  ensures acc(diz.Queue_hist, wildcard)
+  ensures acc(diz.Queue_hist.History_q_hist_value, 1 / 2)
+  ensures acc(diz.Queue_hist.History_q_hist_hist, 1 / 2)
+  ensures acc(diz.Queue_head, wildcard)
+  ensures acc(diz.Queue_head.AtomicNode_ref, 1 / 2)
+  ensures acc(Queue_chain_EncodedGlobalVariables_Node_Node_Sequence$Integer$(diz, globals, diz.Queue_head.AtomicNode_ref, diz.Queue_last, diz.Queue_hist.History_q_hist_value ++ Seq(old(n2.Node_val))), write)
+  ensures diz.Queue_head.AtomicNode_ref == old(diz.Queue_head.AtomicNode_ref)
+{
+  var __flatten_45__72: Ref
+  var __flatten_46__73: Ref
+  diz.Queue_last := n2
+  inhale diz.Queue_head.AtomicNode_ref != n2
+  fold acc(Queue_reachable_EncodedGlobalVariables_Node_Node(diz, globals, n2, n2), write)
+  fold acc(Queue_reachable_EncodedGlobalVariables_Node_Node(diz, globals, n1, n2), write)
+  Queue_lemma_reach_transitive_EncodedGlobalVariables_Node_Node_Node(diz, globals, diz.Queue_begin, n1, n2)
+  __flatten_45__72 := diz.Queue_head
+  __flatten_46__73 := diz.Queue_hist
+  Queue_append_lemma_EncodedGlobalVariables_Node_Node_Node_Sequence$Integer$_Integer(diz, globals, __flatten_45__72.AtomicNode_ref, n1, n2, __flatten_46__73.History_q_hist_value, n2.Node_val)
+}
+
+method Queue___contract_unsatisfiable__lemma_reach_transitive_EncodedGlobalVariables_Node_Node_Node(diz: Ref, globals: Ref, n1: Ref, n2: Ref, n3: Ref)
+  requires diz != null
+{
+  inhale true && (acc(Queue_reachable_EncodedGlobalVariables_Node_Node(diz, globals, n1, n2), wildcard) && acc(Queue_reachable_EncodedGlobalVariables_Node_Node(diz, globals, n2, n3), wildcard))
+  // assert
+  assert false
+  inhale false
+}
+
+method Queue_lemma_reach_transitive_EncodedGlobalVariables_Node_Node_Node(diz: Ref, globals: Ref, n1: Ref, n2: Ref, n3: Ref)
+  requires diz != null
+  requires acc(Queue_reachable_EncodedGlobalVariables_Node_Node(diz, globals, n1, n2), wildcard)
+  requires acc(Queue_reachable_EncodedGlobalVariables_Node_Node(diz, globals, n2, n3), wildcard)
+  ensures acc(Queue_reachable_EncodedGlobalVariables_Node_Node(diz, globals, n1, n3), write)
+{
+  var __flatten_48__74: Ref
+  if (n1 != n2) {
+    unfold acc(Queue_reachable_EncodedGlobalVariables_Node_Node(diz, globals, n1, n2), wildcard)
+    __flatten_48__74 := n1.Node_next
+    Queue_lemma_reach_transitive_EncodedGlobalVariables_Node_Node_Node(diz, globals, __flatten_48__74.AtomicNode_ref, n2, n3)
+    // assert
+    assert acc(Queue_reachable_EncodedGlobalVariables_Node_Node(diz, globals, n1.Node_next.AtomicNode_ref, n3), write)
+    fold acc(Queue_reachable_EncodedGlobalVariables_Node_Node(diz, globals, n1, n3), write)
+  } else {
+    Queue_lemma_rebuild_full_EncodedGlobalVariables_Node_Node(diz, globals, n2, n3)
+  }
+}
+
+method Queue___contract_unsatisfiable__lemma_rebuild_full_EncodedGlobalVariables_Node_Node(diz: Ref, globals: Ref, n1: Ref, n2: Ref)
+  requires diz != null
+{
+  inhale true && acc(Queue_reachable_EncodedGlobalVariables_Node_Node(diz, globals, n1, n2), wildcard)
+  // assert
+  assert false
+  inhale false
+}
+
+method Queue_lemma_rebuild_full_EncodedGlobalVariables_Node_Node(diz: Ref, globals: Ref, n1: Ref, n2: Ref)
+  requires diz != null
+  requires acc(Queue_reachable_EncodedGlobalVariables_Node_Node(diz, globals, n1, n2), wildcard)
+  ensures acc(Queue_reachable_EncodedGlobalVariables_Node_Node(diz, globals, n1, n2), write)
+{
+  var __flatten_51__75: Ref
+  unfold acc(Queue_reachable_EncodedGlobalVariables_Node_Node(diz, globals, n1, n2), wildcard)
+  if (n1 != n2) {
+    __flatten_51__75 := n1.Node_next
+    Queue_lemma_rebuild_full_EncodedGlobalVariables_Node_Node(diz, globals, __flatten_51__75.AtomicNode_ref, n2)
+  }
+  fold acc(Queue_reachable_EncodedGlobalVariables_Node_Node(diz, globals, n1, n2), write)
+}

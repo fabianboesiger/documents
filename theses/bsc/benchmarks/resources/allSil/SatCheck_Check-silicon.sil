@@ -1,0 +1,154 @@
+// Generated on 2021-03-23 at 23:38:58
+domain TYPE {
+  
+  unique function class_Worker(): TYPE
+  
+  unique function class_java_DOT_lang_DOT_Object(): TYPE
+  
+  unique function class_Test(): TYPE
+  
+  unique function class_EncodedGlobalVariables(): TYPE
+  
+  function directSuperclass(t: TYPE): TYPE
+  
+  function type_of(val: Ref): TYPE
+  
+  axiom Worker_directSuperclass {
+    directSuperclass(class_Worker()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom Test_directSuperclass {
+    directSuperclass(class_Test()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom EncodedGlobalVariables_directSuperclass {
+    directSuperclass(class_EncodedGlobalVariables()) == class_java_DOT_lang_DOT_Object()
+  }
+}
+
+domain frac {
+  
+  function frac_val(a: frac): Perm
+  
+  axiom frac_eq {
+    (forall a: frac, b: frac :: { frac_val(a),frac_val(b) } (frac_val(a) == frac_val(b)) == (a == b))
+  }
+  
+  axiom frac_bound {
+    (forall a: frac :: { frac_val(a) } 0 / 1 < frac_val(a) && frac_val(a) <= 1 / 1)
+  }
+}
+
+domain zfrac {
+  
+  function zfrac_val(a: zfrac): Perm
+  
+  axiom zfrac_eq {
+    (forall a: zfrac, b: zfrac :: { zfrac_val(a),zfrac_val(b) } (zfrac_val(a) == zfrac_val(b)) == (a == b))
+  }
+  
+  axiom zfrac_bound {
+    (forall a: zfrac :: { zfrac_val(a) } 0 / 1 <= zfrac_val(a) && zfrac_val(a) <= 1 / 1)
+  }
+}
+
+//  a field 
+field Worker_terminated: Bool
+
+//  a field 
+field Worker_value: Int
+
+//  a field 
+field Test_values: Seq[Int]
+
+function instanceof_TYPE_TYPE(t: TYPE, u: TYPE): Bool
+  ensures result == (t == u || directSuperclass(t) == u)
+
+
+function new_frac(x: Perm): frac
+  requires 0 / 1 < x && x <= 1 / 1
+  ensures frac_val(result) == x
+
+
+function new_zfrac(x: Perm): zfrac
+  requires 0 / 1 <= x && x <= 1 / 1
+  ensures zfrac_val(result) == x
+
+
+method Test___contract_unsatisfiable__reset_EncodedGlobalVariables_Integer_Sequence$Worker$(diz: Ref, globals: Ref, N: Int, workers: Seq[Ref])
+  requires diz != null
+{
+  inhale 0 < N && |workers| == N && ((forall i__1: Int :: { workers[i__1] } 0 <= i__1 && i__1 < N ==> workers[i__1] != null) && ((forall i__2: Int :: { workers[i__2] } 0 <= i__2 && i__2 < N ==> acc(workers[i__2].Worker_terminated, write)) && (forall i__3: Int :: { workers[i__3] } 0 <= i__3 && i__3 < N ==> acc(workers[i__3].Worker_value, write))) && acc(diz.Test_values, write) && |diz.Test_values| == N && (forall i__4: Int :: { workers[i__4] } 0 <= i__4 && i__4 < N ==> !workers[i__4].Worker_terminated))
+  // assert
+  assert false
+  inhale false
+}
+
+method Test_loop_body_4_Integer_Sequence$Worker$_Integer(diz: Ref, N: Int, workers: Seq[Ref], tid: Int)
+  requires diz != null
+  requires 0 < N && |workers| == N
+  requires 0 <= tid && tid < N
+  requires 0 < N
+  requires acc(workers[tid].Worker_terminated, 1 / 2)
+  requires acc(workers[tid].Worker_value, 1 / 2)
+  requires !workers[tid].Worker_terminated
+  ensures 0 < N && |workers| == N
+  ensures 0 <= tid && tid < N
+  ensures 0 < N
+  ensures acc(workers[tid].Worker_terminated, 1 / 2)
+  ensures acc(workers[tid].Worker_value, 1 / 2)
+  ensures workers[tid].Worker_terminated
+  ensures workers[tid].Worker_value == 0
+{
+  var __flatten_1__9: Seq[Int]
+  var __flatten_2__10: Ref
+  var __flatten_3__11: Ref
+  inhale 0 < N && |workers| == N && (0 < N && |workers| == N && acc(diz.Test_values, write) && |diz.Test_values| == N && (forall i__5: Int :: { workers[i__5] } 0 <= i__5 && i__5 < N ==> workers[i__5] != null) && ((forall i__6: Int :: { workers[i__6] } 0 <= i__6 && i__6 < N ==> acc(workers[i__6].Worker_terminated, 1 / 2)) && (forall i__7: Int :: { workers[i__7] } 0 <= i__7 && i__7 < N ==> acc(workers[i__7].Worker_value, 1 / 2))) && (forall i__8: Int :: { diz.Test_values[i__8] } { workers[i__8] } 0 <= i__8 && i__8 < N && workers[i__8].Worker_terminated ==> diz.Test_values[i__8] == workers[i__8].Worker_value))
+  __flatten_1__9 := diz.Test_values[tid := 0]
+  diz.Test_values := __flatten_1__9
+  __flatten_2__10 := workers[tid]
+  __flatten_2__10.Worker_value := 0
+  __flatten_3__11 := workers[tid]
+  __flatten_3__11.Worker_terminated := true
+  exhale 0 < N && |workers| == N && (0 < N && |workers| == N && acc(diz.Test_values, write) && |diz.Test_values| == N && (forall i__12: Int :: { workers[i__12] } 0 <= i__12 && i__12 < N ==> workers[i__12] != null) && ((forall i__13: Int :: { workers[i__13] } 0 <= i__13 && i__13 < N ==> acc(workers[i__13].Worker_terminated, 1 / 2)) && (forall i__14: Int :: { workers[i__14] } 0 <= i__14 && i__14 < N ==> acc(workers[i__14].Worker_value, 1 / 2))) && (forall i__15: Int :: { diz.Test_values[i__15] } { workers[i__15] } 0 <= i__15 && i__15 < N && workers[i__15].Worker_terminated ==> diz.Test_values[i__15] == workers[i__15].Worker_value))
+}
+
+method Test_parrallel_region_main_1_Integer_Sequence$Worker$(diz: Ref, N: Int, workers: Seq[Ref])
+  requires diz != null
+  requires 0 < N && |workers| == N
+  requires 0 < N ==> 0 < N
+  requires (forall tid: Int :: { workers[tid] } 0 <= tid && tid < N ==> acc(workers[tid].Worker_terminated, 1 / 2))
+  requires (forall tid: Int :: { workers[tid] } 0 <= tid && tid < N ==> acc(workers[tid].Worker_value, 1 / 2))
+  requires (forall tid: Int :: { workers[tid] } 0 <= tid && tid < N ==> !workers[tid].Worker_terminated)
+  ensures 0 < N && |workers| == N
+  ensures 0 < N ==> 0 < N
+  ensures (forall tid: Int :: { workers[tid] } 0 <= tid && tid < N ==> acc(workers[tid].Worker_terminated, 1 / 2))
+  ensures (forall tid: Int :: { workers[tid] } 0 <= tid && tid < N ==> acc(workers[tid].Worker_value, 1 / 2))
+  ensures (forall tid: Int :: { workers[tid] } 0 <= tid && tid < N ==> workers[tid].Worker_terminated)
+  ensures (forall tid: Int :: { workers[tid] } 0 <= tid && tid < N ==> workers[tid].Worker_value == 0)
+{
+  inhale false
+}
+
+method Test_reset_EncodedGlobalVariables_Integer_Sequence$Worker$(diz: Ref, globals: Ref, N: Int, workers: Seq[Ref])
+  requires diz != null
+  requires 0 < N && |workers| == N
+  requires (forall i: Int :: { workers[i] } 0 <= i && i < N ==> workers[i] != null)
+  requires (forall i: Int :: { workers[i] } 0 <= i && i < N ==> acc(workers[i].Worker_terminated, write))
+  requires (forall i: Int :: { workers[i] } 0 <= i && i < N ==> acc(workers[i].Worker_value, write))
+  requires acc(diz.Test_values, write)
+  requires |diz.Test_values| == N
+  requires (forall i: Int :: { workers[i] } 0 <= i && i < N ==> !workers[i].Worker_terminated)
+  ensures 0 < N && |workers| == N
+  ensures (forall i: Int :: { workers[i] } 0 <= i && i < N ==> workers[i] != null)
+  ensures (forall i: Int :: { workers[i] } 0 <= i && i < N ==> acc(workers[i].Worker_terminated, write))
+  ensures (forall i: Int :: { workers[i] } 0 <= i && i < N ==> acc(workers[i].Worker_value, write))
+  ensures acc(diz.Test_values, write)
+  ensures |diz.Test_values| == N
+  ensures (forall i: Int :: { workers[i] } 0 <= i && i < N ==> workers[i].Worker_terminated)
+  ensures (forall i: Int :: { diz.Test_values[i] } 0 <= i && i < N ==> diz.Test_values[i] == 0)
+{
+  exhale 0 < N && |workers| == N && (0 < N && |workers| == N && acc(diz.Test_values, write) && |diz.Test_values| == N && (forall i__16: Int :: { workers[i__16] } 0 <= i__16 && i__16 < N ==> workers[i__16] != null) && ((forall i__17: Int :: { workers[i__17] } 0 <= i__17 && i__17 < N ==> acc(workers[i__17].Worker_terminated, 1 / 2)) && (forall i__18: Int :: { workers[i__18] } 0 <= i__18 && i__18 < N ==> acc(workers[i__18].Worker_value, 1 / 2))) && (forall i__19: Int :: { diz.Test_values[i__19] } { workers[i__19] } 0 <= i__19 && i__19 < N && workers[i__19].Worker_terminated ==> diz.Test_values[i__19] == workers[i__19].Worker_value))
+  Test_parrallel_region_main_1_Integer_Sequence$Worker$(diz, N, workers)
+  inhale 0 < N && |workers| == N && (0 < N && |workers| == N && acc(diz.Test_values, write) && |diz.Test_values| == N && (forall i__20: Int :: { workers[i__20] } 0 <= i__20 && i__20 < N ==> workers[i__20] != null) && ((forall i__21: Int :: { workers[i__21] } 0 <= i__21 && i__21 < N ==> acc(workers[i__21].Worker_terminated, 1 / 2)) && (forall i__22: Int :: { workers[i__22] } 0 <= i__22 && i__22 < N ==> acc(workers[i__22].Worker_value, 1 / 2))) && (forall i__23: Int :: { diz.Test_values[i__23] } { workers[i__23] } 0 <= i__23 && i__23 < N && workers[i__23].Worker_terminated ==> diz.Test_values[i__23] == workers[i__23].Worker_value))
+}

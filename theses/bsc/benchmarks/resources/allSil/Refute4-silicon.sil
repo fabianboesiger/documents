@@ -1,0 +1,113 @@
+// Generated on 2021-03-23 at 23:38:16
+domain TYPE {
+  
+  unique function class_java_DOT_lang_DOT_Object(): TYPE
+  
+  unique function class_Refute(): TYPE
+  
+  unique function class_EncodedGlobalVariables(): TYPE
+  
+  function directSuperclass(t: TYPE): TYPE
+  
+  function type_of(val: Ref): TYPE
+  
+  axiom java_DOT_lang_DOT_Object_directSuperclass {
+    directSuperclass(class_java_DOT_lang_DOT_Object()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom Refute_directSuperclass {
+    directSuperclass(class_Refute()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom EncodedGlobalVariables_directSuperclass {
+    directSuperclass(class_EncodedGlobalVariables()) == class_java_DOT_lang_DOT_Object()
+  }
+}
+
+domain frac {
+  
+  function frac_val(a: frac): Perm
+  
+  axiom frac_eq {
+    (forall a: frac, b: frac :: { frac_val(a),frac_val(b) } (frac_val(a) == frac_val(b)) == (a == b))
+  }
+  
+  axiom frac_bound {
+    (forall a: frac :: { frac_val(a) } 0 / 1 < frac_val(a) && frac_val(a) <= 1 / 1)
+  }
+}
+
+domain zfrac {
+  
+  function zfrac_val(a: zfrac): Perm
+  
+  axiom zfrac_eq {
+    (forall a: zfrac, b: zfrac :: { zfrac_val(a),zfrac_val(b) } (zfrac_val(a) == zfrac_val(b)) == (a == b))
+  }
+  
+  axiom zfrac_bound {
+    (forall a: zfrac :: { zfrac_val(a) } 0 / 1 <= zfrac_val(a) && zfrac_val(a) <= 1 / 1)
+  }
+}
+
+//  a field 
+field Refute_x: Int
+
+function instanceof_TYPE_TYPE(t: TYPE, u: TYPE): Bool
+  ensures result == (t == u || directSuperclass(t) == u)
+
+
+function new_frac(x: Perm): frac
+  requires 0 / 1 < x && x <= 1 / 1
+  ensures frac_val(result) == x
+
+
+function new_zfrac(x: Perm): zfrac
+  requires 0 / 1 <= x && x <= 1 / 1
+  ensures zfrac_val(result) == x
+
+
+method java_DOT_lang_DOT_Object_Object_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Object()
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Object_internal_Object_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Object()
+{
+  inhale false
+}
+
+method Refute_good2_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+  requires acc(diz.Refute_x, write)
+  requires diz.Refute_x == 2
+  ensures acc(diz.Refute_x, write)
+  ensures diz.Refute_x == 3
+{
+  inhale false
+}
+
+method Refute___contract_unsatisfiable__internal_good2_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale true && (acc(diz.Refute_x, write) && diz.Refute_x == 2)
+  // assert
+  assert false
+  inhale false
+}
+
+method Refute_internal_good2_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+  requires acc(diz.Refute_x, write)
+  requires diz.Refute_x == 2
+  ensures acc(diz.Refute_x, write)
+  ensures diz.Refute_x == 3
+{
+  // refute
+  assert !(diz.Refute_x == 3)
+  diz.Refute_x := 3
+}

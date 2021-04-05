@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# Update and Install Packages
+pamac upgrade -a
+sudo pamac install \
+	git \
+	code \
+	discord \
+	gimp \
+	intellij-idea-community-edition \
+	kstars \
+	libreoffice-still \
+	pgadmin4 \
+	thunderbird \
+	steam-manjaro \
+	wine \
+	ttf-fira-code \
+	teamviewer
+
+# Install Rust Lang
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+# Install VS Code Extensions
+code --install-extension james-yu.latex-workshop
+code --install-extension valentjn.vscode-ltex
+code --install-extension dougfinke.vscode-pandoc
+code --install-extension serayuzgur.crates
+code --install-extension matklad.rust-analyzer
+code --install-extension this-fifo.natty
+
+# Install Snaps
+sudo pacman -S snapd
+sudo systemctl enable --now snapd.socket
+sudo ln -s /var/lib/snapd/snap /snap
+sudo snap install
+	snap-store \
+	zoom-client \
+	mc-installer
+	
+# Setup Git
+git config --global user.name "Fabian Bösiger"
+git config --global user.email "boesiger.fabian@outlook.com"
+mkdir ~/git
+cd ~/git
+git clone https://github.com/fabianboesiger/fabianboesiger.github.io.git
+git clone https://github.com/fabianboesiger/documents.git
+
+# Manual Work
+# - firefox sync
+# - set default fonts (os and vs code)
+# - setup github ssh
+# - install remarkable client

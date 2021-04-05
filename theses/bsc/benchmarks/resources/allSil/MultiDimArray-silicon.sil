@@ -1,0 +1,282 @@
+// Generated on 2021-03-23 at 23:35:20
+domain TYPE {
+  
+  unique function class_java_DOT_lang_DOT_Object(): TYPE
+  
+  unique function class_MultiDimArray(): TYPE
+  
+  unique function class_EncodedGlobalVariables(): TYPE
+  
+  function directSuperclass(t: TYPE): TYPE
+  
+  function type_of(val: Ref): TYPE
+  
+  axiom java_DOT_lang_DOT_Object_directSuperclass {
+    directSuperclass(class_java_DOT_lang_DOT_Object()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom MultiDimArray_directSuperclass {
+    directSuperclass(class_MultiDimArray()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom EncodedGlobalVariables_directSuperclass {
+    directSuperclass(class_EncodedGlobalVariables()) == class_java_DOT_lang_DOT_Object()
+  }
+}
+
+domain frac {
+  
+  function frac_val(a: frac): Perm
+  
+  axiom frac_eq {
+    (forall a: frac, b: frac :: { frac_val(a),frac_val(b) } (frac_val(a) == frac_val(b)) == (a == b))
+  }
+  
+  axiom frac_bound {
+    (forall a: frac :: { frac_val(a) } 0 / 1 < frac_val(a) && frac_val(a) <= 1 / 1)
+  }
+}
+
+domain zfrac {
+  
+  function zfrac_val(a: zfrac): Perm
+  
+  axiom zfrac_eq {
+    (forall a: zfrac, b: zfrac :: { zfrac_val(a),zfrac_val(b) } (zfrac_val(a) == zfrac_val(b)) == (a == b))
+  }
+  
+  axiom zfrac_bound {
+    (forall a: zfrac :: { zfrac_val(a) } 0 / 1 <= zfrac_val(a) && zfrac_val(a) <= 1 / 1)
+  }
+}
+
+domain VCTArray[CT] {
+  
+  function loc(a: VCTArray[CT], i: Int): CT
+  
+  function alen(a: VCTArray[CT]): Int
+  
+  function first(r: CT): VCTArray[CT]
+  
+  function second(r: CT): Int
+  
+  axiom all_diff {
+    (forall a: VCTArray[CT], i: Int :: { (loc(a, i): CT) } (first((loc(a, i): CT)): VCTArray[CT]) == a && (second((loc(a, i): CT)): Int) == i)
+  }
+  
+  axiom len_nonneg {
+    (forall a: VCTArray[CT] :: { (alen(a): Int) } (alen(a): Int) >= 0)
+  }
+}
+
+domain VCTOption[T] {
+  
+  function VCTNone(): VCTOption[T]
+  
+  function VCTSome(t: T): VCTOption[T]
+  
+  function getVCTOption(o: VCTOption[T]): T
+  
+  function getVCTOptionOrElse(o: VCTOption[T], default: T): T
+  
+  axiom not_equal_vct {
+    (forall x: T :: { (VCTSome(x): VCTOption[T]) } (VCTNone(): VCTOption[T]) != (VCTSome(x): VCTOption[T]))
+  }
+  
+  axiom get_axiom_vct {
+    (forall x: T :: { (getVCTOption((VCTSome(x): VCTOption[T])): T) } (getVCTOption((VCTSome(x): VCTOption[T])): T) == x)
+  }
+  
+  axiom get_axiom_vct_2 {
+    (forall x: VCTOption[T] :: { (VCTSome((getVCTOption(x): T)): VCTOption[T]) } (VCTSome((getVCTOption(x): T)): VCTOption[T]) == x)
+  }
+  
+  axiom get_or_else_axiom_1 {
+    (forall val: T, default: T :: { (getVCTOptionOrElse((VCTSome(val): VCTOption[T]), default): T) } (getVCTOptionOrElse((VCTSome(val): VCTOption[T]), default): T) == val)
+  }
+  
+  axiom get_or_else_axiom_2 {
+    (forall default: T :: { (getVCTOptionOrElse((VCTNone(): VCTOption[T]), default): T) } (getVCTOptionOrElse((VCTNone(): VCTOption[T]), default): T) == default)
+  }
+}
+
+//  a field 
+field Integer__item: Int
+
+//  a field 
+field Ref__item: Ref
+
+//  a field 
+field String__item: Seq[Int]
+
+//  a field 
+field VCTOption_VCTArray_Ref____item: VCTOption[VCTArray[Ref]]
+
+function instanceof_TYPE_TYPE(t: TYPE, u: TYPE): Bool
+  ensures result == (t == u || directSuperclass(t) == u)
+
+
+function new_frac(x: Perm): frac
+  requires 0 / 1 < x && x <= 1 / 1
+  ensures frac_val(result) == x
+
+
+function new_zfrac(x: Perm): zfrac
+  requires 0 / 1 <= x && x <= 1 / 1
+  ensures zfrac_val(result) == x
+
+
+function getVCTOption1(x: VCTOption[VCTArray[Ref]]): VCTArray[Ref]
+  requires x != (VCTNone(): VCTOption[VCTArray[Ref]])
+{
+  (getVCTOption(x): VCTArray[Ref])
+}
+
+method java_DOT_lang_DOT_Object_Object_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Object()
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Object_internal_Object_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Object()
+{
+  inhale false
+}
+
+method MultiDimArray___contract_unsatisfiable__method_EncodedGlobalVariables_Option$Array$Cell$Integer$$$(globals: Ref, x: VCTOption[VCTArray[Ref]])
+{
+  inhale true && (x == (VCTNone(): VCTOption[VCTArray[Ref]]) || (alen(getVCTOption1(x)): Int) == 5)
+  // assert
+  assert false
+  inhale false
+}
+
+method MultiDimArray_method_EncodedGlobalVariables_Option$Array$Cell$Integer$$$(globals: Ref, x: VCTOption[VCTArray[Ref]])
+  requires x == (VCTNone(): VCTOption[VCTArray[Ref]]) || (alen(getVCTOption1(x)): Int) == 5
+{
+  
+}
+
+method MultiDimArray___contract_unsatisfiable__main_EncodedGlobalVariables_Option$Array$Cell$String$$$(globals: Ref, args: VCTOption[VCTArray[Ref]])
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+}
+
+method MultiDimArray_main_EncodedGlobalVariables_Option$Array$Cell$String$$$(globals: Ref, args: VCTOption[VCTArray[Ref]])
+{
+  var a__1: VCTOption[VCTArray[Ref]]
+  var __flatten_1__2: VCTArray[Ref]
+  var __flatten_2__3: VCTArray[Ref]
+  var __flatten_3__4: VCTArray[Ref]
+  var __flatten_4__5: VCTArray[Ref]
+  var cond__6: Bool
+  var x__7: VCTOption[VCTArray[Ref]]
+  var __flatten_5__8: VCTOption[VCTArray[Ref]]
+  var __flatten_6__9: VCTArray[Ref]
+  var __flatten_7__10: VCTArray[Ref]
+  var __flatten_8__11: VCTArray[Ref]
+  var __flatten_10__12: Ref
+  var __flatten_11__13: VCTOption[VCTArray[Ref]]
+  var __flatten_12__14: VCTOption[VCTArray[Ref]]
+  var __flatten_13__15: Ref
+  var __flatten_14__16: VCTOption[VCTArray[Ref]]
+  var __flatten_15__17: VCTOption[VCTArray[Ref]]
+  var __flatten_16__18: Ref
+  var __flatten_17__19: Ref
+  __flatten_1__2 := array_new_Array_Cell_Option_Array_Cell_Option_Array_Cell_Integer_________Integer(3)
+  (loc(__flatten_1__2, 0): Ref).VCTOption_VCTArray_Ref____item := (VCTNone(): VCTOption[VCTArray[Ref]])
+  __flatten_2__3 := array_new_Array_Cell_Option_Array_Cell_Integer______Integer(1)
+  (loc(__flatten_2__3, 0): Ref).VCTOption_VCTArray_Ref____item := (VCTNone(): VCTOption[VCTArray[Ref]])
+  (loc(__flatten_1__2, 1): Ref).VCTOption_VCTArray_Ref____item := (VCTSome(__flatten_2__3): VCTOption[VCTArray[Ref]])
+  __flatten_3__4 := array_new_Array_Cell_Option_Array_Cell_Integer______Integer(1)
+  __flatten_4__5 := array_new_Array_Cell_Integer___Integer(2)
+  (loc(__flatten_4__5, 0): Ref).Integer__item := 1
+  (loc(__flatten_4__5, 1): Ref).Integer__item := 2
+  (loc(__flatten_3__4, 0): Ref).VCTOption_VCTArray_Ref____item := (VCTSome(__flatten_4__5): VCTOption[VCTArray[Ref]])
+  (loc(__flatten_1__2, 2): Ref).VCTOption_VCTArray_Ref____item := (VCTSome(__flatten_3__4): VCTOption[VCTArray[Ref]])
+  a__1 := (VCTSome(__flatten_1__2): VCTOption[VCTArray[Ref]])
+  cond__6 := true
+  if (cond__6) {
+    __flatten_6__9 := array_new_Array_Cell_Option_Array_Cell_java_DOT_lang_DOT_Object______Integer(1)
+    (loc(__flatten_6__9, 0): Ref).VCTOption_VCTArray_Ref____item := (VCTNone(): VCTOption[VCTArray[Ref]])
+    __flatten_5__8 := (VCTSome(__flatten_6__9): VCTOption[VCTArray[Ref]])
+  } else {
+    __flatten_7__10 := array_new_Array_Cell_Option_Array_Cell_java_DOT_lang_DOT_Object______Integer(1)
+    __flatten_8__11 := array_new_Array_Cell_java_DOT_lang_DOT_Object___Integer(1)
+    (loc(__flatten_8__11, 0): Ref).Ref__item := null
+    (loc(__flatten_7__10, 0): Ref).VCTOption_VCTArray_Ref____item := (VCTSome(__flatten_8__11): VCTOption[VCTArray[Ref]])
+    __flatten_5__8 := (VCTSome(__flatten_7__10): VCTOption[VCTArray[Ref]])
+  }
+  x__7 := __flatten_5__8
+  MultiDimArray_method_EncodedGlobalVariables_Option$Array$Cell$Integer$$$(globals, (VCTNone(): VCTOption[VCTArray[Ref]]))
+  __flatten_10__12 := (loc(getVCTOption1(x__7), 0): Ref)
+  if (cond__6) {
+    __flatten_12__14 := (VCTNone(): VCTOption[VCTArray[Ref]])
+  } else {
+    __flatten_12__14 := (VCTNone(): VCTOption[VCTArray[Ref]])
+  }
+  __flatten_11__13 := __flatten_12__14
+  __flatten_10__12.VCTOption_VCTArray_Ref____item := __flatten_11__13
+  __flatten_13__15 := (loc(getVCTOption1(x__7), 0): Ref)
+  if (cond__6) {
+    __flatten_15__17 := (VCTNone(): VCTOption[VCTArray[Ref]])
+  } else {
+    __flatten_16__18 := (loc(getVCTOption1(x__7), 0): Ref)
+    __flatten_15__17 := __flatten_16__18.VCTOption_VCTArray_Ref____item
+  }
+  __flatten_14__16 := __flatten_15__17
+  __flatten_13__15.VCTOption_VCTArray_Ref____item := __flatten_14__16
+  __flatten_17__19 := (loc(getVCTOption1(x__7), 0): Ref)
+  if (__flatten_17__19.VCTOption_VCTArray_Ref____item == (VCTNone(): VCTOption[VCTArray[Ref]])) {
+    // assert
+    assert true
+    goto __return_main
+  }
+  label __return_main
+}
+
+method array_new_Array_Cell_Option_Array_Cell_Option_Array_Cell_Integer_________Integer(size0: Int) returns (sys__result: VCTArray[Ref])
+  ensures (alen(sys__result): Int) == size0
+  ensures (forall i0: Int :: { (loc(sys__result, i0): Ref).VCTOption_VCTArray_Ref____item } 0 <= i0 && i0 < size0 ==> acc((loc(sys__result, i0): Ref).VCTOption_VCTArray_Ref____item, write))
+  ensures (forall i0: Int :: { (loc(sys__result, i0): Ref).VCTOption_VCTArray_Ref____item } 0 <= i0 && i0 < size0 ==> (loc(sys__result, i0): Ref).VCTOption_VCTArray_Ref____item == (VCTNone(): VCTOption[VCTArray[Ref]]))
+{
+  inhale false
+}
+
+method array_new_Array_Cell_Option_Array_Cell_Integer______Integer(size0: Int) returns (sys__result: VCTArray[Ref])
+  ensures (alen(sys__result): Int) == size0
+  ensures (forall i0: Int :: { (loc(sys__result, i0): Ref).VCTOption_VCTArray_Ref____item } 0 <= i0 && i0 < size0 ==> acc((loc(sys__result, i0): Ref).VCTOption_VCTArray_Ref____item, write))
+  ensures (forall i0: Int :: { (loc(sys__result, i0): Ref).VCTOption_VCTArray_Ref____item } 0 <= i0 && i0 < size0 ==> (loc(sys__result, i0): Ref).VCTOption_VCTArray_Ref____item == (VCTNone(): VCTOption[VCTArray[Ref]]))
+{
+  inhale false
+}
+
+method array_new_Array_Cell_Integer___Integer(size0: Int) returns (sys__result: VCTArray[Ref])
+  ensures (alen(sys__result): Int) == size0
+  ensures (forall i0: Int :: { (loc(sys__result, i0): Ref).Integer__item } 0 <= i0 && i0 < size0 ==> acc((loc(sys__result, i0): Ref).Integer__item, write))
+  ensures (forall i0: Int :: { (loc(sys__result, i0): Ref).Integer__item } 0 <= i0 && i0 < size0 ==> (loc(sys__result, i0): Ref).Integer__item == 0)
+{
+  inhale false
+}
+
+method array_new_Array_Cell_Option_Array_Cell_java_DOT_lang_DOT_Object______Integer(size0: Int) returns (sys__result: VCTArray[Ref])
+  ensures (alen(sys__result): Int) == size0
+  ensures (forall i0: Int :: { (loc(sys__result, i0): Ref).VCTOption_VCTArray_Ref____item } 0 <= i0 && i0 < size0 ==> acc((loc(sys__result, i0): Ref).VCTOption_VCTArray_Ref____item, write))
+  ensures (forall i0: Int :: { (loc(sys__result, i0): Ref).VCTOption_VCTArray_Ref____item } 0 <= i0 && i0 < size0 ==> (loc(sys__result, i0): Ref).VCTOption_VCTArray_Ref____item == (VCTNone(): VCTOption[VCTArray[Ref]]))
+{
+  inhale false
+}
+
+method array_new_Array_Cell_java_DOT_lang_DOT_Object___Integer(size0: Int) returns (sys__result: VCTArray[Ref])
+  ensures (alen(sys__result): Int) == size0
+  ensures (forall i0: Int :: { (loc(sys__result, i0): Ref).Ref__item } 0 <= i0 && i0 < size0 ==> acc((loc(sys__result, i0): Ref).Ref__item, write))
+  ensures (forall i0: Int :: { (loc(sys__result, i0): Ref).Ref__item } 0 <= i0 && i0 < size0 ==> (loc(sys__result, i0): Ref).Ref__item == null)
+{
+  inhale false
+}

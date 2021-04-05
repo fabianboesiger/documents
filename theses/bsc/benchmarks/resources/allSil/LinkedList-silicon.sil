@@ -1,0 +1,430 @@
+// Generated on 2021-03-23 at 23:34:25
+domain TYPE {
+  
+  unique function class_Seq(): TYPE
+  
+  unique function class_java_DOT_lang_DOT_Object(): TYPE
+  
+  unique function class_List(): TYPE
+  
+  unique function class_EncodedGlobalVariables(): TYPE
+  
+  function directSuperclass(t: TYPE): TYPE
+  
+  function type_of(val: Ref): TYPE
+  
+  axiom Seq_directSuperclass {
+    directSuperclass(class_Seq()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom List_directSuperclass {
+    directSuperclass(class_List()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom EncodedGlobalVariables_directSuperclass {
+    directSuperclass(class_EncodedGlobalVariables()) == class_java_DOT_lang_DOT_Object()
+  }
+}
+
+domain frac {
+  
+  function frac_val(a: frac): Perm
+  
+  axiom frac_eq {
+    (forall a: frac, b: frac :: { frac_val(a),frac_val(b) } (frac_val(a) == frac_val(b)) == (a == b))
+  }
+  
+  axiom frac_bound {
+    (forall a: frac :: { frac_val(a) } 0 / 1 < frac_val(a) && frac_val(a) <= 1 / 1)
+  }
+}
+
+domain zfrac {
+  
+  function zfrac_val(a: zfrac): Perm
+  
+  axiom zfrac_eq {
+    (forall a: zfrac, b: zfrac :: { zfrac_val(a),zfrac_val(b) } (zfrac_val(a) == zfrac_val(b)) == (a == b))
+  }
+  
+  axiom zfrac_bound {
+    (forall a: zfrac :: { zfrac_val(a) } 0 / 1 <= zfrac_val(a) && zfrac_val(a) <= 1 / 1)
+  }
+}
+
+//  a field 
+field List_next: Ref
+
+//  a field 
+field List_value: Int
+
+function Seq_append_Integer_Sequence$Integer$(v: Int, s: Seq[Int]): Seq[Int]
+{
+  Seq(v) ++ s
+}
+
+function Seq_create_empty(): Seq[Int]
+{
+  Seq[Int]()
+}
+
+function Seq_is_empty_Sequence$Integer$(s: Seq[Int]): Bool
+{
+  s == Seq_create_empty()
+}
+
+function Seq_prepend_Integer_Sequence$Integer$(v: Int, s: Seq[Int]): Seq[Int]
+{
+  s ++ Seq(v)
+}
+
+function Seq_remove_Sequence$Integer$_Integer(s: Seq[Int], v: Int): Seq[Int]
+{
+  (Seq_is_empty_Sequence$Integer$(s) ? Seq_create_empty() : (s[0] == v ? s[1..] : Seq_append_Integer_Sequence$Integer$(s[0], Seq_remove_Sequence$Integer$_Integer(s[1..], v))))
+}
+
+function Seq_reverse_Sequence$Integer$(s: Seq[Int]): Seq[Int]
+{
+  (Seq_is_empty_Sequence$Integer$(s) ? Seq_create_empty() : Seq_reverse_Sequence$Integer$(s[1..]) ++ Seq(s[0]))
+}
+
+function List_is_empty_List(list: Ref): Bool
+{
+  list == null
+}
+
+function List_as_seq_EncodedGlobalVariables_List_Fraction(globals: Ref, list: Ref, p: frac): Seq[Int]
+  requires frac_val(p) != none
+  requires list != null ==> acc(List_state_EncodedGlobalVariables_Fraction(list, globals, p), write)
+{
+  (List_is_empty_List(list) ? Seq_create_empty() : (unfolding acc(List_state_EncodedGlobalVariables_Fraction(list, globals, p), write) in Seq(list.List_value) ++ List_as_seq_EncodedGlobalVariables_List_Fraction(globals, list.List_next, p)))
+}
+
+function instanceof_TYPE_TYPE(t: TYPE, u: TYPE): Bool
+  ensures result == (t == u || directSuperclass(t) == u)
+
+
+function new_frac(x: Perm): frac
+  requires 0 / 1 < x && x <= 1 / 1
+  ensures frac_val(result) == x
+
+
+function new_zfrac(x: Perm): zfrac
+  requires 0 / 1 <= x && x <= 1 / 1
+  ensures zfrac_val(result) == x
+
+
+predicate List_state_EncodedGlobalVariables_Fraction(diz: Ref, globals: Ref, p: frac) {
+  diz != null && (frac_val(p) != none && acc(diz.List_value, frac_val(p)) && acc(diz.List_next, frac_val(p)) && (diz.List_next != null ==> acc(List_state_EncodedGlobalVariables_Fraction(diz.List_next, globals, p), write)))
+}
+
+method List___contract_unsatisfiable__append_EncodedGlobalVariables_List_Integer_Fraction_Sequence$Integer$(globals: Ref, list: Ref, value: Int, p: frac, orig: Seq[Int]) returns (sys__result: Ref)
+{
+  inhale true && (frac_val(p) != none && (list != null ==> acc(List_state_EncodedGlobalVariables_Fraction(list, globals, p), write)) && orig == List_as_seq_EncodedGlobalVariables_List_Fraction(globals, list, p))
+  // assert
+  assert false
+  inhale false
+}
+
+method List_append_EncodedGlobalVariables_List_Integer_Fraction_Sequence$Integer$(globals: Ref, list: Ref, value: Int, p: frac, orig: Seq[Int]) returns (sys__result: Ref)
+  requires frac_val(p) != none
+  requires list != null ==> acc(List_state_EncodedGlobalVariables_Fraction(list, globals, p), write)
+  requires orig == List_as_seq_EncodedGlobalVariables_List_Fraction(globals, list, p)
+  ensures frac_val(p) != none
+  ensures list != null ==> acc(List_state_EncodedGlobalVariables_Fraction(list, globals, p), write)
+  ensures sys__result != null
+  ensures acc(List_state_EncodedGlobalVariables_Fraction(sys__result, globals, new_frac(write)), write)
+  ensures value == (unfolding acc(List_state_EncodedGlobalVariables_Fraction(sys__result, globals, new_frac(write)), write) in sys__result.List_value)
+  ensures List_as_seq_EncodedGlobalVariables_List_Fraction(globals, sys__result, new_frac(write)) == Seq_append_Integer_Sequence$Integer$(value, orig)
+{
+  var sys__local__result__1: Ref
+  var tail_list__2: Ref
+  tail_list__2 := List_clone_EncodedGlobalVariables_List_Fraction_Sequence$Integer$(globals, list, p, orig)
+  sys__local__result__1 := List_List_EncodedGlobalVariables_List_Integer_Sequence$Integer$(globals, tail_list__2, value, orig)
+  // assert
+  assert frac_val(p) != none && (list != null ==> acc(List_state_EncodedGlobalVariables_Fraction(list, globals, p), write)) && sys__local__result__1 != null && acc(List_state_EncodedGlobalVariables_Fraction(sys__local__result__1, globals, new_frac(write)), write) && value == (unfolding acc(List_state_EncodedGlobalVariables_Fraction(sys__local__result__1, globals, new_frac(write)), write) in sys__local__result__1.List_value) && List_as_seq_EncodedGlobalVariables_List_Fraction(globals, sys__local__result__1, new_frac(write)) == Seq_append_Integer_Sequence$Integer$(value, orig)
+  goto __return_append
+  label __return_append
+  sys__result := sys__local__result__1
+  // assert
+  assert frac_val(p) != none && (list != null ==> acc(List_state_EncodedGlobalVariables_Fraction(list, globals, p), write)) && sys__result != null && acc(List_state_EncodedGlobalVariables_Fraction(sys__result, globals, new_frac(write)), write) && value == (unfolding acc(List_state_EncodedGlobalVariables_Fraction(sys__result, globals, new_frac(write)), write) in sys__result.List_value) && List_as_seq_EncodedGlobalVariables_List_Fraction(globals, sys__result, new_frac(write)) == Seq_append_Integer_Sequence$Integer$(value, orig)
+  inhale false
+}
+
+method List___contract_unsatisfiable__clone_EncodedGlobalVariables_List_Fraction_Sequence$Integer$(globals: Ref, a: Ref, p: frac, orig: Seq[Int]) returns (sys__result: Ref)
+{
+  inhale true && (frac_val(p) != none && (a != null ==> acc(List_state_EncodedGlobalVariables_Fraction(a, globals, p), write)) && orig == List_as_seq_EncodedGlobalVariables_List_Fraction(globals, a, p))
+  // assert
+  assert false
+  inhale false
+}
+
+method List_clone_EncodedGlobalVariables_List_Fraction_Sequence$Integer$(globals: Ref, a: Ref, p: frac, orig: Seq[Int]) returns (sys__result: Ref)
+  requires frac_val(p) != none
+  requires a != null ==> acc(List_state_EncodedGlobalVariables_Fraction(a, globals, p), write)
+  requires orig == List_as_seq_EncodedGlobalVariables_List_Fraction(globals, a, p)
+  ensures frac_val(p) != none
+  ensures a != null ==> acc(List_state_EncodedGlobalVariables_Fraction(a, globals, p), write)
+  ensures sys__result != null ==> acc(List_state_EncodedGlobalVariables_Fraction(sys__result, globals, new_frac(write)), write)
+  ensures List_as_seq_EncodedGlobalVariables_List_Fraction(globals, sys__result, new_frac(write)) == orig
+{
+  var sys__local__result__3: Ref
+  var __flatten_3__4: Bool
+  var rec__5: Ref
+  var result__6: Ref
+  var __flatten_5__7: Seq[Int]
+  __flatten_3__4 := List_is_empty_List(a)
+  if (__flatten_3__4) {
+    sys__local__result__3 := null
+    // assert
+    assert frac_val(p) != none && (a != null ==> acc(List_state_EncodedGlobalVariables_Fraction(a, globals, p), write)) && (sys__local__result__3 != null ==> acc(List_state_EncodedGlobalVariables_Fraction(sys__local__result__3, globals, new_frac(write)), write)) && List_as_seq_EncodedGlobalVariables_List_Fraction(globals, sys__local__result__3, new_frac(write)) == orig
+    goto __return_clone
+  }
+  unfold acc(List_state_EncodedGlobalVariables_Fraction(a, globals, p), write)
+  rec__5 := List_clone_EncodedGlobalVariables_List_Fraction_Sequence$Integer$(globals, a.List_next, p, orig[1..])
+  __flatten_5__7 := List_as_seq_EncodedGlobalVariables_List_Fraction(globals, rec__5, new_frac(write))
+  result__6 := List_List_EncodedGlobalVariables_List_Integer_Sequence$Integer$(globals, rec__5, a.List_value, __flatten_5__7)
+  fold acc(List_state_EncodedGlobalVariables_Fraction(a, globals, p), write)
+  sys__local__result__3 := result__6
+  // assert
+  assert frac_val(p) != none && (a != null ==> acc(List_state_EncodedGlobalVariables_Fraction(a, globals, p), write)) && (sys__local__result__3 != null ==> acc(List_state_EncodedGlobalVariables_Fraction(sys__local__result__3, globals, new_frac(write)), write)) && List_as_seq_EncodedGlobalVariables_List_Fraction(globals, sys__local__result__3, new_frac(write)) == orig
+  goto __return_clone
+  label __return_clone
+  sys__result := sys__local__result__3
+  // assert
+  assert frac_val(p) != none && (a != null ==> acc(List_state_EncodedGlobalVariables_Fraction(a, globals, p), write)) && (sys__result != null ==> acc(List_state_EncodedGlobalVariables_Fraction(sys__result, globals, new_frac(write)), write)) && List_as_seq_EncodedGlobalVariables_List_Fraction(globals, sys__result, new_frac(write)) == orig
+  inhale false
+}
+
+method List___contract_unsatisfiable__concatenate_EncodedGlobalVariables_List_List_Fraction_Fraction_Sequence$Integer$_Sequence$Integer$(globals: Ref, a: Ref, b: Ref, p: frac, q: frac, orig_a: Seq[Int], orig_b: Seq[Int]) returns (sys__result: Ref)
+{
+  inhale true && (frac_val(p) != none && frac_val(q) != none && (a != null ==> acc(List_state_EncodedGlobalVariables_Fraction(a, globals, p), write)) && (b != null ==> acc(List_state_EncodedGlobalVariables_Fraction(b, globals, q), write)) && orig_a == List_as_seq_EncodedGlobalVariables_List_Fraction(globals, a, p) && orig_b == List_as_seq_EncodedGlobalVariables_List_Fraction(globals, b, q))
+  // assert
+  assert false
+  inhale false
+}
+
+method List_concatenate_EncodedGlobalVariables_List_List_Fraction_Fraction_Sequence$Integer$_Sequence$Integer$(globals: Ref, a: Ref, b: Ref, p: frac, q: frac, orig_a: Seq[Int], orig_b: Seq[Int]) returns (sys__result: Ref)
+  requires frac_val(p) != none
+  requires frac_val(q) != none
+  requires a != null ==> acc(List_state_EncodedGlobalVariables_Fraction(a, globals, p), write)
+  requires b != null ==> acc(List_state_EncodedGlobalVariables_Fraction(b, globals, q), write)
+  requires orig_a == List_as_seq_EncodedGlobalVariables_List_Fraction(globals, a, p)
+  requires orig_b == List_as_seq_EncodedGlobalVariables_List_Fraction(globals, b, q)
+  ensures frac_val(p) != none
+  ensures frac_val(q) != none
+  ensures a != null ==> acc(List_state_EncodedGlobalVariables_Fraction(a, globals, p), write)
+  ensures b != null ==> acc(List_state_EncodedGlobalVariables_Fraction(b, globals, q), write)
+  ensures sys__result != null ==> acc(List_state_EncodedGlobalVariables_Fraction(sys__result, globals, new_frac(write)), write)
+  ensures List_as_seq_EncodedGlobalVariables_List_Fraction(globals, sys__result, new_frac(write)) == orig_a ++ orig_b
+{
+  var sys__local__result__8: Ref
+  var __flatten_7__9: Bool
+  var rec__10: Ref
+  var __flatten_9__11: Seq[Int]
+  var __flatten_10__12: Seq[Int]
+  var result__13: Ref
+  var __flatten_12__14: Seq[Int]
+  __flatten_7__9 := List_is_empty_List(a)
+  if (__flatten_7__9) {
+    sys__local__result__8 := List_clone_EncodedGlobalVariables_List_Fraction_Sequence$Integer$(globals, b, q, orig_b)
+    // assert
+    assert frac_val(p) != none && frac_val(q) != none && (a != null ==> acc(List_state_EncodedGlobalVariables_Fraction(a, globals, p), write)) && (b != null ==> acc(List_state_EncodedGlobalVariables_Fraction(b, globals, q), write)) && (sys__local__result__8 != null ==> acc(List_state_EncodedGlobalVariables_Fraction(sys__local__result__8, globals, new_frac(write)), write)) && List_as_seq_EncodedGlobalVariables_List_Fraction(globals, sys__local__result__8, new_frac(write)) == orig_a ++ orig_b
+    goto __return_concatenate
+  }
+  unfold acc(List_state_EncodedGlobalVariables_Fraction(a, globals, p), write)
+  __flatten_9__11 := List_as_seq_EncodedGlobalVariables_List_Fraction(globals, a.List_next, p)
+  __flatten_10__12 := List_as_seq_EncodedGlobalVariables_List_Fraction(globals, b, q)
+  rec__10 := List_concatenate_EncodedGlobalVariables_List_List_Fraction_Fraction_Sequence$Integer$_Sequence$Integer$(globals, a.List_next, b, p, q, __flatten_9__11, __flatten_10__12)
+  __flatten_12__14 := List_as_seq_EncodedGlobalVariables_List_Fraction(globals, rec__10, new_frac(write))
+  result__13 := List_List_EncodedGlobalVariables_List_Integer_Sequence$Integer$(globals, rec__10, a.List_value, __flatten_12__14)
+  fold acc(List_state_EncodedGlobalVariables_Fraction(a, globals, p), write)
+  sys__local__result__8 := result__13
+  // assert
+  assert frac_val(p) != none && frac_val(q) != none && (a != null ==> acc(List_state_EncodedGlobalVariables_Fraction(a, globals, p), write)) && (b != null ==> acc(List_state_EncodedGlobalVariables_Fraction(b, globals, q), write)) && (sys__local__result__8 != null ==> acc(List_state_EncodedGlobalVariables_Fraction(sys__local__result__8, globals, new_frac(write)), write)) && List_as_seq_EncodedGlobalVariables_List_Fraction(globals, sys__local__result__8, new_frac(write)) == orig_a ++ orig_b
+  goto __return_concatenate
+  label __return_concatenate
+  sys__result := sys__local__result__8
+  // assert
+  assert frac_val(p) != none && frac_val(q) != none && (a != null ==> acc(List_state_EncodedGlobalVariables_Fraction(a, globals, p), write)) && (b != null ==> acc(List_state_EncodedGlobalVariables_Fraction(b, globals, q), write)) && (sys__result != null ==> acc(List_state_EncodedGlobalVariables_Fraction(sys__result, globals, new_frac(write)), write)) && List_as_seq_EncodedGlobalVariables_List_Fraction(globals, sys__result, new_frac(write)) == orig_a ++ orig_b
+  inhale false
+}
+
+method List___contract_unsatisfiable__prepend_EncodedGlobalVariables_List_Integer_Fraction_Sequence$Integer$(globals: Ref, list: Ref, value: Int, p: frac, orig: Seq[Int]) returns (sys__result: Ref)
+{
+  inhale true && (frac_val(p) != none && (list != null ==> acc(List_state_EncodedGlobalVariables_Fraction(list, globals, p), write)) && List_as_seq_EncodedGlobalVariables_List_Fraction(globals, list, p) == orig)
+  // assert
+  assert false
+  inhale false
+}
+
+method List_prepend_EncodedGlobalVariables_List_Integer_Fraction_Sequence$Integer$(globals: Ref, list: Ref, value: Int, p: frac, orig: Seq[Int]) returns (sys__result: Ref)
+  requires frac_val(p) != none
+  requires list != null ==> acc(List_state_EncodedGlobalVariables_Fraction(list, globals, p), write)
+  requires List_as_seq_EncodedGlobalVariables_List_Fraction(globals, list, p) == orig
+  ensures frac_val(p) != none
+  ensures list != null ==> acc(List_state_EncodedGlobalVariables_Fraction(list, globals, p), write)
+  ensures sys__result != null
+  ensures acc(List_state_EncodedGlobalVariables_Fraction(sys__result, globals, new_frac(write)), write)
+  ensures List_as_seq_EncodedGlobalVariables_List_Fraction(globals, sys__result, new_frac(write)) == Seq_prepend_Integer_Sequence$Integer$(value, orig)
+{
+  var sys__local__result__15: Ref
+  var __flatten_14__16: Bool
+  var __flatten_15__17: Seq[Int]
+  var rec__18: Ref
+  var result__19: Ref
+  var __flatten_18__20: Seq[Int]
+  __flatten_14__16 := List_is_empty_List(list)
+  if (__flatten_14__16) {
+    __flatten_15__17 := Seq_create_empty()
+    sys__local__result__15 := List_List_EncodedGlobalVariables_List_Integer_Sequence$Integer$(globals, null, value, __flatten_15__17)
+    // assert
+    assert frac_val(p) != none && (list != null ==> acc(List_state_EncodedGlobalVariables_Fraction(list, globals, p), write)) && sys__local__result__15 != null && acc(List_state_EncodedGlobalVariables_Fraction(sys__local__result__15, globals, new_frac(write)), write) && List_as_seq_EncodedGlobalVariables_List_Fraction(globals, sys__local__result__15, new_frac(write)) == Seq_prepend_Integer_Sequence$Integer$(value, orig)
+    goto __return_prepend
+  }
+  unfold acc(List_state_EncodedGlobalVariables_Fraction(list, globals, p), write)
+  rec__18 := List_prepend_EncodedGlobalVariables_List_Integer_Fraction_Sequence$Integer$(globals, list.List_next, value, p, orig[1..])
+  __flatten_18__20 := List_as_seq_EncodedGlobalVariables_List_Fraction(globals, rec__18, new_frac(write))
+  result__19 := List_List_EncodedGlobalVariables_List_Integer_Sequence$Integer$(globals, rec__18, list.List_value, __flatten_18__20)
+  fold acc(List_state_EncodedGlobalVariables_Fraction(list, globals, p), write)
+  sys__local__result__15 := result__19
+  // assert
+  assert frac_val(p) != none && (list != null ==> acc(List_state_EncodedGlobalVariables_Fraction(list, globals, p), write)) && sys__local__result__15 != null && acc(List_state_EncodedGlobalVariables_Fraction(sys__local__result__15, globals, new_frac(write)), write) && List_as_seq_EncodedGlobalVariables_List_Fraction(globals, sys__local__result__15, new_frac(write)) == Seq_prepend_Integer_Sequence$Integer$(value, orig)
+  goto __return_prepend
+  label __return_prepend
+  sys__result := sys__local__result__15
+  // assert
+  assert frac_val(p) != none && (list != null ==> acc(List_state_EncodedGlobalVariables_Fraction(list, globals, p), write)) && sys__result != null && acc(List_state_EncodedGlobalVariables_Fraction(sys__result, globals, new_frac(write)), write) && List_as_seq_EncodedGlobalVariables_List_Fraction(globals, sys__result, new_frac(write)) == Seq_prepend_Integer_Sequence$Integer$(value, orig)
+  inhale false
+}
+
+method List___contract_unsatisfiable__remove_EncodedGlobalVariables_List_Integer_Fraction_Sequence$Integer$(globals: Ref, list: Ref, value: Int, p: frac, orig: Seq[Int]) returns (sys__result: Ref)
+{
+  inhale true && (frac_val(p) != none && (list != null ==> acc(List_state_EncodedGlobalVariables_Fraction(list, globals, p), write)) && orig == List_as_seq_EncodedGlobalVariables_List_Fraction(globals, list, p))
+  // assert
+  assert false
+  inhale false
+}
+
+method List_remove_EncodedGlobalVariables_List_Integer_Fraction_Sequence$Integer$(globals: Ref, list: Ref, value: Int, p: frac, orig: Seq[Int]) returns (sys__result: Ref)
+  requires frac_val(p) != none
+  requires list != null ==> acc(List_state_EncodedGlobalVariables_Fraction(list, globals, p), write)
+  requires orig == List_as_seq_EncodedGlobalVariables_List_Fraction(globals, list, p)
+  ensures frac_val(p) != none
+  ensures list != null ==> acc(List_state_EncodedGlobalVariables_Fraction(list, globals, p), write)
+  ensures sys__result != null ==> acc(List_state_EncodedGlobalVariables_Fraction(sys__result, globals, new_frac(write)), write)
+  ensures List_as_seq_EncodedGlobalVariables_List_Fraction(globals, sys__result, new_frac(write)) == Seq_remove_Sequence$Integer$_Integer(orig, value)
+{
+  var result__23: Ref
+  var sys__local__result__21: Ref
+  var __flatten_20__22: Bool
+  var rec__24: Ref
+  var result__25: Ref
+  var __flatten_23__26: Seq[Int]
+  __flatten_20__22 := List_is_empty_List(list)
+  if (__flatten_20__22) {
+    sys__local__result__21 := null
+    // assert
+    assert frac_val(p) != none && (list != null ==> acc(List_state_EncodedGlobalVariables_Fraction(list, globals, p), write)) && (sys__local__result__21 != null ==> acc(List_state_EncodedGlobalVariables_Fraction(sys__local__result__21, globals, new_frac(write)), write)) && List_as_seq_EncodedGlobalVariables_List_Fraction(globals, sys__local__result__21, new_frac(write)) == Seq_remove_Sequence$Integer$_Integer(orig, value)
+    goto __return_remove
+  }
+  unfold acc(List_state_EncodedGlobalVariables_Fraction(list, globals, p), write)
+  if (list.List_value == value) {
+    result__23 := List_clone_EncodedGlobalVariables_List_Fraction_Sequence$Integer$(globals, list.List_next, p, orig[1..])
+    fold acc(List_state_EncodedGlobalVariables_Fraction(list, globals, p), write)
+    sys__local__result__21 := result__23
+    // assert
+    assert frac_val(p) != none && (list != null ==> acc(List_state_EncodedGlobalVariables_Fraction(list, globals, p), write)) && (sys__local__result__21 != null ==> acc(List_state_EncodedGlobalVariables_Fraction(sys__local__result__21, globals, new_frac(write)), write)) && List_as_seq_EncodedGlobalVariables_List_Fraction(globals, sys__local__result__21, new_frac(write)) == Seq_remove_Sequence$Integer$_Integer(orig, value)
+    goto __return_remove
+  }
+  rec__24 := List_remove_EncodedGlobalVariables_List_Integer_Fraction_Sequence$Integer$(globals, list.List_next, value, p, orig[1..])
+  __flatten_23__26 := List_as_seq_EncodedGlobalVariables_List_Fraction(globals, rec__24, new_frac(write))
+  result__25 := List_List_EncodedGlobalVariables_List_Integer_Sequence$Integer$(globals, rec__24, list.List_value, __flatten_23__26)
+  fold acc(List_state_EncodedGlobalVariables_Fraction(list, globals, p), write)
+  sys__local__result__21 := result__25
+  // assert
+  assert frac_val(p) != none && (list != null ==> acc(List_state_EncodedGlobalVariables_Fraction(list, globals, p), write)) && (sys__local__result__21 != null ==> acc(List_state_EncodedGlobalVariables_Fraction(sys__local__result__21, globals, new_frac(write)), write)) && List_as_seq_EncodedGlobalVariables_List_Fraction(globals, sys__local__result__21, new_frac(write)) == Seq_remove_Sequence$Integer$_Integer(orig, value)
+  goto __return_remove
+  label __return_remove
+  sys__result := sys__local__result__21
+  // assert
+  assert frac_val(p) != none && (list != null ==> acc(List_state_EncodedGlobalVariables_Fraction(list, globals, p), write)) && (sys__result != null ==> acc(List_state_EncodedGlobalVariables_Fraction(sys__result, globals, new_frac(write)), write)) && List_as_seq_EncodedGlobalVariables_List_Fraction(globals, sys__result, new_frac(write)) == Seq_remove_Sequence$Integer$_Integer(orig, value)
+  inhale false
+}
+
+method List___contract_unsatisfiable__reverse_EncodedGlobalVariables_List_Fraction_Sequence$Integer$(globals: Ref, list: Ref, p: frac, orig: Seq[Int]) returns (sys__result: Ref)
+{
+  inhale true && (frac_val(p) != none && (list != null ==> acc(List_state_EncodedGlobalVariables_Fraction(list, globals, p), write)) && orig == List_as_seq_EncodedGlobalVariables_List_Fraction(globals, list, p))
+  // assert
+  assert false
+  inhale false
+}
+
+method List_reverse_EncodedGlobalVariables_List_Fraction_Sequence$Integer$(globals: Ref, list: Ref, p: frac, orig: Seq[Int]) returns (sys__result: Ref)
+  requires frac_val(p) != none
+  requires list != null ==> acc(List_state_EncodedGlobalVariables_Fraction(list, globals, p), write)
+  requires orig == List_as_seq_EncodedGlobalVariables_List_Fraction(globals, list, p)
+  ensures frac_val(p) != none
+  ensures list != null ==> acc(List_state_EncodedGlobalVariables_Fraction(list, globals, p), write)
+  ensures sys__result != null ==> acc(List_state_EncodedGlobalVariables_Fraction(sys__result, globals, new_frac(write)), write)
+  ensures List_as_seq_EncodedGlobalVariables_List_Fraction(globals, sys__result, new_frac(write)) == Seq_reverse_Sequence$Integer$(orig)
+{
+  var sys__local__result__27: Ref
+  var __flatten_25__28: Bool
+  var rec__29: Ref
+  var result__30: Ref
+  var __flatten_27__31: Seq[Int]
+  __flatten_25__28 := List_is_empty_List(list)
+  if (__flatten_25__28) {
+    sys__local__result__27 := null
+    // assert
+    assert frac_val(p) != none && (list != null ==> acc(List_state_EncodedGlobalVariables_Fraction(list, globals, p), write)) && (sys__local__result__27 != null ==> acc(List_state_EncodedGlobalVariables_Fraction(sys__local__result__27, globals, new_frac(write)), write)) && List_as_seq_EncodedGlobalVariables_List_Fraction(globals, sys__local__result__27, new_frac(write)) == Seq_reverse_Sequence$Integer$(orig)
+    goto __return_reverse
+  }
+  unfold acc(List_state_EncodedGlobalVariables_Fraction(list, globals, p), write)
+  rec__29 := List_reverse_EncodedGlobalVariables_List_Fraction_Sequence$Integer$(globals, list.List_next, p, orig[1..])
+  __flatten_27__31 := List_as_seq_EncodedGlobalVariables_List_Fraction(globals, rec__29, new_frac(write))
+  result__30 := List_prepend_EncodedGlobalVariables_List_Integer_Fraction_Sequence$Integer$(globals, rec__29, list.List_value, new_frac(write), __flatten_27__31)
+  fold acc(List_state_EncodedGlobalVariables_Fraction(list, globals, p), write)
+  sys__local__result__27 := result__30
+  // assert
+  assert frac_val(p) != none && (list != null ==> acc(List_state_EncodedGlobalVariables_Fraction(list, globals, p), write)) && (sys__local__result__27 != null ==> acc(List_state_EncodedGlobalVariables_Fraction(sys__local__result__27, globals, new_frac(write)), write)) && List_as_seq_EncodedGlobalVariables_List_Fraction(globals, sys__local__result__27, new_frac(write)) == Seq_reverse_Sequence$Integer$(orig)
+  goto __return_reverse
+  label __return_reverse
+  sys__result := sys__local__result__27
+  // assert
+  assert frac_val(p) != none && (list != null ==> acc(List_state_EncodedGlobalVariables_Fraction(list, globals, p), write)) && (sys__result != null ==> acc(List_state_EncodedGlobalVariables_Fraction(sys__result, globals, new_frac(write)), write)) && List_as_seq_EncodedGlobalVariables_List_Fraction(globals, sys__result, new_frac(write)) == Seq_reverse_Sequence$Integer$(orig)
+  inhale false
+}
+
+method List___contract_unsatisfiable__List_EncodedGlobalVariables_List_Integer_Sequence$Integer$(diz: Ref, globals: Ref, n: Ref, v: Int, orig: Seq[Int])
+  requires diz != null
+{
+  inhale true && ((n != null ==> acc(List_state_EncodedGlobalVariables_Fraction(n, globals, new_frac(write)), write)) && List_as_seq_EncodedGlobalVariables_List_Fraction(globals, n, new_frac(write)) == orig)
+  // assert
+  assert false
+  inhale false
+}
+
+method List_List_EncodedGlobalVariables_List_Integer_Sequence$Integer$(globals: Ref, n: Ref, v: Int, orig: Seq[Int]) returns (sys__result: Ref)
+  requires n != null ==> acc(List_state_EncodedGlobalVariables_Fraction(n, globals, new_frac(write)), write)
+  requires List_as_seq_EncodedGlobalVariables_List_Fraction(globals, n, new_frac(write)) == orig
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_List()
+  ensures acc(List_state_EncodedGlobalVariables_Fraction(sys__result, globals, new_frac(write)), write)
+  ensures (unfolding acc(List_state_EncodedGlobalVariables_Fraction(sys__result, globals, new_frac(write)), write) in sys__result.List_value == v)
+  ensures (unfolding acc(List_state_EncodedGlobalVariables_Fraction(sys__result, globals, new_frac(write)), write) in sys__result.List_next == n)
+  ensures (unfolding acc(List_state_EncodedGlobalVariables_Fraction(sys__result, globals, new_frac(write)), write) in List_as_seq_EncodedGlobalVariables_List_Fraction(globals, sys__result.List_next, new_frac(write)) == orig)
+  ensures List_as_seq_EncodedGlobalVariables_List_Fraction(globals, sys__result, new_frac(write)) == Seq_append_Integer_Sequence$Integer$(v, orig)
+{
+  var diz__32: Ref
+  diz__32 := new(List_next, List_value)
+  inhale type_of(diz__32) == class_List()
+  diz__32.List_next := n
+  diz__32.List_value := v
+  fold acc(List_state_EncodedGlobalVariables_Fraction(diz__32, globals, new_frac(write)), write)
+  sys__result := diz__32
+  // assert
+  assert sys__result != null && type_of(sys__result) == class_List() && acc(List_state_EncodedGlobalVariables_Fraction(sys__result, globals, new_frac(write)), write) && (unfolding acc(List_state_EncodedGlobalVariables_Fraction(sys__result, globals, new_frac(write)), write) in sys__result.List_value == v) && (unfolding acc(List_state_EncodedGlobalVariables_Fraction(sys__result, globals, new_frac(write)), write) in sys__result.List_next == n) && (unfolding acc(List_state_EncodedGlobalVariables_Fraction(sys__result, globals, new_frac(write)), write) in List_as_seq_EncodedGlobalVariables_List_Fraction(globals, sys__result.List_next, new_frac(write)) == orig) && List_as_seq_EncodedGlobalVariables_List_Fraction(globals, sys__result, new_frac(write)) == Seq_append_Integer_Sequence$Integer$(v, orig)
+  inhale false
+}

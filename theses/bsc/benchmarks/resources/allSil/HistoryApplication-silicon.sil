@@ -1,0 +1,429 @@
+// Generated on 2021-03-23 at 23:32:40
+domain Process {
+  
+  function p_is_choice(p1: Process, p2: Process): Bool
+  
+  function p_empty(): Process
+  
+  function p_merge(p1: Process, p2: Process): Process
+  
+  function p_choice(p1: Process, p2: Process): Process
+  
+  function p_seq(p1: Process, p2: Process): Process
+  
+  function p_incr(): Process
+  
+  function p_single(n: Int): Process
+  
+  function p_dual(n: Int, m: Int): Process
+  
+  axiom empty_1L {
+    (forall p: Process :: { p_merge(p_empty(), p) } p_merge(p_empty(), p) == p)
+  }
+  
+  axiom empty_2L {
+    (forall p: Process :: { p_seq(p_empty(), p) } p_seq(p_empty(), p) == p)
+  }
+  
+  axiom empty_2R {
+    (forall p: Process :: { p_seq(p, p_empty()) } p_seq(p, p_empty()) == p)
+  }
+  
+  axiom choice_L {
+    (forall p1: Process, p2: Process :: { p_is_choice(p_choice(p1, p2), p1) } p_is_choice(p_choice(p1, p2), p1))
+  }
+  
+  axiom choice_R {
+    (forall p1: Process, p2: Process :: { p_is_choice(p_choice(p1, p2), p2) } p_is_choice(p_choice(p1, p2), p2))
+  }
+  
+  axiom choice_dist {
+    (forall p1: Process, p2: Process, p3: Process :: { p_seq(p_choice(p1, p2), p3) } p_seq(p_choice(p1, p2), p3) == p_choice(p_seq(p1, p3), p_seq(p2, p3)))
+  }
+  
+  axiom seq_assoc {
+    (forall p1: Process, p2: Process, p3: Process :: { p_seq(p_seq(p1, p2), p3) } p_seq(p_seq(p1, p2), p3) == p_seq(p1, p_seq(p2, p3)))
+  }
+  
+  axiom incr_def_2 {
+    (forall p: Process :: { p_seq(p, p_incr()) } p_seq(p, p_incr()) == p_seq(p, p_seq(p_incr(), p_empty())))
+  }
+  
+  axiom single_def_1 {
+    (forall n: Int :: { p_single(n) } (0 < n ? p_seq(p_incr(), p_single(n - 1)) : p_empty()) == p_single(n))
+  }
+  
+  axiom single_def_2 {
+    (forall p: Process, n: Int :: { p_seq(p, p_single(n)) } p_seq(p, p_single(n)) == p_seq(p, p_seq(p_single(n), p_empty())))
+  }
+  
+  axiom dual_def_1 {
+    (forall n: Int, m: Int :: { p_dual(n, m) } p_merge(p_single(n), p_single(m)) == p_dual(n, m))
+  }
+  
+  axiom dual_def_2 {
+    (forall p: Process, n: Int, m: Int :: { p_seq(p, p_dual(n, m)) } p_seq(p, p_dual(n, m)) == p_seq(p, p_seq(p_dual(n, m), p_empty())))
+  }
+  
+  axiom lemma_post {
+    (forall p: Process, n: Int :: { p_seq(p_single(n), p) } p_seq(p_single(n), p) == p_seq((0 < n ? p_seq(p_single(n - 1), p_incr()) : p_empty()), p))
+  }
+  
+  axiom internal_lemma_post {
+    (forall p: Process, n: Int :: { p_seq(p_single(n), p) } p_seq(p_single(n), p) == p_seq((0 < n ? p_seq(p_single(n - 1), p_incr()) : p_empty()), p))
+  }
+  
+  axiom single_axiom_post {
+    (forall p: Process, m: Int, n: Int :: { p_seq(p_single(m), p_seq(p_single(n), p)) } p_seq(p_single(m), p_seq(p_single(n), p)) == p_seq(p_single(m + n), p))
+  }
+  
+  axiom internal_single_axiom_post {
+    (forall p: Process, m: Int, n: Int :: { p_seq(p_single(m), p_seq(p_single(n), p)) } p_seq(p_single(m), p_seq(p_single(n), p)) == p_seq(p_single(m + n), p))
+  }
+}
+
+domain TYPE {
+  
+  unique function class_History(): TYPE
+  
+  unique function class_java_DOT_lang_DOT_Object(): TYPE
+  
+  unique function class_Application(): TYPE
+  
+  unique function class_EncodedGlobalVariables(): TYPE
+  
+  function directSuperclass(t: TYPE): TYPE
+  
+  function type_of(val: Ref): TYPE
+  
+  axiom History_directSuperclass {
+    directSuperclass(class_History()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom java_DOT_lang_DOT_Object_directSuperclass {
+    directSuperclass(class_java_DOT_lang_DOT_Object()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom Application_directSuperclass {
+    directSuperclass(class_Application()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom EncodedGlobalVariables_directSuperclass {
+    directSuperclass(class_EncodedGlobalVariables()) == class_java_DOT_lang_DOT_Object()
+  }
+}
+
+domain frac {
+  
+  function frac_val(a: frac): Perm
+  
+  axiom frac_eq {
+    (forall a: frac, b: frac :: { frac_val(a),frac_val(b) } (frac_val(a) == frac_val(b)) == (a == b))
+  }
+  
+  axiom frac_bound {
+    (forall a: frac :: { frac_val(a) } 0 / 1 < frac_val(a) && frac_val(a) <= 1 / 1)
+  }
+}
+
+domain zfrac {
+  
+  function zfrac_val(a: zfrac): Perm
+  
+  axiom zfrac_eq {
+    (forall a: zfrac, b: zfrac :: { zfrac_val(a),zfrac_val(b) } (zfrac_val(a) == zfrac_val(b)) == (a == b))
+  }
+  
+  axiom zfrac_bound {
+    (forall a: zfrac :: { zfrac_val(a) } 0 / 1 <= zfrac_val(a) && zfrac_val(a) <= 1 / 1)
+  }
+}
+
+//  a field 
+field History_x_hist_value: Int
+
+//  a field 
+field History_x_hist_init: Int
+
+//  a field 
+field History_x_hist_act: Int
+
+//  a field 
+field History_x_hist_write: Int
+
+//  a field 
+field History_x_hist_free: Int
+
+//  a field 
+field History_x_hist_hist: Int
+
+//  a field 
+field History_x_hist_action: Int
+
+function instanceof_TYPE_TYPE(t: TYPE, u: TYPE): Bool
+  ensures result == (t == u || directSuperclass(t) == u)
+
+
+function new_frac(x: Perm): frac
+  requires 0 / 1 < x && x <= 1 / 1
+  ensures frac_val(result) == x
+
+
+function new_zfrac(x: Perm): zfrac
+  requires 0 / 1 <= x && x <= 1 / 1
+  ensures zfrac_val(result) == x
+
+
+predicate History_hist_do_incr_Fraction_Process(diz: Ref, fr: frac, proc: Process) 
+
+predicate History_hist_idle_Fraction_Process(diz: Ref, fr: frac, proc: Process) 
+
+method History_incr_begin_Fraction_Process(diz: Ref, fr: frac, proc: Process)
+  requires diz != null
+  requires frac_val(fr) != none
+  requires acc(History_hist_idle_Fraction_Process(diz, fr, proc), write)
+  requires write != none
+  requires acc(diz.History_x_hist_value, write)
+  requires acc(diz.History_x_hist_hist, write)
+  ensures frac_val(fr) != none
+  ensures acc(History_hist_do_incr_Fraction_Process(diz, fr, proc), write)
+  ensures acc(diz.History_x_hist_act, write)
+  ensures acc(diz.History_x_hist_value, write)
+  ensures acc(diz.History_x_hist_write, write)
+  ensures acc(diz.History_x_hist_action, write)
+  ensures diz.History_x_hist_value == diz.History_x_hist_act
+  ensures diz.History_x_hist_value == old(diz.History_x_hist_value)
+{
+  inhale false
+}
+
+method History_incr_commit_Fraction_Process(diz: Ref, fr: frac, proc: Process)
+  requires diz != null
+  requires frac_val(fr) != none
+  requires acc(History_hist_do_incr_Fraction_Process(diz, fr, proc), write)
+  requires write != none
+  requires acc(diz.History_x_hist_act, write)
+  requires acc(diz.History_x_hist_value, write)
+  requires acc(diz.History_x_hist_write, write)
+  requires acc(diz.History_x_hist_action, write)
+  requires diz.History_x_hist_value == diz.History_x_hist_act + 1
+  ensures frac_val(fr) != none
+  ensures acc(History_hist_idle_Fraction_Process(diz, fr, p_seq(proc, p_incr())), write)
+  ensures acc(diz.History_x_hist_value, write)
+  ensures acc(diz.History_x_hist_hist, write)
+  ensures diz.History_x_hist_value == old(diz.History_x_hist_value)
+{
+  inhale false
+}
+
+method History_History() returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_History()
+  ensures acc(sys__result.History_x_hist_value, write)
+  ensures acc(sys__result.History_x_hist_write, write)
+  ensures acc(sys__result.History_x_hist_free, write)
+  ensures sys__result.History_x_hist_value == 0
+{
+  inhale false
+}
+
+method History_internal_History() returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_History()
+  ensures acc(sys__result.History_x_hist_value, write)
+  ensures acc(sys__result.History_x_hist_write, write)
+  ensures acc(sys__result.History_x_hist_free, write)
+  ensures sys__result.History_x_hist_value == 0
+{
+  var diz__1: Ref
+  diz__1 := new(History_x_hist_value, History_x_hist_init, History_x_hist_act, History_x_hist_write, History_x_hist_free, History_x_hist_hist, History_x_hist_action)
+  inhale type_of(diz__1) == class_History()
+  History_hist_set_x_Integer(diz__1, 0)
+  sys__result := diz__1
+  // assert
+  assert sys__result != null && type_of(sys__result) == class_History() && acc(sys__result.History_x_hist_value, write) && acc(sys__result.History_x_hist_write, write) && acc(sys__result.History_x_hist_free, write) && sys__result.History_x_hist_value == 0
+  inhale false
+}
+
+method History_hist_set_x_Integer(diz: Ref, value: Int)
+  requires diz != null
+  requires acc(diz.History_x_hist_value, write)
+  requires acc(diz.History_x_hist_write, write)
+  ensures acc(diz.History_x_hist_value, write) && diz.History_x_hist_value == value
+  ensures acc(diz.History_x_hist_write, write)
+{
+  inhale false
+}
+
+method History_begin_hist(diz: Ref)
+  requires diz != null
+  requires acc(diz.History_x_hist_value, write)
+  requires acc(diz.History_x_hist_write, write)
+  requires acc(diz.History_x_hist_free, write)
+  ensures acc(diz.History_x_hist_value, write)
+  ensures acc(diz.History_x_hist_hist, write)
+  ensures acc(diz.History_x_hist_init, write)
+  ensures diz.History_x_hist_value == old(diz.History_x_hist_value)
+  ensures diz.History_x_hist_init == old(diz.History_x_hist_value)
+  ensures acc(History_hist_idle_Fraction_Process(diz, new_frac(write), p_empty()), write)
+{
+  inhale false
+}
+
+method History_split_Fraction_Process_Fraction_Process(diz: Ref, frac1: frac, proc1: Process, frac2: frac, proc2: Process)
+  requires diz != null
+  requires frac_val(frac1) + frac_val(frac2) <= write
+  requires acc(History_hist_idle_Fraction_Process(diz, new_frac(frac_val(frac1) + frac_val(frac2)), p_merge(proc1, proc2)), write)
+  ensures acc(History_hist_idle_Fraction_Process(diz, frac1, proc1), write)
+  ensures acc(History_hist_idle_Fraction_Process(diz, frac2, proc2), write)
+{
+  inhale false
+}
+
+method History_merge_Fraction_Process_Fraction_Process(diz: Ref, frac1: frac, proc1: Process, frac2: frac, proc2: Process)
+  requires diz != null
+  requires frac_val(frac1) + frac_val(frac2) <= write
+  requires acc(History_hist_idle_Fraction_Process(diz, frac1, proc1), write)
+  requires acc(History_hist_idle_Fraction_Process(diz, frac2, proc2), write)
+  ensures acc(History_hist_idle_Fraction_Process(diz, new_frac(frac_val(frac1) + frac_val(frac2)), p_merge(proc1, proc2)), write)
+{
+  inhale false
+}
+
+method History_end_hist_1_Integer(diz: Ref, n: Int)
+  requires diz != null
+  requires acc(diz.History_x_hist_init, write)
+  requires acc(diz.History_x_hist_value, write)
+  requires acc(diz.History_x_hist_hist, write)
+  requires 0 <= n
+  requires acc(History_hist_idle_Fraction_Process(diz, new_frac(write), p_single(n)), write)
+  ensures acc(diz.History_x_hist_value, write)
+  ensures acc(diz.History_x_hist_write, write)
+  ensures acc(diz.History_x_hist_free, write)
+  ensures diz.History_x_hist_value == old(diz.History_x_hist_value)
+  ensures diz.History_x_hist_value == old(diz.History_x_hist_init) + n
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Object_Object_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Object()
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Object_internal_Object_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Object()
+{
+  inhale false
+}
+
+method Application_do_incr_EncodedGlobalVariables_History_Process_Fraction(diz: Ref, globals: Ref, h: Ref, p: Process, q: frac)
+  requires diz != null
+  requires frac_val(q) != none
+  requires acc(History_hist_idle_Fraction_Process(h, q, p), write)
+  requires acc(h.History_x_hist_value, write)
+  requires acc(h.History_x_hist_hist, write)
+  ensures acc(h.History_x_hist_value, write)
+  ensures acc(h.History_x_hist_hist, write)
+  ensures acc(History_hist_idle_Fraction_Process(h, q, p_seq(p, p_incr())), write)
+{
+  inhale false
+}
+
+method Application___contract_unsatisfiable__internal_do_incr_EncodedGlobalVariables_History_Process_Fraction(diz: Ref, globals: Ref, h: Ref, p: Process, q: frac)
+  requires diz != null
+{
+  inhale true && (frac_val(q) != none && acc(History_hist_idle_Fraction_Process(h, q, p), write) && (acc(h.History_x_hist_value, write) && acc(h.History_x_hist_hist, write)))
+  // assert
+  assert false
+  inhale false
+}
+
+method Application_internal_do_incr_EncodedGlobalVariables_History_Process_Fraction(diz: Ref, globals: Ref, h: Ref, p: Process, q: frac)
+  requires diz != null
+  requires frac_val(q) != none
+  requires acc(History_hist_idle_Fraction_Process(h, q, p), write)
+  requires acc(h.History_x_hist_value, write)
+  requires acc(h.History_x_hist_hist, write)
+  ensures acc(h.History_x_hist_value, write)
+  ensures acc(h.History_x_hist_hist, write)
+  ensures acc(History_hist_idle_Fraction_Process(h, q, p_seq(p, p_incr())), write)
+{
+  History_incr_begin_Fraction_Process(h, q, p)
+  History_hist_set_x_Integer(h, h.History_x_hist_value + 1)
+  History_incr_commit_Fraction_Process(h, q, p)
+}
+
+method Application_main_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale false
+}
+
+method Application___contract_unsatisfiable__internal_main_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+}
+
+method Application_internal_main_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  var h__2: Ref
+  var __flatten_8__3: Process
+  var __flatten_9__4: Process
+  var __flatten_11__5: Process
+  var __flatten_13__6: Process
+  var __flatten_14__7: Process
+  h__2 := History_History()
+  History_hist_set_x_Integer(h__2, 1)
+  History_begin_hist(h__2)
+  __flatten_8__3 := p_empty()
+  __flatten_9__4 := p_empty()
+  History_split_Fraction_Process_Fraction_Process(h__2, new_frac(1 / 3), __flatten_8__3, new_frac(2 / 3), __flatten_9__4)
+  __flatten_11__5 := p_empty()
+  Application_do_incr_EncodedGlobalVariables_History_Process_Fraction(diz, globals, h__2, __flatten_11__5, new_frac(1 / 3))
+  __flatten_13__6 := p_empty()
+  __flatten_14__7 := p_single(1)
+  History_merge_Fraction_Process_Fraction_Process(h__2, new_frac(2 / 3), __flatten_13__6, new_frac(1 / 3), __flatten_14__7)
+  // assert
+  assert acc(h__2.History_x_hist_init, write) && h__2.History_x_hist_init == 1
+  History_end_hist_1_Integer(h__2, 1)
+  // assert
+  assert h__2.History_x_hist_value == 2
+}
+
+method Application_Application_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_Application()
+{
+  inhale false
+}
+
+method Application___contract_unsatisfiable__internal_Application_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+}
+
+method Application_internal_Application_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_Application()
+{
+  var diz__8: Ref
+  diz__8 := new()
+  inhale type_of(diz__8) == class_Application()
+  sys__result := diz__8
+  // assert
+  assert sys__result != null && type_of(sys__result) == class_Application()
+  inhale false
+}

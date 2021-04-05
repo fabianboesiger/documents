@@ -1,0 +1,519 @@
+// Generated on 2021-03-23 at 23:43:29
+domain TYPE {
+  
+  unique function class_ZeroMatrixIC(): TYPE
+  
+  unique function class_java_DOT_lang_DOT_Object(): TYPE
+  
+  unique function class_ZeroMixedArray(): TYPE
+  
+  unique function class_ZeroMany(): TYPE
+  
+  unique function class_ZeroArrayIC(): TYPE
+  
+  unique function class_EncodedGlobalVariables(): TYPE
+  
+  function directSuperclass(t: TYPE): TYPE
+  
+  function type_of(val: Ref): TYPE
+  
+  axiom ZeroMatrixIC_directSuperclass {
+    directSuperclass(class_ZeroMatrixIC()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom ZeroMixedArray_directSuperclass {
+    directSuperclass(class_ZeroMixedArray()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom ZeroMany_directSuperclass {
+    directSuperclass(class_ZeroMany()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom ZeroArrayIC_directSuperclass {
+    directSuperclass(class_ZeroArrayIC()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom EncodedGlobalVariables_directSuperclass {
+    directSuperclass(class_EncodedGlobalVariables()) == class_java_DOT_lang_DOT_Object()
+  }
+}
+
+domain frac {
+  
+  function frac_val(a: frac): Perm
+  
+  axiom frac_eq {
+    (forall a: frac, b: frac :: { frac_val(a),frac_val(b) } (frac_val(a) == frac_val(b)) == (a == b))
+  }
+  
+  axiom frac_bound {
+    (forall a: frac :: { frac_val(a) } 0 / 1 < frac_val(a) && frac_val(a) <= 1 / 1)
+  }
+}
+
+domain zfrac {
+  
+  function zfrac_val(a: zfrac): Perm
+  
+  axiom zfrac_eq {
+    (forall a: zfrac, b: zfrac :: { zfrac_val(a),zfrac_val(b) } (zfrac_val(a) == zfrac_val(b)) == (a == b))
+  }
+  
+  axiom zfrac_bound {
+    (forall a: zfrac :: { zfrac_val(a) } 0 / 1 <= zfrac_val(a) && zfrac_val(a) <= 1 / 1)
+  }
+}
+
+domain VCTArray[CT] {
+  
+  function loc(a: VCTArray[CT], i: Int): CT
+  
+  function alen(a: VCTArray[CT]): Int
+  
+  function first(r: CT): VCTArray[CT]
+  
+  function second(r: CT): Int
+  
+  axiom all_diff {
+    (forall a: VCTArray[CT], i: Int :: { (loc(a, i): CT) } (first((loc(a, i): CT)): VCTArray[CT]) == a && (second((loc(a, i): CT)): Int) == i)
+  }
+  
+  axiom len_nonneg {
+    (forall a: VCTArray[CT] :: { (alen(a): Int) } (alen(a): Int) >= 0)
+  }
+}
+
+domain VCTOption[T] {
+  
+  function VCTNone(): VCTOption[T]
+  
+  function VCTSome(t: T): VCTOption[T]
+  
+  function getVCTOption(o: VCTOption[T]): T
+  
+  function getVCTOptionOrElse(o: VCTOption[T], default: T): T
+  
+  axiom not_equal_vct {
+    (forall x: T :: { (VCTSome(x): VCTOption[T]) } (VCTNone(): VCTOption[T]) != (VCTSome(x): VCTOption[T]))
+  }
+  
+  axiom get_axiom_vct {
+    (forall x: T :: { (getVCTOption((VCTSome(x): VCTOption[T])): T) } (getVCTOption((VCTSome(x): VCTOption[T])): T) == x)
+  }
+  
+  axiom get_axiom_vct_2 {
+    (forall x: VCTOption[T] :: { (VCTSome((getVCTOption(x): T)): VCTOption[T]) } (VCTSome((getVCTOption(x): T)): VCTOption[T]) == x)
+  }
+  
+  axiom get_or_else_axiom_1 {
+    (forall val: T, default: T :: { (getVCTOptionOrElse((VCTSome(val): VCTOption[T]), default): T) } (getVCTOptionOrElse((VCTSome(val): VCTOption[T]), default): T) == val)
+  }
+  
+  axiom get_or_else_axiom_2 {
+    (forall default: T :: { (getVCTOptionOrElse((VCTNone(): VCTOption[T]), default): T) } (getVCTOptionOrElse((VCTNone(): VCTOption[T]), default): T) == default)
+  }
+}
+
+//  a field 
+field ZeroMany_x: Int
+
+//  a field 
+field Integer__item: Int
+
+function instanceof_TYPE_TYPE(t: TYPE, u: TYPE): Bool
+  ensures result == (t == u || directSuperclass(t) == u)
+
+
+function new_frac(x: Perm): frac
+  requires 0 / 1 < x && x <= 1 / 1
+  ensures frac_val(result) == x
+
+
+function new_zfrac(x: Perm): zfrac
+  requires 0 / 1 <= x && x <= 1 / 1
+  ensures zfrac_val(result) == x
+
+
+function getVCTOption2(x: VCTOption[VCTArray[Ref]]): VCTArray[Ref]
+  requires x != (VCTNone(): VCTOption[VCTArray[Ref]])
+{
+  (getVCTOption(x): VCTArray[Ref])
+}
+
+function getVCTOption1(x: VCTOption[VCTArray[VCTArray[Ref]]]): VCTArray[VCTArray[Ref]]
+  requires x != (VCTNone(): VCTOption[VCTArray[VCTArray[Ref]]])
+{
+  (getVCTOption(x): VCTArray[VCTArray[Ref]])
+}
+
+method ZeroMatrixIC___contract_unsatisfiable__matrix_EncodedGlobalVariables_Integer_Integer_Option$Array$Array$Cell$Integer$$$$(diz: Ref, globals: Ref, M: Int, N: Int, matrix: VCTOption[VCTArray[VCTArray[Ref]]])
+  requires diz != null
+{
+  inhale matrix != (VCTNone(): VCTOption[VCTArray[VCTArray[Ref]]]) && 0 < M && 0 < N && (alen(getVCTOption1(matrix)): Int) == M * N && (forall i1__1: Int, j1__2: Int :: { (loc((loc(getVCTOption1(matrix), i1__1): VCTArray[Ref]), j1__2): Ref) } 0 <= i1__1 && i1__1 < M && (0 <= j1__2 && j1__2 < N) ==> acc((loc((loc(getVCTOption1(matrix), i1__1): VCTArray[Ref]), j1__2): Ref).Integer__item, write))
+  // assert
+  assert false
+  inhale false
+}
+
+method ZeroMatrixIC_loop_body_4_Option$Array$Array$Cell$Integer$$$$_Integer_Integer_Integer_Integer(diz: Ref, matrix: VCTOption[VCTArray[VCTArray[Ref]]], M: Int, N: Int, i: Int, j: Int)
+  requires diz != null
+  requires matrix != (VCTNone(): VCTOption[VCTArray[VCTArray[Ref]]]) && 0 < M && 0 < N
+  requires (alen(getVCTOption1(matrix)): Int) == M * N
+  requires 0 <= i && i < M && (0 <= j && j < N)
+  requires acc((loc((loc(getVCTOption1(matrix), i): VCTArray[Ref]), j): Ref).Integer__item, write)
+  ensures matrix != (VCTNone(): VCTOption[VCTArray[VCTArray[Ref]]]) && 0 < M && 0 < N
+  ensures (alen(getVCTOption1(matrix)): Int) == M * N
+  ensures 0 <= i && i < M && (0 <= j && j < N)
+  ensures acc((loc((loc(getVCTOption1(matrix), i): VCTArray[Ref]), j): Ref).Integer__item, write)
+  ensures (loc((loc(getVCTOption1(matrix), i): VCTArray[Ref]), j): Ref).Integer__item == 0
+{
+  var __flatten_1__3: Ref
+  __flatten_1__3 := (loc((loc(getVCTOption1(matrix), i): VCTArray[Ref]), j): Ref)
+  __flatten_1__3.Integer__item := 0
+}
+
+method ZeroMatrixIC_parrallel_region_main_1_Integer_Integer_Option$Array$Array$Cell$Integer$$$$(diz: Ref, M: Int, N: Int, matrix: VCTOption[VCTArray[VCTArray[Ref]]])
+  requires diz != null
+  requires matrix != (VCTNone(): VCTOption[VCTArray[VCTArray[Ref]]]) && 0 < M && 0 < N
+  requires (alen(getVCTOption1(matrix)): Int) == M * N
+  requires (forall i: Int, j: Int :: { (loc((loc(getVCTOption1(matrix), i): VCTArray[Ref]), j): Ref) } 0 <= i && i < M && (0 <= j && j < N) ==> acc((loc((loc(getVCTOption1(matrix), i): VCTArray[Ref]), j): Ref).Integer__item, write))
+  ensures matrix != (VCTNone(): VCTOption[VCTArray[VCTArray[Ref]]]) && 0 < M && 0 < N
+  ensures (alen(getVCTOption1(matrix)): Int) == M * N
+  ensures (forall i: Int, j: Int :: { (loc((loc(getVCTOption1(matrix), i): VCTArray[Ref]), j): Ref) } 0 <= i && i < M && (0 <= j && j < N) ==> acc((loc((loc(getVCTOption1(matrix), i): VCTArray[Ref]), j): Ref).Integer__item, write))
+  ensures (forall i: Int, j: Int :: { (loc((loc(getVCTOption1(matrix), i): VCTArray[Ref]), j): Ref) } 0 <= i && i < M && (0 <= j && j < N) ==> (loc((loc(getVCTOption1(matrix), i): VCTArray[Ref]), j): Ref).Integer__item == 0)
+{
+  inhale false
+}
+
+method ZeroMatrixIC_matrix_EncodedGlobalVariables_Integer_Integer_Option$Array$Array$Cell$Integer$$$$(diz: Ref, globals: Ref, M: Int, N: Int, matrix: VCTOption[VCTArray[VCTArray[Ref]]])
+  requires diz != null
+  requires matrix != (VCTNone(): VCTOption[VCTArray[VCTArray[Ref]]]) && 0 < M && 0 < N
+  requires (alen(getVCTOption1(matrix)): Int) == M * N
+  requires (forall i1: Int, j1: Int :: { (loc((loc(getVCTOption1(matrix), i1): VCTArray[Ref]), j1): Ref) } 0 <= i1 && i1 < M && (0 <= j1 && j1 < N) ==> acc((loc((loc(getVCTOption1(matrix), i1): VCTArray[Ref]), j1): Ref).Integer__item, write))
+  ensures matrix != (VCTNone(): VCTOption[VCTArray[VCTArray[Ref]]]) && 0 < M && 0 < N
+  ensures (alen(getVCTOption1(matrix)): Int) == M * N
+  ensures (forall i1: Int, j1: Int :: { (loc((loc(getVCTOption1(matrix), i1): VCTArray[Ref]), j1): Ref) } 0 <= i1 && i1 < M && (0 <= j1 && j1 < N) ==> acc((loc((loc(getVCTOption1(matrix), i1): VCTArray[Ref]), j1): Ref).Integer__item, write))
+  ensures (forall i3: Int, j3: Int :: { (loc((loc(getVCTOption1(matrix), i3): VCTArray[Ref]), j3): Ref) } 0 <= i3 && i3 < M && (0 <= j3 && j3 < N) ==> (loc((loc(getVCTOption1(matrix), i3): VCTArray[Ref]), j3): Ref).Integer__item == 0)
+{
+  ZeroMatrixIC_parrallel_region_main_1_Integer_Integer_Option$Array$Array$Cell$Integer$$$$(diz, M, N, matrix)
+}
+
+method ZeroMixedArray___contract_unsatisfiable__vector_EncodedGlobalVariables_Integer_Integer_Option$Array$Cell$Integer$$$(diz: Ref, globals: Ref, M: Int, N: Int, ar: VCTOption[VCTArray[Ref]])
+  requires diz != null
+{
+  inhale ar != (VCTNone(): VCTOption[VCTArray[Ref]]) && 0 < N && 0 < M && (alen(getVCTOption2(ar)): Int) == M * N && (forall i__4: Int :: { (loc(getVCTOption2(ar), i__4): Ref) } 0 <= i__4 && i__4 < M * N ==> acc((loc(getVCTOption2(ar), i__4): Ref).Integer__item, write))
+  // assert
+  assert false
+  inhale false
+}
+
+method ZeroMixedArray_loop_body_9_Option$Array$Cell$Integer$$$_Integer_Integer_Integer_Integer(diz: Ref, ar: VCTOption[VCTArray[Ref]], N: Int, M: Int, i: Int, j: Int)
+  requires diz != null
+  requires ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+  requires 0 < N
+  requires 0 < M
+  requires (alen(getVCTOption2(ar)): Int) == M * N
+  requires 0 <= i && i < M && (i * N <= j && j < (i + 1) * N)
+  requires 0 <= i && i < M
+  requires acc((loc(getVCTOption2(ar), j): Ref).Integer__item, write)
+  ensures ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+  ensures 0 < N
+  ensures 0 < M
+  ensures (alen(getVCTOption2(ar)): Int) == M * N
+  ensures 0 <= i && i < M && (i * N <= j && j < (i + 1) * N)
+  ensures 0 <= i && i < M
+  ensures acc((loc(getVCTOption2(ar), j): Ref).Integer__item, write)
+  ensures (loc(getVCTOption2(ar), j): Ref).Integer__item == 0
+{
+  var __flatten_3__5: Ref
+  __flatten_3__5 := (loc(getVCTOption2(ar), j): Ref)
+  __flatten_3__5.Integer__item := 0
+}
+
+method ZeroMixedArray_parrallel_region_main_3_Integer_Integer_Option$Array$Cell$Integer$$$_Integer(diz: Ref, N: Int, i: Int, ar: VCTOption[VCTArray[Ref]], M: Int)
+  requires diz != null
+  requires ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+  requires 0 < N
+  requires 0 < M
+  requires (alen(getVCTOption2(ar)): Int) == M * N
+  requires i * N < (i + 1) * N ==> 0 <= i && i < M
+  requires (forall j: Int :: { (loc(getVCTOption2(ar), j): Ref) } i * N <= j && j < (i + 1) * N ==> acc((loc(getVCTOption2(ar), j): Ref).Integer__item, write))
+  ensures ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+  ensures 0 < N
+  ensures 0 < M
+  ensures (alen(getVCTOption2(ar)): Int) == M * N
+  ensures i * N < (i + 1) * N ==> 0 <= i && i < M
+  ensures (forall j: Int :: { (loc(getVCTOption2(ar), j): Ref) } i * N <= j && j < (i + 1) * N ==> acc((loc(getVCTOption2(ar), j): Ref).Integer__item, write))
+  ensures (forall j: Int :: { (loc(getVCTOption2(ar), j): Ref) } i * N <= j && j < (i + 1) * N ==> (loc(getVCTOption2(ar), j): Ref).Integer__item == 0)
+{
+  inhale false
+}
+
+method ZeroMixedArray_loop_body_8_Integer_Integer_Option$Array$Cell$Integer$$$_Integer(diz: Ref, N: Int, i: Int, ar: VCTOption[VCTArray[Ref]], M: Int)
+  requires diz != null
+  requires ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+  requires 0 < N
+  requires 0 < M
+  requires (alen(getVCTOption2(ar)): Int) == M * N
+  requires 0 <= i && i < M
+  requires (forall k: Int :: { (loc(getVCTOption2(ar), k): Ref) } i * N <= k && k < (i + 1) * N ==> acc((loc(getVCTOption2(ar), k): Ref).Integer__item, write))
+  ensures ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+  ensures 0 < N
+  ensures 0 < M
+  ensures (alen(getVCTOption2(ar)): Int) == M * N
+  ensures 0 <= i && i < M
+  ensures (forall k: Int :: { (loc(getVCTOption2(ar), k): Ref) } i * N <= k && k < (i + 1) * N ==> acc((loc(getVCTOption2(ar), k): Ref).Integer__item, write))
+  ensures (forall k: Int :: { (loc(getVCTOption2(ar), k): Ref) } i * N <= k && k < (i + 1) * N ==> (loc(getVCTOption2(ar), k): Ref).Integer__item == 0)
+{
+  ZeroMixedArray_parrallel_region_main_3_Integer_Integer_Option$Array$Cell$Integer$$$_Integer(diz, N, i, ar, M)
+}
+
+method ZeroMixedArray_parrallel_region_main_2_Integer_Option$Array$Cell$Integer$$$_Integer(diz: Ref, M: Int, ar: VCTOption[VCTArray[Ref]], N: Int)
+  requires diz != null
+  requires ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+  requires 0 < N
+  requires 0 < M
+  requires (alen(getVCTOption2(ar)): Int) == M * N
+  requires 0 < N ==> (forall k: Int :: { (loc(getVCTOption2(ar), k): Ref) } 0 <= k && k < M * N ==> acc((loc(getVCTOption2(ar), k): Ref).Integer__item, write))
+  ensures ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+  ensures 0 < N
+  ensures 0 < M
+  ensures (alen(getVCTOption2(ar)): Int) == M * N
+  ensures 0 < N ==> (forall k: Int :: { (loc(getVCTOption2(ar), k): Ref) } 0 <= k && k < M * N ==> acc((loc(getVCTOption2(ar), k): Ref).Integer__item, write))
+  ensures 0 < N ==> (forall k: Int :: { (loc(getVCTOption2(ar), k): Ref) } 0 <= k && k < M * N ==> (loc(getVCTOption2(ar), k): Ref).Integer__item == 0)
+{
+  inhale false
+}
+
+method ZeroMixedArray_vector_EncodedGlobalVariables_Integer_Integer_Option$Array$Cell$Integer$$$(diz: Ref, globals: Ref, M: Int, N: Int, ar: VCTOption[VCTArray[Ref]])
+  requires diz != null
+  requires ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+  requires 0 < N
+  requires 0 < M
+  requires (alen(getVCTOption2(ar)): Int) == M * N
+  requires (forall i: Int :: { (loc(getVCTOption2(ar), i): Ref) } 0 <= i && i < M * N ==> acc((loc(getVCTOption2(ar), i): Ref).Integer__item, write))
+  ensures ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+  ensures 0 < N
+  ensures 0 < M
+  ensures (alen(getVCTOption2(ar)): Int) == M * N
+  ensures (forall i: Int :: { (loc(getVCTOption2(ar), i): Ref) } 0 <= i && i < M * N ==> acc((loc(getVCTOption2(ar), i): Ref).Integer__item, write))
+  ensures (forall i: Int :: { (loc(getVCTOption2(ar), i): Ref) } 0 <= i && i < M * N ==> (loc(getVCTOption2(ar), i): Ref).Integer__item == 0)
+{
+  ZeroMixedArray_parrallel_region_main_2_Integer_Option$Array$Cell$Integer$$$_Integer(diz, M, ar, N)
+}
+
+method ZeroMany___contract_unsatisfiable__initialise_EncodedGlobalVariables_Integer_Integer_Option$Array$Cell$Integer$$$_Option$Array$Array$Cell$Integer$$$$(diz: Ref, globals: Ref, M: Int, N: Int, ar: VCTOption[VCTArray[Ref]], matrix: VCTOption[VCTArray[VCTArray[Ref]]])
+  requires diz != null
+{
+  inhale ar != (VCTNone(): VCTOption[VCTArray[Ref]]) && matrix != (VCTNone(): VCTOption[VCTArray[VCTArray[Ref]]]) && 0 <= M && 0 <= N && (alen(getVCTOption2(ar)): Int) == N && (matrix != (VCTNone(): VCTOption[VCTArray[VCTArray[Ref]]]) && (alen(getVCTOption1(matrix)): Int) == M && (forall i0__6: Int :: { (loc(getVCTOption1(matrix), i0__6): VCTArray[Ref]) } 0 <= i0__6 && i0__6 < M ==> (alen((loc(getVCTOption1(matrix), i0__6): VCTArray[Ref])): Int) == N) && (forall i0__7: Int, i1__8: Int, j0__9: Int, j1__10: Int :: { (loc((loc(getVCTOption1(matrix), i0__7): VCTArray[Ref]), i1__8): Ref),(loc((loc(getVCTOption1(matrix), j0__9): VCTArray[Ref]), j1__10): Ref) } 0 <= i0__7 && i0__7 < M && (0 <= i1__8 && i1__8 < N) && (0 <= j0__9 && j0__9 < M) && (0 <= j1__10 && j1__10 < N) && (loc((loc(getVCTOption1(matrix), i0__7): VCTArray[Ref]), i1__8): Ref) == (loc((loc(getVCTOption1(matrix), j0__9): VCTArray[Ref]), j1__10): Ref) ==> i0__7 == j0__9 && i1__8 == j1__10)) && (acc(diz.ZeroMany_x, write) && (forall i__11: Int :: { (loc(getVCTOption2(ar), i__11): Ref) } 0 <= i__11 && i__11 < N ==> acc((loc(getVCTOption2(ar), i__11): Ref).Integer__item, write)) && (forall i1__12: Int, j1__13: Int :: { (loc((loc(getVCTOption1(matrix), i1__12): VCTArray[Ref]), j1__13): Ref) } 0 <= i1__12 && i1__12 < M && (0 <= j1__13 && j1__13 < N) ==> acc((loc((loc(getVCTOption1(matrix), i1__12): VCTArray[Ref]), j1__13): Ref).Integer__item, write)))
+  // assert
+  assert false
+  inhale false
+}
+
+method ZeroMany_loop_body_13_Option$Array$Cell$Integer$$$_Option$Array$Array$Cell$Integer$$$$_Integer_Integer(diz: Ref, ar: VCTOption[VCTArray[Ref]], matrix: VCTOption[VCTArray[VCTArray[Ref]]], M: Int, N: Int)
+  requires diz != null
+  requires ar != (VCTNone(): VCTOption[VCTArray[Ref]]) && matrix != (VCTNone(): VCTOption[VCTArray[VCTArray[Ref]]]) && 0 <= M && 0 <= N
+  requires (alen(getVCTOption2(ar)): Int) == N
+  requires matrix != (VCTNone(): VCTOption[VCTArray[VCTArray[Ref]]])
+  requires (alen(getVCTOption1(matrix)): Int) == M
+  requires (forall i0: Int :: { (loc(getVCTOption1(matrix), i0): VCTArray[Ref]) } 0 <= i0 && i0 < M ==> (alen((loc(getVCTOption1(matrix), i0): VCTArray[Ref])): Int) == N)
+  requires (forall i0: Int, i1: Int, j0: Int, j1: Int :: { (loc((loc(getVCTOption1(matrix), i0): VCTArray[Ref]), i1): Ref),(loc((loc(getVCTOption1(matrix), j0): VCTArray[Ref]), j1): Ref) } 0 <= i0 && i0 < M && (0 <= i1 && i1 < N) && (0 <= j0 && j0 < M) && (0 <= j1 && j1 < N) && (loc((loc(getVCTOption1(matrix), i0): VCTArray[Ref]), i1): Ref) == (loc((loc(getVCTOption1(matrix), j0): VCTArray[Ref]), j1): Ref) ==> i0 == j0 && i1 == j1)
+  requires acc(diz.ZeroMany_x, write)
+  ensures ar != (VCTNone(): VCTOption[VCTArray[Ref]]) && matrix != (VCTNone(): VCTOption[VCTArray[VCTArray[Ref]]]) && 0 <= M && 0 <= N
+  ensures (alen(getVCTOption2(ar)): Int) == N
+  ensures matrix != (VCTNone(): VCTOption[VCTArray[VCTArray[Ref]]])
+  ensures (alen(getVCTOption1(matrix)): Int) == M
+  ensures (forall i0: Int :: { (loc(getVCTOption1(matrix), i0): VCTArray[Ref]) } 0 <= i0 && i0 < M ==> (alen((loc(getVCTOption1(matrix), i0): VCTArray[Ref])): Int) == N)
+  ensures (forall i0: Int, i1: Int, j0: Int, j1: Int :: { (loc((loc(getVCTOption1(matrix), i0): VCTArray[Ref]), i1): Ref),(loc((loc(getVCTOption1(matrix), j0): VCTArray[Ref]), j1): Ref) } 0 <= i0 && i0 < M && (0 <= i1 && i1 < N) && (0 <= j0 && j0 < M) && (0 <= j1 && j1 < N) && (loc((loc(getVCTOption1(matrix), i0): VCTArray[Ref]), i1): Ref) == (loc((loc(getVCTOption1(matrix), j0): VCTArray[Ref]), j1): Ref) ==> i0 == j0 && i1 == j1)
+  ensures acc(diz.ZeroMany_x, write)
+  ensures diz.ZeroMany_x == 0
+{
+  diz.ZeroMany_x := 0
+}
+
+method ZeroMany_loop_body_14_Option$Array$Cell$Integer$$$_Option$Array$Array$Cell$Integer$$$$_Integer_Integer_Integer(diz: Ref, ar: VCTOption[VCTArray[Ref]], matrix: VCTOption[VCTArray[VCTArray[Ref]]], M: Int, N: Int, i: Int)
+  requires diz != null
+  requires ar != (VCTNone(): VCTOption[VCTArray[Ref]]) && matrix != (VCTNone(): VCTOption[VCTArray[VCTArray[Ref]]]) && 0 <= M && 0 <= N
+  requires (alen(getVCTOption2(ar)): Int) == N
+  requires matrix != (VCTNone(): VCTOption[VCTArray[VCTArray[Ref]]])
+  requires (alen(getVCTOption1(matrix)): Int) == M
+  requires (forall i0: Int :: { (loc(getVCTOption1(matrix), i0): VCTArray[Ref]) } 0 <= i0 && i0 < M ==> (alen((loc(getVCTOption1(matrix), i0): VCTArray[Ref])): Int) == N)
+  requires (forall i0: Int, i1: Int, j0: Int, j1: Int :: { (loc((loc(getVCTOption1(matrix), i0): VCTArray[Ref]), i1): Ref),(loc((loc(getVCTOption1(matrix), j0): VCTArray[Ref]), j1): Ref) } 0 <= i0 && i0 < M && (0 <= i1 && i1 < N) && (0 <= j0 && j0 < M) && (0 <= j1 && j1 < N) && (loc((loc(getVCTOption1(matrix), i0): VCTArray[Ref]), i1): Ref) == (loc((loc(getVCTOption1(matrix), j0): VCTArray[Ref]), j1): Ref) ==> i0 == j0 && i1 == j1)
+  requires 0 <= i && i < N
+  requires acc((loc(getVCTOption2(ar), i): Ref).Integer__item, write)
+  ensures ar != (VCTNone(): VCTOption[VCTArray[Ref]]) && matrix != (VCTNone(): VCTOption[VCTArray[VCTArray[Ref]]]) && 0 <= M && 0 <= N
+  ensures (alen(getVCTOption2(ar)): Int) == N
+  ensures matrix != (VCTNone(): VCTOption[VCTArray[VCTArray[Ref]]])
+  ensures (alen(getVCTOption1(matrix)): Int) == M
+  ensures (forall i0: Int :: { (loc(getVCTOption1(matrix), i0): VCTArray[Ref]) } 0 <= i0 && i0 < M ==> (alen((loc(getVCTOption1(matrix), i0): VCTArray[Ref])): Int) == N)
+  ensures (forall i0: Int, i1: Int, j0: Int, j1: Int :: { (loc((loc(getVCTOption1(matrix), i0): VCTArray[Ref]), i1): Ref),(loc((loc(getVCTOption1(matrix), j0): VCTArray[Ref]), j1): Ref) } 0 <= i0 && i0 < M && (0 <= i1 && i1 < N) && (0 <= j0 && j0 < M) && (0 <= j1 && j1 < N) && (loc((loc(getVCTOption1(matrix), i0): VCTArray[Ref]), i1): Ref) == (loc((loc(getVCTOption1(matrix), j0): VCTArray[Ref]), j1): Ref) ==> i0 == j0 && i1 == j1)
+  ensures 0 <= i && i < N
+  ensures acc((loc(getVCTOption2(ar), i): Ref).Integer__item, write)
+  ensures (loc(getVCTOption2(ar), i): Ref).Integer__item == 0
+{
+  var __flatten_6__14: Ref
+  __flatten_6__14 := (loc(getVCTOption2(ar), i): Ref)
+  __flatten_6__14.Integer__item := 0
+}
+
+method ZeroMany_loop_body_15_Option$Array$Cell$Integer$$$_Option$Array$Array$Cell$Integer$$$$_Integer_Integer_Integer_Integer(diz: Ref, ar: VCTOption[VCTArray[Ref]], matrix: VCTOption[VCTArray[VCTArray[Ref]]], M: Int, N: Int, i: Int, j: Int)
+  requires diz != null
+  requires ar != (VCTNone(): VCTOption[VCTArray[Ref]]) && matrix != (VCTNone(): VCTOption[VCTArray[VCTArray[Ref]]]) && 0 <= M && 0 <= N
+  requires (alen(getVCTOption2(ar)): Int) == N
+  requires matrix != (VCTNone(): VCTOption[VCTArray[VCTArray[Ref]]])
+  requires (alen(getVCTOption1(matrix)): Int) == M
+  requires (forall i0: Int :: { (loc(getVCTOption1(matrix), i0): VCTArray[Ref]) } 0 <= i0 && i0 < M ==> (alen((loc(getVCTOption1(matrix), i0): VCTArray[Ref])): Int) == N)
+  requires (forall i0: Int, i1: Int, j0: Int, j1: Int :: { (loc((loc(getVCTOption1(matrix), i0): VCTArray[Ref]), i1): Ref),(loc((loc(getVCTOption1(matrix), j0): VCTArray[Ref]), j1): Ref) } 0 <= i0 && i0 < M && (0 <= i1 && i1 < N) && (0 <= j0 && j0 < M) && (0 <= j1 && j1 < N) && (loc((loc(getVCTOption1(matrix), i0): VCTArray[Ref]), i1): Ref) == (loc((loc(getVCTOption1(matrix), j0): VCTArray[Ref]), j1): Ref) ==> i0 == j0 && i1 == j1)
+  requires 0 <= i && i < M && (0 <= j && j < N)
+  requires acc((loc((loc(getVCTOption1(matrix), i): VCTArray[Ref]), j): Ref).Integer__item, write)
+  ensures ar != (VCTNone(): VCTOption[VCTArray[Ref]]) && matrix != (VCTNone(): VCTOption[VCTArray[VCTArray[Ref]]]) && 0 <= M && 0 <= N
+  ensures (alen(getVCTOption2(ar)): Int) == N
+  ensures matrix != (VCTNone(): VCTOption[VCTArray[VCTArray[Ref]]])
+  ensures (alen(getVCTOption1(matrix)): Int) == M
+  ensures (forall i0: Int :: { (loc(getVCTOption1(matrix), i0): VCTArray[Ref]) } 0 <= i0 && i0 < M ==> (alen((loc(getVCTOption1(matrix), i0): VCTArray[Ref])): Int) == N)
+  ensures (forall i0: Int, i1: Int, j0: Int, j1: Int :: { (loc((loc(getVCTOption1(matrix), i0): VCTArray[Ref]), i1): Ref),(loc((loc(getVCTOption1(matrix), j0): VCTArray[Ref]), j1): Ref) } 0 <= i0 && i0 < M && (0 <= i1 && i1 < N) && (0 <= j0 && j0 < M) && (0 <= j1 && j1 < N) && (loc((loc(getVCTOption1(matrix), i0): VCTArray[Ref]), i1): Ref) == (loc((loc(getVCTOption1(matrix), j0): VCTArray[Ref]), j1): Ref) ==> i0 == j0 && i1 == j1)
+  ensures 0 <= i && i < M && (0 <= j && j < N)
+  ensures acc((loc((loc(getVCTOption1(matrix), i): VCTArray[Ref]), j): Ref).Integer__item, write)
+  ensures (loc((loc(getVCTOption1(matrix), i): VCTArray[Ref]), j): Ref).Integer__item == 0
+{
+  var __flatten_7__15: Ref
+  __flatten_7__15 := (loc((loc(getVCTOption1(matrix), i): VCTArray[Ref]), j): Ref)
+  __flatten_7__15.Integer__item := 0
+}
+
+method ZeroMany_parrallel_region_main_4_Option$Array$Cell$Integer$$$_Option$Array$Array$Cell$Integer$$$$_Integer_Integer(diz: Ref, ar: VCTOption[VCTArray[Ref]], matrix: VCTOption[VCTArray[VCTArray[Ref]]], M: Int, N: Int)
+  requires diz != null
+  requires ar != (VCTNone(): VCTOption[VCTArray[Ref]]) && matrix != (VCTNone(): VCTOption[VCTArray[VCTArray[Ref]]]) && 0 <= M && 0 <= N
+  requires (alen(getVCTOption2(ar)): Int) == N
+  requires matrix != (VCTNone(): VCTOption[VCTArray[VCTArray[Ref]]])
+  requires (alen(getVCTOption1(matrix)): Int) == M
+  requires (forall i0: Int :: { (loc(getVCTOption1(matrix), i0): VCTArray[Ref]) } 0 <= i0 && i0 < M ==> (alen((loc(getVCTOption1(matrix), i0): VCTArray[Ref])): Int) == N)
+  requires (forall i0: Int, i1: Int, j0: Int, j1: Int :: { (loc((loc(getVCTOption1(matrix), i0): VCTArray[Ref]), i1): Ref),(loc((loc(getVCTOption1(matrix), j0): VCTArray[Ref]), j1): Ref) } 0 <= i0 && i0 < M && (0 <= i1 && i1 < N) && (0 <= j0 && j0 < M) && (0 <= j1 && j1 < N) && (loc((loc(getVCTOption1(matrix), i0): VCTArray[Ref]), i1): Ref) == (loc((loc(getVCTOption1(matrix), j0): VCTArray[Ref]), j1): Ref) ==> i0 == j0 && i1 == j1)
+  requires true ==> acc(diz.ZeroMany_x, write)
+  requires ar != (VCTNone(): VCTOption[VCTArray[Ref]]) && matrix != (VCTNone(): VCTOption[VCTArray[VCTArray[Ref]]]) && 0 <= M && 0 <= N
+  requires (alen(getVCTOption2(ar)): Int) == N
+  requires matrix != (VCTNone(): VCTOption[VCTArray[VCTArray[Ref]]])
+  requires (alen(getVCTOption1(matrix)): Int) == M
+  requires (forall i0: Int :: { (loc(getVCTOption1(matrix), i0): VCTArray[Ref]) } 0 <= i0 && i0 < M ==> (alen((loc(getVCTOption1(matrix), i0): VCTArray[Ref])): Int) == N)
+  requires (forall i0: Int, i1: Int, j0: Int, j1: Int :: { (loc((loc(getVCTOption1(matrix), i0): VCTArray[Ref]), i1): Ref),(loc((loc(getVCTOption1(matrix), j0): VCTArray[Ref]), j1): Ref) } 0 <= i0 && i0 < M && (0 <= i1 && i1 < N) && (0 <= j0 && j0 < M) && (0 <= j1 && j1 < N) && (loc((loc(getVCTOption1(matrix), i0): VCTArray[Ref]), i1): Ref) == (loc((loc(getVCTOption1(matrix), j0): VCTArray[Ref]), j1): Ref) ==> i0 == j0 && i1 == j1)
+  requires (forall i: Int :: { (loc(getVCTOption2(ar), i): Ref) } 0 <= i && i < N ==> acc((loc(getVCTOption2(ar), i): Ref).Integer__item, write))
+  requires ar != (VCTNone(): VCTOption[VCTArray[Ref]]) && matrix != (VCTNone(): VCTOption[VCTArray[VCTArray[Ref]]]) && 0 <= M && 0 <= N
+  requires (alen(getVCTOption2(ar)): Int) == N
+  requires matrix != (VCTNone(): VCTOption[VCTArray[VCTArray[Ref]]])
+  requires (alen(getVCTOption1(matrix)): Int) == M
+  requires (forall i0: Int :: { (loc(getVCTOption1(matrix), i0): VCTArray[Ref]) } 0 <= i0 && i0 < M ==> (alen((loc(getVCTOption1(matrix), i0): VCTArray[Ref])): Int) == N)
+  requires (forall i0: Int, i1: Int, j0: Int, j1: Int :: { (loc((loc(getVCTOption1(matrix), i0): VCTArray[Ref]), i1): Ref),(loc((loc(getVCTOption1(matrix), j0): VCTArray[Ref]), j1): Ref) } 0 <= i0 && i0 < M && (0 <= i1 && i1 < N) && (0 <= j0 && j0 < M) && (0 <= j1 && j1 < N) && (loc((loc(getVCTOption1(matrix), i0): VCTArray[Ref]), i1): Ref) == (loc((loc(getVCTOption1(matrix), j0): VCTArray[Ref]), j1): Ref) ==> i0 == j0 && i1 == j1)
+  requires (forall i: Int, j: Int :: { (loc((loc(getVCTOption1(matrix), i): VCTArray[Ref]), j): Ref) } 0 <= i && i < M && (0 <= j && j < N) ==> acc((loc((loc(getVCTOption1(matrix), i): VCTArray[Ref]), j): Ref).Integer__item, write))
+  ensures ar != (VCTNone(): VCTOption[VCTArray[Ref]]) && matrix != (VCTNone(): VCTOption[VCTArray[VCTArray[Ref]]]) && 0 <= M && 0 <= N
+  ensures (alen(getVCTOption2(ar)): Int) == N
+  ensures matrix != (VCTNone(): VCTOption[VCTArray[VCTArray[Ref]]])
+  ensures (alen(getVCTOption1(matrix)): Int) == M
+  ensures (forall i0: Int :: { (loc(getVCTOption1(matrix), i0): VCTArray[Ref]) } 0 <= i0 && i0 < M ==> (alen((loc(getVCTOption1(matrix), i0): VCTArray[Ref])): Int) == N)
+  ensures (forall i0: Int, i1: Int, j0: Int, j1: Int :: { (loc((loc(getVCTOption1(matrix), i0): VCTArray[Ref]), i1): Ref),(loc((loc(getVCTOption1(matrix), j0): VCTArray[Ref]), j1): Ref) } 0 <= i0 && i0 < M && (0 <= i1 && i1 < N) && (0 <= j0 && j0 < M) && (0 <= j1 && j1 < N) && (loc((loc(getVCTOption1(matrix), i0): VCTArray[Ref]), i1): Ref) == (loc((loc(getVCTOption1(matrix), j0): VCTArray[Ref]), j1): Ref) ==> i0 == j0 && i1 == j1)
+  ensures true ==> acc(diz.ZeroMany_x, write)
+  ensures true ==> diz.ZeroMany_x == 0
+  ensures ar != (VCTNone(): VCTOption[VCTArray[Ref]]) && matrix != (VCTNone(): VCTOption[VCTArray[VCTArray[Ref]]]) && 0 <= M && 0 <= N
+  ensures (alen(getVCTOption2(ar)): Int) == N
+  ensures matrix != (VCTNone(): VCTOption[VCTArray[VCTArray[Ref]]])
+  ensures (alen(getVCTOption1(matrix)): Int) == M
+  ensures (forall i0: Int :: { (loc(getVCTOption1(matrix), i0): VCTArray[Ref]) } 0 <= i0 && i0 < M ==> (alen((loc(getVCTOption1(matrix), i0): VCTArray[Ref])): Int) == N)
+  ensures (forall i0: Int, i1: Int, j0: Int, j1: Int :: { (loc((loc(getVCTOption1(matrix), i0): VCTArray[Ref]), i1): Ref),(loc((loc(getVCTOption1(matrix), j0): VCTArray[Ref]), j1): Ref) } 0 <= i0 && i0 < M && (0 <= i1 && i1 < N) && (0 <= j0 && j0 < M) && (0 <= j1 && j1 < N) && (loc((loc(getVCTOption1(matrix), i0): VCTArray[Ref]), i1): Ref) == (loc((loc(getVCTOption1(matrix), j0): VCTArray[Ref]), j1): Ref) ==> i0 == j0 && i1 == j1)
+  ensures (forall i: Int :: { (loc(getVCTOption2(ar), i): Ref) } 0 <= i && i < N ==> acc((loc(getVCTOption2(ar), i): Ref).Integer__item, write))
+  ensures (forall i: Int :: { (loc(getVCTOption2(ar), i): Ref) } 0 <= i && i < N ==> (loc(getVCTOption2(ar), i): Ref).Integer__item == 0)
+  ensures ar != (VCTNone(): VCTOption[VCTArray[Ref]]) && matrix != (VCTNone(): VCTOption[VCTArray[VCTArray[Ref]]]) && 0 <= M && 0 <= N
+  ensures (alen(getVCTOption2(ar)): Int) == N
+  ensures matrix != (VCTNone(): VCTOption[VCTArray[VCTArray[Ref]]])
+  ensures (alen(getVCTOption1(matrix)): Int) == M
+  ensures (forall i0: Int :: { (loc(getVCTOption1(matrix), i0): VCTArray[Ref]) } 0 <= i0 && i0 < M ==> (alen((loc(getVCTOption1(matrix), i0): VCTArray[Ref])): Int) == N)
+  ensures (forall i0: Int, i1: Int, j0: Int, j1: Int :: { (loc((loc(getVCTOption1(matrix), i0): VCTArray[Ref]), i1): Ref),(loc((loc(getVCTOption1(matrix), j0): VCTArray[Ref]), j1): Ref) } 0 <= i0 && i0 < M && (0 <= i1 && i1 < N) && (0 <= j0 && j0 < M) && (0 <= j1 && j1 < N) && (loc((loc(getVCTOption1(matrix), i0): VCTArray[Ref]), i1): Ref) == (loc((loc(getVCTOption1(matrix), j0): VCTArray[Ref]), j1): Ref) ==> i0 == j0 && i1 == j1)
+  ensures (forall i: Int, j: Int :: { (loc((loc(getVCTOption1(matrix), i): VCTArray[Ref]), j): Ref) } 0 <= i && i < M && (0 <= j && j < N) ==> acc((loc((loc(getVCTOption1(matrix), i): VCTArray[Ref]), j): Ref).Integer__item, write))
+  ensures (forall i: Int, j: Int :: { (loc((loc(getVCTOption1(matrix), i): VCTArray[Ref]), j): Ref) } 0 <= i && i < M && (0 <= j && j < N) ==> (loc((loc(getVCTOption1(matrix), i): VCTArray[Ref]), j): Ref).Integer__item == 0)
+{
+  inhale false
+}
+
+method ZeroMany_initialise_EncodedGlobalVariables_Integer_Integer_Option$Array$Cell$Integer$$$_Option$Array$Array$Cell$Integer$$$$(diz: Ref, globals: Ref, M: Int, N: Int, ar: VCTOption[VCTArray[Ref]], matrix: VCTOption[VCTArray[VCTArray[Ref]]])
+  requires diz != null
+  requires ar != (VCTNone(): VCTOption[VCTArray[Ref]]) && matrix != (VCTNone(): VCTOption[VCTArray[VCTArray[Ref]]]) && 0 <= M && 0 <= N
+  requires (alen(getVCTOption2(ar)): Int) == N
+  requires matrix != (VCTNone(): VCTOption[VCTArray[VCTArray[Ref]]])
+  requires (alen(getVCTOption1(matrix)): Int) == M
+  requires (forall i0: Int :: { (loc(getVCTOption1(matrix), i0): VCTArray[Ref]) } 0 <= i0 && i0 < M ==> (alen((loc(getVCTOption1(matrix), i0): VCTArray[Ref])): Int) == N)
+  requires (forall i0: Int, i1: Int, j0: Int, j1: Int :: { (loc((loc(getVCTOption1(matrix), i0): VCTArray[Ref]), i1): Ref),(loc((loc(getVCTOption1(matrix), j0): VCTArray[Ref]), j1): Ref) } 0 <= i0 && i0 < M && (0 <= i1 && i1 < N) && (0 <= j0 && j0 < M) && (0 <= j1 && j1 < N) && (loc((loc(getVCTOption1(matrix), i0): VCTArray[Ref]), i1): Ref) == (loc((loc(getVCTOption1(matrix), j0): VCTArray[Ref]), j1): Ref) ==> i0 == j0 && i1 == j1)
+  requires acc(diz.ZeroMany_x, write)
+  requires (forall i: Int :: { (loc(getVCTOption2(ar), i): Ref) } 0 <= i && i < N ==> acc((loc(getVCTOption2(ar), i): Ref).Integer__item, write))
+  requires (forall i1: Int, j1: Int :: { (loc((loc(getVCTOption1(matrix), i1): VCTArray[Ref]), j1): Ref) } 0 <= i1 && i1 < M && (0 <= j1 && j1 < N) ==> acc((loc((loc(getVCTOption1(matrix), i1): VCTArray[Ref]), j1): Ref).Integer__item, write))
+  ensures ar != (VCTNone(): VCTOption[VCTArray[Ref]]) && matrix != (VCTNone(): VCTOption[VCTArray[VCTArray[Ref]]]) && 0 <= M && 0 <= N
+  ensures (alen(getVCTOption2(ar)): Int) == N
+  ensures matrix != (VCTNone(): VCTOption[VCTArray[VCTArray[Ref]]])
+  ensures (alen(getVCTOption1(matrix)): Int) == M
+  ensures (forall i0: Int :: { (loc(getVCTOption1(matrix), i0): VCTArray[Ref]) } 0 <= i0 && i0 < M ==> (alen((loc(getVCTOption1(matrix), i0): VCTArray[Ref])): Int) == N)
+  ensures (forall i0: Int, i1: Int, j0: Int, j1: Int :: { (loc((loc(getVCTOption1(matrix), i0): VCTArray[Ref]), i1): Ref),(loc((loc(getVCTOption1(matrix), j0): VCTArray[Ref]), j1): Ref) } 0 <= i0 && i0 < M && (0 <= i1 && i1 < N) && (0 <= j0 && j0 < M) && (0 <= j1 && j1 < N) && (loc((loc(getVCTOption1(matrix), i0): VCTArray[Ref]), i1): Ref) == (loc((loc(getVCTOption1(matrix), j0): VCTArray[Ref]), j1): Ref) ==> i0 == j0 && i1 == j1)
+  ensures acc(diz.ZeroMany_x, write)
+  ensures (forall i: Int :: { (loc(getVCTOption2(ar), i): Ref) } 0 <= i && i < N ==> acc((loc(getVCTOption2(ar), i): Ref).Integer__item, write))
+  ensures (forall i1: Int, j1: Int :: { (loc((loc(getVCTOption1(matrix), i1): VCTArray[Ref]), j1): Ref) } 0 <= i1 && i1 < M && (0 <= j1 && j1 < N) ==> acc((loc((loc(getVCTOption1(matrix), i1): VCTArray[Ref]), j1): Ref).Integer__item, write))
+  ensures diz.ZeroMany_x == 0
+  ensures (forall i: Int :: { (loc(getVCTOption2(ar), i): Ref) } 0 <= i && i < N ==> (loc(getVCTOption2(ar), i): Ref).Integer__item == 0)
+  ensures (forall i3: Int, j3: Int :: { (loc((loc(getVCTOption1(matrix), i3): VCTArray[Ref]), j3): Ref) } 0 <= i3 && i3 < M && (0 <= j3 && j3 < N) ==> (loc((loc(getVCTOption1(matrix), i3): VCTArray[Ref]), j3): Ref).Integer__item == 0)
+{
+  ZeroMany_parrallel_region_main_4_Option$Array$Cell$Integer$$$_Option$Array$Array$Cell$Integer$$$$_Integer_Integer(diz, ar, matrix, M, N)
+}
+
+method ZeroArrayIC___contract_unsatisfiable__vector_EncodedGlobalVariables_Integer_Option$Array$Cell$Integer$$$(diz: Ref, globals: Ref, N: Int, ar: VCTOption[VCTArray[Ref]])
+  requires diz != null
+{
+  inhale ar != (VCTNone(): VCTOption[VCTArray[Ref]]) && 0 < N && (alen(getVCTOption2(ar)): Int) == N && (forall i__16: Int :: { (loc(getVCTOption2(ar), i__16): Ref) } 0 <= i__16 && i__16 < N ==> acc((loc(getVCTOption2(ar), i__16): Ref).Integer__item, write))
+  // assert
+  assert false
+  inhale false
+}
+
+method ZeroArrayIC_loop_body_19_Option$Array$Cell$Integer$$$_Integer_Integer(diz: Ref, ar: VCTOption[VCTArray[Ref]], N: Int, i: Int)
+  requires diz != null
+  requires ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+  requires 0 < N
+  requires (alen(getVCTOption2(ar)): Int) == N
+  requires 0 <= i && i < N
+  requires acc((loc(getVCTOption2(ar), i): Ref).Integer__item, write)
+  ensures ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+  ensures 0 < N
+  ensures (alen(getVCTOption2(ar)): Int) == N
+  ensures 0 <= i && i < N
+  ensures acc((loc(getVCTOption2(ar), i): Ref).Integer__item, write)
+  ensures (loc(getVCTOption2(ar), i): Ref).Integer__item == 0
+{
+  var __flatten_9__17: Ref
+  __flatten_9__17 := (loc(getVCTOption2(ar), i): Ref)
+  __flatten_9__17.Integer__item := 0
+}
+
+method ZeroArrayIC_parrallel_region_main_5_Integer_Option$Array$Cell$Integer$$$(diz: Ref, N: Int, ar: VCTOption[VCTArray[Ref]])
+  requires diz != null
+  requires ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+  requires 0 < N
+  requires (alen(getVCTOption2(ar)): Int) == N
+  requires (forall i: Int :: { (loc(getVCTOption2(ar), i): Ref) } 0 <= i && i < N ==> acc((loc(getVCTOption2(ar), i): Ref).Integer__item, write))
+  ensures ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+  ensures 0 < N
+  ensures (alen(getVCTOption2(ar)): Int) == N
+  ensures (forall i: Int :: { (loc(getVCTOption2(ar), i): Ref) } 0 <= i && i < N ==> acc((loc(getVCTOption2(ar), i): Ref).Integer__item, write))
+  ensures (forall i: Int :: { (loc(getVCTOption2(ar), i): Ref) } 0 <= i && i < N ==> (loc(getVCTOption2(ar), i): Ref).Integer__item == 0)
+{
+  inhale false
+}
+
+method ZeroArrayIC_vector_EncodedGlobalVariables_Integer_Option$Array$Cell$Integer$$$(diz: Ref, globals: Ref, N: Int, ar: VCTOption[VCTArray[Ref]])
+  requires diz != null
+  requires ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+  requires 0 < N
+  requires (alen(getVCTOption2(ar)): Int) == N
+  requires (forall i: Int :: { (loc(getVCTOption2(ar), i): Ref) } 0 <= i && i < N ==> acc((loc(getVCTOption2(ar), i): Ref).Integer__item, write))
+  ensures ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+  ensures 0 < N
+  ensures (alen(getVCTOption2(ar)): Int) == N
+  ensures (forall i: Int :: { (loc(getVCTOption2(ar), i): Ref) } 0 <= i && i < N ==> acc((loc(getVCTOption2(ar), i): Ref).Integer__item, write))
+  ensures (forall i: Int :: { (loc(getVCTOption2(ar), i): Ref) } 0 <= i && i < N ==> (loc(getVCTOption2(ar), i): Ref).Integer__item == 0)
+{
+  ZeroArrayIC_parrallel_region_main_5_Integer_Option$Array$Cell$Integer$$$(diz, N, ar)
+}

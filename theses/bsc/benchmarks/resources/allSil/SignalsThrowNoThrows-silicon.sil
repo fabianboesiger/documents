@@ -1,0 +1,489 @@
+// Generated on 2021-03-23 at 23:39:35
+domain TYPE {
+  
+  unique function class_java_DOT_lang_DOT_Object(): TYPE
+  
+  unique function class_java_DOT_lang_DOT_Throwable(): TYPE
+  
+  unique function class_java_DOT_lang_DOT_Exception(): TYPE
+  
+  unique function class_MyException(): TYPE
+  
+  unique function class_java_DOT_lang_DOT_RuntimeException(): TYPE
+  
+  unique function class_FooException(): TYPE
+  
+  unique function class_MyClass(): TYPE
+  
+  unique function class_EncodedGlobalVariables(): TYPE
+  
+  function directSuperclass(t: TYPE): TYPE
+  
+  function type_of(val: Ref): TYPE
+  
+  axiom java_DOT_lang_DOT_Object_directSuperclass {
+    directSuperclass(class_java_DOT_lang_DOT_Object()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom java_DOT_lang_DOT_Throwable_directSuperclass {
+    directSuperclass(class_java_DOT_lang_DOT_Throwable()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom java_DOT_lang_DOT_Exception_directSuperclass {
+    directSuperclass(class_java_DOT_lang_DOT_Exception()) == class_java_DOT_lang_DOT_Throwable()
+  }
+  
+  axiom MyException_directSuperclass {
+    directSuperclass(class_MyException()) == class_java_DOT_lang_DOT_Exception()
+  }
+  
+  axiom java_DOT_lang_DOT_RuntimeException_directSuperclass {
+    directSuperclass(class_java_DOT_lang_DOT_RuntimeException()) == class_java_DOT_lang_DOT_Exception()
+  }
+  
+  axiom FooException_directSuperclass {
+    directSuperclass(class_FooException()) == class_java_DOT_lang_DOT_RuntimeException()
+  }
+  
+  axiom MyClass_directSuperclass {
+    directSuperclass(class_MyClass()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom EncodedGlobalVariables_directSuperclass {
+    directSuperclass(class_EncodedGlobalVariables()) == class_java_DOT_lang_DOT_Object()
+  }
+}
+
+domain frac {
+  
+  function frac_val(a: frac): Perm
+  
+  axiom frac_eq {
+    (forall a: frac, b: frac :: { frac_val(a),frac_val(b) } (frac_val(a) == frac_val(b)) == (a == b))
+  }
+  
+  axiom frac_bound {
+    (forall a: frac :: { frac_val(a) } 0 / 1 < frac_val(a) && frac_val(a) <= 1 / 1)
+  }
+}
+
+domain zfrac {
+  
+  function zfrac_val(a: zfrac): Perm
+  
+  axiom zfrac_eq {
+    (forall a: zfrac, b: zfrac :: { zfrac_val(a),zfrac_val(b) } (zfrac_val(a) == zfrac_val(b)) == (a == b))
+  }
+  
+  axiom zfrac_bound {
+    (forall a: zfrac :: { zfrac_val(a) } 0 / 1 <= zfrac_val(a) && zfrac_val(a) <= 1 / 1)
+  }
+}
+
+//  a field 
+field MyClass_x: Int
+
+function instanceof_TYPE_TYPE(t: TYPE, u: TYPE): Bool
+  ensures result == (t == u || directSuperclass(t) == u)
+
+
+function new_frac(x: Perm): frac
+  requires 0 / 1 < x && x <= 1 / 1
+  ensures frac_val(result) == x
+
+
+function new_zfrac(x: Perm): zfrac
+  requires 0 / 1 <= x && x <= 1 / 1
+  ensures zfrac_val(result) == x
+
+
+method java_DOT_lang_DOT_Object_Object_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Object()
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Object_internal_Object_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Object()
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Throwable_Throwable_EncodedGlobalVariables_java_DOT_lang_DOT_Throwable(globals: Ref, arg0: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Throwable()
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Throwable_internal_Throwable_EncodedGlobalVariables_java_DOT_lang_DOT_Throwable(globals: Ref, arg0: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Throwable()
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Throwable_Throwable_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Throwable()
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Throwable_internal_Throwable_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Throwable()
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Throwable_printStackTrace_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Throwable_internal_printStackTrace_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Throwable_getMessage_EncodedGlobalVariables(diz: Ref, globals: Ref) returns (sys__result: Seq[Int])
+  requires diz != null
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Throwable_internal_getMessage_EncodedGlobalVariables(diz: Ref, globals: Ref) returns (sys__result: Seq[Int])
+  requires diz != null
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Exception_Exception_EncodedGlobalVariables_java_DOT_lang_DOT_Throwable(globals: Ref, arg0: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Exception()
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Exception_internal_Exception_EncodedGlobalVariables_java_DOT_lang_DOT_Throwable(globals: Ref, arg0: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Exception()
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Exception_Exception_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Exception()
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Exception_internal_Exception_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Exception()
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Exception_printStackTrace_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Exception_internal_printStackTrace_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Exception_getMessage_EncodedGlobalVariables(diz: Ref, globals: Ref) returns (sys__result: Seq[Int])
+  requires diz != null
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Exception_internal_getMessage_EncodedGlobalVariables(diz: Ref, globals: Ref) returns (sys__result: Seq[Int])
+  requires diz != null
+{
+  inhale false
+}
+
+method MyException___contract_unsatisfiable__MyException_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+  label method_end___contract_unsatisfiable__MyException_0
+}
+
+method MyException_MyException_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_MyException()
+{
+  var diz__1: Ref
+  diz__1 := new()
+  inhale type_of(diz__1) == class_MyException()
+  label method_end_MyException_1
+  sys__result := diz__1
+  // assert
+  assert sys__result != null && type_of(sys__result) == class_MyException()
+  inhale false
+}
+
+method MyException_printStackTrace_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale false
+}
+
+method MyException_internal_printStackTrace_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale false
+}
+
+method MyException_getMessage_EncodedGlobalVariables(diz: Ref, globals: Ref) returns (sys__result: Seq[Int])
+  requires diz != null
+{
+  inhale false
+}
+
+method MyException_internal_getMessage_EncodedGlobalVariables(diz: Ref, globals: Ref) returns (sys__result: Seq[Int])
+  requires diz != null
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_RuntimeException_RuntimeException_EncodedGlobalVariables_java_DOT_lang_DOT_Throwable(globals: Ref, arg0: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_RuntimeException()
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_RuntimeException_internal_RuntimeException_EncodedGlobalVariables_java_DOT_lang_DOT_Throwable(globals: Ref, arg0: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_RuntimeException()
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_RuntimeException_RuntimeException_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_RuntimeException()
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_RuntimeException_internal_RuntimeException_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_RuntimeException()
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_RuntimeException_printStackTrace_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_RuntimeException_internal_printStackTrace_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_RuntimeException_getMessage_EncodedGlobalVariables(diz: Ref, globals: Ref) returns (sys__result: Seq[Int])
+  requires diz != null
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_RuntimeException_internal_getMessage_EncodedGlobalVariables(diz: Ref, globals: Ref) returns (sys__result: Seq[Int])
+  requires diz != null
+{
+  inhale false
+}
+
+method FooException___contract_unsatisfiable__FooException_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+  label method_end___contract_unsatisfiable__FooException_2
+}
+
+method FooException_FooException_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_FooException()
+{
+  var diz__2: Ref
+  diz__2 := new()
+  inhale type_of(diz__2) == class_FooException()
+  label method_end_FooException_3
+  sys__result := diz__2
+  // assert
+  assert sys__result != null && type_of(sys__result) == class_FooException()
+  inhale false
+}
+
+method FooException_printStackTrace_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale false
+}
+
+method FooException_internal_printStackTrace_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale false
+}
+
+method FooException_getMessage_EncodedGlobalVariables(diz: Ref, globals: Ref) returns (sys__result: Seq[Int])
+  requires diz != null
+{
+  inhale false
+}
+
+method FooException_internal_getMessage_EncodedGlobalVariables(diz: Ref, globals: Ref) returns (sys__result: Seq[Int])
+  requires diz != null
+{
+  inhale false
+}
+
+method MyClass___contract_unsatisfiable__foo_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale true && acc(diz.MyClass_x, write)
+  // assert
+  assert false
+  inhale false
+  label method_end___contract_unsatisfiable__foo_4
+}
+
+method MyClass_foo_java_DOT_lang_DOT_Object_EncodedGlobalVariables(diz: Ref, globals: Ref) returns (sys__exc: Ref)
+  requires diz != null
+  requires acc(diz.MyClass_x, write)
+  ensures sys__exc == null ==> acc(diz.MyClass_x, write) && diz.MyClass_x == old(diz.MyClass_x) + 1
+  ensures sys__exc != null && instanceof_TYPE_TYPE(type_of(sys__exc), class_FooException()) ==> acc(diz.MyClass_x, write) && diz.MyClass_x == 10
+  ensures sys__exc != null ==> sys__exc != null && instanceof_TYPE_TYPE(type_of(sys__exc), class_FooException())
+{
+  var __flatten_1__3: Int
+  sys__exc := null
+  __flatten_1__3 := diz.MyClass_x + 1
+  diz.MyClass_x := __flatten_1__3
+  label method_end_foo_5
+}
+
+method MyClass___contract_unsatisfiable__bar_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale true && acc(diz.MyClass_x, write)
+  // assert
+  assert false
+  inhale false
+  label method_end___contract_unsatisfiable__bar_6
+}
+
+method MyClass_bar_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+  requires acc(diz.MyClass_x, write)
+  ensures acc(diz.MyClass_x, write)
+  ensures diz.MyClass_x == 40 || diz.MyClass_x == 50
+{
+  var f__8: Ref
+  var e__7: Ref
+  var sys__exc__4: Ref
+  var __flatten_3__5: Ref
+  var old__sys_exc_11__6: Ref
+  sys__exc__4 := null
+  old__sys_exc_11__6 := sys__exc__4
+  sys__exc__4 := MyClass_foo_java_DOT_lang_DOT_Object_EncodedGlobalVariables(diz, globals)
+  if (sys__exc__4 != null) {
+    goto catch_8
+  }
+  diz.MyClass_x := 20
+  // assert
+  assert diz.MyClass_x == 20
+  __flatten_3__5 := MyException_MyException_EncodedGlobalVariables(globals)
+  sys__exc__4 := __flatten_3__5
+  goto catch_8
+  // assert
+  assert false
+  diz.MyClass_x := 30
+  goto try_end_10
+  label catch_8
+  if (!instanceof_TYPE_TYPE(type_of(sys__exc__4), class_MyException())) {
+    goto catch_9
+  }
+  inhale e__7 == sys__exc__4
+  sys__exc__4 := null
+  // assert
+  assert diz.MyClass_x == 20
+  diz.MyClass_x := 40
+  // assert
+  assert diz.MyClass_x == 40
+  // assert
+  assert sys__exc__4 == null
+  sys__exc__4 := old__sys_exc_11__6
+  goto try_end_10
+  label catch_9
+  if (!instanceof_TYPE_TYPE(type_of(sys__exc__4), class_FooException())) {
+    goto method_end_bar_7
+  }
+  inhale f__8 == sys__exc__4
+  sys__exc__4 := null
+  // assert
+  assert diz.MyClass_x == 10
+  diz.MyClass_x := 50
+  // assert
+  assert diz.MyClass_x == 50
+  // assert
+  assert sys__exc__4 == null
+  sys__exc__4 := old__sys_exc_11__6
+  goto try_end_10
+  label try_end_10
+  // assert
+  assert diz.MyClass_x == 40 || diz.MyClass_x == 50
+  label method_end_bar_7
+  // assert
+  assert sys__exc__4 == null
+}
+
+method MyClass___contract_unsatisfiable__MyClass_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+  label method_end___contract_unsatisfiable__MyClass_12
+}
+
+method MyClass_MyClass_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_MyClass()
+  ensures acc(sys__result.MyClass_x, write) && sys__result.MyClass_x == 0
+{
+  var diz__9: Ref
+  diz__9 := new(MyClass_x)
+  inhale type_of(diz__9) == class_MyClass()
+  diz__9.MyClass_x := 0
+  label method_end_MyClass_13
+  sys__result := diz__9
+  // assert
+  assert sys__result != null && type_of(sys__result) == class_MyClass() && (acc(sys__result.MyClass_x, write) && sys__result.MyClass_x == 0)
+  inhale false
+}

@@ -1,0 +1,159 @@
+// Generated on 2021-03-23 at 23:33:05
+domain TYPE {
+  
+  unique function class_java_DOT_lang_DOT_Object(): TYPE
+  
+  unique function class_InvokationInGuard(): TYPE
+  
+  unique function class_EncodedGlobalVariables(): TYPE
+  
+  function directSuperclass(t: TYPE): TYPE
+  
+  function type_of(val: Ref): TYPE
+  
+  axiom java_DOT_lang_DOT_Object_directSuperclass {
+    directSuperclass(class_java_DOT_lang_DOT_Object()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom InvokationInGuard_directSuperclass {
+    directSuperclass(class_InvokationInGuard()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom EncodedGlobalVariables_directSuperclass {
+    directSuperclass(class_EncodedGlobalVariables()) == class_java_DOT_lang_DOT_Object()
+  }
+}
+
+function instanceof_TYPE_TYPE(t: TYPE, u: TYPE): Bool
+  ensures result == (t == u || directSuperclass(t) == u)
+
+
+method java_DOT_lang_DOT_Object_Object_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Object()
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Object_internal_Object_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Object()
+{
+  inhale false
+}
+
+method InvokationInGuard_bar_EncodedGlobalVariables(diz: Ref, globals: Ref) returns (sys__result: Int)
+  requires diz != null
+{
+  inhale false
+}
+
+method InvokationInGuard___contract_unsatisfiable__internal_bar_EncodedGlobalVariables(diz: Ref, globals: Ref) returns (sys__result: Int)
+  requires diz != null
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+}
+
+method InvokationInGuard_internal_bar_EncodedGlobalVariables(diz: Ref, globals: Ref) returns (sys__result: Int)
+  requires diz != null
+{
+  sys__result := 0
+  // assert
+  assert true
+  inhale false
+}
+
+method InvokationInGuard_foo_EncodedGlobalVariables(diz: Ref, globals: Ref) returns (sys__result: Int)
+  requires diz != null
+{
+  inhale false
+}
+
+method InvokationInGuard___contract_unsatisfiable__internal_foo_EncodedGlobalVariables(diz: Ref, globals: Ref) returns (sys__result: Int)
+  requires diz != null
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+}
+
+method InvokationInGuard_internal_foo_EncodedGlobalVariables(diz: Ref, globals: Ref) returns (sys__result: Int)
+  requires diz != null
+{
+  sys__result := 0
+  // assert
+  assert true
+  inhale false
+}
+
+method InvokationInGuard_action_EncodedGlobalVariables_Integer(diz: Ref, globals: Ref, i: Int)
+  requires diz != null
+{
+  inhale false
+}
+
+method InvokationInGuard___contract_unsatisfiable__internal_action_EncodedGlobalVariables_Integer(diz: Ref, globals: Ref, i: Int)
+  requires diz != null
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+}
+
+method InvokationInGuard_internal_action_EncodedGlobalVariables_Integer(diz: Ref, globals: Ref, i: Int)
+  requires diz != null
+{
+  // assert
+  assert true
+  inhale false
+}
+
+method InvokationInGuard_test_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale false
+}
+
+method InvokationInGuard___contract_unsatisfiable__internal_test_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+}
+
+method InvokationInGuard_internal_test_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  var __flatten_1__1: Int
+  var __flatten_2__2: Int
+  var __flatten_4__3: Int
+  var __flatten_5__4: Int
+  var __flatten_7__5: Int
+  var __flatten_8__6: Int
+  __flatten_1__1 := InvokationInGuard_bar_EncodedGlobalVariables(diz, globals)
+  __flatten_2__2 := InvokationInGuard_bar_EncodedGlobalVariables(diz, globals)
+  if (__flatten_1__1 == __flatten_2__2) {
+    InvokationInGuard_action_EncodedGlobalVariables_Integer(diz, globals, 0)
+  } else {
+    __flatten_4__3 := InvokationInGuard_bar_EncodedGlobalVariables(diz, globals)
+    __flatten_5__4 := InvokationInGuard_foo_EncodedGlobalVariables(diz, globals)
+    if (__flatten_4__3 == __flatten_5__4) {
+      InvokationInGuard_action_EncodedGlobalVariables_Integer(diz, globals, 1)
+    } else {
+      __flatten_7__5 := InvokationInGuard_foo_EncodedGlobalVariables(diz, globals)
+      __flatten_8__6 := InvokationInGuard_bar_EncodedGlobalVariables(diz, globals)
+      if (__flatten_7__5 == __flatten_8__6) {
+        InvokationInGuard_action_EncodedGlobalVariables_Integer(diz, globals, 2)
+      } else {
+        InvokationInGuard_action_EncodedGlobalVariables_Integer(diz, globals, 3)
+      }
+    }
+  }
+}

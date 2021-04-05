@@ -1,0 +1,263 @@
+// Generated on 2021-03-23 at 23:41:38
+domain TYPE {
+  
+  unique function class_java_DOT_lang_DOT_Object(): TYPE
+  
+  unique function class_Tree(): TYPE
+  
+  unique function class_EncodedGlobalVariables(): TYPE
+  
+  unique function class_MagicWands(): TYPE
+  
+  function directSuperclass(t: TYPE): TYPE
+  
+  function type_of(val: Ref): TYPE
+  
+  axiom java_DOT_lang_DOT_Object_directSuperclass {
+    directSuperclass(class_java_DOT_lang_DOT_Object()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom Tree_directSuperclass {
+    directSuperclass(class_Tree()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom EncodedGlobalVariables_directSuperclass {
+    directSuperclass(class_EncodedGlobalVariables()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom MagicWands_directSuperclass {
+    directSuperclass(class_MagicWands()) == class_java_DOT_lang_DOT_Object()
+  }
+}
+
+domain frac {
+  
+  function frac_val(a: frac): Perm
+  
+  axiom frac_eq {
+    (forall a: frac, b: frac :: { frac_val(a),frac_val(b) } (frac_val(a) == frac_val(b)) == (a == b))
+  }
+  
+  axiom frac_bound {
+    (forall a: frac :: { frac_val(a) } 0 / 1 < frac_val(a) && frac_val(a) <= 1 / 1)
+  }
+}
+
+domain zfrac {
+  
+  function zfrac_val(a: zfrac): Perm
+  
+  axiom zfrac_eq {
+    (forall a: zfrac, b: zfrac :: { zfrac_val(a),zfrac_val(b) } (zfrac_val(a) == zfrac_val(b)) == (a == b))
+  }
+  
+  axiom zfrac_bound {
+    (forall a: zfrac :: { zfrac_val(a) } 0 / 1 <= zfrac_val(a) && zfrac_val(a) <= 1 / 1)
+  }
+}
+
+//  a field 
+field Tree_data: Int
+
+//  a field 
+field Tree_left: Ref
+
+//  a field 
+field Tree_right: Ref
+
+function Tree_tolist_EncodedGlobalVariables_Tree(globals: Ref, t: Ref): Seq[Int]
+  requires t != null ==> acc(Tree_state_EncodedGlobalVariables(t, globals), write)
+{
+  (t == null ? Seq[Int]() : (unfolding acc(Tree_state_EncodedGlobalVariables(t, globals), write) in Tree_tolist_EncodedGlobalVariables_Tree(globals, t.Tree_left) ++ Seq(t.Tree_data) ++ Tree_tolist_EncodedGlobalVariables_Tree(globals, t.Tree_right)))
+}
+
+function Tree_sorted_list_Sequence$Integer$(s: Seq[Int]): Bool
+{
+  (forall i: Int :: { s[i] } 1 < i && i < |s| ==> s[i - 1] <= s[i])
+}
+
+function Tree_sorted_EncodedGlobalVariables_Tree(globals: Ref, t: Ref): Bool
+  requires t != null ==> acc(Tree_state_EncodedGlobalVariables(t, globals), write)
+{
+  Tree_sorted_list_Sequence$Integer$(Tree_tolist_EncodedGlobalVariables_Tree(globals, t))
+}
+
+function instanceof_TYPE_TYPE(t: TYPE, u: TYPE): Bool
+  ensures result == (t == u || directSuperclass(t) == u)
+
+
+function new_frac(x: Perm): frac
+  requires 0 / 1 < x && x <= 1 / 1
+  ensures frac_val(result) == x
+
+
+function new_zfrac(x: Perm): zfrac
+  requires 0 / 1 <= x && x <= 1 / 1
+  ensures zfrac_val(result) == x
+
+
+predicate Tree_state_EncodedGlobalVariables(diz: Ref, globals: Ref) {
+  diz != null && (acc(diz.Tree_data, write) && acc(diz.Tree_left, write) && acc(diz.Tree_right, write) && (diz.Tree_left != null ==> acc(Tree_state_EncodedGlobalVariables(diz.Tree_left, globals), write)) && (diz.Tree_right != null ==> acc(Tree_state_EncodedGlobalVariables(diz.Tree_right, globals), write)))
+}
+
+predicate MagicWands_Wand_state_contains_for_state_contains_Tree_EncodedGlobalVariables_Sequence$Integer$_Tree_EncodedGlobalVariables_Sequence$Integer$(x_0: Ref, x_1: Ref, x_2: Seq[Int], x_3: Ref, x_4: Ref, x_5: Seq[Int]) 
+
+method java_DOT_lang_DOT_Object_Object_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Object()
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Object_internal_Object_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Object()
+{
+  inhale false
+}
+
+method Tree___contract_unsatisfiable__del_min_EncodedGlobalVariables_Tree(diz: Ref, globals: Ref, top: Ref) returns (sys__result: Ref)
+  requires diz != null
+{
+  inhale true && (top != null && acc(Tree_state_EncodedGlobalVariables(top, globals), write))
+  // assert
+  assert false
+  inhale false
+}
+
+method Tree_lemma_1_Tree_EncodedGlobalVariables_Sequence$Integer$(diz: Ref, top: Ref, globals: Ref, target_contents: Seq[Int])
+  requires diz != null
+  requires acc(Tree_state_EncodedGlobalVariables(top, globals), write)
+  requires Tree_tolist_EncodedGlobalVariables_Tree(globals, top) == target_contents
+  ensures acc(Tree_state_EncodedGlobalVariables(top, globals), write)
+  ensures Tree_tolist_EncodedGlobalVariables_Tree(globals, top) == target_contents
+{
+  
+}
+
+method Tree_lemma_2_Sequence$Integer$_Sequence$Integer$_Tree_EncodedGlobalVariables_Tree_Tree_Sequence$Integer$(diz: Ref, prev_contents: Seq[Int], cur_contents: Seq[Int], prev: Ref, globals: Ref, cur: Ref, top: Ref, target_contents: Seq[Int])
+  requires diz != null
+  requires 0 < |prev_contents|
+  requires 0 < |cur_contents|
+  requires acc(prev.Tree_left, write)
+  requires acc(prev.Tree_data, write)
+  requires acc(prev.Tree_right, write)
+  requires prev.Tree_right != null ==> acc(Tree_state_EncodedGlobalVariables(prev.Tree_right, globals), write)
+  requires prev.Tree_left == cur
+  requires prev_contents == cur_contents ++ Seq(prev.Tree_data) ++ Tree_tolist_EncodedGlobalVariables_Tree(globals, prev.Tree_right)
+  requires acc(Tree_state_EncodedGlobalVariables(cur, globals), write)
+  requires Tree_tolist_EncodedGlobalVariables_Tree(globals, cur) == cur_contents[1..]
+  ensures acc(Tree_state_EncodedGlobalVariables(top, globals), write)
+  ensures Tree_tolist_EncodedGlobalVariables_Tree(globals, top) == target_contents
+{
+  fold acc(Tree_state_EncodedGlobalVariables(prev, globals), write)
+  // assert
+  assert acc(Tree_state_EncodedGlobalVariables(prev, globals), write) && Tree_tolist_EncodedGlobalVariables_Tree(globals, prev) == prev_contents[1..]
+  exhale acc(MagicWands_Wand_state_contains_for_state_contains_Tree_EncodedGlobalVariables_Sequence$Integer$_Tree_EncodedGlobalVariables_Sequence$Integer$(prev, globals, prev_contents[1..], top, globals, target_contents), write)
+  exhale acc(Tree_state_EncodedGlobalVariables(prev, globals), write) && Tree_tolist_EncodedGlobalVariables_Tree(globals, prev) == prev_contents[1..]
+  inhale acc(Tree_state_EncodedGlobalVariables(top, globals), write) && Tree_tolist_EncodedGlobalVariables_Tree(globals, top) == target_contents
+}
+
+method Tree_del_min_EncodedGlobalVariables_Tree(diz: Ref, globals: Ref, top: Ref) returns (sys__result: Ref)
+  requires diz != null
+  requires top != null
+  requires acc(Tree_state_EncodedGlobalVariables(top, globals), write)
+  ensures sys__result != null ==> acc(Tree_state_EncodedGlobalVariables(sys__result, globals), write)
+  ensures old(Tree_tolist_EncodedGlobalVariables_Tree(globals, top))[1..] == Tree_tolist_EncodedGlobalVariables_Tree(globals, sys__result)
+  ensures old(Tree_sorted_EncodedGlobalVariables_Tree(globals, top)) ==> Tree_sorted_EncodedGlobalVariables_Tree(globals, sys__result)
+{
+  var prev_contents__15: Seq[Int]
+  var prev__14: Ref
+  var cur_contents__13: Seq[Int]
+  var left__12: Ref
+  var cur__11: Ref
+  var sys__local__result__1: Ref
+  var orig_contents__2: Seq[Int]
+  var target_contents__3: Seq[Int]
+  var __flatten_2__4: Seq[Int]
+  var __flatten_3__5: Seq[Int]
+  var __flatten_4__6: Seq[Int]
+  var __flatten_5__7: Seq[Int]
+  var __flatten_6__8: Seq[Int]
+  var __flatten_7__9: Seq[Int]
+  var __flatten_8__10: Ref
+  orig_contents__2 := Tree_tolist_EncodedGlobalVariables_Tree(globals, top)
+  __flatten_2__4 := Tree_tolist_EncodedGlobalVariables_Tree(globals, top)
+  target_contents__3 := __flatten_2__4[1..]
+  unfold acc(Tree_state_EncodedGlobalVariables(top, globals), write)
+  if (top.Tree_left == null) {
+    // assert
+    assert orig_contents__2 == Tree_tolist_EncodedGlobalVariables_Tree(globals, top.Tree_left) ++ Seq(top.Tree_data) ++ Tree_tolist_EncodedGlobalVariables_Tree(globals, top.Tree_right)
+    // assert
+    assert Tree_tolist_EncodedGlobalVariables_Tree(globals, top.Tree_left) == Seq[Int]()
+    sys__local__result__1 := top.Tree_left
+    // assert
+    assert (sys__local__result__1 != null ==> acc(Tree_state_EncodedGlobalVariables(sys__local__result__1, globals), write)) && old(Tree_tolist_EncodedGlobalVariables_Tree(globals, top))[1..] == Tree_tolist_EncodedGlobalVariables_Tree(globals, sys__local__result__1) && (old(Tree_sorted_EncodedGlobalVariables_Tree(globals, top)) ==> Tree_sorted_EncodedGlobalVariables_Tree(globals, sys__local__result__1))
+    goto __return_del_min
+  } else {
+    cur__11 := top
+    left__12 := top.Tree_left
+    cur_contents__13 := orig_contents__2
+    // assert
+    assert cur_contents__13 == Tree_tolist_EncodedGlobalVariables_Tree(globals, left__12) ++ Seq(top.Tree_data) ++ Tree_tolist_EncodedGlobalVariables_Tree(globals, top.Tree_right)
+    unfold acc(Tree_state_EncodedGlobalVariables(left__12, globals), write)
+    exhale true
+    inhale acc(MagicWands_Wand_state_contains_for_state_contains_Tree_EncodedGlobalVariables_Sequence$Integer$_Tree_EncodedGlobalVariables_Sequence$Integer$(top, globals, target_contents__3, top, globals, target_contents__3), write)
+    while (left__12.Tree_left != null)
+      invariant acc(cur__11.Tree_left, write)
+      invariant acc(cur__11.Tree_data, write)
+      invariant acc(cur__11.Tree_right, write)
+      invariant cur__11.Tree_left == left__12
+      invariant cur__11.Tree_right != null ==> acc(Tree_state_EncodedGlobalVariables(cur__11.Tree_right, globals), write)
+      invariant acc(left__12.Tree_left, write)
+      invariant acc(left__12.Tree_data, write)
+      invariant acc(left__12.Tree_right, write)
+      invariant left__12.Tree_left != null ==> acc(Tree_state_EncodedGlobalVariables(left__12.Tree_left, globals), write)
+      invariant left__12.Tree_right != null ==> acc(Tree_state_EncodedGlobalVariables(left__12.Tree_right, globals), write)
+      invariant cur_contents__13 == Tree_tolist_EncodedGlobalVariables_Tree(globals, left__12.Tree_left) ++ Seq(left__12.Tree_data) ++ Tree_tolist_EncodedGlobalVariables_Tree(globals, left__12.Tree_right) ++ Seq(cur__11.Tree_data) ++ Tree_tolist_EncodedGlobalVariables_Tree(globals, cur__11.Tree_right)
+      invariant acc(MagicWands_Wand_state_contains_for_state_contains_Tree_EncodedGlobalVariables_Sequence$Integer$_Tree_EncodedGlobalVariables_Sequence$Integer$(cur__11, globals, cur_contents__13[1..], top, globals, target_contents__3), write) 
+    {
+      prev__14 := cur__11
+      prev_contents__15 := cur_contents__13
+      cur__11 := left__12
+      left__12 := cur__11.Tree_left
+      unfold acc(Tree_state_EncodedGlobalVariables(left__12, globals), write)
+      __flatten_3__5 := Tree_tolist_EncodedGlobalVariables_Tree(globals, left__12.Tree_left)
+      __flatten_4__6 := Seq(left__12.Tree_data)
+      __flatten_5__7 := Tree_tolist_EncodedGlobalVariables_Tree(globals, left__12.Tree_right)
+      cur_contents__13 := __flatten_3__5 ++ __flatten_4__6 ++ __flatten_5__7
+      __flatten_6__8 := Seq(cur__11.Tree_data)
+      __flatten_7__9 := Tree_tolist_EncodedGlobalVariables_Tree(globals, cur__11.Tree_right)
+      cur_contents__13 := cur_contents__13 ++ __flatten_6__8 ++ __flatten_7__9
+      // assert
+      assert 0 < |prev_contents__15|
+      // assert
+      assert 0 < |cur_contents__13|
+      // assert
+      assert prev_contents__15 == cur_contents__13 ++ Seq(prev__14.Tree_data) ++ Tree_tolist_EncodedGlobalVariables_Tree(globals, prev__14.Tree_right)
+      exhale 0 < |prev_contents__15| && 0 < |cur_contents__13| && (acc(prev__14.Tree_left, write) && acc(prev__14.Tree_data, write)) && (acc(prev__14.Tree_right, write) && (prev__14.Tree_right != null ==> acc(Tree_state_EncodedGlobalVariables(prev__14.Tree_right, globals), write))) && prev__14.Tree_left == cur__11 && prev_contents__15 == cur_contents__13 ++ Seq(prev__14.Tree_data) ++ Tree_tolist_EncodedGlobalVariables_Tree(globals, prev__14.Tree_right)
+      inhale acc(MagicWands_Wand_state_contains_for_state_contains_Tree_EncodedGlobalVariables_Sequence$Integer$_Tree_EncodedGlobalVariables_Sequence$Integer$(cur__11, globals, cur_contents__13[1..], top, globals, target_contents__3), write)
+    }
+    __flatten_8__10 := left__12.Tree_right
+    cur__11.Tree_left := __flatten_8__10
+    fold acc(Tree_state_EncodedGlobalVariables(cur__11, globals), write)
+    // assert
+    assert Tree_tolist_EncodedGlobalVariables_Tree(globals, cur__11) == cur_contents__13[1..]
+    // assert
+    assert acc(Tree_state_EncodedGlobalVariables(cur__11, globals), write) && Tree_tolist_EncodedGlobalVariables_Tree(globals, cur__11) == Tree_tolist_EncodedGlobalVariables_Tree(globals, cur__11)
+    // assert
+    assert acc(Tree_state_EncodedGlobalVariables(cur__11, globals), write) && Tree_tolist_EncodedGlobalVariables_Tree(globals, cur__11) == cur_contents__13[1..]
+    exhale acc(MagicWands_Wand_state_contains_for_state_contains_Tree_EncodedGlobalVariables_Sequence$Integer$_Tree_EncodedGlobalVariables_Sequence$Integer$(cur__11, globals, cur_contents__13[1..], top, globals, target_contents__3), write)
+    exhale acc(Tree_state_EncodedGlobalVariables(cur__11, globals), write) && Tree_tolist_EncodedGlobalVariables_Tree(globals, cur__11) == cur_contents__13[1..]
+    inhale acc(Tree_state_EncodedGlobalVariables(top, globals), write) && Tree_tolist_EncodedGlobalVariables_Tree(globals, top) == target_contents__3
+    sys__local__result__1 := top
+    // assert
+    assert (sys__local__result__1 != null ==> acc(Tree_state_EncodedGlobalVariables(sys__local__result__1, globals), write)) && old(Tree_tolist_EncodedGlobalVariables_Tree(globals, top))[1..] == Tree_tolist_EncodedGlobalVariables_Tree(globals, sys__local__result__1) && (old(Tree_sorted_EncodedGlobalVariables_Tree(globals, top)) ==> Tree_sorted_EncodedGlobalVariables_Tree(globals, sys__local__result__1))
+    goto __return_del_min
+  }
+  label __return_del_min
+  sys__result := sys__local__result__1
+  // assert
+  assert (sys__result != null ==> acc(Tree_state_EncodedGlobalVariables(sys__result, globals), write)) && old(Tree_tolist_EncodedGlobalVariables_Tree(globals, top))[1..] == Tree_tolist_EncodedGlobalVariables_Tree(globals, sys__result) && (old(Tree_sorted_EncodedGlobalVariables_Tree(globals, top)) ==> Tree_sorted_EncodedGlobalVariables_Tree(globals, sys__result))
+  inhale false
+}

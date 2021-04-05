@@ -1,0 +1,93 @@
+// Generated on 2021-03-23 at 23:41:43
+domain TYPE {
+  
+  unique function class_java_DOT_lang_DOT_Object(): TYPE
+  
+  unique function class_C(): TYPE
+  
+  unique function class_EncodedGlobalVariables(): TYPE
+  
+  function directSuperclass(t: TYPE): TYPE
+  
+  function type_of(val: Ref): TYPE
+  
+  axiom java_DOT_lang_DOT_Object_directSuperclass {
+    directSuperclass(class_java_DOT_lang_DOT_Object()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom C_directSuperclass {
+    directSuperclass(class_C()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom EncodedGlobalVariables_directSuperclass {
+    directSuperclass(class_EncodedGlobalVariables()) == class_java_DOT_lang_DOT_Object()
+  }
+}
+
+function instanceof_TYPE_TYPE(t: TYPE, u: TYPE): Bool
+  ensures result == (t == u || directSuperclass(t) == u)
+
+
+method java_DOT_lang_DOT_Object_Object_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Object()
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Object_internal_Object_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Object()
+{
+  inhale false
+}
+
+method C_m1_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+  requires type_of(diz) == class_C()
+{
+  inhale false
+}
+
+method C___contract_unsatisfiable__internal_m1_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale true && type_of(diz) == class_C()
+  // assert
+  assert false
+  inhale false
+}
+
+method C_internal_m1_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+  requires type_of(diz) == class_C()
+{
+  // assert
+  assert diz != null && instanceof_TYPE_TYPE(type_of(diz), class_C())
+  // assert
+  assert type_of(diz) == class_C()
+}
+
+method C_m2_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+  requires diz != null && instanceof_TYPE_TYPE(type_of(diz), class_C())
+{
+  inhale false
+}
+
+method C___contract_unsatisfiable__internal_m2_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale true && (diz != null && instanceof_TYPE_TYPE(type_of(diz), class_C()))
+  // assert
+  assert false
+  inhale false
+}
+
+method C_internal_m2_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+  requires diz != null && instanceof_TYPE_TYPE(type_of(diz), class_C())
+{
+  // assert
+  assert diz != null && instanceof_TYPE_TYPE(type_of(diz), class_C())
+}
