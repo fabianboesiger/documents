@@ -1,0 +1,132 @@
+// Generated on 2021-03-23 at 23:28:29
+domain TYPE {
+  
+  unique function class_java_DOT_lang_DOT_Object(): TYPE
+  
+  unique function class_MyClass(): TYPE
+  
+  unique function class_EncodedGlobalVariables(): TYPE
+  
+  function directSuperclass(t: TYPE): TYPE
+  
+  function type_of(val: Ref): TYPE
+  
+  axiom java_DOT_lang_DOT_Object_directSuperclass {
+    directSuperclass(class_java_DOT_lang_DOT_Object()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom MyClass_directSuperclass {
+    directSuperclass(class_MyClass()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom EncodedGlobalVariables_directSuperclass {
+    directSuperclass(class_EncodedGlobalVariables()) == class_java_DOT_lang_DOT_Object()
+  }
+}
+
+function instanceof_TYPE_TYPE(t: TYPE, u: TYPE): Bool
+  ensures result == (t == u || directSuperclass(t) == u)
+
+
+method java_DOT_lang_DOT_Object_Object_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Object()
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Object_internal_Object_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Object()
+{
+  inhale false
+}
+
+method MyClass_p_EncodedGlobalVariables(diz: Ref, globals: Ref) returns (sys__result: Bool)
+  requires diz != null
+{
+  inhale false
+}
+
+method MyClass___contract_unsatisfiable__foo_EncodedGlobalVariables(diz: Ref, globals: Ref) returns (sys__result: Int)
+  requires diz != null
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+}
+
+method MyClass_foo_EncodedGlobalVariables(diz: Ref, globals: Ref) returns (sys__result: Int)
+  requires diz != null
+{
+  var switch_1_0__5: Int
+  var sys__local__result__1: Int
+  var x__2: Int
+  var __flatten_1__3: Bool
+  var pp__4: Bool
+  x__2 := 0
+  __flatten_1__3 := MyClass_p_EncodedGlobalVariables(diz, globals)
+  if (__flatten_1__3) {
+    x__2 := 1
+    goto __break_my_if
+    x__2 := 2
+    // assert
+    assert false
+  }
+  label __break_my_if
+  // assert
+  assert x__2 == 1 || x__2 == 0
+  pp__4 := MyClass_p_EncodedGlobalVariables(diz, globals)
+  while (pp__4)
+    invariant x__2 == 1 || x__2 == 0 || x__2 == 500 
+  {
+    x__2 := 5
+    pp__4 := MyClass_p_EncodedGlobalVariables(diz, globals)
+    while (pp__4)
+      invariant x__2 == 5 || x__2 == 40 
+    {
+      switch_1_0__5 := 3
+      if (switch_1_0__5 == 3) {
+        goto switch_1_case_1
+      } else {
+        goto switch_1_case_default
+      }
+      label switch_1_case_default
+      x__2 := 4
+      goto __break_myLoop3
+      label switch_1_case_1
+      x__2 := 10
+      goto __break_switch_1
+      label __break_switch_1
+      // assert
+      assert x__2 == 10
+      x__2 := 40
+      // assert
+      assert x__2 == 40
+    }
+    label __break_myLoop3
+    if (x__2 == 41) {
+      sys__local__result__1 := 30
+      // assert
+      assert true
+      goto __return_foo
+    }
+    // assert
+    assert x__2 == 40 || x__2 == 5
+    x__2 := 500
+    goto __break_loop_0
+  }
+  label __break_loop_0
+  // assert
+  assert x__2 == 500 || x__2 == 1 || x__2 == 0
+  sys__local__result__1 := 31
+  // assert
+  assert true
+  goto __return_foo
+  label __return_foo
+  sys__result := sys__local__result__1
+  // assert
+  assert true
+  inhale false
+}

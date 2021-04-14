@@ -1,0 +1,45 @@
+// Generated on 2021-03-23 at 23:37:49
+domain TYPE {
+  
+  unique function class_rewriterIssue(): TYPE
+  
+  unique function class_java_DOT_lang_DOT_Object(): TYPE
+  
+  unique function class_EncodedGlobalVariables(): TYPE
+  
+  function directSuperclass(t: TYPE): TYPE
+  
+  function type_of(val: Ref): TYPE
+  
+  axiom rewriterIssue_directSuperclass {
+    directSuperclass(class_rewriterIssue()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom EncodedGlobalVariables_directSuperclass {
+    directSuperclass(class_EncodedGlobalVariables()) == class_java_DOT_lang_DOT_Object()
+  }
+}
+
+//  a field 
+field rewriterIssue_x: Int
+
+function instanceof_TYPE_TYPE(t: TYPE, u: TYPE): Bool
+  ensures result == (t == u || directSuperclass(t) == u)
+
+
+method rewriterIssue___contract_unsatisfiable__m_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale true && ((exists i__1: Int :: true && false) ==> acc(diz.rewriterIssue_x, wildcard))
+  // assert
+  assert false
+  inhale false
+}
+
+method rewriterIssue_m_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+  requires (exists i: Int :: true && false) ==> acc(diz.rewriterIssue_x, wildcard)
+  ensures acc(diz.rewriterIssue_x, wildcard)
+{
+  
+}

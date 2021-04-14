@@ -1,0 +1,454 @@
+// Generated on 2021-03-23 at 23:30:40
+domain Process {
+  
+  function p_is_choice(p1: Process, p2: Process): Bool
+  
+  function p_empty(): Process
+  
+  function p_merge(p1: Process, p2: Process): Process
+  
+  function p_choice(p1: Process, p2: Process): Process
+  
+  function p_seq(p1: Process, p2: Process): Process
+  
+  function p_decr(): Process
+  
+  function p_pardecr(): Process
+  
+  axiom empty_1L {
+    (forall p: Process :: { p_merge(p_empty(), p) } p_merge(p_empty(), p) == p)
+  }
+  
+  axiom empty_2L {
+    (forall p: Process :: { p_seq(p_empty(), p) } p_seq(p_empty(), p) == p)
+  }
+  
+  axiom empty_2R {
+    (forall p: Process :: { p_seq(p, p_empty()) } p_seq(p, p_empty()) == p)
+  }
+  
+  axiom choice_L {
+    (forall p1: Process, p2: Process :: { p_is_choice(p_choice(p1, p2), p1) } p_is_choice(p_choice(p1, p2), p1))
+  }
+  
+  axiom choice_R {
+    (forall p1: Process, p2: Process :: { p_is_choice(p_choice(p1, p2), p2) } p_is_choice(p_choice(p1, p2), p2))
+  }
+  
+  axiom choice_dist {
+    (forall p1: Process, p2: Process, p3: Process :: { p_seq(p_choice(p1, p2), p3) } p_seq(p_choice(p1, p2), p3) == p_choice(p_seq(p1, p3), p_seq(p2, p3)))
+  }
+  
+  axiom seq_assoc {
+    (forall p1: Process, p2: Process, p3: Process :: { p_seq(p_seq(p1, p2), p3) } p_seq(p_seq(p1, p2), p3) == p_seq(p1, p_seq(p2, p3)))
+  }
+  
+  axiom decr_def_2 {
+    (forall p: Process :: { p_seq(p, p_decr()) } p_seq(p, p_decr()) == p_seq(p, p_seq(p_decr(), p_empty())))
+  }
+  
+  axiom pardecr_def_1 {
+    p_merge(p_decr(), p_decr()) == p_pardecr()
+  }
+  
+  axiom pardecr_def_2 {
+    (forall p: Process :: { p_seq(p, p_pardecr()) } p_seq(p, p_pardecr()) == p_seq(p, p_seq(p_pardecr(), p_empty())))
+  }
+}
+
+domain TYPE {
+  
+  unique function class_Future(): TYPE
+  
+  unique function class_java_DOT_lang_DOT_Object(): TYPE
+  
+  unique function class_Program(): TYPE
+  
+  unique function class_EncodedGlobalVariables(): TYPE
+  
+  function directSuperclass(t: TYPE): TYPE
+  
+  function type_of(val: Ref): TYPE
+  
+  axiom Future_directSuperclass {
+    directSuperclass(class_Future()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom Program_directSuperclass {
+    directSuperclass(class_Program()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom EncodedGlobalVariables_directSuperclass {
+    directSuperclass(class_EncodedGlobalVariables()) == class_java_DOT_lang_DOT_Object()
+  }
+}
+
+domain frac {
+  
+  function frac_val(a: frac): Perm
+  
+  axiom frac_eq {
+    (forall a: frac, b: frac :: { frac_val(a),frac_val(b) } (frac_val(a) == frac_val(b)) == (a == b))
+  }
+  
+  axiom frac_bound {
+    (forall a: frac :: { frac_val(a) } 0 / 1 < frac_val(a) && frac_val(a) <= 1 / 1)
+  }
+}
+
+domain zfrac {
+  
+  function zfrac_val(a: zfrac): Perm
+  
+  axiom zfrac_eq {
+    (forall a: zfrac, b: zfrac :: { zfrac_val(a),zfrac_val(b) } (zfrac_val(a) == zfrac_val(b)) == (a == b))
+  }
+  
+  axiom zfrac_bound {
+    (forall a: zfrac :: { zfrac_val(a) } 0 / 1 <= zfrac_val(a) && zfrac_val(a) <= 1 / 1)
+  }
+}
+
+//  a field 
+field Future_step_hist_value: Int
+
+//  a field 
+field Future_step_hist_init: Int
+
+//  a field 
+field Future_step_hist_act: Int
+
+//  a field 
+field Future_step_hist_write: Int
+
+//  a field 
+field Future_step_hist_free: Int
+
+//  a field 
+field Future_step_hist_hist: Int
+
+//  a field 
+field Future_step_hist_action: Int
+
+//  a field 
+field Future_counter_hist_value: Int
+
+//  a field 
+field Future_counter_hist_init: Int
+
+//  a field 
+field Future_counter_hist_act: Int
+
+//  a field 
+field Future_counter_hist_write: Int
+
+//  a field 
+field Future_counter_hist_free: Int
+
+//  a field 
+field Future_counter_hist_hist: Int
+
+//  a field 
+field Future_counter_hist_action: Int
+
+function instanceof_TYPE_TYPE(t: TYPE, u: TYPE): Bool
+  ensures result == (t == u || directSuperclass(t) == u)
+
+
+function new_frac(x: Perm): frac
+  requires 0 / 1 < x && x <= 1 / 1
+  ensures frac_val(result) == x
+
+
+function new_zfrac(x: Perm): zfrac
+  requires 0 / 1 <= x && x <= 1 / 1
+  ensures zfrac_val(result) == x
+
+
+predicate Future_hist_do_decr_Fraction_Process_ZFraction(diz: Ref, fr: frac, proc: Process, step_frac: zfrac) 
+
+predicate Future_hist_idle_Fraction_Process(diz: Ref, fr: frac, proc: Process) 
+
+method Future_decr_begin_Fraction_Process_ZFraction(diz: Ref, fr: frac, proc: Process, step_frac: zfrac)
+  requires diz != null
+  requires frac_val(fr) != none
+  requires acc(Future_hist_idle_Fraction_Process(diz, fr, p_seq(p_decr(), proc)), write)
+  requires write != none
+  requires acc(diz.Future_counter_hist_value, write)
+  requires acc(diz.Future_counter_hist_hist, write)
+  requires zfrac_val(step_frac) != none
+  requires acc(diz.Future_step_hist_value, zfrac_val(step_frac))
+  requires acc(diz.Future_step_hist_hist, zfrac_val(step_frac))
+  ensures frac_val(fr) != none
+  ensures acc(Future_hist_do_decr_Fraction_Process_ZFraction(diz, fr, proc, step_frac), write)
+  ensures acc(diz.Future_counter_hist_act, write)
+  ensures acc(diz.Future_counter_hist_value, write)
+  ensures acc(diz.Future_counter_hist_write, write)
+  ensures acc(diz.Future_counter_hist_action, write)
+  ensures diz.Future_counter_hist_value == diz.Future_counter_hist_act
+  ensures diz.Future_counter_hist_value == old(diz.Future_counter_hist_value)
+  ensures acc(diz.Future_step_hist_act, zfrac_val(step_frac))
+  ensures acc(diz.Future_step_hist_value, zfrac_val(step_frac))
+  ensures acc(diz.Future_step_hist_write, zfrac_val(step_frac))
+  ensures acc(diz.Future_step_hist_action, zfrac_val(step_frac))
+  ensures diz.Future_step_hist_value == diz.Future_step_hist_act
+  ensures diz.Future_step_hist_value == old(diz.Future_step_hist_value)
+{
+  inhale false
+}
+
+method Future_decr_commit_Fraction_Process_ZFraction(diz: Ref, fr: frac, proc: Process, step_frac: zfrac)
+  requires diz != null
+  requires frac_val(fr) != none
+  requires acc(Future_hist_do_decr_Fraction_Process_ZFraction(diz, fr, proc, step_frac), write)
+  requires write != none
+  requires acc(diz.Future_counter_hist_act, write)
+  requires acc(diz.Future_counter_hist_value, write)
+  requires acc(diz.Future_counter_hist_write, write)
+  requires acc(diz.Future_counter_hist_action, write)
+  requires zfrac_val(step_frac) != none
+  requires acc(diz.Future_step_hist_act, zfrac_val(step_frac))
+  requires acc(diz.Future_step_hist_value, zfrac_val(step_frac))
+  requires acc(diz.Future_step_hist_write, zfrac_val(step_frac))
+  requires acc(diz.Future_step_hist_action, zfrac_val(step_frac))
+  requires diz.Future_counter_hist_value == diz.Future_counter_hist_act - diz.Future_step_hist_value
+  ensures frac_val(fr) != none
+  ensures acc(Future_hist_idle_Fraction_Process(diz, fr, proc), write)
+  ensures acc(diz.Future_counter_hist_value, write)
+  ensures acc(diz.Future_counter_hist_hist, write)
+  ensures diz.Future_counter_hist_value == old(diz.Future_counter_hist_value)
+  ensures acc(diz.Future_step_hist_value, zfrac_val(step_frac))
+  ensures acc(diz.Future_step_hist_hist, zfrac_val(step_frac))
+  ensures diz.Future_step_hist_value == old(diz.Future_step_hist_value)
+{
+  inhale false
+}
+
+method Future_Future() returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_Future()
+  ensures acc(sys__result.Future_step_hist_value, write)
+  ensures acc(sys__result.Future_step_hist_write, write)
+  ensures acc(sys__result.Future_step_hist_free, write)
+  ensures sys__result.Future_step_hist_value == 0
+  ensures acc(sys__result.Future_counter_hist_value, write)
+  ensures acc(sys__result.Future_counter_hist_write, write)
+  ensures acc(sys__result.Future_counter_hist_free, write)
+  ensures sys__result.Future_counter_hist_value == 0
+{
+  var diz__1: Ref
+  diz__1 := new(Future_step_hist_value, Future_step_hist_init, Future_step_hist_act, Future_step_hist_write, Future_step_hist_free, Future_step_hist_hist, Future_step_hist_action, Future_counter_hist_value, Future_counter_hist_init, Future_counter_hist_act, Future_counter_hist_write, Future_counter_hist_free, Future_counter_hist_hist, Future_counter_hist_action)
+  inhale type_of(diz__1) == class_Future()
+  Future_hist_set_step_Integer(diz__1, 0)
+  Future_hist_set_counter_Integer(diz__1, 0)
+  sys__result := diz__1
+  // assert
+  assert sys__result != null && type_of(sys__result) == class_Future() && acc(sys__result.Future_step_hist_value, write) && acc(sys__result.Future_step_hist_write, write) && acc(sys__result.Future_step_hist_free, write) && sys__result.Future_step_hist_value == 0 && acc(sys__result.Future_counter_hist_value, write) && acc(sys__result.Future_counter_hist_write, write) && acc(sys__result.Future_counter_hist_free, write) && sys__result.Future_counter_hist_value == 0
+  inhale false
+}
+
+method Future_hist_set_step_Integer(diz: Ref, value: Int)
+  requires diz != null
+  requires acc(diz.Future_step_hist_value, write)
+  requires acc(diz.Future_step_hist_write, write)
+  ensures acc(diz.Future_step_hist_value, write) && diz.Future_step_hist_value == value
+  ensures acc(diz.Future_step_hist_write, write)
+{
+  inhale false
+}
+
+method Future_hist_set_counter_Integer(diz: Ref, value: Int)
+  requires diz != null
+  requires acc(diz.Future_counter_hist_value, write)
+  requires acc(diz.Future_counter_hist_write, write)
+  ensures acc(diz.Future_counter_hist_value, write) && diz.Future_counter_hist_value == value
+  ensures acc(diz.Future_counter_hist_write, write)
+{
+  inhale false
+}
+
+method Future_end_future(diz: Ref)
+  requires diz != null
+  requires acc(diz.Future_step_hist_value, write)
+  requires acc(diz.Future_step_hist_hist, write)
+  requires acc(diz.Future_step_hist_init, write)
+  requires acc(diz.Future_counter_hist_value, write)
+  requires acc(diz.Future_counter_hist_hist, write)
+  requires acc(diz.Future_counter_hist_init, write)
+  requires acc(Future_hist_idle_Fraction_Process(diz, new_frac(write), p_empty()), write)
+  ensures acc(diz.Future_step_hist_value, write)
+  ensures acc(diz.Future_step_hist_write, write)
+  ensures acc(diz.Future_step_hist_free, write)
+  ensures diz.Future_step_hist_value == old(diz.Future_step_hist_value)
+  ensures diz.Future_step_hist_value == old(diz.Future_step_hist_init)
+  ensures acc(diz.Future_counter_hist_value, write)
+  ensures acc(diz.Future_counter_hist_write, write)
+  ensures acc(diz.Future_counter_hist_free, write)
+  ensures diz.Future_counter_hist_value == old(diz.Future_counter_hist_value)
+  ensures diz.Future_counter_hist_value == old(diz.Future_counter_hist_init)
+{
+  inhale false
+}
+
+method Future_split_Fraction_Process_Fraction_Process(diz: Ref, frac1: frac, proc1: Process, frac2: frac, proc2: Process)
+  requires diz != null
+  requires frac_val(frac1) + frac_val(frac2) <= write
+  requires acc(Future_hist_idle_Fraction_Process(diz, new_frac(frac_val(frac1) + frac_val(frac2)), p_merge(proc1, proc2)), write)
+  ensures acc(Future_hist_idle_Fraction_Process(diz, frac1, proc1), write)
+  ensures acc(Future_hist_idle_Fraction_Process(diz, frac2, proc2), write)
+{
+  inhale false
+}
+
+method Future_merge_Fraction_Process_Fraction_Process(diz: Ref, frac1: frac, proc1: Process, frac2: frac, proc2: Process)
+  requires diz != null
+  requires frac_val(frac1) + frac_val(frac2) <= write
+  requires acc(Future_hist_idle_Fraction_Process(diz, frac1, proc1), write)
+  requires acc(Future_hist_idle_Fraction_Process(diz, frac2, proc2), write)
+  ensures acc(Future_hist_idle_Fraction_Process(diz, new_frac(frac_val(frac1) + frac_val(frac2)), p_merge(proc1, proc2)), write)
+{
+  inhale false
+}
+
+method Future_begin_future_1(diz: Ref)
+  requires diz != null
+  requires acc(diz.Future_step_hist_value, write)
+  requires acc(diz.Future_step_hist_write, write)
+  requires acc(diz.Future_step_hist_free, write)
+  requires acc(diz.Future_counter_hist_value, write)
+  requires acc(diz.Future_counter_hist_write, write)
+  requires acc(diz.Future_counter_hist_free, write)
+  ensures acc(diz.Future_step_hist_value, write)
+  ensures acc(diz.Future_step_hist_hist, write)
+  ensures acc(diz.Future_step_hist_init, write)
+  ensures diz.Future_step_hist_value == old(diz.Future_step_hist_value)
+  ensures acc(diz.Future_counter_hist_value, write)
+  ensures acc(diz.Future_counter_hist_hist, write)
+  ensures acc(diz.Future_counter_hist_init, write)
+  ensures diz.Future_counter_hist_value == old(diz.Future_counter_hist_value)
+  ensures diz.Future_counter_hist_init == old(diz.Future_counter_hist_value) - 2 * diz.Future_step_hist_init
+  ensures acc(Future_hist_idle_Fraction_Process(diz, new_frac(write), p_pardecr()), write)
+{
+  inhale false
+}
+
+method freshZfrac() returns (sys__result: zfrac)
+{
+  inhale false
+}
+
+method Program___contract_unsatisfiable__decrease_EncodedGlobalVariables_Integer(diz: Ref, globals: Ref, count: Int) returns (sys__result: Int)
+  requires diz != null
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+}
+
+method Program_loop_body_4_Future(diz: Ref, f: Ref)
+  requires diz != null
+  requires acc(Future_hist_idle_Fraction_Process(f, new_frac(1 / 2), p_decr()), write)
+  ensures acc(Future_hist_idle_Fraction_Process(f, new_frac(1 / 2), p_empty()), write)
+{
+  var f_This_step0__2: zfrac
+  var __flatten_4__3: Process
+  var __flatten_7__4: Process
+  inhale acc(f.Future_counter_hist_value, write) && acc(f.Future_counter_hist_hist, write) && (acc(f.Future_step_hist_value, 1 / 2) && acc(f.Future_step_hist_hist, 1 / 2))
+  f_This_step0__2 := freshZfrac()
+  // assert
+  assert none < perm(f.Future_step_hist_hist)
+  // assert
+  assert none < perm(f.Future_step_hist_hist)
+  inhale none < zfrac_val(f_This_step0__2) && zfrac_val(f_This_step0__2) < perm(f.Future_step_hist_hist) && zfrac_val(f_This_step0__2) < perm(f.Future_step_hist_value)
+  __flatten_4__3 := p_empty()
+  Future_decr_begin_Fraction_Process_ZFraction(f, new_frac(1 / 2), __flatten_4__3, f_This_step0__2)
+  Future_hist_set_counter_Integer(f, f.Future_counter_hist_value - f.Future_step_hist_value)
+  __flatten_7__4 := p_empty()
+  Future_decr_commit_Fraction_Process_ZFraction(f, new_frac(1 / 2), __flatten_7__4, f_This_step0__2)
+  exhale acc(f.Future_counter_hist_value, write) && acc(f.Future_counter_hist_hist, write) && (acc(f.Future_step_hist_value, 1 / 2) && acc(f.Future_step_hist_hist, 1 / 2))
+}
+
+method Program_loop_body_10_Future(diz: Ref, f: Ref)
+  requires diz != null
+  requires acc(Future_hist_idle_Fraction_Process(f, new_frac(1 / 2), p_decr()), write)
+  ensures acc(Future_hist_idle_Fraction_Process(f, new_frac(1 / 2), p_empty()), write)
+{
+  var f_This_step1__5: zfrac
+  var __flatten_10__6: Process
+  var __flatten_13__7: Process
+  inhale acc(f.Future_counter_hist_value, write) && acc(f.Future_counter_hist_hist, write) && (acc(f.Future_step_hist_value, 1 / 2) && acc(f.Future_step_hist_hist, 1 / 2))
+  f_This_step1__5 := freshZfrac()
+  // assert
+  assert none < perm(f.Future_step_hist_hist)
+  // assert
+  assert none < perm(f.Future_step_hist_hist)
+  inhale none < zfrac_val(f_This_step1__5) && zfrac_val(f_This_step1__5) < perm(f.Future_step_hist_hist) && zfrac_val(f_This_step1__5) < perm(f.Future_step_hist_value)
+  __flatten_10__6 := p_empty()
+  Future_decr_begin_Fraction_Process_ZFraction(f, new_frac(1 / 2), __flatten_10__6, f_This_step1__5)
+  Future_hist_set_counter_Integer(f, f.Future_counter_hist_value - f.Future_step_hist_value)
+  __flatten_13__7 := p_empty()
+  Future_decr_commit_Fraction_Process_ZFraction(f, new_frac(1 / 2), __flatten_13__7, f_This_step1__5)
+  exhale acc(f.Future_counter_hist_value, write) && acc(f.Future_counter_hist_hist, write) && (acc(f.Future_step_hist_value, 1 / 2) && acc(f.Future_step_hist_hist, 1 / 2))
+}
+
+method Program_parrallel_region_main_1_Future(diz: Ref, f: Ref)
+  requires diz != null
+  requires true ==> acc(Future_hist_idle_Fraction_Process(f, new_frac(1 / 2), p_decr()), write)
+  requires true ==> acc(Future_hist_idle_Fraction_Process(f, new_frac(1 / 2), p_decr()), write)
+  ensures true ==> acc(Future_hist_idle_Fraction_Process(f, new_frac(1 / 2), p_empty()), write)
+  ensures true ==> acc(Future_hist_idle_Fraction_Process(f, new_frac(1 / 2), p_empty()), write)
+{
+  inhale false
+}
+
+method Program_decrease_EncodedGlobalVariables_Integer(diz: Ref, globals: Ref, count: Int) returns (sys__result: Int)
+  requires diz != null
+  ensures sys__result == count - 4
+{
+  var f__8: Ref
+  var __flatten_19__9: Process
+  var __flatten_20__10: Process
+  var __flatten_23__11: Process
+  var __flatten_24__12: Process
+  f__8 := Future_Future()
+  Future_hist_set_counter_Integer(f__8, count)
+  Future_hist_set_step_Integer(f__8, 2)
+  Future_begin_future_1(f__8)
+  __flatten_19__9 := p_decr()
+  __flatten_20__10 := p_decr()
+  Future_split_Fraction_Process_Fraction_Process(f__8, new_frac(1 / 2), __flatten_19__9, new_frac(1 / 2), __flatten_20__10)
+  exhale acc(f__8.Future_counter_hist_value, write) && acc(f__8.Future_counter_hist_hist, write) && (acc(f__8.Future_step_hist_value, 1 / 2) && acc(f__8.Future_step_hist_hist, 1 / 2))
+  Program_parrallel_region_main_1_Future(diz, f__8)
+  inhale acc(f__8.Future_counter_hist_value, write) && acc(f__8.Future_counter_hist_hist, write) && (acc(f__8.Future_step_hist_value, 1 / 2) && acc(f__8.Future_step_hist_hist, 1 / 2))
+  __flatten_23__11 := p_empty()
+  __flatten_24__12 := p_empty()
+  Future_merge_Fraction_Process_Fraction_Process(f__8, new_frac(1 / 2), __flatten_23__11, new_frac(1 / 2), __flatten_24__12)
+  Future_end_future(f__8)
+  sys__result := f__8.Future_counter_hist_value
+  // assert
+  assert sys__result == count - 4
+  inhale false
+}
+
+method Program___contract_unsatisfiable__Program_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+}
+
+method Program_Program_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_Program()
+{
+  var diz__13: Ref
+  diz__13 := new()
+  inhale type_of(diz__13) == class_Program()
+  sys__result := diz__13
+  // assert
+  assert sys__result != null && type_of(sys__result) == class_Program()
+  inhale false
+}

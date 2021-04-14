@@ -1,0 +1,586 @@
+// Generated on 2021-03-23 at 23:33:31
+domain TYPE {
+  
+  unique function class_java_DOT_lang_DOT_Object(): TYPE
+  
+  unique function class_Exercise4(): TYPE
+  
+  unique function class_JavaArrayExamples(): TYPE
+  
+  unique function class_EncodedGlobalVariables(): TYPE
+  
+  function directSuperclass(t: TYPE): TYPE
+  
+  function type_of(val: Ref): TYPE
+  
+  axiom java_DOT_lang_DOT_Object_directSuperclass {
+    directSuperclass(class_java_DOT_lang_DOT_Object()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom Exercise4_directSuperclass {
+    directSuperclass(class_Exercise4()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom JavaArrayExamples_directSuperclass {
+    directSuperclass(class_JavaArrayExamples()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom EncodedGlobalVariables_directSuperclass {
+    directSuperclass(class_EncodedGlobalVariables()) == class_java_DOT_lang_DOT_Object()
+  }
+}
+
+domain frac {
+  
+  function frac_val(a: frac): Perm
+  
+  axiom frac_eq {
+    (forall a: frac, b: frac :: { frac_val(a),frac_val(b) } (frac_val(a) == frac_val(b)) == (a == b))
+  }
+  
+  axiom frac_bound {
+    (forall a: frac :: { frac_val(a) } 0 / 1 < frac_val(a) && frac_val(a) <= 1 / 1)
+  }
+}
+
+domain zfrac {
+  
+  function zfrac_val(a: zfrac): Perm
+  
+  axiom zfrac_eq {
+    (forall a: zfrac, b: zfrac :: { zfrac_val(a),zfrac_val(b) } (zfrac_val(a) == zfrac_val(b)) == (a == b))
+  }
+  
+  axiom zfrac_bound {
+    (forall a: zfrac :: { zfrac_val(a) } 0 / 1 <= zfrac_val(a) && zfrac_val(a) <= 1 / 1)
+  }
+}
+
+domain VCTArray[CT] {
+  
+  function loc(a: VCTArray[CT], i: Int): CT
+  
+  function alen(a: VCTArray[CT]): Int
+  
+  function first(r: CT): VCTArray[CT]
+  
+  function second(r: CT): Int
+  
+  axiom all_diff {
+    (forall a: VCTArray[CT], i: Int :: { (loc(a, i): CT) } (first((loc(a, i): CT)): VCTArray[CT]) == a && (second((loc(a, i): CT)): Int) == i)
+  }
+  
+  axiom len_nonneg {
+    (forall a: VCTArray[CT] :: { (alen(a): Int) } (alen(a): Int) >= 0)
+  }
+}
+
+domain VCTOption[T] {
+  
+  function VCTNone(): VCTOption[T]
+  
+  function VCTSome(t: T): VCTOption[T]
+  
+  function getVCTOption(o: VCTOption[T]): T
+  
+  function getVCTOptionOrElse(o: VCTOption[T], default: T): T
+  
+  axiom not_equal_vct {
+    (forall x: T :: { (VCTSome(x): VCTOption[T]) } (VCTNone(): VCTOption[T]) != (VCTSome(x): VCTOption[T]))
+  }
+  
+  axiom get_axiom_vct {
+    (forall x: T :: { (getVCTOption((VCTSome(x): VCTOption[T])): T) } (getVCTOption((VCTSome(x): VCTOption[T])): T) == x)
+  }
+  
+  axiom get_axiom_vct_2 {
+    (forall x: VCTOption[T] :: { (VCTSome((getVCTOption(x): T)): VCTOption[T]) } (VCTSome((getVCTOption(x): T)): VCTOption[T]) == x)
+  }
+  
+  axiom get_or_else_axiom_1 {
+    (forall val: T, default: T :: { (getVCTOptionOrElse((VCTSome(val): VCTOption[T]), default): T) } (getVCTOptionOrElse((VCTSome(val): VCTOption[T]), default): T) == val)
+  }
+  
+  axiom get_or_else_axiom_2 {
+    (forall default: T :: { (getVCTOptionOrElse((VCTNone(): VCTOption[T]), default): T) } (getVCTOptionOrElse((VCTNone(): VCTOption[T]), default): T) == default)
+  }
+}
+
+//  a field 
+field Integer__item: Int
+
+function instanceof_TYPE_TYPE(t: TYPE, u: TYPE): Bool
+  ensures result == (t == u || directSuperclass(t) == u)
+
+
+function new_frac(x: Perm): frac
+  requires 0 / 1 < x && x <= 1 / 1
+  ensures frac_val(result) == x
+
+
+function new_zfrac(x: Perm): zfrac
+  requires 0 / 1 <= x && x <= 1 / 1
+  ensures zfrac_val(result) == x
+
+
+function getVCTOption1(x: VCTOption[VCTArray[Ref]]): VCTArray[Ref]
+  requires x != (VCTNone(): VCTOption[VCTArray[Ref]])
+{
+  (getVCTOption(x): VCTArray[Ref])
+}
+
+method java_DOT_lang_DOT_Object_Object_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Object()
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Object_internal_Object_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Object()
+{
+  inhale false
+}
+
+method Exercise4_zip_EncodedGlobalVariables_Option$Array$Cell$Integer$$$_Option$Array$Cell$Integer$$$_Option$Array$Cell$Integer$$$(diz: Ref, globals: Ref, a: VCTOption[VCTArray[Ref]], b: VCTOption[VCTArray[Ref]], res: VCTOption[VCTArray[Ref]])
+  requires diz != null
+  requires a != (VCTNone(): VCTOption[VCTArray[Ref]]) && b != (VCTNone(): VCTOption[VCTArray[Ref]]) && res != (VCTNone(): VCTOption[VCTArray[Ref]])
+  requires (alen(getVCTOption1(a)): Int) == (alen(getVCTOption1(b)): Int) && (alen(getVCTOption1(res)): Int) == 2 * (alen(getVCTOption1(a)): Int)
+  requires (forall i: Int :: { (loc(getVCTOption1(a), i): Ref) } 0 <= i && i < (alen(getVCTOption1(a)): Int) ==> acc((loc(getVCTOption1(a), i): Ref).Integer__item, write))
+  requires (forall i: Int :: { (loc(getVCTOption1(b), i): Ref) } 0 <= i && i < (alen(getVCTOption1(b)): Int) ==> acc((loc(getVCTOption1(b), i): Ref).Integer__item, write))
+  requires (forall i: Int :: { (loc(getVCTOption1(res), i): Ref) } 0 <= i && i < (alen(getVCTOption1(res)): Int) ==> acc((loc(getVCTOption1(res), i): Ref).Integer__item, write))
+  ensures a != (VCTNone(): VCTOption[VCTArray[Ref]]) && b != (VCTNone(): VCTOption[VCTArray[Ref]]) && res != (VCTNone(): VCTOption[VCTArray[Ref]])
+  ensures (alen(getVCTOption1(a)): Int) == (alen(getVCTOption1(b)): Int) && (alen(getVCTOption1(res)): Int) == 2 * (alen(getVCTOption1(a)): Int)
+  ensures (forall i: Int :: { (loc(getVCTOption1(a), i): Ref) } 0 <= i && i < (alen(getVCTOption1(a)): Int) ==> acc((loc(getVCTOption1(a), i): Ref).Integer__item, write))
+  ensures (forall i: Int :: { (loc(getVCTOption1(b), i): Ref) } 0 <= i && i < (alen(getVCTOption1(b)): Int) ==> acc((loc(getVCTOption1(b), i): Ref).Integer__item, write))
+  ensures (forall i: Int :: { (loc(getVCTOption1(res), i): Ref) } 0 <= i && i < (alen(getVCTOption1(res)): Int) ==> acc((loc(getVCTOption1(res), i): Ref).Integer__item, write))
+  ensures (forall i: Int :: { (loc(getVCTOption1(a), i): Ref) } 0 <= i && i < (alen(getVCTOption1(a)): Int) ==> (loc(getVCTOption1(res), 2 * i): Ref).Integer__item == (loc(getVCTOption1(a), i): Ref).Integer__item)
+  ensures (forall i: Int :: { (loc(getVCTOption1(b), i): Ref) } 0 <= i && i < (alen(getVCTOption1(b)): Int) ==> (loc(getVCTOption1(res), 2 * i + 1): Ref).Integer__item == (loc(getVCTOption1(b), i): Ref).Integer__item)
+{
+  inhale false
+}
+
+method Exercise4___contract_unsatisfiable__internal_zip_EncodedGlobalVariables_Option$Array$Cell$Integer$$$_Option$Array$Cell$Integer$$$_Option$Array$Cell$Integer$$$(diz: Ref, globals: Ref, a: VCTOption[VCTArray[Ref]], b: VCTOption[VCTArray[Ref]], res: VCTOption[VCTArray[Ref]])
+  requires diz != null
+{
+  inhale a != (VCTNone(): VCTOption[VCTArray[Ref]]) && b != (VCTNone(): VCTOption[VCTArray[Ref]]) && res != (VCTNone(): VCTOption[VCTArray[Ref]]) && ((alen(getVCTOption1(a)): Int) == (alen(getVCTOption1(b)): Int) && (alen(getVCTOption1(res)): Int) == 2 * (alen(getVCTOption1(a)): Int)) && (forall i__1: Int :: { (loc(getVCTOption1(a), i__1): Ref) } 0 <= i__1 && i__1 < (alen(getVCTOption1(a)): Int) ==> acc((loc(getVCTOption1(a), i__1): Ref).Integer__item, write)) && (forall i__2: Int :: { (loc(getVCTOption1(b), i__2): Ref) } 0 <= i__2 && i__2 < (alen(getVCTOption1(b)): Int) ==> acc((loc(getVCTOption1(b), i__2): Ref).Integer__item, write)) && (forall i__3: Int :: { (loc(getVCTOption1(res), i__3): Ref) } 0 <= i__3 && i__3 < (alen(getVCTOption1(res)): Int) ==> acc((loc(getVCTOption1(res), i__3): Ref).Integer__item, write)) && true
+  // assert
+  assert false
+  inhale false
+}
+
+method Exercise4_internal_zip_EncodedGlobalVariables_Option$Array$Cell$Integer$$$_Option$Array$Cell$Integer$$$_Option$Array$Cell$Integer$$$(diz: Ref, globals: Ref, a: VCTOption[VCTArray[Ref]], b: VCTOption[VCTArray[Ref]], res: VCTOption[VCTArray[Ref]])
+  requires diz != null
+  requires a != (VCTNone(): VCTOption[VCTArray[Ref]]) && b != (VCTNone(): VCTOption[VCTArray[Ref]]) && res != (VCTNone(): VCTOption[VCTArray[Ref]])
+  requires (alen(getVCTOption1(a)): Int) == (alen(getVCTOption1(b)): Int) && (alen(getVCTOption1(res)): Int) == 2 * (alen(getVCTOption1(a)): Int)
+  requires (forall i: Int :: { (loc(getVCTOption1(a), i): Ref) } 0 <= i && i < (alen(getVCTOption1(a)): Int) ==> acc((loc(getVCTOption1(a), i): Ref).Integer__item, write))
+  requires (forall i: Int :: { (loc(getVCTOption1(b), i): Ref) } 0 <= i && i < (alen(getVCTOption1(b)): Int) ==> acc((loc(getVCTOption1(b), i): Ref).Integer__item, write))
+  requires (forall i: Int :: { (loc(getVCTOption1(res), i): Ref) } 0 <= i && i < (alen(getVCTOption1(res)): Int) ==> acc((loc(getVCTOption1(res), i): Ref).Integer__item, write))
+  ensures a != (VCTNone(): VCTOption[VCTArray[Ref]]) && b != (VCTNone(): VCTOption[VCTArray[Ref]]) && res != (VCTNone(): VCTOption[VCTArray[Ref]])
+  ensures (alen(getVCTOption1(a)): Int) == (alen(getVCTOption1(b)): Int) && (alen(getVCTOption1(res)): Int) == 2 * (alen(getVCTOption1(a)): Int)
+  ensures (forall i: Int :: { (loc(getVCTOption1(a), i): Ref) } 0 <= i && i < (alen(getVCTOption1(a)): Int) ==> acc((loc(getVCTOption1(a), i): Ref).Integer__item, write))
+  ensures (forall i: Int :: { (loc(getVCTOption1(b), i): Ref) } 0 <= i && i < (alen(getVCTOption1(b)): Int) ==> acc((loc(getVCTOption1(b), i): Ref).Integer__item, write))
+  ensures (forall i: Int :: { (loc(getVCTOption1(res), i): Ref) } 0 <= i && i < (alen(getVCTOption1(res)): Int) ==> acc((loc(getVCTOption1(res), i): Ref).Integer__item, write))
+  ensures (forall i: Int :: { (loc(getVCTOption1(a), i): Ref) } 0 <= i && i < (alen(getVCTOption1(a)): Int) ==> (loc(getVCTOption1(res), 2 * i): Ref).Integer__item == (loc(getVCTOption1(a), i): Ref).Integer__item)
+  ensures (forall i: Int :: { (loc(getVCTOption1(b), i): Ref) } 0 <= i && i < (alen(getVCTOption1(b)): Int) ==> (loc(getVCTOption1(res), 2 * i + 1): Ref).Integer__item == (loc(getVCTOption1(b), i): Ref).Integer__item)
+{
+  var k__4: Int
+  var __flatten_1__5: Ref
+  var __flatten_2__6: Int
+  var __flatten_3__7: Ref
+  var __flatten_4__8: Ref
+  var __flatten_5__9: Int
+  var __flatten_6__10: Ref
+  k__4 := 0
+  while (k__4 < (alen(getVCTOption1(res)): Int))
+    invariant a != (VCTNone(): VCTOption[VCTArray[Ref]]) && b != (VCTNone(): VCTOption[VCTArray[Ref]]) && res != (VCTNone(): VCTOption[VCTArray[Ref]])
+    invariant (alen(getVCTOption1(a)): Int) == (alen(getVCTOption1(b)): Int) && (alen(getVCTOption1(res)): Int) == 2 * (alen(getVCTOption1(a)): Int)
+    invariant (forall i__11: Int :: { (loc(getVCTOption1(a), i__11): Ref) } 0 <= i__11 && i__11 < (alen(getVCTOption1(a)): Int) ==> acc((loc(getVCTOption1(a), i__11): Ref).Integer__item, write))
+    invariant (forall i__12: Int :: { (loc(getVCTOption1(b), i__12): Ref) } 0 <= i__12 && i__12 < (alen(getVCTOption1(b)): Int) ==> acc((loc(getVCTOption1(b), i__12): Ref).Integer__item, write))
+    invariant (forall i__13: Int :: { (loc(getVCTOption1(res), i__13): Ref) } 0 <= i__13 && i__13 < (alen(getVCTOption1(res)): Int) ==> acc((loc(getVCTOption1(res), i__13): Ref).Integer__item, write))
+    invariant 0 <= k__4
+    invariant k__4 % 2 == 0
+    invariant k__4 <= (alen(getVCTOption1(res)): Int)
+    invariant (forall i__14: Int :: { (loc(getVCTOption1(a), i__14): Ref) } 0 <= i__14 && i__14 < k__4 / 2 ==> (loc(getVCTOption1(res), 2 * i__14): Ref).Integer__item == (loc(getVCTOption1(a), i__14): Ref).Integer__item)
+    invariant (forall i__15: Int :: { (loc(getVCTOption1(b), i__15): Ref) } 0 <= i__15 && i__15 < k__4 / 2 ==> (loc(getVCTOption1(res), 2 * i__15 + 1): Ref).Integer__item == (loc(getVCTOption1(b), i__15): Ref).Integer__item) 
+  {
+    __flatten_1__5 := (loc(getVCTOption1(res), k__4): Ref)
+    __flatten_3__7 := (loc(getVCTOption1(a), k__4 / 2): Ref)
+    __flatten_2__6 := __flatten_3__7.Integer__item
+    __flatten_1__5.Integer__item := __flatten_2__6
+    __flatten_4__8 := (loc(getVCTOption1(res), k__4 + 1): Ref)
+    __flatten_6__10 := (loc(getVCTOption1(b), k__4 / 2): Ref)
+    __flatten_5__9 := __flatten_6__10.Integer__item
+    __flatten_4__8.Integer__item := __flatten_5__9
+    k__4 := k__4 + 2
+  }
+}
+
+method JavaArrayExamples_shift_drf_EncodedGlobalVariables_Option$Array$Cell$Integer$$$(diz: Ref, globals: Ref, a: VCTOption[VCTArray[Ref]])
+  requires diz != null
+  requires a != (VCTNone(): VCTOption[VCTArray[Ref]])
+  requires (forall i: Int :: { (loc(getVCTOption1(a), i): Ref) } 0 <= i && i < (alen(getVCTOption1(a)): Int) ==> acc((loc(getVCTOption1(a), i): Ref).Integer__item, write))
+  ensures a != (VCTNone(): VCTOption[VCTArray[Ref]])
+  ensures (forall i: Int :: { (loc(getVCTOption1(a), i): Ref) } 0 <= i && i < (alen(getVCTOption1(a)): Int) ==> acc((loc(getVCTOption1(a), i): Ref).Integer__item, write))
+{
+  inhale false
+}
+
+method JavaArrayExamples___contract_unsatisfiable__internal_shift_drf_EncodedGlobalVariables_Option$Array$Cell$Integer$$$(diz: Ref, globals: Ref, a: VCTOption[VCTArray[Ref]])
+  requires diz != null
+{
+  inhale a != (VCTNone(): VCTOption[VCTArray[Ref]]) && (forall i__16: Int :: { (loc(getVCTOption1(a), i__16): Ref) } 0 <= i__16 && i__16 < (alen(getVCTOption1(a)): Int) ==> acc((loc(getVCTOption1(a), i__16): Ref).Integer__item, write))
+  // assert
+  assert false
+  inhale false
+}
+
+method JavaArrayExamples_recv_body_8_Integer_Option$Array$Cell$Integer$$$(diz: Ref, i: Int, a: VCTOption[VCTArray[Ref]])
+  requires diz != null
+  requires a != (VCTNone(): VCTOption[VCTArray[Ref]])
+  ensures a != (VCTNone(): VCTOption[VCTArray[Ref]])
+  ensures 0 < i
+  ensures i < (alen(getVCTOption1(a)): Int)
+  ensures acc((loc(getVCTOption1(a), i): Ref).Integer__item, 1 / 2)
+{
+  inhale false
+}
+
+method JavaArrayExamples_send_body_9_Integer_Option$Array$Cell$Integer$$$(diz: Ref, i: Int, a: VCTOption[VCTArray[Ref]])
+  requires diz != null
+  requires a != (VCTNone(): VCTOption[VCTArray[Ref]])
+  requires 0 <= i
+  requires i < (alen(getVCTOption1(a)): Int) - 1
+  requires acc((loc(getVCTOption1(a), i + 1): Ref).Integer__item, 1 / 2)
+  ensures a != (VCTNone(): VCTOption[VCTArray[Ref]])
+{
+  inhale false
+}
+
+method JavaArrayExamples_loop_body_7_Integer_Option$Array$Cell$Integer$$$(diz: Ref, i: Int, a: VCTOption[VCTArray[Ref]])
+  requires diz != null
+  requires a != (VCTNone(): VCTOption[VCTArray[Ref]])
+  requires 0 <= i && i < (alen(getVCTOption1(a)): Int)
+  requires acc((loc(getVCTOption1(a), i): Ref).Integer__item, 1 / 2)
+  requires i == 0 ==> acc((loc(getVCTOption1(a), i): Ref).Integer__item, 1 / 2)
+  requires i < (alen(getVCTOption1(a)): Int) - 1 ==> acc((loc(getVCTOption1(a), i + 1): Ref).Integer__item, 1 / 2)
+  ensures a != (VCTNone(): VCTOption[VCTArray[Ref]])
+  ensures 0 <= i && i < (alen(getVCTOption1(a)): Int)
+  ensures acc((loc(getVCTOption1(a), i): Ref).Integer__item, write)
+{
+  var __flatten_8__17: Ref
+  var __flatten_9__18: Int
+  var __flatten_10__19: Ref
+  if (0 < i) {
+    JavaArrayExamples_recv_body_8_Integer_Option$Array$Cell$Integer$$$(diz, i, a)
+  }
+  if (i < (alen(getVCTOption1(a)): Int) - 1) {
+    __flatten_8__17 := (loc(getVCTOption1(a), i): Ref)
+    __flatten_10__19 := (loc(getVCTOption1(a), i + 1): Ref)
+    __flatten_9__18 := __flatten_10__19.Integer__item
+    __flatten_8__17.Integer__item := __flatten_9__18
+    JavaArrayExamples_send_body_9_Integer_Option$Array$Cell$Integer$$$(diz, i, a)
+  }
+}
+
+method JavaArrayExamples_guard_check_S2_S1_Integer_Option$Array$Cell$Integer$$$(diz: Ref, i: Int, a: VCTOption[VCTArray[Ref]])
+  requires diz != null
+  requires a != (VCTNone(): VCTOption[VCTArray[Ref]])
+  requires 0 <= i && i < (alen(getVCTOption1(a)): Int)
+  requires 0 < i
+  ensures a != (VCTNone(): VCTOption[VCTArray[Ref]])
+  ensures 1 <= i
+  ensures i - 1 < (alen(getVCTOption1(a)): Int) - 1
+{
+  
+}
+
+method JavaArrayExamples_resource_check_S2_S1_Integer_Option$Array$Cell$Integer$$$(diz: Ref, i: Int, a: VCTOption[VCTArray[Ref]])
+  requires diz != null
+  requires a != (VCTNone(): VCTOption[VCTArray[Ref]])
+  requires 0 <= i && i < (alen(getVCTOption1(a)): Int)
+  requires i - 1 < (alen(getVCTOption1(a)): Int) - 1
+  requires 0 < i
+  requires 0 <= i - 1
+  requires i - 1 < (alen(getVCTOption1(a)): Int) - 1
+  requires acc((loc(getVCTOption1(a), i - 1 + 1): Ref).Integer__item, 1 / 2)
+  ensures a != (VCTNone(): VCTOption[VCTArray[Ref]])
+  ensures i - 1 < (alen(getVCTOption1(a)): Int) - 1
+  ensures 0 < i
+  ensures i < (alen(getVCTOption1(a)): Int)
+  ensures acc((loc(getVCTOption1(a), i): Ref).Integer__item, 1 / 2)
+{
+  
+}
+
+method JavaArrayExamples_parrallel_region_main_1_Option$Array$Cell$Integer$$$(diz: Ref, a: VCTOption[VCTArray[Ref]])
+  requires diz != null
+  requires a != (VCTNone(): VCTOption[VCTArray[Ref]])
+  requires (forall i: Int :: { (loc(getVCTOption1(a), i): Ref) } 0 <= i && i < (alen(getVCTOption1(a)): Int) ==> acc((loc(getVCTOption1(a), i): Ref).Integer__item, 1 / 2))
+  requires 0 <= 0 && 0 < (alen(getVCTOption1(a)): Int) ==> acc((loc(getVCTOption1(a), 0): Ref).Integer__item, 1 / 2)
+  requires (forall i: Int :: { (loc(getVCTOption1(a), i): Ref) } 1 <= i && i < ((alen(getVCTOption1(a)): Int) - 1 < (alen(getVCTOption1(a)): Int) ? (alen(getVCTOption1(a)): Int) - 1 : (alen(getVCTOption1(a)): Int)) + 1 ==> acc((loc(getVCTOption1(a), i): Ref).Integer__item, 1 / 2))
+  ensures a != (VCTNone(): VCTOption[VCTArray[Ref]])
+  ensures (forall i: Int :: { (loc(getVCTOption1(a), i): Ref) } 0 <= i && i < (alen(getVCTOption1(a)): Int) ==> acc((loc(getVCTOption1(a), i): Ref).Integer__item, write))
+{
+  inhale false
+}
+
+method JavaArrayExamples_internal_shift_drf_EncodedGlobalVariables_Option$Array$Cell$Integer$$$(diz: Ref, globals: Ref, a: VCTOption[VCTArray[Ref]])
+  requires diz != null
+  requires a != (VCTNone(): VCTOption[VCTArray[Ref]])
+  requires (forall i: Int :: { (loc(getVCTOption1(a), i): Ref) } 0 <= i && i < (alen(getVCTOption1(a)): Int) ==> acc((loc(getVCTOption1(a), i): Ref).Integer__item, write))
+  ensures a != (VCTNone(): VCTOption[VCTArray[Ref]])
+  ensures (forall i: Int :: { (loc(getVCTOption1(a), i): Ref) } 0 <= i && i < (alen(getVCTOption1(a)): Int) ==> acc((loc(getVCTOption1(a), i): Ref).Integer__item, write))
+{
+  JavaArrayExamples_parrallel_region_main_1_Option$Array$Cell$Integer$$$(diz, a)
+}
+
+method JavaArrayExamples_zero_array_EncodedGlobalVariables_Option$Array$Cell$Integer$$$(diz: Ref, globals: Ref, ar: VCTOption[VCTArray[Ref]])
+  requires diz != null
+  requires ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+  requires (forall k: Int :: { (loc(getVCTOption1(ar), k): Ref) } 0 <= k && k < (alen(getVCTOption1(ar)): Int) ==> acc((loc(getVCTOption1(ar), k): Ref).Integer__item, write))
+  ensures ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+  ensures (forall k: Int :: { (loc(getVCTOption1(ar), k): Ref) } 0 <= k && k < (alen(getVCTOption1(ar)): Int) ==> acc((loc(getVCTOption1(ar), k): Ref).Integer__item, write))
+  ensures (forall k: Int :: { (loc(getVCTOption1(ar), k): Ref) } 0 <= k && k < (alen(getVCTOption1(ar)): Int) ==> (loc(getVCTOption1(ar), k): Ref).Integer__item == 0)
+{
+  inhale false
+}
+
+method JavaArrayExamples___contract_unsatisfiable__internal_zero_array_EncodedGlobalVariables_Option$Array$Cell$Integer$$$(diz: Ref, globals: Ref, ar: VCTOption[VCTArray[Ref]])
+  requires diz != null
+{
+  inhale ar != (VCTNone(): VCTOption[VCTArray[Ref]]) && (forall k__20: Int :: { (loc(getVCTOption1(ar), k__20): Ref) } 0 <= k__20 && k__20 < (alen(getVCTOption1(ar)): Int) ==> acc((loc(getVCTOption1(ar), k__20): Ref).Integer__item, write)) && true
+  // assert
+  assert false
+  inhale false
+}
+
+method JavaArrayExamples_internal_zero_array_EncodedGlobalVariables_Option$Array$Cell$Integer$$$(diz: Ref, globals: Ref, ar: VCTOption[VCTArray[Ref]])
+  requires diz != null
+  requires ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+  requires (forall k: Int :: { (loc(getVCTOption1(ar), k): Ref) } 0 <= k && k < (alen(getVCTOption1(ar)): Int) ==> acc((loc(getVCTOption1(ar), k): Ref).Integer__item, write))
+  ensures ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+  ensures (forall k: Int :: { (loc(getVCTOption1(ar), k): Ref) } 0 <= k && k < (alen(getVCTOption1(ar)): Int) ==> acc((loc(getVCTOption1(ar), k): Ref).Integer__item, write))
+  ensures (forall k: Int :: { (loc(getVCTOption1(ar), k): Ref) } 0 <= k && k < (alen(getVCTOption1(ar)): Int) ==> (loc(getVCTOption1(ar), k): Ref).Integer__item == 0)
+{
+  var i__21: Int
+  var N__22: Int
+  var __flatten_13__23: Ref
+  var __flatten_14__24: Int
+  i__21 := 0
+  N__22 := (alen(getVCTOption1(ar)): Int)
+  while (i__21 < N__22)
+    invariant ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+    invariant (forall k__25: Int :: { (loc(getVCTOption1(ar), k__25): Ref) } 0 <= k__25 && k__25 < (alen(getVCTOption1(ar)): Int) ==> acc((loc(getVCTOption1(ar), k__25): Ref).Integer__item, write))
+    invariant 0 <= i__21 && i__21 <= N__22 && N__22 == (alen(getVCTOption1(ar)): Int)
+    invariant (forall k__26: Int :: { (loc(getVCTOption1(ar), k__26): Ref) } 0 <= k__26 && k__26 < i__21 ==> (loc(getVCTOption1(ar), k__26): Ref).Integer__item == 0) 
+  {
+    __flatten_13__23 := (loc(getVCTOption1(ar), i__21): Ref)
+    __flatten_13__23.Integer__item := 0
+    __flatten_14__24 := i__21
+    i__21 := i__21 + 1
+  }
+}
+
+method JavaArrayExamples_zero_array_nested_EncodedGlobalVariables_Option$Array$Cell$Integer$$$_Integer_Integer(diz: Ref, globals: Ref, ar: VCTOption[VCTArray[Ref]], M: Int, N: Int)
+  requires diz != null
+  requires ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+  requires 0 < M
+  requires 0 < N
+  requires M * N == (alen(getVCTOption1(ar)): Int)
+  requires (forall k: Int :: { (loc(getVCTOption1(ar), k): Ref) } 0 <= k && k < (alen(getVCTOption1(ar)): Int) ==> acc((loc(getVCTOption1(ar), k): Ref).Integer__item, write))
+  ensures ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+  ensures 0 < M
+  ensures 0 < N
+  ensures M * N == (alen(getVCTOption1(ar)): Int)
+  ensures (forall k: Int :: { (loc(getVCTOption1(ar), k): Ref) } 0 <= k && k < (alen(getVCTOption1(ar)): Int) ==> acc((loc(getVCTOption1(ar), k): Ref).Integer__item, write))
+  ensures (forall k: Int :: { (loc(getVCTOption1(ar), k): Ref) } 0 <= k && k < (alen(getVCTOption1(ar)): Int) ==> (loc(getVCTOption1(ar), k): Ref).Integer__item == 0)
+{
+  inhale false
+}
+
+method JavaArrayExamples___contract_unsatisfiable__internal_zero_array_nested_EncodedGlobalVariables_Option$Array$Cell$Integer$$$_Integer_Integer(diz: Ref, globals: Ref, ar: VCTOption[VCTArray[Ref]], M: Int, N: Int)
+  requires diz != null
+{
+  inhale ar != (VCTNone(): VCTOption[VCTArray[Ref]]) && 0 < M && 0 < N && M * N == (alen(getVCTOption1(ar)): Int) && (forall k__27: Int :: { (loc(getVCTOption1(ar), k__27): Ref) } 0 <= k__27 && k__27 < (alen(getVCTOption1(ar)): Int) ==> acc((loc(getVCTOption1(ar), k__27): Ref).Integer__item, write))
+  // assert
+  assert false
+  inhale false
+}
+
+method JavaArrayExamples_loop_body_17_Option$Array$Cell$Integer$$$_Integer_Integer_Integer_Integer(diz: Ref, ar: VCTOption[VCTArray[Ref]], M: Int, N: Int, i: Int, j: Int)
+  requires diz != null
+  requires ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+  requires 0 < M
+  requires 0 < N
+  requires M * N == (alen(getVCTOption1(ar)): Int)
+  requires 0 <= i && i < M && (0 <= j && j < N)
+  requires 0 <= i && i < M
+  requires acc((loc(getVCTOption1(ar), i * N + j): Ref).Integer__item, write)
+  ensures ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+  ensures 0 < M
+  ensures 0 < N
+  ensures M * N == (alen(getVCTOption1(ar)): Int)
+  ensures 0 <= i && i < M && (0 <= j && j < N)
+  ensures 0 <= i && i < M
+  ensures acc((loc(getVCTOption1(ar), i * N + j): Ref).Integer__item, write)
+  ensures (loc(getVCTOption1(ar), i * N + j): Ref).Integer__item == 0
+{
+  var __flatten_15__28: Ref
+  __flatten_15__28 := (loc(getVCTOption1(ar), i * N + j): Ref)
+  __flatten_15__28.Integer__item := 0
+}
+
+method JavaArrayExamples_parrallel_region_main_3_Integer_Option$Array$Cell$Integer$$$_Integer_Integer(diz: Ref, N: Int, ar: VCTOption[VCTArray[Ref]], M: Int, i: Int)
+  requires diz != null
+  requires ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+  requires 0 < M
+  requires 0 < N
+  requires M * N == (alen(getVCTOption1(ar)): Int)
+  requires 0 < N ==> 0 <= i && i < M
+  requires (forall j: Int :: { (loc(getVCTOption1(ar), j): Ref) } i * N <= j && j < (i + 1) * N ==> acc((loc(getVCTOption1(ar), j): Ref).Integer__item, write))
+  ensures ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+  ensures 0 < M
+  ensures 0 < N
+  ensures M * N == (alen(getVCTOption1(ar)): Int)
+  ensures 0 < N ==> 0 <= i && i < M
+  ensures (forall j: Int :: { (loc(getVCTOption1(ar), j): Ref) } i * N <= j && j < (i + 1) * N ==> acc((loc(getVCTOption1(ar), j): Ref).Integer__item, write))
+  ensures (forall j: Int :: { (loc(getVCTOption1(ar), j): Ref) } i * N <= j && j < (i + 1) * N ==> (loc(getVCTOption1(ar), j): Ref).Integer__item == 0)
+{
+  inhale false
+}
+
+method JavaArrayExamples_loop_body_16_Integer_Option$Array$Cell$Integer$$$_Integer_Integer(diz: Ref, N: Int, ar: VCTOption[VCTArray[Ref]], M: Int, i: Int)
+  requires diz != null
+  requires ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+  requires 0 < M
+  requires 0 < N
+  requires M * N == (alen(getVCTOption1(ar)): Int)
+  requires 0 <= i && i < M
+  requires (forall k: Int :: { (loc(getVCTOption1(ar), k): Ref) } i * N <= k && k < (i + 1) * N ==> acc((loc(getVCTOption1(ar), k): Ref).Integer__item, write))
+  ensures ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+  ensures 0 < M
+  ensures 0 < N
+  ensures M * N == (alen(getVCTOption1(ar)): Int)
+  ensures 0 <= i && i < M
+  ensures (forall k: Int :: { (loc(getVCTOption1(ar), k): Ref) } i * N <= k && k < (i + 1) * N ==> acc((loc(getVCTOption1(ar), k): Ref).Integer__item, write))
+  ensures (forall k: Int :: { (loc(getVCTOption1(ar), k): Ref) } i * N <= k && k < (i + 1) * N ==> (loc(getVCTOption1(ar), k): Ref).Integer__item == 0)
+{
+  JavaArrayExamples_parrallel_region_main_3_Integer_Option$Array$Cell$Integer$$$_Integer_Integer(diz, N, ar, M, i)
+}
+
+method JavaArrayExamples_parrallel_region_main_2_Integer_Option$Array$Cell$Integer$$$_Integer(diz: Ref, M: Int, ar: VCTOption[VCTArray[Ref]], N: Int)
+  requires diz != null
+  requires ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+  requires 0 < M
+  requires 0 < N
+  requires M * N == (alen(getVCTOption1(ar)): Int)
+  requires 0 < N ==> (forall k: Int :: { (loc(getVCTOption1(ar), k): Ref) } 0 <= k && k < M * N ==> acc((loc(getVCTOption1(ar), k): Ref).Integer__item, write))
+  ensures ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+  ensures 0 < M
+  ensures 0 < N
+  ensures M * N == (alen(getVCTOption1(ar)): Int)
+  ensures 0 < N ==> (forall k: Int :: { (loc(getVCTOption1(ar), k): Ref) } 0 <= k && k < M * N ==> acc((loc(getVCTOption1(ar), k): Ref).Integer__item, write))
+  ensures 0 < N ==> (forall k: Int :: { (loc(getVCTOption1(ar), k): Ref) } 0 <= k && k < M * N ==> (loc(getVCTOption1(ar), k): Ref).Integer__item == 0)
+{
+  inhale false
+}
+
+method JavaArrayExamples_internal_zero_array_nested_EncodedGlobalVariables_Option$Array$Cell$Integer$$$_Integer_Integer(diz: Ref, globals: Ref, ar: VCTOption[VCTArray[Ref]], M: Int, N: Int)
+  requires diz != null
+  requires ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+  requires 0 < M
+  requires 0 < N
+  requires M * N == (alen(getVCTOption1(ar)): Int)
+  requires (forall k: Int :: { (loc(getVCTOption1(ar), k): Ref) } 0 <= k && k < (alen(getVCTOption1(ar)): Int) ==> acc((loc(getVCTOption1(ar), k): Ref).Integer__item, write))
+  ensures ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+  ensures 0 < M
+  ensures 0 < N
+  ensures M * N == (alen(getVCTOption1(ar)): Int)
+  ensures (forall k: Int :: { (loc(getVCTOption1(ar), k): Ref) } 0 <= k && k < (alen(getVCTOption1(ar)): Int) ==> acc((loc(getVCTOption1(ar), k): Ref).Integer__item, write))
+  ensures (forall k: Int :: { (loc(getVCTOption1(ar), k): Ref) } 0 <= k && k < (alen(getVCTOption1(ar)): Int) ==> (loc(getVCTOption1(ar), k): Ref).Integer__item == 0)
+{
+  JavaArrayExamples_parrallel_region_main_2_Integer_Option$Array$Cell$Integer$$$_Integer(diz, M, ar, N)
+}
+
+method JavaArrayExamples_zero_array_smart_nested_EncodedGlobalVariables_Option$Array$Cell$Integer$$$_Integer_Integer(diz: Ref, globals: Ref, ar: VCTOption[VCTArray[Ref]], M: Int, N: Int)
+  requires diz != null
+  requires ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+  requires 0 < M
+  requires 0 < N
+  requires M * N == (alen(getVCTOption1(ar)): Int)
+  requires (forall k: Int :: { (loc(getVCTOption1(ar), k): Ref) } 0 <= k && k < (alen(getVCTOption1(ar)): Int) ==> acc((loc(getVCTOption1(ar), k): Ref).Integer__item, write))
+  ensures ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+  ensures 0 < M
+  ensures 0 < N
+  ensures M * N == (alen(getVCTOption1(ar)): Int)
+  ensures (forall k: Int :: { (loc(getVCTOption1(ar), k): Ref) } 0 <= k && k < (alen(getVCTOption1(ar)): Int) ==> acc((loc(getVCTOption1(ar), k): Ref).Integer__item, write))
+  ensures (forall k: Int :: { (loc(getVCTOption1(ar), k): Ref) } 0 <= k && k < (alen(getVCTOption1(ar)): Int) ==> (loc(getVCTOption1(ar), k): Ref).Integer__item == 0)
+{
+  inhale false
+}
+
+method JavaArrayExamples___contract_unsatisfiable__internal_zero_array_smart_nested_EncodedGlobalVariables_Option$Array$Cell$Integer$$$_Integer_Integer(diz: Ref, globals: Ref, ar: VCTOption[VCTArray[Ref]], M: Int, N: Int)
+  requires diz != null
+{
+  inhale ar != (VCTNone(): VCTOption[VCTArray[Ref]]) && 0 < M && 0 < N && M * N == (alen(getVCTOption1(ar)): Int) && (forall k__29: Int :: { (loc(getVCTOption1(ar), k__29): Ref) } 0 <= k__29 && k__29 < (alen(getVCTOption1(ar)): Int) ==> acc((loc(getVCTOption1(ar), k__29): Ref).Integer__item, write))
+  // assert
+  assert false
+  inhale false
+}
+
+method JavaArrayExamples_loop_body_21_Option$Array$Cell$Integer$$$_Integer_Integer_Integer_Integer(diz: Ref, ar: VCTOption[VCTArray[Ref]], M: Int, N: Int, i: Int, j: Int)
+  requires diz != null
+  requires ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+  requires 0 < M
+  requires 0 < N
+  requires M * N == (alen(getVCTOption1(ar)): Int)
+  requires 0 <= i && i < M && (0 <= j && j < N)
+  requires acc((loc(getVCTOption1(ar), i * N + j): Ref).Integer__item, write)
+  ensures ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+  ensures 0 < M
+  ensures 0 < N
+  ensures M * N == (alen(getVCTOption1(ar)): Int)
+  ensures 0 <= i && i < M && (0 <= j && j < N)
+  ensures acc((loc(getVCTOption1(ar), i * N + j): Ref).Integer__item, write)
+  ensures (loc(getVCTOption1(ar), i * N + j): Ref).Integer__item == 0
+{
+  var __flatten_18__30: Ref
+  __flatten_18__30 := (loc(getVCTOption1(ar), i * N + j): Ref)
+  __flatten_18__30.Integer__item := 0
+}
+
+method JavaArrayExamples_parrallel_region_main_4_Integer_Integer_Option$Array$Cell$Integer$$$(diz: Ref, M: Int, N: Int, ar: VCTOption[VCTArray[Ref]])
+  requires diz != null
+  requires ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+  requires 0 < M
+  requires 0 < N
+  requires M * N == (alen(getVCTOption1(ar)): Int)
+  requires 0 < N ==> (forall j: Int :: { (loc(getVCTOption1(ar), j): Ref) } 0 <= j && j < M * N ==> acc((loc(getVCTOption1(ar), j): Ref).Integer__item, write))
+  ensures ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+  ensures 0 < M
+  ensures 0 < N
+  ensures M * N == (alen(getVCTOption1(ar)): Int)
+  ensures 0 < N ==> (forall j: Int :: { (loc(getVCTOption1(ar), j): Ref) } 0 <= j && j < M * N ==> acc((loc(getVCTOption1(ar), j): Ref).Integer__item, write))
+  ensures 0 < N ==> (forall j: Int :: { (loc(getVCTOption1(ar), j): Ref) } 0 <= j && j < M * N ==> (loc(getVCTOption1(ar), j): Ref).Integer__item == 0)
+{
+  inhale false
+}
+
+method JavaArrayExamples_internal_zero_array_smart_nested_EncodedGlobalVariables_Option$Array$Cell$Integer$$$_Integer_Integer(diz: Ref, globals: Ref, ar: VCTOption[VCTArray[Ref]], M: Int, N: Int)
+  requires diz != null
+  requires ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+  requires 0 < M
+  requires 0 < N
+  requires M * N == (alen(getVCTOption1(ar)): Int)
+  requires (forall k: Int :: { (loc(getVCTOption1(ar), k): Ref) } 0 <= k && k < (alen(getVCTOption1(ar)): Int) ==> acc((loc(getVCTOption1(ar), k): Ref).Integer__item, write))
+  ensures ar != (VCTNone(): VCTOption[VCTArray[Ref]])
+  ensures 0 < M
+  ensures 0 < N
+  ensures M * N == (alen(getVCTOption1(ar)): Int)
+  ensures (forall k: Int :: { (loc(getVCTOption1(ar), k): Ref) } 0 <= k && k < (alen(getVCTOption1(ar)): Int) ==> acc((loc(getVCTOption1(ar), k): Ref).Integer__item, write))
+  ensures (forall k: Int :: { (loc(getVCTOption1(ar), k): Ref) } 0 <= k && k < (alen(getVCTOption1(ar)): Int) ==> (loc(getVCTOption1(ar), k): Ref).Integer__item == 0)
+{
+  JavaArrayExamples_parrallel_region_main_4_Integer_Integer_Option$Array$Cell$Integer$$$(diz, M, N, ar)
+}

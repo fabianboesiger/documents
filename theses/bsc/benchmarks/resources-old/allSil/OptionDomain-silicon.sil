@@ -1,0 +1,62 @@
+// Generated on 2021-03-23 at 23:36:32
+domain Option[T] {
+  
+  function None(): Option[T]
+  
+  function Some(t: T): Option[T]
+  
+  function get(o: Option[T]): T
+  
+  axiom not_equal {
+    (forall x: T :: { (Some(x): Option[T]) } (None(): Option[T]) != (Some(x): Option[T]))
+  }
+  
+  axiom get_axiom {
+    (forall x: T :: { (get((Some(x): Option[T])): T) } (get((Some(x): Option[T])): T) == x)
+  }
+}
+
+domain TYPE {
+  
+  unique function class_Ref(): TYPE
+  
+  unique function class_java_DOT_lang_DOT_Object(): TYPE
+  
+  unique function class_EncodedGlobalVariables(): TYPE
+  
+  function directSuperclass(t: TYPE): TYPE
+  
+  function type_of(val: Ref): TYPE
+  
+  axiom Ref_directSuperclass {
+    directSuperclass(class_Ref()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom EncodedGlobalVariables_directSuperclass {
+    directSuperclass(class_EncodedGlobalVariables()) == class_java_DOT_lang_DOT_Object()
+  }
+}
+
+function get_Integer_Option$Integer$(o: Option[Int]): Int
+  requires o != (None(): Option[Int])
+{
+  (get(o): Int)
+}
+
+function instanceof_TYPE_TYPE(t: TYPE, u: TYPE): Bool
+  ensures result == (t == u || directSuperclass(t) == u)
+
+
+method test_EncodedGlobalVariables(globals: Ref)
+{
+  var x__1: Option[Int]
+  var y__2: Option[Int]
+  var i__3: Int
+  x__1 := (None(): Option[Int])
+  y__2 := (Some(37): Option[Int])
+  // assert
+  assert x__1 != y__2
+  // assert
+  assert get_Integer_Option$Integer$(y__2) == 37
+  i__3 := get_Integer_Option$Integer$(x__1)
+}

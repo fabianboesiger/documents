@@ -1,0 +1,159 @@
+// Generated on 2021-03-23 at 23:31:07
+domain TYPE {
+  
+  unique function class_Fib(): TYPE
+  
+  unique function class_java_DOT_lang_DOT_Object(): TYPE
+  
+  unique function class_EncodedGlobalVariables(): TYPE
+  
+  function directSuperclass(t: TYPE): TYPE
+  
+  function type_of(val: Ref): TYPE
+  
+  axiom Fib_directSuperclass {
+    directSuperclass(class_Fib()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom EncodedGlobalVariables_directSuperclass {
+    directSuperclass(class_EncodedGlobalVariables()) == class_java_DOT_lang_DOT_Object()
+  }
+}
+
+domain frac {
+  
+  function frac_val(a: frac): Perm
+  
+  axiom frac_eq {
+    (forall a: frac, b: frac :: { frac_val(a),frac_val(b) } (frac_val(a) == frac_val(b)) == (a == b))
+  }
+  
+  axiom frac_bound {
+    (forall a: frac :: { frac_val(a) } 0 / 1 < frac_val(a) && frac_val(a) <= 1 / 1)
+  }
+}
+
+domain zfrac {
+  
+  function zfrac_val(a: zfrac): Perm
+  
+  axiom zfrac_eq {
+    (forall a: zfrac, b: zfrac :: { zfrac_val(a),zfrac_val(b) } (zfrac_val(a) == zfrac_val(b)) == (a == b))
+  }
+  
+  axiom zfrac_bound {
+    (forall a: zfrac :: { zfrac_val(a) } 0 / 1 <= zfrac_val(a) && zfrac_val(a) <= 1 / 1)
+  }
+}
+
+//  a field 
+field Fib_input: Int
+
+//  a field 
+field Fib_output: Int
+
+function Fib_fib_Integer(n: Int): Int
+{
+  (n < 2 ? 1 : Fib_fib_Integer(n - 1) + Fib_fib_Integer(n - 2))
+}
+
+function instanceof_TYPE_TYPE(t: TYPE, u: TYPE): Bool
+  ensures result == (t == u || directSuperclass(t) == u)
+
+
+function new_frac(x: Perm): frac
+  requires 0 / 1 < x && x <= 1 / 1
+  ensures frac_val(result) == x
+
+
+function new_zfrac(x: Perm): zfrac
+  requires 0 / 1 <= x && x <= 1 / 1
+  ensures zfrac_val(result) == x
+
+
+predicate Fib_joinToken_EncodedGlobalVariables(diz: Ref, globals: Ref) 
+
+predicate Fib_idleToken_EncodedGlobalVariables(diz: Ref, globals: Ref) 
+
+method Fib_forkOperator_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+  requires acc(diz.Fib_input, 1 / 10)
+  requires acc(diz.Fib_output, write)
+  requires acc(Fib_idleToken_EncodedGlobalVariables(diz, globals), write)
+  ensures acc(Fib_joinToken_EncodedGlobalVariables(diz, globals), write)
+{
+  inhale false
+}
+
+method Fib_joinOperator_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+  requires acc(Fib_joinToken_EncodedGlobalVariables(diz, globals), write)
+  ensures acc(Fib_idleToken_EncodedGlobalVariables(diz, globals), write)
+  ensures acc(diz.Fib_input, 1 / 10)
+  ensures acc(diz.Fib_output, write)
+  ensures diz.Fib_output == Fib_fib_Integer(diz.Fib_input)
+{
+  inhale false
+}
+
+method Fib___contract_unsatisfiable__run_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale true && (acc(diz.Fib_input, 1 / 10) && acc(diz.Fib_output, write))
+  // assert
+  assert false
+  inhale false
+}
+
+method Fib_run_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+  requires acc(diz.Fib_input, 1 / 10)
+  requires acc(diz.Fib_output, write)
+  ensures acc(diz.Fib_input, 1 / 10)
+  ensures acc(diz.Fib_output, write)
+  ensures diz.Fib_output == Fib_fib_Integer(diz.Fib_input)
+{
+  var f2__3: Ref
+  var f1__2: Ref
+  var __flatten_7__1: Int
+  if (diz.Fib_input < 2) {
+    diz.Fib_output := 1
+  } else {
+    f1__2 := Fib_Fib_EncodedGlobalVariables_Integer(globals, diz.Fib_input - 1)
+    f2__3 := Fib_Fib_EncodedGlobalVariables_Integer(globals, diz.Fib_input - 2)
+    Fib_forkOperator_EncodedGlobalVariables(f1__2, globals)
+    Fib_forkOperator_EncodedGlobalVariables(f2__3, globals)
+    Fib_joinOperator_EncodedGlobalVariables(f1__2, globals)
+    Fib_joinOperator_EncodedGlobalVariables(f2__3, globals)
+    __flatten_7__1 := f1__2.Fib_output + f2__3.Fib_output
+    diz.Fib_output := __flatten_7__1
+  }
+}
+
+method Fib___contract_unsatisfiable__Fib_EncodedGlobalVariables_Integer(diz: Ref, globals: Ref, n: Int)
+  requires diz != null
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+}
+
+method Fib_Fib_EncodedGlobalVariables_Integer(globals: Ref, n: Int) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_Fib()
+  ensures acc(Fib_idleToken_EncodedGlobalVariables(sys__result, globals), write)
+  ensures acc(sys__result.Fib_input, write)
+  ensures acc(sys__result.Fib_output, write)
+  ensures sys__result.Fib_input == n
+{
+  var diz__4: Ref
+  diz__4 := new(Fib_input, Fib_output)
+  inhale type_of(diz__4) == class_Fib()
+  diz__4.Fib_input := n
+  inhale acc(Fib_idleToken_EncodedGlobalVariables(diz__4, globals), write)
+  sys__result := diz__4
+  // assert
+  assert sys__result != null && type_of(sys__result) == class_Fib() && acc(Fib_idleToken_EncodedGlobalVariables(sys__result, globals), write) && acc(sys__result.Fib_input, write) && acc(sys__result.Fib_output, write) && sys__result.Fib_input == n
+  inhale false
+}

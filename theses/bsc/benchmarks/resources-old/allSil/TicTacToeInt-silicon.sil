@@ -1,0 +1,519 @@
+// Generated on 2021-03-23 at 23:41:43
+domain TYPE {
+  
+  unique function class_Grid(): TYPE
+  
+  unique function class_java_DOT_lang_DOT_Object(): TYPE
+  
+  unique function class_Game(): TYPE
+  
+  unique function class_EncodedGlobalVariables(): TYPE
+  
+  function directSuperclass(t: TYPE): TYPE
+  
+  function type_of(val: Ref): TYPE
+  
+  axiom Grid_directSuperclass {
+    directSuperclass(class_Grid()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom Game_directSuperclass {
+    directSuperclass(class_Game()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom EncodedGlobalVariables_directSuperclass {
+    directSuperclass(class_EncodedGlobalVariables()) == class_java_DOT_lang_DOT_Object()
+  }
+}
+
+domain frac {
+  
+  function frac_val(a: frac): Perm
+  
+  axiom frac_eq {
+    (forall a: frac, b: frac :: { frac_val(a),frac_val(b) } (frac_val(a) == frac_val(b)) == (a == b))
+  }
+  
+  axiom frac_bound {
+    (forall a: frac :: { frac_val(a) } 0 / 1 < frac_val(a) && frac_val(a) <= 1 / 1)
+  }
+}
+
+domain zfrac {
+  
+  function zfrac_val(a: zfrac): Perm
+  
+  axiom zfrac_eq {
+    (forall a: zfrac, b: zfrac :: { zfrac_val(a),zfrac_val(b) } (zfrac_val(a) == zfrac_val(b)) == (a == b))
+  }
+  
+  axiom zfrac_bound {
+    (forall a: zfrac :: { zfrac_val(a) } 0 / 1 <= zfrac_val(a) && zfrac_val(a) <= 1 / 1)
+  }
+}
+
+//  a field 
+field Grid_c00: Int
+
+//  a field 
+field Grid_c01: Int
+
+//  a field 
+field Grid_c02: Int
+
+//  a field 
+field Grid_c10: Int
+
+//  a field 
+field Grid_c11: Int
+
+//  a field 
+field Grid_c12: Int
+
+//  a field 
+field Grid_c20: Int
+
+//  a field 
+field Grid_c21: Int
+
+//  a field 
+field Grid_c22: Int
+
+//  a field 
+field Grid_token: Int
+
+//  a field 
+field Grid_movei: Int
+
+//  a field 
+field Grid_movej: Int
+
+//  a field 
+field Grid_moveToken: Int
+
+function Grid_pureReadCell_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer(i: Int, j: Int, c00: Int, c01: Int, c02: Int, c10: Int, c11: Int, c12: Int, c20: Int, c21: Int, c22: Int): Int
+  requires 0 <= i && i <= 2
+  requires 0 <= j && j <= 2
+{
+  (i == 0 && j == 0 ? c00 : (i == 0 && j == 1 ? c01 : (i == 0 && j == 2 ? c02 : (i == 1 && j == 0 ? c10 : (i == 1 && j == 1 ? c11 : (i == 1 && j == 2 ? c12 : (i == 2 && j == 0 ? c20 : (i == 2 && j == 1 ? c21 : c22))))))))
+}
+
+function Grid_gridFull_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer(c00: Int, c01: Int, c02: Int, c10: Int, c11: Int, c12: Int, c20: Int, c21: Int, c22: Int): Bool
+{
+  c00 == -1 && c01 == -1 && c02 == -1 && c10 == -1 && c11 == -1 && c12 == -1 && c20 == -1 && c21 == -1 && c22 == -1
+}
+
+function Grid_gridWin_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer(c00: Int, c01: Int, c02: Int, c10: Int, c11: Int, c12: Int, c20: Int, c21: Int, c22: Int): Bool
+{
+  (((((((c00 != -1 && c00 == c01 && c01 == c02 || c10 != -1) && c10 == c11 && c11 == c12 || c20 != -1) && c20 == c21 && c21 == c22 || c00 != -1) && c00 == c10 && c10 == c20 || c01 != -1) && c01 == c11 && c11 == c21 || c02 != -1) && c02 == c12 && c12 == c22 || c00 != -1) && c00 == c11 && c11 == c22 || c02 != -1) && c02 == c11 && c11 == c20
+}
+
+function Grid_gameFinished_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer(c00: Int, c01: Int, c02: Int, c10: Int, c11: Int, c12: Int, c20: Int, c21: Int, c22: Int): Bool
+{
+  Grid_gridFull_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer(c00, c01, c02, c10, c11, c12, c20, c21, c22) || Grid_gridWin_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer(c00, c01, c02, c10, c11, c12, c20, c21, c22)
+}
+
+function Game_equalGrids_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer(c00: Int, c01: Int, c02: Int, c10: Int, c11: Int, c12: Int, c20: Int, c21: Int, c22: Int, d00: Int, d01: Int, d02: Int, d10: Int, d11: Int, d12: Int, d20: Int, d21: Int, d22: Int): Bool
+{
+  c00 == d00 && c01 == d01 && c02 == d02 && c10 == d10 && c11 == d11 && c12 == d12 && c20 == d20 && c21 == d21 && c22 == d22
+}
+
+function instanceof_TYPE_TYPE(t: TYPE, u: TYPE): Bool
+  ensures result == (t == u || directSuperclass(t) == u)
+
+
+function new_frac(x: Perm): frac
+  requires 0 / 1 < x && x <= 1 / 1
+  ensures frac_val(result) == x
+
+
+function new_zfrac(x: Perm): zfrac
+  requires 0 / 1 <= x && x <= 1 / 1
+  ensures zfrac_val(result) == x
+
+
+method Grid___contract_unsatisfiable__Grid_EncodedGlobalVariables_Integer(diz: Ref, globals: Ref, tok: Int)
+  requires diz != null
+{
+  inhale true && (tok == 0 || tok == 1)
+  // assert
+  assert false
+  inhale false
+}
+
+method Grid_Grid_EncodedGlobalVariables_Integer(globals: Ref, tok: Int) returns (sys__result: Ref)
+  requires tok == 0 || tok == 1
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_Grid()
+  ensures acc(sys__result.Grid_c00, write)
+  ensures acc(sys__result.Grid_c01, write)
+  ensures acc(sys__result.Grid_c02, write)
+  ensures acc(sys__result.Grid_c10, write)
+  ensures acc(sys__result.Grid_c11, write)
+  ensures acc(sys__result.Grid_c12, write)
+  ensures acc(sys__result.Grid_c20, write)
+  ensures acc(sys__result.Grid_c21, write)
+  ensures acc(sys__result.Grid_c22, write)
+  ensures sys__result.Grid_c00 == -1 && sys__result.Grid_c01 == -1 && sys__result.Grid_c02 == -1 && sys__result.Grid_c10 == -1 && sys__result.Grid_c11 == -1 && sys__result.Grid_c12 == -1 && sys__result.Grid_c20 == -1 && sys__result.Grid_c21 == -1 && sys__result.Grid_c22 == -1
+  ensures acc(sys__result.Grid_token, 1 / 2)
+  ensures acc(sys__result.Grid_movei, write)
+  ensures acc(sys__result.Grid_movej, write)
+  ensures acc(sys__result.Grid_moveToken, write)
+  ensures sys__result.Grid_token == tok
+  ensures sys__result.Grid_token == 0 || sys__result.Grid_token == 1
+{
+  var __flatten_9__10: Int
+  var __flatten_8__9: Int
+  var __flatten_7__8: Int
+  var __flatten_6__7: Int
+  var __flatten_5__6: Int
+  var __flatten_4__5: Int
+  var __flatten_3__4: Int
+  var __flatten_2__3: Int
+  var __flatten_1__2: Int
+  var diz__1: Ref
+  diz__1 := new(Grid_c00, Grid_c01, Grid_c02, Grid_c10, Grid_c11, Grid_c12, Grid_c20, Grid_c21, Grid_c22, Grid_token, Grid_movei, Grid_movej, Grid_moveToken)
+  inhale type_of(diz__1) == class_Grid()
+  __flatten_1__2 := -1
+  diz__1.Grid_c00 := __flatten_1__2
+  __flatten_2__3 := -1
+  diz__1.Grid_c01 := __flatten_2__3
+  __flatten_3__4 := -1
+  diz__1.Grid_c02 := __flatten_3__4
+  __flatten_4__5 := -1
+  diz__1.Grid_c10 := __flatten_4__5
+  __flatten_5__6 := -1
+  diz__1.Grid_c11 := __flatten_5__6
+  __flatten_6__7 := -1
+  diz__1.Grid_c12 := __flatten_6__7
+  __flatten_7__8 := -1
+  diz__1.Grid_c20 := __flatten_7__8
+  __flatten_8__9 := -1
+  diz__1.Grid_c21 := __flatten_8__9
+  __flatten_9__10 := -1
+  diz__1.Grid_c22 := __flatten_9__10
+  diz__1.Grid_token := tok
+  sys__result := diz__1
+  // assert
+  assert sys__result != null && type_of(sys__result) == class_Grid() && acc(sys__result.Grid_c00, write) && acc(sys__result.Grid_c01, write) && acc(sys__result.Grid_c02, write) && acc(sys__result.Grid_c10, write) && acc(sys__result.Grid_c11, write) && acc(sys__result.Grid_c12, write) && acc(sys__result.Grid_c20, write) && acc(sys__result.Grid_c21, write) && acc(sys__result.Grid_c22, write) && (sys__result.Grid_c00 == -1 && sys__result.Grid_c01 == -1 && sys__result.Grid_c02 == -1 && sys__result.Grid_c10 == -1 && sys__result.Grid_c11 == -1 && sys__result.Grid_c12 == -1 && sys__result.Grid_c20 == -1 && sys__result.Grid_c21 == -1 && sys__result.Grid_c22 == -1) && acc(sys__result.Grid_token, 1 / 2) && acc(sys__result.Grid_movei, write) && acc(sys__result.Grid_movej, write) && acc(sys__result.Grid_moveToken, write) && sys__result.Grid_token == tok && (sys__result.Grid_token == 0 || sys__result.Grid_token == 1)
+  inhale false
+}
+
+method Grid___contract_unsatisfiable__readCell_EncodedGlobalVariables_Integer_Integer(diz: Ref, globals: Ref, i: Int, j: Int) returns (sys__result: Int)
+  requires diz != null
+{
+  inhale true && (acc(diz.Grid_c00, 1 / 2) && acc(diz.Grid_c01, 1 / 2) && acc(diz.Grid_c02, 1 / 2) && acc(diz.Grid_c10, 1 / 2) && acc(diz.Grid_c11, 1 / 2) && acc(diz.Grid_c12, 1 / 2) && acc(diz.Grid_c20, 1 / 2) && acc(diz.Grid_c21, 1 / 2) && acc(diz.Grid_c22, 1 / 2) && (0 <= i && i <= 2) && (0 <= j && j <= 2))
+  // assert
+  assert false
+  inhale false
+}
+
+method Grid_readCell_EncodedGlobalVariables_Integer_Integer(diz: Ref, globals: Ref, i: Int, j: Int) returns (sys__result: Int)
+  requires diz != null
+  requires acc(diz.Grid_c00, 1 / 2)
+  requires acc(diz.Grid_c01, 1 / 2)
+  requires acc(diz.Grid_c02, 1 / 2)
+  requires acc(diz.Grid_c10, 1 / 2)
+  requires acc(diz.Grid_c11, 1 / 2)
+  requires acc(diz.Grid_c12, 1 / 2)
+  requires acc(diz.Grid_c20, 1 / 2)
+  requires acc(diz.Grid_c21, 1 / 2)
+  requires acc(diz.Grid_c22, 1 / 2)
+  requires 0 <= i && i <= 2
+  requires 0 <= j && j <= 2
+  ensures acc(diz.Grid_c00, 1 / 2)
+  ensures acc(diz.Grid_c01, 1 / 2)
+  ensures acc(diz.Grid_c02, 1 / 2)
+  ensures acc(diz.Grid_c10, 1 / 2)
+  ensures acc(diz.Grid_c11, 1 / 2)
+  ensures acc(diz.Grid_c12, 1 / 2)
+  ensures acc(diz.Grid_c20, 1 / 2)
+  ensures acc(diz.Grid_c21, 1 / 2)
+  ensures acc(diz.Grid_c22, 1 / 2)
+{
+  var sys__local__result__11: Int
+  if (i == 0 && j == 0) {
+    sys__local__result__11 := diz.Grid_c00
+    // assert
+    assert acc(diz.Grid_c00, 1 / 2) && acc(diz.Grid_c01, 1 / 2) && acc(diz.Grid_c02, 1 / 2) && acc(diz.Grid_c10, 1 / 2) && acc(diz.Grid_c11, 1 / 2) && acc(diz.Grid_c12, 1 / 2) && acc(diz.Grid_c20, 1 / 2) && acc(diz.Grid_c21, 1 / 2) && acc(diz.Grid_c22, 1 / 2)
+    goto __return_readCell
+  } elseif (i == 0 && j == 1) {
+    sys__local__result__11 := diz.Grid_c01
+    // assert
+    assert acc(diz.Grid_c00, 1 / 2) && acc(diz.Grid_c01, 1 / 2) && acc(diz.Grid_c02, 1 / 2) && acc(diz.Grid_c10, 1 / 2) && acc(diz.Grid_c11, 1 / 2) && acc(diz.Grid_c12, 1 / 2) && acc(diz.Grid_c20, 1 / 2) && acc(diz.Grid_c21, 1 / 2) && acc(diz.Grid_c22, 1 / 2)
+    goto __return_readCell
+  } elseif (i == 0 && j == 2) {
+    sys__local__result__11 := diz.Grid_c02
+    // assert
+    assert acc(diz.Grid_c00, 1 / 2) && acc(diz.Grid_c01, 1 / 2) && acc(diz.Grid_c02, 1 / 2) && acc(diz.Grid_c10, 1 / 2) && acc(diz.Grid_c11, 1 / 2) && acc(diz.Grid_c12, 1 / 2) && acc(diz.Grid_c20, 1 / 2) && acc(diz.Grid_c21, 1 / 2) && acc(diz.Grid_c22, 1 / 2)
+    goto __return_readCell
+  } elseif (i == 1 && j == 0) {
+    sys__local__result__11 := diz.Grid_c10
+    // assert
+    assert acc(diz.Grid_c00, 1 / 2) && acc(diz.Grid_c01, 1 / 2) && acc(diz.Grid_c02, 1 / 2) && acc(diz.Grid_c10, 1 / 2) && acc(diz.Grid_c11, 1 / 2) && acc(diz.Grid_c12, 1 / 2) && acc(diz.Grid_c20, 1 / 2) && acc(diz.Grid_c21, 1 / 2) && acc(diz.Grid_c22, 1 / 2)
+    goto __return_readCell
+  } elseif (i == 1 && j == 1) {
+    sys__local__result__11 := diz.Grid_c11
+    // assert
+    assert acc(diz.Grid_c00, 1 / 2) && acc(diz.Grid_c01, 1 / 2) && acc(diz.Grid_c02, 1 / 2) && acc(diz.Grid_c10, 1 / 2) && acc(diz.Grid_c11, 1 / 2) && acc(diz.Grid_c12, 1 / 2) && acc(diz.Grid_c20, 1 / 2) && acc(diz.Grid_c21, 1 / 2) && acc(diz.Grid_c22, 1 / 2)
+    goto __return_readCell
+  } elseif (i == 1 && j == 2) {
+    sys__local__result__11 := diz.Grid_c12
+    // assert
+    assert acc(diz.Grid_c00, 1 / 2) && acc(diz.Grid_c01, 1 / 2) && acc(diz.Grid_c02, 1 / 2) && acc(diz.Grid_c10, 1 / 2) && acc(diz.Grid_c11, 1 / 2) && acc(diz.Grid_c12, 1 / 2) && acc(diz.Grid_c20, 1 / 2) && acc(diz.Grid_c21, 1 / 2) && acc(diz.Grid_c22, 1 / 2)
+    goto __return_readCell
+  } elseif (i == 2 && j == 0) {
+    sys__local__result__11 := diz.Grid_c20
+    // assert
+    assert acc(diz.Grid_c00, 1 / 2) && acc(diz.Grid_c01, 1 / 2) && acc(diz.Grid_c02, 1 / 2) && acc(diz.Grid_c10, 1 / 2) && acc(diz.Grid_c11, 1 / 2) && acc(diz.Grid_c12, 1 / 2) && acc(diz.Grid_c20, 1 / 2) && acc(diz.Grid_c21, 1 / 2) && acc(diz.Grid_c22, 1 / 2)
+    goto __return_readCell
+  } elseif (i == 2 && j == 1) {
+    sys__local__result__11 := diz.Grid_c21
+    // assert
+    assert acc(diz.Grid_c00, 1 / 2) && acc(diz.Grid_c01, 1 / 2) && acc(diz.Grid_c02, 1 / 2) && acc(diz.Grid_c10, 1 / 2) && acc(diz.Grid_c11, 1 / 2) && acc(diz.Grid_c12, 1 / 2) && acc(diz.Grid_c20, 1 / 2) && acc(diz.Grid_c21, 1 / 2) && acc(diz.Grid_c22, 1 / 2)
+    goto __return_readCell
+  } elseif (i == 2 && j == 2) {
+    sys__local__result__11 := diz.Grid_c22
+    // assert
+    assert acc(diz.Grid_c00, 1 / 2) && acc(diz.Grid_c01, 1 / 2) && acc(diz.Grid_c02, 1 / 2) && acc(diz.Grid_c10, 1 / 2) && acc(diz.Grid_c11, 1 / 2) && acc(diz.Grid_c12, 1 / 2) && acc(diz.Grid_c20, 1 / 2) && acc(diz.Grid_c21, 1 / 2) && acc(diz.Grid_c22, 1 / 2)
+    goto __return_readCell
+  }
+  label __return_readCell
+  sys__result := sys__local__result__11
+  // assert
+  assert acc(diz.Grid_c00, 1 / 2) && acc(diz.Grid_c01, 1 / 2) && acc(diz.Grid_c02, 1 / 2) && acc(diz.Grid_c10, 1 / 2) && acc(diz.Grid_c11, 1 / 2) && acc(diz.Grid_c12, 1 / 2) && acc(diz.Grid_c20, 1 / 2) && acc(diz.Grid_c21, 1 / 2) && acc(diz.Grid_c22, 1 / 2)
+  inhale false
+}
+
+method Grid___contract_unsatisfiable__doMove_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale true && (acc(diz.Grid_c00, write) && acc(diz.Grid_c01, write) && acc(diz.Grid_c02, write) && acc(diz.Grid_c10, write) && acc(diz.Grid_c11, write) && acc(diz.Grid_c12, write) && acc(diz.Grid_c20, write) && acc(diz.Grid_c21, write) && acc(diz.Grid_c22, write) && acc(diz.Grid_movei, 1 / 2) && acc(diz.Grid_movej, 1 / 2) && acc(diz.Grid_moveToken, 1 / 2) && (0 <= diz.Grid_movei && diz.Grid_movei <= 2) && (0 <= diz.Grid_movej && diz.Grid_movej <= 2) && (diz.Grid_moveToken == 0 || diz.Grid_moveToken == 1) && Grid_pureReadCell_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer(diz.Grid_movei, diz.Grid_movej, diz.Grid_c00, diz.Grid_c01, diz.Grid_c02, diz.Grid_c10, diz.Grid_c11, diz.Grid_c12, diz.Grid_c20, diz.Grid_c21, diz.Grid_c22) == -1)
+  // assert
+  assert false
+  inhale false
+}
+
+method Grid_doMove_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+  requires acc(diz.Grid_c00, write)
+  requires acc(diz.Grid_c01, write)
+  requires acc(diz.Grid_c02, write)
+  requires acc(diz.Grid_c10, write)
+  requires acc(diz.Grid_c11, write)
+  requires acc(diz.Grid_c12, write)
+  requires acc(diz.Grid_c20, write)
+  requires acc(diz.Grid_c21, write)
+  requires acc(diz.Grid_c22, write)
+  requires acc(diz.Grid_movei, 1 / 2)
+  requires acc(diz.Grid_movej, 1 / 2)
+  requires acc(diz.Grid_moveToken, 1 / 2)
+  requires 0 <= diz.Grid_movei && diz.Grid_movei <= 2
+  requires 0 <= diz.Grid_movej && diz.Grid_movej <= 2
+  requires diz.Grid_moveToken == 0 || diz.Grid_moveToken == 1
+  requires Grid_pureReadCell_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer(diz.Grid_movei, diz.Grid_movej, diz.Grid_c00, diz.Grid_c01, diz.Grid_c02, diz.Grid_c10, diz.Grid_c11, diz.Grid_c12, diz.Grid_c20, diz.Grid_c21, diz.Grid_c22) == -1
+  ensures acc(diz.Grid_c00, write)
+  ensures acc(diz.Grid_c01, write)
+  ensures acc(diz.Grid_c02, write)
+  ensures acc(diz.Grid_c10, write)
+  ensures acc(diz.Grid_c11, write)
+  ensures acc(diz.Grid_c12, write)
+  ensures acc(diz.Grid_c20, write)
+  ensures acc(diz.Grid_c21, write)
+  ensures acc(diz.Grid_c22, write)
+  ensures acc(diz.Grid_movei, 1 / 2)
+  ensures acc(diz.Grid_movej, 1 / 2)
+  ensures acc(diz.Grid_moveToken, 1 / 2)
+  ensures 0 <= diz.Grid_movei && diz.Grid_movei <= 2
+  ensures 0 <= diz.Grid_movej && diz.Grid_movej <= 2
+  ensures Grid_pureReadCell_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer(diz.Grid_movei, diz.Grid_movej, diz.Grid_c00, diz.Grid_c01, diz.Grid_c02, diz.Grid_c10, diz.Grid_c11, diz.Grid_c12, diz.Grid_c20, diz.Grid_c21, diz.Grid_c22) == diz.Grid_moveToken
+  ensures diz.Grid_movei != 0 || diz.Grid_movej != 0 ==> old(diz.Grid_c00) == diz.Grid_c00
+  ensures diz.Grid_movei != 0 || diz.Grid_movej != 1 ==> old(diz.Grid_c01) == diz.Grid_c01
+  ensures diz.Grid_movei != 0 || diz.Grid_movej != 2 ==> old(diz.Grid_c02) == diz.Grid_c02
+  ensures diz.Grid_movei != 1 || diz.Grid_movej != 0 ==> old(diz.Grid_c10) == diz.Grid_c10
+  ensures diz.Grid_movei != 1 || diz.Grid_movej != 1 ==> old(diz.Grid_c11) == diz.Grid_c11
+  ensures diz.Grid_movei != 1 || diz.Grid_movej != 2 ==> old(diz.Grid_c12) == diz.Grid_c12
+  ensures diz.Grid_movei != 2 || diz.Grid_movej != 0 ==> old(diz.Grid_c20) == diz.Grid_c20
+  ensures diz.Grid_movei != 2 || diz.Grid_movej != 1 ==> old(diz.Grid_c21) == diz.Grid_c21
+  ensures diz.Grid_movei != 2 || diz.Grid_movej != 2 ==> old(diz.Grid_c22) == diz.Grid_c22
+{
+  var __flatten_10__12: Int
+  var __flatten_11__13: Int
+  var __flatten_12__14: Int
+  var __flatten_13__15: Int
+  var __flatten_14__16: Int
+  var __flatten_15__17: Int
+  var __flatten_16__18: Int
+  var __flatten_17__19: Int
+  var __flatten_18__20: Int
+  if (diz.Grid_movei == 0 && diz.Grid_movej == 0) {
+    __flatten_10__12 := diz.Grid_moveToken
+    diz.Grid_c00 := __flatten_10__12
+  } elseif (diz.Grid_movei == 0 && diz.Grid_movej == 1) {
+    __flatten_11__13 := diz.Grid_moveToken
+    diz.Grid_c01 := __flatten_11__13
+  } elseif (diz.Grid_movei == 0 && diz.Grid_movej == 2) {
+    __flatten_12__14 := diz.Grid_moveToken
+    diz.Grid_c02 := __flatten_12__14
+  } elseif (diz.Grid_movei == 1 && diz.Grid_movej == 0) {
+    __flatten_13__15 := diz.Grid_moveToken
+    diz.Grid_c10 := __flatten_13__15
+  } elseif (diz.Grid_movei == 1 && diz.Grid_movej == 1) {
+    __flatten_14__16 := diz.Grid_moveToken
+    diz.Grid_c11 := __flatten_14__16
+  } elseif (diz.Grid_movei == 1 && diz.Grid_movej == 2) {
+    __flatten_15__17 := diz.Grid_moveToken
+    diz.Grid_c12 := __flatten_15__17
+  } elseif (diz.Grid_movei == 2 && diz.Grid_movej == 0) {
+    __flatten_16__18 := diz.Grid_moveToken
+    diz.Grid_c20 := __flatten_16__18
+  } elseif (diz.Grid_movei == 2 && diz.Grid_movej == 1) {
+    __flatten_17__19 := diz.Grid_moveToken
+    diz.Grid_c21 := __flatten_17__19
+  } elseif (diz.Grid_movei == 2 && diz.Grid_movej == 2) {
+    __flatten_18__20 := diz.Grid_moveToken
+    diz.Grid_c22 := __flatten_18__20
+  }
+}
+
+method Grid_createNewMove_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+  requires acc(diz.Grid_movei, write)
+  requires acc(diz.Grid_movej, write)
+  requires acc(diz.Grid_moveToken, write)
+  requires acc(diz.Grid_token, 1 / 2)
+  requires acc(diz.Grid_c00, 1 / 2)
+  requires acc(diz.Grid_c01, 1 / 2)
+  requires acc(diz.Grid_c02, 1 / 2)
+  requires acc(diz.Grid_c10, 1 / 2)
+  requires acc(diz.Grid_c11, 1 / 2)
+  requires acc(diz.Grid_c12, 1 / 2)
+  requires acc(diz.Grid_c20, 1 / 2)
+  requires acc(diz.Grid_c21, 1 / 2)
+  requires acc(diz.Grid_c22, 1 / 2)
+  requires diz.Grid_token == 0 || diz.Grid_token == 1
+  requires !Grid_gridFull_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer(diz.Grid_c00, diz.Grid_c01, diz.Grid_c02, diz.Grid_c10, diz.Grid_c11, diz.Grid_c12, diz.Grid_c20, diz.Grid_c21, diz.Grid_c22)
+  ensures acc(diz.Grid_movei, write)
+  ensures acc(diz.Grid_movej, write)
+  ensures acc(diz.Grid_moveToken, write)
+  ensures acc(diz.Grid_token, 1 / 2)
+  ensures acc(diz.Grid_c00, 1 / 2)
+  ensures acc(diz.Grid_c01, 1 / 2)
+  ensures acc(diz.Grid_c02, 1 / 2)
+  ensures acc(diz.Grid_c10, 1 / 2)
+  ensures acc(diz.Grid_c11, 1 / 2)
+  ensures acc(diz.Grid_c12, 1 / 2)
+  ensures acc(diz.Grid_c20, 1 / 2)
+  ensures acc(diz.Grid_c21, 1 / 2)
+  ensures acc(diz.Grid_c22, 1 / 2)
+  ensures 0 <= diz.Grid_movei && diz.Grid_movei <= 2
+  ensures 0 <= diz.Grid_movej && diz.Grid_movej <= 2
+  ensures diz.Grid_moveToken == diz.Grid_token
+  ensures diz.Grid_moveToken == 0 || diz.Grid_moveToken == 1
+  ensures diz.Grid_token == old(diz.Grid_token)
+  ensures Grid_pureReadCell_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer(diz.Grid_movei, diz.Grid_movej, diz.Grid_c00, diz.Grid_c01, diz.Grid_c02, diz.Grid_c10, diz.Grid_c11, diz.Grid_c12, diz.Grid_c20, diz.Grid_c21, diz.Grid_c22) == -1
+{
+  inhale false
+}
+
+method Grid_setMove_EncodedGlobalVariables_Integer_Integer_Integer(diz: Ref, globals: Ref, i: Int, j: Int, tok: Int)
+  requires diz != null
+  requires acc(diz.Grid_movei, write)
+  requires acc(diz.Grid_movej, write)
+  requires acc(diz.Grid_moveToken, write)
+  requires acc(diz.Grid_token, 1 / 2)
+  requires acc(diz.Grid_c00, 1 / 2)
+  requires acc(diz.Grid_c01, 1 / 2)
+  requires acc(diz.Grid_c02, 1 / 2)
+  requires acc(diz.Grid_c10, 1 / 2)
+  requires acc(diz.Grid_c11, 1 / 2)
+  requires acc(diz.Grid_c12, 1 / 2)
+  requires acc(diz.Grid_c20, 1 / 2)
+  requires acc(diz.Grid_c21, 1 / 2)
+  requires acc(diz.Grid_c22, 1 / 2)
+  requires 0 <= i && i <= 2
+  requires 0 <= j && j <= 2
+  requires tok == 0 || tok == 1
+  requires !Grid_gridFull_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer(diz.Grid_c00, diz.Grid_c01, diz.Grid_c02, diz.Grid_c10, diz.Grid_c11, diz.Grid_c12, diz.Grid_c20, diz.Grid_c21, diz.Grid_c22)
+  requires Grid_pureReadCell_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer(i, j, diz.Grid_c00, diz.Grid_c01, diz.Grid_c02, diz.Grid_c10, diz.Grid_c11, diz.Grid_c12, diz.Grid_c20, diz.Grid_c21, diz.Grid_c22) == -1
+  ensures acc(diz.Grid_movei, write)
+  ensures acc(diz.Grid_movej, write)
+  ensures acc(diz.Grid_moveToken, write)
+  ensures acc(diz.Grid_token, 1 / 2)
+  ensures acc(diz.Grid_c00, 1 / 2)
+  ensures acc(diz.Grid_c01, 1 / 2)
+  ensures acc(diz.Grid_c02, 1 / 2)
+  ensures acc(diz.Grid_c10, 1 / 2)
+  ensures acc(diz.Grid_c11, 1 / 2)
+  ensures acc(diz.Grid_c12, 1 / 2)
+  ensures acc(diz.Grid_c20, 1 / 2)
+  ensures acc(diz.Grid_c21, 1 / 2)
+  ensures acc(diz.Grid_c22, 1 / 2)
+  ensures diz.Grid_moveToken == tok
+  ensures diz.Grid_movei == i && diz.Grid_movej == j
+  ensures diz.Grid_token == old(diz.Grid_token)
+  ensures !Grid_gridFull_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer(diz.Grid_c00, diz.Grid_c01, diz.Grid_c02, diz.Grid_c10, diz.Grid_c11, diz.Grid_c12, diz.Grid_c20, diz.Grid_c21, diz.Grid_c22)
+  ensures Grid_pureReadCell_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer(i, j, diz.Grid_c00, diz.Grid_c01, diz.Grid_c02, diz.Grid_c10, diz.Grid_c11, diz.Grid_c12, diz.Grid_c20, diz.Grid_c21, diz.Grid_c22) == -1
+{
+  inhale false
+}
+
+method Game___contract_unsatisfiable__play_EncodedGlobalVariables(globals: Ref)
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+}
+
+method Game_play_EncodedGlobalVariables(globals: Ref)
+{
+  var P1__21: Ref
+  var P2__22: Ref
+  var isTurnP1__23: Bool
+  P1__21 := Grid_Grid_EncodedGlobalVariables_Integer(globals, 0)
+  P2__22 := Grid_Grid_EncodedGlobalVariables_Integer(globals, 1)
+  isTurnP1__23 := true
+  while (!Grid_gameFinished_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer(P1__21.Grid_c00, P1__21.Grid_c01, P1__21.Grid_c02, P1__21.Grid_c10, P1__21.Grid_c11, P1__21.Grid_c12, P1__21.Grid_c20, P1__21.Grid_c21, P1__21.Grid_c22) && !Grid_gameFinished_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer(P2__22.Grid_c00, P2__22.Grid_c01, P2__22.Grid_c02, P2__22.Grid_c10, P2__22.Grid_c11, P2__22.Grid_c12, P2__22.Grid_c20, P2__22.Grid_c21, P2__22.Grid_c22))
+    invariant acc(P1__21.Grid_c00, write)
+    invariant acc(P1__21.Grid_c01, write)
+    invariant acc(P1__21.Grid_c02, write)
+    invariant acc(P1__21.Grid_c10, write)
+    invariant acc(P1__21.Grid_c11, write)
+    invariant acc(P1__21.Grid_c12, write)
+    invariant acc(P1__21.Grid_c20, write)
+    invariant acc(P1__21.Grid_c21, write)
+    invariant acc(P1__21.Grid_c22, write)
+    invariant acc(P2__22.Grid_c00, write)
+    invariant acc(P2__22.Grid_c01, write)
+    invariant acc(P2__22.Grid_c02, write)
+    invariant acc(P2__22.Grid_c10, write)
+    invariant acc(P2__22.Grid_c11, write)
+    invariant acc(P2__22.Grid_c12, write)
+    invariant acc(P2__22.Grid_c20, write)
+    invariant acc(P2__22.Grid_c21, write)
+    invariant acc(P2__22.Grid_c22, write)
+    invariant acc(P1__21.Grid_movei, write)
+    invariant acc(P1__21.Grid_movej, write)
+    invariant acc(P1__21.Grid_moveToken, write)
+    invariant acc(P1__21.Grid_token, 1 / 2)
+    invariant acc(P2__22.Grid_movei, write)
+    invariant acc(P2__22.Grid_movej, write)
+    invariant acc(P2__22.Grid_moveToken, write)
+    invariant acc(P2__22.Grid_token, 1 / 2)
+    invariant Game_equalGrids_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer_Integer(P1__21.Grid_c00, P1__21.Grid_c01, P1__21.Grid_c02, P1__21.Grid_c10, P1__21.Grid_c11, P1__21.Grid_c12, P1__21.Grid_c20, P1__21.Grid_c21, P1__21.Grid_c22, P2__22.Grid_c00, P2__22.Grid_c01, P2__22.Grid_c02, P2__22.Grid_c10, P2__22.Grid_c11, P2__22.Grid_c12, P2__22.Grid_c20, P2__22.Grid_c21, P2__22.Grid_c22)
+    invariant P1__21.Grid_token == 0
+    invariant P2__22.Grid_token == 1 
+  {
+    if (isTurnP1__23) {
+      Grid_createNewMove_EncodedGlobalVariables(P1__21, globals)
+      Grid_setMove_EncodedGlobalVariables_Integer_Integer_Integer(P2__22, globals, P1__21.Grid_movei, P1__21.Grid_movej, P1__21.Grid_moveToken)
+    } else {
+      Grid_createNewMove_EncodedGlobalVariables(P2__22, globals)
+      Grid_setMove_EncodedGlobalVariables_Integer_Integer_Integer(P1__21, globals, P2__22.Grid_movei, P2__22.Grid_movej, P2__22.Grid_moveToken)
+    }
+    Grid_doMove_EncodedGlobalVariables(P1__21, globals)
+    Grid_doMove_EncodedGlobalVariables(P2__22, globals)
+    isTurnP1__23 := !isTurnP1__23
+  }
+}

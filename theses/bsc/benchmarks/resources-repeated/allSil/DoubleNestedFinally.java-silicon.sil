@@ -1,0 +1,286 @@
+// Generated on 2021-03-23 at 23:30:34
+domain TYPE {
+  
+  unique function class_java_DOT_lang_DOT_Object(): TYPE
+  
+  unique function class_C(): TYPE
+  
+  unique function class_java_DOT_lang_DOT_Throwable(): TYPE
+  
+  unique function class_java_DOT_lang_DOT_Exception(): TYPE
+  
+  unique function class_java_DOT_io_DOT_IOException(): TYPE
+  
+  unique function class_EncodedGlobalVariables(): TYPE
+  
+  function directSuperclass(t: TYPE): TYPE
+  
+  function type_of(val: Ref): TYPE
+  
+  axiom java_DOT_lang_DOT_Object_directSuperclass {
+    directSuperclass(class_java_DOT_lang_DOT_Object()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom C_directSuperclass {
+    directSuperclass(class_C()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom java_DOT_lang_DOT_Throwable_directSuperclass {
+    directSuperclass(class_java_DOT_lang_DOT_Throwable()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom java_DOT_lang_DOT_Exception_directSuperclass {
+    directSuperclass(class_java_DOT_lang_DOT_Exception()) == class_java_DOT_lang_DOT_Throwable()
+  }
+  
+  axiom java_DOT_io_DOT_IOException_directSuperclass {
+    directSuperclass(class_java_DOT_io_DOT_IOException()) == class_java_DOT_lang_DOT_Exception()
+  }
+  
+  axiom EncodedGlobalVariables_directSuperclass {
+    directSuperclass(class_EncodedGlobalVariables()) == class_java_DOT_lang_DOT_Object()
+  }
+}
+
+function instanceof_TYPE_TYPE(t: TYPE, u: TYPE): Bool
+  ensures result == (t == u || directSuperclass(t) == u)
+
+
+method java_DOT_lang_DOT_Object_Object_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Object()
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Object_internal_Object_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Object()
+{
+  inhale false
+}
+
+method C_m_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale false
+}
+
+method C___contract_unsatisfiable__internal_m_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+  label method_end___contract_unsatisfiable__internal_m_0
+}
+
+method C_internal_m_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  var e__7: Ref
+  var old__sys_exc_10__6: Ref
+  var old__sys_exc_7__5: Ref
+  var sys__exc__1: Ref
+  var x__2: Int
+  var __flatten_1__3: Ref
+  var old__sys_exc_4__4: Ref
+  sys__exc__1 := null
+  x__2 := 0
+  old__sys_exc_4__4 := sys__exc__1
+  old__sys_exc_7__5 := sys__exc__1
+  __flatten_1__3 := java_DOT_io_DOT_IOException_IOException_EncodedGlobalVariables(globals)
+  sys__exc__1 := __flatten_1__3
+  goto finally_5
+  goto finally_5
+  label finally_5
+  old__sys_exc_10__6 := sys__exc__1
+  goto finally_8
+  label finally_8
+  if (sys__exc__1 != old__sys_exc_10__6) {
+    goto catch_2
+  }
+  goto try_end_9
+  label try_end_9
+  x__2 := 3
+  if (sys__exc__1 != old__sys_exc_7__5) {
+    goto catch_2
+  }
+  goto try_end_6
+  label try_end_6
+  goto try_end_3
+  label catch_2
+  if (!instanceof_TYPE_TYPE(type_of(sys__exc__1), class_java_DOT_io_DOT_IOException())) {
+    goto method_end_internal_m_1
+  }
+  inhale e__7 == sys__exc__1
+  sys__exc__1 := null
+  x__2 := x__2 + 10
+  // assert
+  assert sys__exc__1 == null
+  sys__exc__1 := old__sys_exc_4__4
+  goto try_end_3
+  label try_end_3
+  // assert
+  assert x__2 == 13
+  label method_end_internal_m_1
+  // assert
+  assert sys__exc__1 == null
+}
+
+method java_DOT_lang_DOT_Throwable_Throwable_EncodedGlobalVariables_java_DOT_lang_DOT_Throwable(globals: Ref, arg0: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Throwable()
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Throwable_internal_Throwable_EncodedGlobalVariables_java_DOT_lang_DOT_Throwable(globals: Ref, arg0: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Throwable()
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Throwable_Throwable_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Throwable()
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Throwable_internal_Throwable_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Throwable()
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Throwable_printStackTrace_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Throwable_internal_printStackTrace_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Throwable_getMessage_EncodedGlobalVariables(diz: Ref, globals: Ref) returns (sys__result: Seq[Int])
+  requires diz != null
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Throwable_internal_getMessage_EncodedGlobalVariables(diz: Ref, globals: Ref) returns (sys__result: Seq[Int])
+  requires diz != null
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Exception_Exception_EncodedGlobalVariables_java_DOT_lang_DOT_Throwable(globals: Ref, arg0: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Exception()
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Exception_internal_Exception_EncodedGlobalVariables_java_DOT_lang_DOT_Throwable(globals: Ref, arg0: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Exception()
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Exception_Exception_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Exception()
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Exception_internal_Exception_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Exception()
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Exception_printStackTrace_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Exception_internal_printStackTrace_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Exception_getMessage_EncodedGlobalVariables(diz: Ref, globals: Ref) returns (sys__result: Seq[Int])
+  requires diz != null
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Exception_internal_getMessage_EncodedGlobalVariables(diz: Ref, globals: Ref) returns (sys__result: Seq[Int])
+  requires diz != null
+{
+  inhale false
+}
+
+method java_DOT_io_DOT_IOException_IOException_EncodedGlobalVariables_java_DOT_lang_DOT_Throwable(globals: Ref, arg0: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_io_DOT_IOException()
+{
+  inhale false
+}
+
+method java_DOT_io_DOT_IOException_internal_IOException_EncodedGlobalVariables_java_DOT_lang_DOT_Throwable(globals: Ref, arg0: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_io_DOT_IOException()
+{
+  inhale false
+}
+
+method java_DOT_io_DOT_IOException_IOException_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_io_DOT_IOException()
+{
+  inhale false
+}
+
+method java_DOT_io_DOT_IOException_internal_IOException_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_io_DOT_IOException()
+{
+  inhale false
+}
+
+method java_DOT_io_DOT_IOException_printStackTrace_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale false
+}
+
+method java_DOT_io_DOT_IOException_internal_printStackTrace_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale false
+}
+
+method java_DOT_io_DOT_IOException_getMessage_EncodedGlobalVariables(diz: Ref, globals: Ref) returns (sys__result: Seq[Int])
+  requires diz != null
+{
+  inhale false
+}
+
+method java_DOT_io_DOT_IOException_internal_getMessage_EncodedGlobalVariables(diz: Ref, globals: Ref) returns (sys__result: Seq[Int])
+  requires diz != null
+{
+  inhale false
+}

@@ -1,0 +1,101 @@
+// Generated on 2021-03-23 at 23:40:08
+domain TYPE {
+  
+  unique function class_java_DOT_lang_DOT_Object(): TYPE
+  
+  unique function class_Test(): TYPE
+  
+  unique function class_EncodedGlobalVariables(): TYPE
+  
+  function directSuperclass(t: TYPE): TYPE
+  
+  function type_of(val: Ref): TYPE
+  
+  axiom java_DOT_lang_DOT_Object_directSuperclass {
+    directSuperclass(class_java_DOT_lang_DOT_Object()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom Test_directSuperclass {
+    directSuperclass(class_Test()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom EncodedGlobalVariables_directSuperclass {
+    directSuperclass(class_EncodedGlobalVariables()) == class_java_DOT_lang_DOT_Object()
+  }
+}
+
+function instanceof_TYPE_TYPE(t: TYPE, u: TYPE): Bool
+  ensures result == (t == u || directSuperclass(t) == u)
+
+
+method java_DOT_lang_DOT_Object_Object_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Object()
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Object_internal_Object_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Object()
+{
+  inhale false
+}
+
+method Test_usage_EncodedGlobalVariables_Boolean(diz: Ref, globals: Ref, cond: Bool)
+  requires diz != null
+{
+  inhale false
+}
+
+method Test___contract_unsatisfiable__internal_usage_EncodedGlobalVariables_Boolean(diz: Ref, globals: Ref, cond: Bool)
+  requires diz != null
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+}
+
+method Test_internal_usage_EncodedGlobalVariables_Boolean(diz: Ref, globals: Ref, cond: Bool)
+  requires diz != null
+{
+  var result__1: Int
+  var __flatten_1__2: Int
+  var __flatten_2__3: Int
+  var __flatten_3__4: Int
+  if (cond) {
+    __flatten_2__3 := Test_expectEqual_EncodedGlobalVariables_Boolean_Boolean(diz, globals, cond, true)
+    __flatten_1__2 := __flatten_2__3
+  } else {
+    __flatten_3__4 := Test_expectEqual_EncodedGlobalVariables_Boolean_Boolean(diz, globals, cond, false)
+    __flatten_1__2 := __flatten_3__4
+  }
+  result__1 := __flatten_1__2
+}
+
+method Test_expectEqual_EncodedGlobalVariables_Boolean_Boolean(diz: Ref, globals: Ref, a: Bool, b: Bool) returns (sys__result: Int)
+  requires diz != null
+  requires a == b
+{
+  inhale false
+}
+
+method Test___contract_unsatisfiable__internal_expectEqual_EncodedGlobalVariables_Boolean_Boolean(diz: Ref, globals: Ref, a: Bool, b: Bool) returns (sys__result: Int)
+  requires diz != null
+{
+  inhale true && a == b
+  // assert
+  assert false
+  inhale false
+}
+
+method Test_internal_expectEqual_EncodedGlobalVariables_Boolean_Boolean(diz: Ref, globals: Ref, a: Bool, b: Bool) returns (sys__result: Int)
+  requires diz != null
+  requires a == b
+{
+  sys__result := 0
+  // assert
+  assert true
+  inhale false
+}

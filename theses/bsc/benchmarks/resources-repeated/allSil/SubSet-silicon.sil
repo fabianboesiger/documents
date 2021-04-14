@@ -1,0 +1,63 @@
+// Generated on 2021-03-23 at 23:39:39
+domain TYPE {
+  
+  unique function class_SubSet(): TYPE
+  
+  unique function class_java_DOT_lang_DOT_Object(): TYPE
+  
+  unique function class_EncodedGlobalVariables(): TYPE
+  
+  function directSuperclass(t: TYPE): TYPE
+  
+  function type_of(val: Ref): TYPE
+  
+  axiom SubSet_directSuperclass {
+    directSuperclass(class_SubSet()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom EncodedGlobalVariables_directSuperclass {
+    directSuperclass(class_EncodedGlobalVariables()) == class_java_DOT_lang_DOT_Object()
+  }
+}
+
+function instanceof_TYPE_TYPE(t: TYPE, u: TYPE): Bool
+  ensures result == (t == u || directSuperclass(t) == u)
+
+
+method SubSet___contract_unsatisfiable__main_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+}
+
+method SubSet_main_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  var a__1: Set[Int]
+  var __flatten_1__2: Set[Int]
+  var b__3: Set[Int]
+  var __flatten_2__4: Set[Int]
+  var c__5: Multiset[Int]
+  var __flatten_3__6: Multiset[Int]
+  var d__7: Multiset[Int]
+  var __flatten_4__8: Multiset[Int]
+  __flatten_1__2 := Set(1, 5, 7, 8, 6, 1, 4, 8, 6, 3)
+  a__1 := __flatten_1__2
+  __flatten_2__4 := Set(1, 5, 7)
+  b__3 := __flatten_2__4
+  // assert
+  assert (b__3 subset b__3) && (b__3 subset a__1) && !((a__1 subset b__3))
+  __flatten_3__6 := Multiset(1, 5, 7, 4, 9, 6, 3, 2, 4, 5)
+  c__5 := __flatten_3__6
+  __flatten_4__8 := Multiset(4, 6, 2, 4, 5)
+  d__7 := __flatten_4__8
+  // assert
+  assert (d__7 subset c__5)
+  // assert
+  assert (7 in d__7) == 0 && (7 in c__5) == 1 && !((c__5 subset d__7))
+  // assert
+  assert !((Set(1, 2, 3) subset Set[Int]()))
+}

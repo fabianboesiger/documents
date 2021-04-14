@@ -1,0 +1,127 @@
+// Generated on 2021-03-23 at 23:38:23
+domain TYPE {
+  
+  unique function class_RemoveValues(): TYPE
+  
+  unique function class_java_DOT_lang_DOT_Object(): TYPE
+  
+  unique function class_Edge(): TYPE
+  
+  unique function class_EncodedGlobalVariables(): TYPE
+  
+  function directSuperclass(t: TYPE): TYPE
+  
+  function type_of(val: Ref): TYPE
+  
+  axiom RemoveValues_directSuperclass {
+    directSuperclass(class_RemoveValues()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom Edge_directSuperclass {
+    directSuperclass(class_Edge()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom EncodedGlobalVariables_directSuperclass {
+    directSuperclass(class_EncodedGlobalVariables()) == class_java_DOT_lang_DOT_Object()
+  }
+}
+
+//  a field 
+field Edge_source: Int
+
+//  a field 
+field Edge_target: Int
+
+function remove_by_index_Sequence_Integer__Sequence$Integer$_Integer(seq0: Seq[Int], i0: Int): Seq[Int]
+  requires 0 <= i0 && i0 < |seq0|
+  ensures |result| == |seq0| - 1
+  ensures (forall j0: Int :: { result[j0] } 0 <= j0 && j0 < i0 ==> result[j0] == seq0[j0])
+  ensures (forall j0: Int :: { result[j0] } i0 <= j0 && j0 < |result| ==> result[j0] == seq0[j0 + 1])
+
+
+function remove_by_index_Sequence_Edge__Sequence$Edge$_Integer(seq0: Seq[Ref], i0: Int): Seq[Ref]
+  requires 0 <= i0 && i0 < |seq0|
+  ensures |result| == |seq0| - 1
+  ensures (forall j0: Int :: { result[j0] } 0 <= j0 && j0 < i0 ==> result[j0] == seq0[j0])
+  ensures (forall j0: Int :: { result[j0] } i0 <= j0 && j0 < |result| ==> result[j0] == seq0[j0 + 1])
+
+
+function instanceof_TYPE_TYPE(t: TYPE, u: TYPE): Bool
+  ensures result == (t == u || directSuperclass(t) == u)
+
+
+method RemoveValues___contract_unsatisfiable__main_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+}
+
+method RemoveValues_main_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  var a__1: Seq[Int]
+  var __flatten_1__2: Seq[Int]
+  var b__3: Seq[Int]
+  var c__4: Seq[Int]
+  var d__5: Seq[Int]
+  var f__6: Seq[Int]
+  var g__7: Seq[Int]
+  var e1__8: Ref
+  var e2__9: Ref
+  var e3__10: Ref
+  var es__11: Seq[Ref]
+  var __flatten_10__12: Seq[Ref]
+  __flatten_1__2 := Seq(1, 2, 3, 4, 5)
+  a__1 := __flatten_1__2
+  b__3 := remove_by_index_Sequence_Integer__Sequence$Integer$_Integer(a__1, 2)
+  // assert
+  assert b__3 == Seq(1, 2, 4, 5)
+  c__4 := remove_by_index_Sequence_Integer__Sequence$Integer$_Integer(b__3, 0)
+  // assert
+  assert c__4 == Seq(2, 4, 5)
+  d__5 := remove_by_index_Sequence_Integer__Sequence$Integer$_Integer(c__4, 2)
+  // assert
+  assert d__5 == Seq(2, 4)
+  f__6 := remove_by_index_Sequence_Integer__Sequence$Integer$_Integer(d__5, 1)
+  // assert
+  assert f__6 == Seq(2)
+  g__7 := remove_by_index_Sequence_Integer__Sequence$Integer$_Integer(f__6, 0)
+  // assert
+  assert g__7 == Seq[Int]()
+  // assert
+  assert 0 == |g__7|
+  e1__8 := Edge_Edge_EncodedGlobalVariables_Integer_Integer(globals, 0, 1)
+  e2__9 := Edge_Edge_EncodedGlobalVariables_Integer_Integer(globals, 1, 2)
+  e3__10 := Edge_Edge_EncodedGlobalVariables_Integer_Integer(globals, 2, 0)
+  __flatten_10__12 := Seq(e1__8, e2__9, e3__10)
+  es__11 := __flatten_10__12
+  // assert
+  assert remove_by_index_Sequence_Edge__Sequence$Edge$_Integer(es__11, 1) == Seq(e1__8, e3__10)
+}
+
+method Edge___contract_unsatisfiable__Edge_EncodedGlobalVariables_Integer_Integer(diz: Ref, globals: Ref, s: Int, t: Int)
+  requires diz != null
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+}
+
+method Edge_Edge_EncodedGlobalVariables_Integer_Integer(globals: Ref, s: Int, t: Int) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_Edge()
+{
+  var diz__13: Ref
+  diz__13 := new(Edge_source, Edge_target)
+  inhale type_of(diz__13) == class_Edge()
+  diz__13.Edge_source := s
+  diz__13.Edge_target := t
+  sys__result := diz__13
+  // assert
+  assert sys__result != null && type_of(sys__result) == class_Edge()
+  inhale false
+}

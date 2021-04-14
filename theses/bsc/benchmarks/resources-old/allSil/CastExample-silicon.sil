@@ -1,0 +1,202 @@
+// Generated on 2021-03-23 at 23:30:09
+domain TYPE {
+  
+  unique function class_java_DOT_lang_DOT_Object(): TYPE
+  
+  unique function class_Node(): TYPE
+  
+  unique function class_Leaf(): TYPE
+  
+  unique function class_Test(): TYPE
+  
+  unique function class_EncodedGlobalVariables(): TYPE
+  
+  function directSuperclass(t: TYPE): TYPE
+  
+  function type_of(val: Ref): TYPE
+  
+  axiom java_DOT_lang_DOT_Object_directSuperclass {
+    directSuperclass(class_java_DOT_lang_DOT_Object()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom Node_directSuperclass {
+    directSuperclass(class_Node()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom Leaf_directSuperclass {
+    directSuperclass(class_Leaf()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom Test_directSuperclass {
+    directSuperclass(class_Test()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom EncodedGlobalVariables_directSuperclass {
+    directSuperclass(class_EncodedGlobalVariables()) == class_java_DOT_lang_DOT_Object()
+  }
+}
+
+domain frac {
+  
+  function frac_val(a: frac): Perm
+  
+  axiom frac_eq {
+    (forall a: frac, b: frac :: { frac_val(a),frac_val(b) } (frac_val(a) == frac_val(b)) == (a == b))
+  }
+  
+  axiom frac_bound {
+    (forall a: frac :: { frac_val(a) } 0 / 1 < frac_val(a) && frac_val(a) <= 1 / 1)
+  }
+}
+
+domain zfrac {
+  
+  function zfrac_val(a: zfrac): Perm
+  
+  axiom zfrac_eq {
+    (forall a: zfrac, b: zfrac :: { zfrac_val(a),zfrac_val(b) } (zfrac_val(a) == zfrac_val(b)) == (a == b))
+  }
+  
+  axiom zfrac_bound {
+    (forall a: zfrac :: { zfrac_val(a) } 0 / 1 <= zfrac_val(a) && zfrac_val(a) <= 1 / 1)
+  }
+}
+
+//  a field 
+field Node_key: Int
+
+//  a field 
+field Node_left: Ref
+
+//  a field 
+field Node_right: Ref
+
+//  a field 
+field Leaf_other: Int
+
+function instanceof_TYPE_TYPE(t: TYPE, u: TYPE): Bool
+  ensures result == (t == u || directSuperclass(t) == u)
+
+
+function new_frac(x: Perm): frac
+  requires 0 / 1 < x && x <= 1 / 1
+  ensures frac_val(result) == x
+
+
+function new_zfrac(x: Perm): zfrac
+  requires 0 / 1 <= x && x <= 1 / 1
+  ensures zfrac_val(result) == x
+
+
+predicate Test_state_rec_EncodedGlobalVariables_java_DOT_lang_DOT_Object(globals: Ref, t: Ref) {
+  t != null && (t != null && instanceof_TYPE_TYPE(type_of(t), class_Leaf()) || t != null && instanceof_TYPE_TYPE(type_of(t), class_Node())) && (t != null && instanceof_TYPE_TYPE(type_of(t), class_Leaf()) ==> acc((instanceof_TYPE_TYPE(type_of(t), class_Leaf()) ? t : null).Leaf_other, write)) && (t != null && instanceof_TYPE_TYPE(type_of(t), class_Node()) ==> acc((instanceof_TYPE_TYPE(type_of(t), class_Node()) ? t : null).Node_key, write) && acc((instanceof_TYPE_TYPE(type_of(t), class_Node()) ? t : null).Node_left, write) && ((instanceof_TYPE_TYPE(type_of(t), class_Node()) ? t : null).Node_left != null && acc(Test_state_rec_EncodedGlobalVariables_java_DOT_lang_DOT_Object(globals, (instanceof_TYPE_TYPE(type_of(t), class_Node()) ? t : null).Node_left), write)) && acc((instanceof_TYPE_TYPE(type_of(t), class_Node()) ? t : null).Node_right, write) && ((instanceof_TYPE_TYPE(type_of(t), class_Node()) ? t : null).Node_right != null && acc(Test_state_rec_EncodedGlobalVariables_java_DOT_lang_DOT_Object(globals, (instanceof_TYPE_TYPE(type_of(t), class_Node()) ? t : null).Node_right), write)))
+}
+
+method java_DOT_lang_DOT_Object_Object_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Object()
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Object_internal_Object_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Object()
+{
+  inhale false
+}
+
+method Node_Node_EncodedGlobalVariables_Integer_java_DOT_lang_DOT_Object_java_DOT_lang_DOT_Object(globals: Ref, key: Int, left: Ref, right: Ref) returns (sys__result: Ref)
+  requires left != null
+  requires acc(Test_state_rec_EncodedGlobalVariables_java_DOT_lang_DOT_Object(globals, left), write)
+  requires right != null
+  requires acc(Test_state_rec_EncodedGlobalVariables_java_DOT_lang_DOT_Object(globals, right), write)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_Node()
+  ensures sys__result != null
+  ensures acc(Test_state_rec_EncodedGlobalVariables_java_DOT_lang_DOT_Object(globals, sys__result), write)
+{
+  inhale false
+}
+
+method Node___contract_unsatisfiable__internal_Node_EncodedGlobalVariables_Integer_java_DOT_lang_DOT_Object_java_DOT_lang_DOT_Object(diz: Ref, globals: Ref, key: Int, left: Ref, right: Ref)
+  requires diz != null
+{
+  inhale true && (left != null && acc(Test_state_rec_EncodedGlobalVariables_java_DOT_lang_DOT_Object(globals, left), write) && (right != null && acc(Test_state_rec_EncodedGlobalVariables_java_DOT_lang_DOT_Object(globals, right), write)))
+  // assert
+  assert false
+  inhale false
+}
+
+method Node_internal_Node_EncodedGlobalVariables_Integer_java_DOT_lang_DOT_Object_java_DOT_lang_DOT_Object(globals: Ref, key: Int, left: Ref, right: Ref) returns (sys__result: Ref)
+  requires left != null
+  requires acc(Test_state_rec_EncodedGlobalVariables_java_DOT_lang_DOT_Object(globals, left), write)
+  requires right != null
+  requires acc(Test_state_rec_EncodedGlobalVariables_java_DOT_lang_DOT_Object(globals, right), write)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_Node()
+  ensures sys__result != null
+  ensures acc(Test_state_rec_EncodedGlobalVariables_java_DOT_lang_DOT_Object(globals, sys__result), write)
+{
+  var diz__1: Ref
+  diz__1 := new(Node_key, Node_left, Node_right)
+  inhale type_of(diz__1) == class_Node()
+  diz__1.Node_key := key
+  diz__1.Node_left := left
+  diz__1.Node_right := right
+  // assert
+  assert diz__1 != null && instanceof_TYPE_TYPE(type_of(diz__1), class_Node())
+  // assert
+  assert !(diz__1 != null && instanceof_TYPE_TYPE(type_of(diz__1), class_Leaf()))
+  fold acc(Test_state_rec_EncodedGlobalVariables_java_DOT_lang_DOT_Object(globals, diz__1), write)
+  sys__result := diz__1
+  // assert
+  assert sys__result != null && type_of(sys__result) == class_Node() && sys__result != null && acc(Test_state_rec_EncodedGlobalVariables_java_DOT_lang_DOT_Object(globals, sys__result), write)
+  inhale false
+}
+
+method Test_find_EncodedGlobalVariables_java_DOT_lang_DOT_Object_Integer(diz: Ref, globals: Ref, tt: Ref, key: Int) returns (sys__result: Int)
+  requires diz != null
+  requires tt != null
+  requires acc(Test_state_rec_EncodedGlobalVariables_java_DOT_lang_DOT_Object(globals, tt), write)
+{
+  inhale false
+}
+
+method Test___contract_unsatisfiable__internal_find_EncodedGlobalVariables_java_DOT_lang_DOT_Object_Integer(diz: Ref, globals: Ref, tt: Ref, key: Int) returns (sys__result: Int)
+  requires diz != null
+{
+  inhale true && (tt != null && acc(Test_state_rec_EncodedGlobalVariables_java_DOT_lang_DOT_Object(globals, tt), write))
+  // assert
+  assert false
+  inhale false
+}
+
+method Test_internal_find_EncodedGlobalVariables_java_DOT_lang_DOT_Object_Integer(diz: Ref, globals: Ref, tt: Ref, key: Int) returns (sys__result: Int)
+  requires diz != null
+  requires tt != null
+  requires acc(Test_state_rec_EncodedGlobalVariables_java_DOT_lang_DOT_Object(globals, tt), write)
+{
+  var n__3: Ref
+  var t__2: Ref
+  var l__4: Ref
+  t__2 := tt
+  while (t__2 != null && instanceof_TYPE_TYPE(type_of(t__2), class_Node()))
+    invariant t__2 != null
+    invariant acc(Test_state_rec_EncodedGlobalVariables_java_DOT_lang_DOT_Object(globals, t__2), write) 
+  {
+    n__3 := (instanceof_TYPE_TYPE(type_of(t__2), class_Node()) ? t__2 : null)
+    unfold acc(Test_state_rec_EncodedGlobalVariables_java_DOT_lang_DOT_Object(globals, n__3), write)
+    if (key < n__3.Node_key) {
+      t__2 := n__3.Node_left
+    } else {
+      t__2 := n__3.Node_right
+    }
+  }
+  unfold acc(Test_state_rec_EncodedGlobalVariables_java_DOT_lang_DOT_Object(globals, t__2), write)
+  l__4 := (instanceof_TYPE_TYPE(type_of(t__2), class_Leaf()) ? t__2 : null)
+  sys__result := l__4.Leaf_other
+  // assert
+  assert true
+  inhale false
+}

@@ -1,0 +1,120 @@
+// Generated on 2021-03-23 at 23:29:53
+domain TYPE {
+  
+  unique function class_BubbleSort(): TYPE
+  
+  unique function class_java_DOT_lang_DOT_Object(): TYPE
+  
+  unique function class_EncodedGlobalVariables(): TYPE
+  
+  function directSuperclass(t: TYPE): TYPE
+  
+  function type_of(val: Ref): TYPE
+  
+  axiom BubbleSort_directSuperclass {
+    directSuperclass(class_BubbleSort()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom EncodedGlobalVariables_directSuperclass {
+    directSuperclass(class_EncodedGlobalVariables()) == class_java_DOT_lang_DOT_Object()
+  }
+}
+
+function BubbleSort_sorted_Sequence$Integer$(xs: Seq[Int]): Bool
+{
+  (forall i: Int :: { xs[i] } 0 <= i && i < |xs| - 1 ==> xs[i] <= xs[i + 1])
+}
+
+function BubbleSort_correct_Sequence$Integer$_Integer(xs: Seq[Int], i: Int): Bool
+{
+  (forall g: Int, h: Int :: { xs[h],xs[g] } 0 <= g && g <= i && (i < h && h < |xs|) ==> xs[g] <= xs[h])
+}
+
+function BubbleSort_Set_Sequence$Integer$_Integer_Integer(xs: Seq[Int], n: Int, val: Int): Seq[Int]
+  requires 0 <= n && n < |xs|
+  ensures |result| == |xs|
+  ensures (forall g: Int :: { result[g] } { xs[g] } 0 <= g && g < n ==> result[g] == xs[g])
+  ensures (forall g: Int :: { result[g] } { xs[g] } n < g && g < |xs| ==> result[g] == xs[g])
+  ensures result[n] == val
+{
+  (0 < n ? Seq(xs[0]) ++ BubbleSort_Set_Sequence$Integer$_Integer_Integer(xs[1..], n - 1, val) : Seq(val) ++ xs[1..])
+}
+
+function instanceof_TYPE_TYPE(t: TYPE, u: TYPE): Bool
+  ensures result == (t == u || directSuperclass(t) == u)
+
+
+method BubbleSort___contract_unsatisfiable__sort_EncodedGlobalVariables_Sequence$Integer$(diz: Ref, globals: Ref, input: Seq[Int]) returns (sys__result: Seq[Int])
+  requires diz != null
+{
+  inhale true && 0 < |input|
+  // assert
+  assert false
+  inhale false
+}
+
+method BubbleSort_sort_EncodedGlobalVariables_Sequence$Integer$(diz: Ref, globals: Ref, input: Seq[Int]) returns (sys__result: Seq[Int])
+  requires diz != null
+  requires 0 < |input|
+  ensures BubbleSort_sorted_Sequence$Integer$(sys__result)
+{
+  var i__3: Int
+  var out__1: Seq[Int]
+  var lastUnsorted__2: Int
+  out__1 := input
+  lastUnsorted__2 := |out__1| - 1
+  while (0 < lastUnsorted__2)
+    invariant 0 <= lastUnsorted__2 && lastUnsorted__2 < |out__1|
+    invariant lastUnsorted__2 < 0 ==> |input| == 0
+    invariant BubbleSort_sorted_Sequence$Integer$(out__1[lastUnsorted__2..])
+    invariant BubbleSort_correct_Sequence$Integer$_Integer(out__1, lastUnsorted__2) 
+  {
+    i__3 := 0
+    while (i__3 < lastUnsorted__2)
+      invariant 0 <= lastUnsorted__2 && lastUnsorted__2 < |out__1|
+      invariant 0 <= i__3 && i__3 <= lastUnsorted__2
+      invariant BubbleSort_sorted_Sequence$Integer$(out__1[lastUnsorted__2..])
+      invariant BubbleSort_correct_Sequence$Integer$_Integer(out__1, lastUnsorted__2)
+      invariant (forall k__4: Int :: { out__1[k__4] } 0 <= k__4 && k__4 < i__3 ==> out__1[k__4] <= out__1[i__3]) 
+    {
+      if (out__1[i__3 + 1] < out__1[i__3]) {
+        out__1 := BubbleSort_swap_EncodedGlobalVariables_Sequence$Integer$_Integer_Integer(diz, globals, out__1, i__3, i__3 + 1)
+      }
+      i__3 := i__3 + 1
+    }
+    lastUnsorted__2 := lastUnsorted__2 - 1
+  }
+  sys__result := out__1
+  // assert
+  assert BubbleSort_sorted_Sequence$Integer$(sys__result)
+  inhale false
+}
+
+method BubbleSort___contract_unsatisfiable__swap_EncodedGlobalVariables_Sequence$Integer$_Integer_Integer(diz: Ref, globals: Ref, xs: Seq[Int], i: Int, j: Int) returns (sys__result: Seq[Int])
+  requires diz != null
+{
+  inhale true && (0 <= i && i < |xs| && (0 <= j && j < |xs|))
+  // assert
+  assert false
+  inhale false
+}
+
+method BubbleSort_swap_EncodedGlobalVariables_Sequence$Integer$_Integer_Integer(diz: Ref, globals: Ref, xs: Seq[Int], i: Int, j: Int) returns (sys__result: Seq[Int])
+  requires diz != null
+  requires 0 <= i && i < |xs|
+  requires 0 <= j && j < |xs|
+  ensures |xs| == |sys__result|
+  ensures (forall k: Int :: { sys__result[k] } { xs[k] } 0 <= k && k < |xs| && k != i && k != j ==> sys__result[k] == xs[k])
+  ensures sys__result[i] == xs[j]
+  ensures sys__result[j] == xs[i]
+{
+  var tmp__5: Int
+  var res__6: Seq[Int]
+  tmp__5 := xs[i]
+  res__6 := BubbleSort_Set_Sequence$Integer$_Integer_Integer(xs, i, xs[j])
+  res__6 := BubbleSort_Set_Sequence$Integer$_Integer_Integer(res__6, j, tmp__5)
+  sys__result := res__6
+  // assert
+  assert |xs| == |sys__result| && (forall k__7: Int :: { sys__result[k__7] } { xs[k__7] } 0 <= k__7 && k__7 < |xs| && k__7 != i && k__7 != j ==> sys__result[k__7] == xs[k__7]) && sys__result[i] == xs[j] && sys__result[j] == xs[i]
+  inhale false
+}

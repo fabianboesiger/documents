@@ -1,0 +1,96 @@
+// Generated on 2021-03-23 at 23:35:36
+domain TYPE {
+  
+  unique function class_java_DOT_lang_DOT_Object(): TYPE
+  
+  unique function class_NewClassGhost(): TYPE
+  
+  unique function class_EncodedGlobalVariables(): TYPE
+  
+  function directSuperclass(t: TYPE): TYPE
+  
+  function type_of(val: Ref): TYPE
+  
+  axiom java_DOT_lang_DOT_Object_directSuperclass {
+    directSuperclass(class_java_DOT_lang_DOT_Object()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom NewClassGhost_directSuperclass {
+    directSuperclass(class_NewClassGhost()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom EncodedGlobalVariables_directSuperclass {
+    directSuperclass(class_EncodedGlobalVariables()) == class_java_DOT_lang_DOT_Object()
+  }
+}
+
+function instanceof_TYPE_TYPE(t: TYPE, u: TYPE): Bool
+  ensures result == (t == u || directSuperclass(t) == u)
+
+
+method java_DOT_lang_DOT_Object_Object_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Object()
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Object_internal_Object_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Object()
+{
+  inhale false
+}
+
+method NewClassGhost_NewClassGhost_EncodedGlobalVariables_Integer(globals: Ref, g: Int) returns (sys__result: Ref)
+  requires g == 5
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_NewClassGhost()
+{
+  inhale false
+}
+
+method NewClassGhost___contract_unsatisfiable__internal_NewClassGhost_EncodedGlobalVariables_Integer(diz: Ref, globals: Ref, g: Int)
+  requires diz != null
+{
+  inhale true && g == 5
+  // assert
+  assert false
+  inhale false
+}
+
+method NewClassGhost_internal_NewClassGhost_EncodedGlobalVariables_Integer(globals: Ref, g: Int) returns (sys__result: Ref)
+  requires g == 5
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_NewClassGhost()
+{
+  var diz__1: Ref
+  diz__1 := new()
+  inhale type_of(diz__1) == class_NewClassGhost()
+  sys__result := diz__1
+  // assert
+  assert sys__result != null && type_of(sys__result) == class_NewClassGhost()
+  inhale false
+}
+
+method NewClassGhost_test_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale false
+}
+
+method NewClassGhost___contract_unsatisfiable__internal_test_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+}
+
+method NewClassGhost_internal_test_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  var __flatten_1__2: Ref
+  __flatten_1__2 := NewClassGhost_NewClassGhost_EncodedGlobalVariables_Integer(globals, 5)
+}

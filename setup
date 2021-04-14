@@ -2,7 +2,8 @@
 
 # Update and Install Packages
 pamac upgrade -a
-sudo pamac install \
+pamac install \
+	firefox \
 	git \
 	code \
 	discord \
@@ -14,9 +15,8 @@ sudo pamac install \
 	thunderbird \
 	steam-manjaro \
 	wine \
-	ttf-fira-code \
-	teamviewer
-
+	ttf-fira-code
+	
 # Install Rust Lang
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 

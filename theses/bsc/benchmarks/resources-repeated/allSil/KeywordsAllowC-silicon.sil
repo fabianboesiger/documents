@@ -1,0 +1,86 @@
+// Generated on 2021-03-23 at 23:33:31
+domain TYPE {
+  
+  unique function class_EncodedGlobalVariables(): TYPE
+  
+  unique function class_java_DOT_lang_DOT_Object(): TYPE
+  
+  function directSuperclass(t: TYPE): TYPE
+  
+  function type_of(val: Ref): TYPE
+  
+  axiom EncodedGlobalVariables_directSuperclass {
+    directSuperclass(class_EncodedGlobalVariables()) == class_java_DOT_lang_DOT_Object()
+  }
+}
+
+function instanceof_TYPE_TYPE(t: TYPE, u: TYPE): Bool
+  ensures result == (t == u || directSuperclass(t) == u)
+
+
+method __contract_unsatisfiable__test_EncodedGlobalVariables(globals: Ref)
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+}
+
+method test_EncodedGlobalVariables(globals: Ref)
+{
+  var assert__1: Int
+  var resource__2: Int
+  var process__3: Int
+  var frac__4: Int
+  var zfrac__5: Int
+  var bool__6: Int
+  var rational__7: Int
+  var seq__8: Int
+  var pure__9: Int
+  var thread_local__10: Int
+  var with__11: Int
+  var then__12: Int
+  var given__13: Int
+  var yields__14: Int
+  var axiom__15: Int
+  var modifies__16: Int
+  var accessible__17: Int
+  var requires__18: Int
+  var ensures__19: Int
+  var context_everywhere__20: Int
+  var context__21: Int
+  var loop_invariant__22: Int
+  var create__23: Int
+  var qed__24: Int
+  var apply__25: Int
+  var use__26: Int
+  var destroy__27: Int
+  var split__28: Int
+  var merge__29: Int
+  var choose__30: Int
+  var fold__31: Int
+  var unfold__32: Int
+  var open__33: Int
+  var close__34: Int
+  var assume__35: Int
+  var inhale__36: Int
+  var exhale__37: Int
+  var label__38: Int
+  var refute__39: Int
+  var witness__40: Int
+  var ghost__41: Int
+  var send__42: Int
+  var to__43: Int
+  var recv__44: Int
+  var from__45: Int
+  var transfer__46: Int
+  var csl_subject__47: Int
+  var spec_ignore__48: Int
+  var action__49: Int
+  var atomic__50: Int
+  var Reducible__51: Int
+  var signals__52: Int
+  var kernel_invariant__53: Int
+  var set__54: Int
+  var pointer__55: Int
+}

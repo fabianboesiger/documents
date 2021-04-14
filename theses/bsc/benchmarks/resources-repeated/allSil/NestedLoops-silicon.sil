@@ -1,0 +1,66 @@
+// Generated on 2021-03-23 at 23:35:17
+domain TYPE {
+  
+  unique function class_NestedLoops(): TYPE
+  
+  unique function class_java_DOT_lang_DOT_Object(): TYPE
+  
+  unique function class_EncodedGlobalVariables(): TYPE
+  
+  function directSuperclass(t: TYPE): TYPE
+  
+  function type_of(val: Ref): TYPE
+  
+  axiom NestedLoops_directSuperclass {
+    directSuperclass(class_NestedLoops()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom EncodedGlobalVariables_directSuperclass {
+    directSuperclass(class_EncodedGlobalVariables()) == class_java_DOT_lang_DOT_Object()
+  }
+}
+
+function instanceof_TYPE_TYPE(t: TYPE, u: TYPE): Bool
+  ensures result == (t == u || directSuperclass(t) == u)
+
+
+method NestedLoops___contract_unsatisfiable__cubed_EncodedGlobalVariables_Integer(diz: Ref, globals: Ref, n: Int) returns (sys__result: Int)
+  requires diz != null
+{
+  inhale true && 0 <= n
+  // assert
+  assert false
+  inhale false
+}
+
+method NestedLoops_cubed_EncodedGlobalVariables_Integer(diz: Ref, globals: Ref, n: Int) returns (sys__result: Int)
+  requires diz != null
+  requires 0 <= n
+  ensures sys__result == n * n * n
+{
+  var i__1: Int
+  var j__2: Int
+  var res__3: Int
+  var tmp__4: Int
+  i__1 := 0
+  res__3 := 0
+  while (i__1 < n)
+    invariant 0 <= i__1 && i__1 <= n && res__3 == i__1 * i__1 * i__1 
+  {
+    j__2 := 0
+    tmp__4 := 0
+    while (j__2 < i__1)
+      invariant 0 <= j__2 && j__2 <= i__1 && tmp__4 == j__2 * j__2 
+    {
+      tmp__4 := tmp__4 + j__2
+      j__2 := j__2 + 1
+      tmp__4 := tmp__4 + j__2
+    }
+    res__3 := res__3 + 3 * tmp__4 + 3 * i__1 + 1
+    i__1 := i__1 + 1
+  }
+  sys__result := res__3
+  // assert
+  assert sys__result == n * n * n
+  inhale false
+}

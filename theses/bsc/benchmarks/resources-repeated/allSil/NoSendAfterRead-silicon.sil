@@ -1,0 +1,931 @@
+// Generated on 2021-03-23 at 23:36:08
+domain Process {
+  
+  function p_is_choice(p1: Process, p2: Process): Bool
+  
+  function p_empty(): Process
+  
+  function p_merge(p1: Process, p2: Process): Process
+  
+  function p_choice(p1: Process, p2: Process): Process
+  
+  function p_seq(p1: Process, p2: Process): Process
+  
+  function p_p_send(): Process
+  
+  function p_receive(): Process
+  
+  function p_clear(): Process
+  
+  function p_nsar(): Process
+  
+  function p_rs(): Process
+  
+  axiom empty_1L {
+    (forall p: Process :: { p_merge(p_empty(), p) } p_merge(p_empty(), p) == p)
+  }
+  
+  axiom empty_2L {
+    (forall p: Process :: { p_seq(p_empty(), p) } p_seq(p_empty(), p) == p)
+  }
+  
+  axiom empty_2R {
+    (forall p: Process :: { p_seq(p, p_empty()) } p_seq(p, p_empty()) == p)
+  }
+  
+  axiom choice_L {
+    (forall p1: Process, p2: Process :: { p_is_choice(p_choice(p1, p2), p1) } p_is_choice(p_choice(p1, p2), p1))
+  }
+  
+  axiom choice_R {
+    (forall p1: Process, p2: Process :: { p_is_choice(p_choice(p1, p2), p2) } p_is_choice(p_choice(p1, p2), p2))
+  }
+  
+  axiom choice_dist {
+    (forall p1: Process, p2: Process, p3: Process :: { p_seq(p_choice(p1, p2), p3) } p_seq(p_choice(p1, p2), p3) == p_choice(p_seq(p1, p3), p_seq(p2, p3)))
+  }
+  
+  axiom seq_assoc {
+    (forall p1: Process, p2: Process, p3: Process :: { p_seq(p_seq(p1, p2), p3) } p_seq(p_seq(p1, p2), p3) == p_seq(p1, p_seq(p2, p3)))
+  }
+  
+  axiom p_send_def_2 {
+    (forall p: Process :: { p_seq(p, p_p_send()) } p_seq(p, p_p_send()) == p_seq(p, p_seq(p_p_send(), p_empty())))
+  }
+  
+  axiom receive_def_2 {
+    (forall p: Process :: { p_seq(p, p_receive()) } p_seq(p, p_receive()) == p_seq(p, p_seq(p_receive(), p_empty())))
+  }
+  
+  axiom clear_def_2 {
+    (forall p: Process :: { p_seq(p, p_clear()) } p_seq(p, p_clear()) == p_seq(p, p_seq(p_clear(), p_empty())))
+  }
+  
+  axiom nsar_def_1 {
+    p_choice(p_seq(p_p_send(), p_nsar()), p_seq(p_clear(), p_rs())) == p_nsar()
+  }
+  
+  axiom nsar_def_2 {
+    (forall p: Process :: { p_seq(p, p_nsar()) } p_seq(p, p_nsar()) == p_seq(p, p_seq(p_nsar(), p_empty())))
+  }
+  
+  axiom rs_def_1 {
+    p_choice(p_seq(p_clear(), p_rs()), p_seq(p_receive(), p_rs())) == p_rs()
+  }
+  
+  axiom rs_def_2 {
+    (forall p: Process :: { p_seq(p, p_rs()) } p_seq(p, p_rs()) == p_seq(p, p_seq(p_rs(), p_empty())))
+  }
+}
+
+domain TYPE {
+  
+  unique function class_Future(): TYPE
+  
+  unique function class_java_DOT_lang_DOT_Object(): TYPE
+  
+  unique function class_Device(): TYPE
+  
+  unique function class_Lock(): TYPE
+  
+  unique function class_Sender(): TYPE
+  
+  unique function class_Reader(): TYPE
+  
+  unique function class_EncodedGlobalVariables(): TYPE
+  
+  function directSuperclass(t: TYPE): TYPE
+  
+  function type_of(val: Ref): TYPE
+  
+  axiom Future_directSuperclass {
+    directSuperclass(class_Future()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom java_DOT_lang_DOT_Object_directSuperclass {
+    directSuperclass(class_java_DOT_lang_DOT_Object()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom Device_directSuperclass {
+    directSuperclass(class_Device()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom Lock_directSuperclass {
+    directSuperclass(class_Lock()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom Sender_directSuperclass {
+    directSuperclass(class_Sender()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom Reader_directSuperclass {
+    directSuperclass(class_Reader()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom EncodedGlobalVariables_directSuperclass {
+    directSuperclass(class_EncodedGlobalVariables()) == class_java_DOT_lang_DOT_Object()
+  }
+}
+
+domain frac {
+  
+  function frac_val(a: frac): Perm
+  
+  axiom frac_eq {
+    (forall a: frac, b: frac :: { frac_val(a),frac_val(b) } (frac_val(a) == frac_val(b)) == (a == b))
+  }
+  
+  axiom frac_bound {
+    (forall a: frac :: { frac_val(a) } 0 / 1 < frac_val(a) && frac_val(a) <= 1 / 1)
+  }
+}
+
+domain zfrac {
+  
+  function zfrac_val(a: zfrac): Perm
+  
+  axiom zfrac_eq {
+    (forall a: zfrac, b: zfrac :: { zfrac_val(a),zfrac_val(b) } (zfrac_val(a) == zfrac_val(b)) == (a == b))
+  }
+  
+  axiom zfrac_bound {
+    (forall a: zfrac :: { zfrac_val(a) } 0 / 1 <= zfrac_val(a) && zfrac_val(a) <= 1 / 1)
+  }
+}
+
+//  a field 
+field Future_flag_hist_value: Bool
+
+//  a field 
+field Future_flag_hist_init: Bool
+
+//  a field 
+field Future_flag_hist_act: Bool
+
+//  a field 
+field Future_flag_hist_write: Bool
+
+//  a field 
+field Future_flag_hist_free: Bool
+
+//  a field 
+field Future_flag_hist_hist: Bool
+
+//  a field 
+field Future_flag_hist_action: Bool
+
+//  a field 
+field Device_F: Ref
+
+//  a field 
+field Lock_d: Ref
+
+//  a field 
+field Lock_flag: Bool
+
+//  a field 
+field Sender_d: Ref
+
+//  a field 
+field Sender_l: Ref
+
+//  a field 
+field Reader_d: Ref
+
+//  a field 
+field Reader_l: Ref
+
+function instanceof_TYPE_TYPE(t: TYPE, u: TYPE): Bool
+  ensures result == (t == u || directSuperclass(t) == u)
+
+
+function new_frac(x: Perm): frac
+  requires 0 / 1 < x && x <= 1 / 1
+  ensures frac_val(result) == x
+
+
+function new_zfrac(x: Perm): zfrac
+  requires 0 / 1 <= x && x <= 1 / 1
+  ensures zfrac_val(result) == x
+
+
+predicate Future_hist_do_p_send_Fraction_Process_ZFraction(diz: Ref, fr: frac, proc: Process, flag_frac: zfrac) 
+
+predicate Future_hist_do_receive_Fraction_Process_ZFraction(diz: Ref, fr: frac, proc: Process, flag_frac: zfrac) 
+
+predicate Future_hist_do_clear_Fraction_Process(diz: Ref, fr: frac, proc: Process) 
+
+predicate Future_hist_idle_Fraction_Process(diz: Ref, fr: frac, proc: Process) 
+
+predicate Sender_joinToken_EncodedGlobalVariables(diz: Ref, globals: Ref) 
+
+predicate Sender_internal_joinToken_EncodedGlobalVariables(diz: Ref, globals: Ref) 
+
+predicate Sender_idleToken_EncodedGlobalVariables(diz: Ref, globals: Ref) 
+
+predicate Sender_internal_idleToken_EncodedGlobalVariables(diz: Ref, globals: Ref) 
+
+predicate Reader_joinToken_EncodedGlobalVariables(diz: Ref, globals: Ref) 
+
+predicate Reader_internal_joinToken_EncodedGlobalVariables(diz: Ref, globals: Ref) 
+
+predicate Reader_idleToken_EncodedGlobalVariables(diz: Ref, globals: Ref) 
+
+predicate Reader_internal_idleToken_EncodedGlobalVariables(diz: Ref, globals: Ref) 
+
+method Future_p_send_begin_Fraction_Process_ZFraction(diz: Ref, fr: frac, proc: Process, flag_frac: zfrac)
+  requires diz != null
+  requires frac_val(fr) != none
+  requires acc(Future_hist_idle_Fraction_Process(diz, fr, p_seq(p_p_send(), proc)), write)
+  requires zfrac_val(flag_frac) != none
+  requires acc(diz.Future_flag_hist_value, zfrac_val(flag_frac))
+  requires acc(diz.Future_flag_hist_hist, zfrac_val(flag_frac))
+  requires diz.Future_flag_hist_value
+  ensures frac_val(fr) != none
+  ensures acc(Future_hist_do_p_send_Fraction_Process_ZFraction(diz, fr, proc, flag_frac), write)
+  ensures acc(diz.Future_flag_hist_act, zfrac_val(flag_frac))
+  ensures acc(diz.Future_flag_hist_value, zfrac_val(flag_frac))
+  ensures acc(diz.Future_flag_hist_write, zfrac_val(flag_frac))
+  ensures acc(diz.Future_flag_hist_action, zfrac_val(flag_frac))
+  ensures diz.Future_flag_hist_value == diz.Future_flag_hist_act
+  ensures diz.Future_flag_hist_value == old(diz.Future_flag_hist_value)
+{
+  inhale false
+}
+
+method Future_p_send_commit_Fraction_Process_ZFraction(diz: Ref, fr: frac, proc: Process, flag_frac: zfrac)
+  requires diz != null
+  requires frac_val(fr) != none
+  requires acc(Future_hist_do_p_send_Fraction_Process_ZFraction(diz, fr, proc, flag_frac), write)
+  requires zfrac_val(flag_frac) != none
+  requires acc(diz.Future_flag_hist_act, zfrac_val(flag_frac))
+  requires acc(diz.Future_flag_hist_value, zfrac_val(flag_frac))
+  requires acc(diz.Future_flag_hist_write, zfrac_val(flag_frac))
+  requires acc(diz.Future_flag_hist_action, zfrac_val(flag_frac))
+  ensures frac_val(fr) != none
+  ensures acc(Future_hist_idle_Fraction_Process(diz, fr, proc), write)
+  ensures acc(diz.Future_flag_hist_value, zfrac_val(flag_frac))
+  ensures acc(diz.Future_flag_hist_hist, zfrac_val(flag_frac))
+  ensures diz.Future_flag_hist_value == old(diz.Future_flag_hist_value)
+{
+  inhale false
+}
+
+method Future_receive_begin_Fraction_Process_ZFraction(diz: Ref, fr: frac, proc: Process, flag_frac: zfrac)
+  requires diz != null
+  requires frac_val(fr) != none
+  requires acc(Future_hist_idle_Fraction_Process(diz, fr, p_seq(p_receive(), proc)), write)
+  requires zfrac_val(flag_frac) != none
+  requires acc(diz.Future_flag_hist_value, zfrac_val(flag_frac))
+  requires acc(diz.Future_flag_hist_hist, zfrac_val(flag_frac))
+  requires !diz.Future_flag_hist_value
+  ensures frac_val(fr) != none
+  ensures acc(Future_hist_do_receive_Fraction_Process_ZFraction(diz, fr, proc, flag_frac), write)
+  ensures acc(diz.Future_flag_hist_act, zfrac_val(flag_frac))
+  ensures acc(diz.Future_flag_hist_value, zfrac_val(flag_frac))
+  ensures acc(diz.Future_flag_hist_write, zfrac_val(flag_frac))
+  ensures acc(diz.Future_flag_hist_action, zfrac_val(flag_frac))
+  ensures diz.Future_flag_hist_value == diz.Future_flag_hist_act
+  ensures diz.Future_flag_hist_value == old(diz.Future_flag_hist_value)
+{
+  inhale false
+}
+
+method Future_receive_commit_Fraction_Process_ZFraction(diz: Ref, fr: frac, proc: Process, flag_frac: zfrac)
+  requires diz != null
+  requires frac_val(fr) != none
+  requires acc(Future_hist_do_receive_Fraction_Process_ZFraction(diz, fr, proc, flag_frac), write)
+  requires zfrac_val(flag_frac) != none
+  requires acc(diz.Future_flag_hist_act, zfrac_val(flag_frac))
+  requires acc(diz.Future_flag_hist_value, zfrac_val(flag_frac))
+  requires acc(diz.Future_flag_hist_write, zfrac_val(flag_frac))
+  requires acc(diz.Future_flag_hist_action, zfrac_val(flag_frac))
+  ensures frac_val(fr) != none
+  ensures acc(Future_hist_idle_Fraction_Process(diz, fr, proc), write)
+  ensures acc(diz.Future_flag_hist_value, zfrac_val(flag_frac))
+  ensures acc(diz.Future_flag_hist_hist, zfrac_val(flag_frac))
+  ensures diz.Future_flag_hist_value == old(diz.Future_flag_hist_value)
+{
+  inhale false
+}
+
+method Future_clear_begin_Fraction_Process(diz: Ref, fr: frac, proc: Process)
+  requires diz != null
+  requires frac_val(fr) != none
+  requires acc(Future_hist_idle_Fraction_Process(diz, fr, p_seq(p_clear(), proc)), write)
+  requires write != none
+  requires acc(diz.Future_flag_hist_value, write)
+  requires acc(diz.Future_flag_hist_hist, write)
+  ensures frac_val(fr) != none
+  ensures acc(Future_hist_do_clear_Fraction_Process(diz, fr, proc), write)
+  ensures acc(diz.Future_flag_hist_act, write)
+  ensures acc(diz.Future_flag_hist_value, write)
+  ensures acc(diz.Future_flag_hist_write, write)
+  ensures acc(diz.Future_flag_hist_action, write)
+  ensures diz.Future_flag_hist_value == diz.Future_flag_hist_act
+  ensures diz.Future_flag_hist_value == old(diz.Future_flag_hist_value)
+{
+  inhale false
+}
+
+method Future_clear_commit_Fraction_Process(diz: Ref, fr: frac, proc: Process)
+  requires diz != null
+  requires frac_val(fr) != none
+  requires acc(Future_hist_do_clear_Fraction_Process(diz, fr, proc), write)
+  requires write != none
+  requires acc(diz.Future_flag_hist_act, write)
+  requires acc(diz.Future_flag_hist_value, write)
+  requires acc(diz.Future_flag_hist_write, write)
+  requires acc(diz.Future_flag_hist_action, write)
+  requires !diz.Future_flag_hist_value
+  ensures frac_val(fr) != none
+  ensures acc(Future_hist_idle_Fraction_Process(diz, fr, proc), write)
+  ensures acc(diz.Future_flag_hist_value, write)
+  ensures acc(diz.Future_flag_hist_hist, write)
+  ensures diz.Future_flag_hist_value == old(diz.Future_flag_hist_value)
+{
+  inhale false
+}
+
+method Future_Future() returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_Future()
+  ensures acc(sys__result.Future_flag_hist_value, write)
+  ensures acc(sys__result.Future_flag_hist_write, write)
+  ensures acc(sys__result.Future_flag_hist_free, write)
+  ensures sys__result.Future_flag_hist_value == false
+{
+  inhale false
+}
+
+method Future_internal_Future() returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_Future()
+  ensures acc(sys__result.Future_flag_hist_value, write)
+  ensures acc(sys__result.Future_flag_hist_write, write)
+  ensures acc(sys__result.Future_flag_hist_free, write)
+  ensures sys__result.Future_flag_hist_value == false
+{
+  var diz__1: Ref
+  diz__1 := new(Future_flag_hist_value, Future_flag_hist_init, Future_flag_hist_act, Future_flag_hist_write, Future_flag_hist_free, Future_flag_hist_hist, Future_flag_hist_action)
+  inhale type_of(diz__1) == class_Future()
+  Future_hist_set_flag_Boolean(diz__1, false)
+  sys__result := diz__1
+  // assert
+  assert sys__result != null && type_of(sys__result) == class_Future() && acc(sys__result.Future_flag_hist_value, write) && acc(sys__result.Future_flag_hist_write, write) && acc(sys__result.Future_flag_hist_free, write) && sys__result.Future_flag_hist_value == false
+  inhale false
+}
+
+method Future_hist_set_flag_Boolean(diz: Ref, value: Bool)
+  requires diz != null
+  requires acc(diz.Future_flag_hist_value, write)
+  requires acc(diz.Future_flag_hist_write, write)
+  ensures acc(diz.Future_flag_hist_value, write) && diz.Future_flag_hist_value == value
+  ensures acc(diz.Future_flag_hist_write, write)
+{
+  inhale false
+}
+
+method Future_end_future(diz: Ref)
+  requires diz != null
+  requires acc(diz.Future_flag_hist_value, write)
+  requires acc(diz.Future_flag_hist_hist, write)
+  requires acc(diz.Future_flag_hist_init, write)
+  requires acc(Future_hist_idle_Fraction_Process(diz, new_frac(write), p_empty()), write)
+  ensures acc(diz.Future_flag_hist_value, write)
+  ensures acc(diz.Future_flag_hist_write, write)
+  ensures acc(diz.Future_flag_hist_free, write)
+  ensures diz.Future_flag_hist_value == old(diz.Future_flag_hist_value)
+  ensures diz.Future_flag_hist_value == old(diz.Future_flag_hist_init)
+{
+  inhale false
+}
+
+method Future_split_Fraction_Process_Fraction_Process(diz: Ref, frac1: frac, proc1: Process, frac2: frac, proc2: Process)
+  requires diz != null
+  requires frac_val(frac1) + frac_val(frac2) <= write
+  requires acc(Future_hist_idle_Fraction_Process(diz, new_frac(frac_val(frac1) + frac_val(frac2)), p_merge(proc1, proc2)), write)
+  ensures acc(Future_hist_idle_Fraction_Process(diz, frac1, proc1), write)
+  ensures acc(Future_hist_idle_Fraction_Process(diz, frac2, proc2), write)
+{
+  inhale false
+}
+
+method Future_merge_Fraction_Process_Fraction_Process(diz: Ref, frac1: frac, proc1: Process, frac2: frac, proc2: Process)
+  requires diz != null
+  requires frac_val(frac1) + frac_val(frac2) <= write
+  requires acc(Future_hist_idle_Fraction_Process(diz, frac1, proc1), write)
+  requires acc(Future_hist_idle_Fraction_Process(diz, frac2, proc2), write)
+  ensures acc(Future_hist_idle_Fraction_Process(diz, new_frac(frac_val(frac1) + frac_val(frac2)), p_merge(proc1, proc2)), write)
+{
+  inhale false
+}
+
+method Future_begin_future_1(diz: Ref)
+  requires diz != null
+  requires acc(diz.Future_flag_hist_value, write)
+  requires acc(diz.Future_flag_hist_write, write)
+  requires acc(diz.Future_flag_hist_free, write)
+  ensures acc(diz.Future_flag_hist_value, write)
+  ensures acc(diz.Future_flag_hist_hist, write)
+  ensures acc(diz.Future_flag_hist_init, write)
+  ensures diz.Future_flag_hist_value == old(diz.Future_flag_hist_value)
+  ensures acc(Future_hist_idle_Fraction_Process(diz, new_frac(write), p_nsar()), write)
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Object_Object_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Object()
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Object_internal_Object_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Object()
+{
+  inhale false
+}
+
+method Device_Device_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_Device()
+  ensures acc(sys__result.Device_F, wildcard)
+  ensures acc(sys__result.Device_F.Future_flag_hist_value, write)
+  ensures acc(sys__result.Device_F.Future_flag_hist_hist, write)
+  ensures sys__result.Device_F.Future_flag_hist_value
+  ensures acc(Future_hist_idle_Fraction_Process(sys__result.Device_F, new_frac(write), p_nsar()), write)
+{
+  inhale false
+}
+
+method Device___contract_unsatisfiable__internal_Device_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+}
+
+method Device_internal_Device_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_Device()
+  ensures acc(sys__result.Device_F, wildcard)
+  ensures acc(sys__result.Device_F.Future_flag_hist_value, write)
+  ensures acc(sys__result.Device_F.Future_flag_hist_hist, write)
+  ensures sys__result.Device_F.Future_flag_hist_value
+  ensures acc(Future_hist_idle_Fraction_Process(sys__result.Device_F, new_frac(write), p_nsar()), write)
+{
+  var __flatten_2__3: Ref
+  var diz__2: Ref
+  diz__2 := new(Device_F)
+  inhale type_of(diz__2) == class_Device()
+  __flatten_2__3 := Future_Future()
+  diz__2.Device_F := __flatten_2__3
+  Future_hist_set_flag_Boolean(diz__2.Device_F, true)
+  Future_begin_future_1(diz__2.Device_F)
+  sys__result := diz__2
+  // assert
+  assert sys__result != null && type_of(sys__result) == class_Device() && acc(sys__result.Device_F, wildcard) && acc(sys__result.Device_F.Future_flag_hist_value, write) && acc(sys__result.Device_F.Future_flag_hist_hist, write) && sys__result.Device_F.Future_flag_hist_value && acc(Future_hist_idle_Fraction_Process(sys__result.Device_F, new_frac(write), p_nsar()), write)
+  inhale false
+}
+
+method Device_send_EncodedGlobalVariables_Fraction_Process(diz: Ref, globals: Ref, p: frac, P: Process)
+  requires diz != null
+  requires frac_val(p) != none
+  requires acc(diz.Device_F, wildcard)
+  requires acc(diz.Device_F.Future_flag_hist_value, frac_val(p))
+  requires acc(diz.Device_F.Future_flag_hist_hist, frac_val(p))
+  requires diz.Device_F.Future_flag_hist_value
+  requires acc(Future_hist_idle_Fraction_Process(diz.Device_F, p, p_seq(p_p_send(), P)), write)
+  ensures frac_val(p) != none
+  ensures acc(diz.Device_F, wildcard)
+  ensures acc(diz.Device_F.Future_flag_hist_value, frac_val(p))
+  ensures acc(diz.Device_F.Future_flag_hist_hist, frac_val(p))
+  ensures diz.Device_F.Future_flag_hist_value
+  ensures acc(Future_hist_idle_Fraction_Process(diz.Device_F, p, P), write)
+{
+  inhale false
+}
+
+method Device_internal_send_EncodedGlobalVariables_Fraction_Process(diz: Ref, globals: Ref, p: frac, P: Process)
+  requires diz != null
+  requires frac_val(p) != none
+  requires acc(diz.Device_F, wildcard)
+  requires acc(diz.Device_F.Future_flag_hist_value, frac_val(p))
+  requires acc(diz.Device_F.Future_flag_hist_hist, frac_val(p))
+  requires diz.Device_F.Future_flag_hist_value
+  requires acc(Future_hist_idle_Fraction_Process(diz.Device_F, p, p_seq(p_p_send(), P)), write)
+  ensures frac_val(p) != none
+  ensures acc(diz.Device_F, wildcard)
+  ensures acc(diz.Device_F.Future_flag_hist_value, frac_val(p))
+  ensures acc(diz.Device_F.Future_flag_hist_hist, frac_val(p))
+  ensures diz.Device_F.Future_flag_hist_value
+  ensures acc(Future_hist_idle_Fraction_Process(diz.Device_F, p, P), write)
+{
+  inhale false
+}
+
+method Device_receive_EncodedGlobalVariables_Fraction_Process(diz: Ref, globals: Ref, p: frac, P: Process)
+  requires diz != null
+  requires frac_val(p) != none
+  requires acc(diz.Device_F, wildcard)
+  requires acc(diz.Device_F.Future_flag_hist_value, frac_val(p))
+  requires acc(diz.Device_F.Future_flag_hist_hist, frac_val(p))
+  requires !diz.Device_F.Future_flag_hist_value
+  requires acc(Future_hist_idle_Fraction_Process(diz.Device_F, p, p_seq(p_receive(), P)), write)
+  ensures frac_val(p) != none
+  ensures acc(diz.Device_F, wildcard)
+  ensures acc(diz.Device_F.Future_flag_hist_value, frac_val(p))
+  ensures acc(diz.Device_F.Future_flag_hist_hist, frac_val(p))
+  ensures !diz.Device_F.Future_flag_hist_value
+  ensures acc(Future_hist_idle_Fraction_Process(diz.Device_F, p, P), write)
+{
+  inhale false
+}
+
+method Device_internal_receive_EncodedGlobalVariables_Fraction_Process(diz: Ref, globals: Ref, p: frac, P: Process)
+  requires diz != null
+  requires frac_val(p) != none
+  requires acc(diz.Device_F, wildcard)
+  requires acc(diz.Device_F.Future_flag_hist_value, frac_val(p))
+  requires acc(diz.Device_F.Future_flag_hist_hist, frac_val(p))
+  requires !diz.Device_F.Future_flag_hist_value
+  requires acc(Future_hist_idle_Fraction_Process(diz.Device_F, p, p_seq(p_receive(), P)), write)
+  ensures frac_val(p) != none
+  ensures acc(diz.Device_F, wildcard)
+  ensures acc(diz.Device_F.Future_flag_hist_value, frac_val(p))
+  ensures acc(diz.Device_F.Future_flag_hist_hist, frac_val(p))
+  ensures !diz.Device_F.Future_flag_hist_value
+  ensures acc(Future_hist_idle_Fraction_Process(diz.Device_F, p, P), write)
+{
+  inhale false
+}
+
+method Lock_lock_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+  ensures acc(diz.Lock_d, wildcard)
+  ensures acc(diz.Lock_flag, write)
+  ensures acc(diz.Lock_d.Device_F, wildcard)
+  ensures acc(diz.Lock_d.Device_F.Future_flag_hist_value, write)
+  ensures acc(diz.Lock_d.Device_F.Future_flag_hist_hist, write)
+  ensures diz.Lock_d.Device_F.Future_flag_hist_value == diz.Lock_flag
+{
+  inhale false
+}
+
+method Lock_internal_lock_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+  ensures acc(diz.Lock_d, wildcard)
+  ensures acc(diz.Lock_flag, write)
+  ensures acc(diz.Lock_d.Device_F, wildcard)
+  ensures acc(diz.Lock_d.Device_F.Future_flag_hist_value, write)
+  ensures acc(diz.Lock_d.Device_F.Future_flag_hist_hist, write)
+  ensures diz.Lock_d.Device_F.Future_flag_hist_value == diz.Lock_flag
+{
+  inhale false
+}
+
+method Lock_unlock_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+  requires acc(diz.Lock_d, wildcard)
+  requires acc(diz.Lock_flag, write)
+  requires acc(diz.Lock_d.Device_F, wildcard)
+  requires acc(diz.Lock_d.Device_F.Future_flag_hist_value, write)
+  requires acc(diz.Lock_d.Device_F.Future_flag_hist_hist, write)
+  requires diz.Lock_d.Device_F.Future_flag_hist_value == diz.Lock_flag
+{
+  inhale false
+}
+
+method Lock_internal_unlock_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+  requires acc(diz.Lock_d, wildcard)
+  requires acc(diz.Lock_flag, write)
+  requires acc(diz.Lock_d.Device_F, wildcard)
+  requires acc(diz.Lock_d.Device_F.Future_flag_hist_value, write)
+  requires acc(diz.Lock_d.Device_F.Future_flag_hist_hist, write)
+  requires diz.Lock_d.Device_F.Future_flag_hist_value == diz.Lock_flag
+{
+  inhale false
+}
+
+method Lock_Lock_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_Lock()
+  ensures acc(sys__result.Lock_d, write) && sys__result.Lock_d == null
+  ensures acc(sys__result.Lock_flag, write) && sys__result.Lock_flag == false
+{
+  inhale false
+}
+
+method Lock___contract_unsatisfiable__internal_Lock_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+}
+
+method Lock_internal_Lock_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_Lock()
+  ensures acc(sys__result.Lock_d, write) && sys__result.Lock_d == null
+  ensures acc(sys__result.Lock_flag, write) && sys__result.Lock_flag == false
+{
+  var diz__4: Ref
+  diz__4 := new(Lock_d, Lock_flag)
+  inhale type_of(diz__4) == class_Lock()
+  diz__4.Lock_d := null
+  diz__4.Lock_flag := false
+  sys__result := diz__4
+  // assert
+  assert sys__result != null && type_of(sys__result) == class_Lock() && (acc(sys__result.Lock_d, write) && sys__result.Lock_d == null) && (acc(sys__result.Lock_flag, write) && sys__result.Lock_flag == false)
+  inhale false
+}
+
+method Sender_forkOperator_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+  requires acc(diz.Sender_d, wildcard)
+  requires acc(diz.Sender_d.Device_F, wildcard)
+  requires acc(Future_hist_idle_Fraction_Process(diz.Sender_d.Device_F, new_frac(1 / 2), p_nsar()), write)
+  requires acc(diz.Sender_l, wildcard)
+  requires acc(diz.Sender_l.Lock_d, wildcard)
+  requires diz.Sender_l.Lock_d == diz.Sender_d
+  requires acc(Sender_idleToken_EncodedGlobalVariables(diz, globals), write)
+  ensures acc(Sender_joinToken_EncodedGlobalVariables(diz, globals), write)
+{
+  inhale false
+}
+
+method Sender_internal_forkOperator_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+  requires acc(diz.Sender_d, wildcard)
+  requires acc(diz.Sender_d.Device_F, wildcard)
+  requires acc(Future_hist_idle_Fraction_Process(diz.Sender_d.Device_F, new_frac(1 / 2), p_nsar()), write)
+  requires acc(diz.Sender_l, wildcard)
+  requires acc(diz.Sender_l.Lock_d, wildcard)
+  requires diz.Sender_l.Lock_d == diz.Sender_d
+  requires acc(Sender_idleToken_EncodedGlobalVariables(diz, globals), write)
+  ensures acc(Sender_joinToken_EncodedGlobalVariables(diz, globals), write)
+{
+  inhale false
+}
+
+method Sender_joinOperator_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+  requires acc(Sender_joinToken_EncodedGlobalVariables(diz, globals), write)
+  ensures acc(Sender_idleToken_EncodedGlobalVariables(diz, globals), write)
+{
+  inhale false
+}
+
+method Sender_internal_joinOperator_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+  requires acc(Sender_joinToken_EncodedGlobalVariables(diz, globals), write)
+  ensures acc(Sender_idleToken_EncodedGlobalVariables(diz, globals), write)
+{
+  inhale false
+}
+
+method Sender_run_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+  requires acc(diz.Sender_d, wildcard)
+  requires acc(diz.Sender_d.Device_F, wildcard)
+  requires acc(Future_hist_idle_Fraction_Process(diz.Sender_d.Device_F, new_frac(1 / 2), p_nsar()), write)
+  requires acc(diz.Sender_l, wildcard)
+  requires acc(diz.Sender_l.Lock_d, wildcard)
+  requires diz.Sender_l.Lock_d == diz.Sender_d
+{
+  inhale false
+}
+
+method Sender___contract_unsatisfiable__internal_run_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale true && (acc(diz.Sender_d, wildcard) && acc(diz.Sender_d.Device_F, wildcard) && acc(Future_hist_idle_Fraction_Process(diz.Sender_d.Device_F, new_frac(1 / 2), p_nsar()), write) && acc(diz.Sender_l, wildcard) && acc(diz.Sender_l.Lock_d, wildcard) && diz.Sender_l.Lock_d == diz.Sender_d)
+  // assert
+  assert false
+  inhale false
+}
+
+method Sender_internal_run_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+  requires acc(diz.Sender_d, wildcard)
+  requires acc(diz.Sender_d.Device_F, wildcard)
+  requires acc(Future_hist_idle_Fraction_Process(diz.Sender_d.Device_F, new_frac(1 / 2), p_nsar()), write)
+  requires acc(diz.Sender_l, wildcard)
+  requires acc(diz.Sender_l.Lock_d, wildcard)
+  requires diz.Sender_l.Lock_d == diz.Sender_d
+{
+  var __flatten_7__5: Ref
+  var __flatten_8__6: Process
+  while (true)
+    invariant acc(diz.Sender_d, wildcard)
+    invariant acc(diz.Sender_d.Device_F, wildcard)
+    invariant acc(diz.Sender_l, wildcard)
+    invariant acc(diz.Sender_l.Lock_d, wildcard)
+    invariant diz.Sender_l.Lock_d == diz.Sender_d
+    invariant acc(Future_hist_idle_Fraction_Process(diz.Sender_d.Device_F, new_frac(1 / 2), p_nsar()), write) 
+  {
+    Lock_lock_EncodedGlobalVariables(diz.Sender_l, globals)
+    __flatten_7__5 := diz.Sender_l
+    if (__flatten_7__5.Lock_flag) {
+      exhale acc(Future_hist_idle_Fraction_Process(diz.Sender_d.Device_F, new_frac(1 / 2), p_nsar()), write)
+      // assert
+      assert p_is_choice(p_nsar(), p_seq(p_p_send(), p_nsar()))
+      inhale acc(Future_hist_idle_Fraction_Process(diz.Sender_d.Device_F, new_frac(1 / 2), p_seq(p_p_send(), p_nsar())), write)
+      __flatten_8__6 := p_nsar()
+      Device_send_EncodedGlobalVariables_Fraction_Process(diz.Sender_d, globals, new_frac(1 / 2), __flatten_8__6)
+    }
+    Lock_unlock_EncodedGlobalVariables(diz.Sender_l, globals)
+  }
+}
+
+method Sender_Sender_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_Sender()
+  ensures acc(sys__result.Sender_d, write) && sys__result.Sender_d == null
+  ensures acc(sys__result.Sender_l, write) && sys__result.Sender_l == null
+{
+  inhale false
+}
+
+method Sender___contract_unsatisfiable__internal_Sender_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+}
+
+method Sender_internal_Sender_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_Sender()
+  ensures acc(sys__result.Sender_d, write) && sys__result.Sender_d == null
+  ensures acc(sys__result.Sender_l, write) && sys__result.Sender_l == null
+{
+  var diz__7: Ref
+  diz__7 := new(Sender_d, Sender_l)
+  inhale type_of(diz__7) == class_Sender()
+  diz__7.Sender_d := null
+  diz__7.Sender_l := null
+  sys__result := diz__7
+  // assert
+  assert sys__result != null && type_of(sys__result) == class_Sender() && (acc(sys__result.Sender_d, write) && sys__result.Sender_d == null) && (acc(sys__result.Sender_l, write) && sys__result.Sender_l == null)
+  inhale false
+}
+
+method Reader_forkOperator_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+  requires acc(diz.Reader_d, wildcard)
+  requires acc(diz.Reader_l, wildcard)
+  requires acc(diz.Reader_l.Lock_d, wildcard)
+  requires diz.Reader_l.Lock_d == diz.Reader_d
+  requires acc(diz.Reader_d.Device_F, wildcard)
+  requires acc(Future_hist_idle_Fraction_Process(diz.Reader_d.Device_F, new_frac(1 / 2), p_rs()), write)
+  requires acc(Reader_idleToken_EncodedGlobalVariables(diz, globals), write)
+  ensures acc(Reader_joinToken_EncodedGlobalVariables(diz, globals), write)
+{
+  inhale false
+}
+
+method Reader_internal_forkOperator_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+  requires acc(diz.Reader_d, wildcard)
+  requires acc(diz.Reader_l, wildcard)
+  requires acc(diz.Reader_l.Lock_d, wildcard)
+  requires diz.Reader_l.Lock_d == diz.Reader_d
+  requires acc(diz.Reader_d.Device_F, wildcard)
+  requires acc(Future_hist_idle_Fraction_Process(diz.Reader_d.Device_F, new_frac(1 / 2), p_rs()), write)
+  requires acc(Reader_idleToken_EncodedGlobalVariables(diz, globals), write)
+  ensures acc(Reader_joinToken_EncodedGlobalVariables(diz, globals), write)
+{
+  inhale false
+}
+
+method Reader_joinOperator_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+  requires acc(Reader_joinToken_EncodedGlobalVariables(diz, globals), write)
+  ensures acc(Reader_idleToken_EncodedGlobalVariables(diz, globals), write)
+{
+  inhale false
+}
+
+method Reader_internal_joinOperator_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+  requires acc(Reader_joinToken_EncodedGlobalVariables(diz, globals), write)
+  ensures acc(Reader_idleToken_EncodedGlobalVariables(diz, globals), write)
+{
+  inhale false
+}
+
+method Reader_run_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+  requires acc(diz.Reader_d, wildcard)
+  requires acc(diz.Reader_l, wildcard)
+  requires acc(diz.Reader_l.Lock_d, wildcard)
+  requires diz.Reader_l.Lock_d == diz.Reader_d
+  requires acc(diz.Reader_d.Device_F, wildcard)
+  requires acc(Future_hist_idle_Fraction_Process(diz.Reader_d.Device_F, new_frac(1 / 2), p_rs()), write)
+{
+  inhale false
+}
+
+method Reader___contract_unsatisfiable__internal_run_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale true && (acc(diz.Reader_d, wildcard) && acc(diz.Reader_l, wildcard) && acc(diz.Reader_l.Lock_d, wildcard) && diz.Reader_l.Lock_d == diz.Reader_d && acc(diz.Reader_d.Device_F, wildcard) && acc(Future_hist_idle_Fraction_Process(diz.Reader_d.Device_F, new_frac(1 / 2), p_rs()), write))
+  // assert
+  assert false
+  inhale false
+}
+
+method Reader_internal_run_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+  requires acc(diz.Reader_d, wildcard)
+  requires acc(diz.Reader_l, wildcard)
+  requires acc(diz.Reader_l.Lock_d, wildcard)
+  requires diz.Reader_l.Lock_d == diz.Reader_d
+  requires acc(diz.Reader_d.Device_F, wildcard)
+  requires acc(Future_hist_idle_Fraction_Process(diz.Reader_d.Device_F, new_frac(1 / 2), p_rs()), write)
+{
+  var __flatten_12__8: Ref
+  var __flatten_13__9: Process
+  var __flatten_15__10: Ref
+  var __flatten_16__11: Ref
+  var __flatten_18__12: Ref
+  var __flatten_19__13: Process
+  var __flatten_21__14: Process
+  while (true)
+    invariant acc(diz.Reader_d, wildcard)
+    invariant acc(diz.Reader_d.Device_F, wildcard)
+    invariant acc(diz.Reader_l, wildcard)
+    invariant acc(diz.Reader_l.Lock_d, wildcard)
+    invariant diz.Reader_l.Lock_d == diz.Reader_d
+    invariant acc(Future_hist_idle_Fraction_Process(diz.Reader_d.Device_F, new_frac(1 / 2), p_rs()), write) 
+  {
+    Lock_lock_EncodedGlobalVariables(diz.Reader_l, globals)
+    exhale acc(Future_hist_idle_Fraction_Process(diz.Reader_d.Device_F, new_frac(1 / 2), p_rs()), write)
+    // assert
+    assert p_is_choice(p_rs(), p_seq(p_clear(), p_rs()))
+    inhale acc(Future_hist_idle_Fraction_Process(diz.Reader_d.Device_F, new_frac(1 / 2), p_seq(p_clear(), p_rs())), write)
+    __flatten_12__8 := diz.Reader_d
+    __flatten_13__9 := p_rs()
+    Future_clear_begin_Fraction_Process(__flatten_12__8.Device_F, new_frac(1 / 2), __flatten_13__9)
+    __flatten_15__10 := diz.Reader_l
+    __flatten_15__10.Lock_flag := false
+    __flatten_16__11 := diz.Reader_d
+    Future_hist_set_flag_Boolean(__flatten_16__11.Device_F, false)
+    __flatten_18__12 := diz.Reader_d
+    __flatten_19__13 := p_rs()
+    Future_clear_commit_Fraction_Process(__flatten_18__12.Device_F, new_frac(1 / 2), __flatten_19__13)
+    exhale acc(Future_hist_idle_Fraction_Process(diz.Reader_d.Device_F, new_frac(1 / 2), p_rs()), write)
+    // assert
+    assert p_is_choice(p_rs(), p_seq(p_receive(), p_rs()))
+    inhale acc(Future_hist_idle_Fraction_Process(diz.Reader_d.Device_F, new_frac(1 / 2), p_seq(p_receive(), p_rs())), write)
+    __flatten_21__14 := p_rs()
+    Device_receive_EncodedGlobalVariables_Fraction_Process(diz.Reader_d, globals, new_frac(1 / 2), __flatten_21__14)
+    Lock_unlock_EncodedGlobalVariables(diz.Reader_l, globals)
+  }
+}
+
+method Reader_Reader_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_Reader()
+  ensures acc(sys__result.Reader_d, write) && sys__result.Reader_d == null
+  ensures acc(sys__result.Reader_l, write) && sys__result.Reader_l == null
+{
+  inhale false
+}
+
+method Reader___contract_unsatisfiable__internal_Reader_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+}
+
+method Reader_internal_Reader_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_Reader()
+  ensures acc(sys__result.Reader_d, write) && sys__result.Reader_d == null
+  ensures acc(sys__result.Reader_l, write) && sys__result.Reader_l == null
+{
+  var diz__15: Ref
+  diz__15 := new(Reader_d, Reader_l)
+  inhale type_of(diz__15) == class_Reader()
+  diz__15.Reader_d := null
+  diz__15.Reader_l := null
+  sys__result := diz__15
+  // assert
+  assert sys__result != null && type_of(sys__result) == class_Reader() && (acc(sys__result.Reader_d, write) && sys__result.Reader_d == null) && (acc(sys__result.Reader_l, write) && sys__result.Reader_l == null)
+  inhale false
+}

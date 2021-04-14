@@ -1,0 +1,464 @@
+// Generated on 2021-03-23 at 23:44:25
+domain Process {
+  
+  function p_is_choice(p1: Process, p2: Process): Bool
+  
+  function p_empty(): Process
+  
+  function p_merge(p1: Process, p2: Process): Process
+  
+  function p_choice(p1: Process, p2: Process): Process
+  
+  function p_seq(p1: Process, p2: Process): Process
+  
+  function p_incr(v: Int): Process
+  
+  function p_done(v: Int): Process
+  
+  function p_P(xs: Seq[Int]): Process
+  
+  axiom empty_1L {
+    (forall p: Process :: { p_merge(p_empty(), p) } p_merge(p_empty(), p) == p)
+  }
+  
+  axiom empty_2L {
+    (forall p: Process :: { p_seq(p_empty(), p) } p_seq(p_empty(), p) == p)
+  }
+  
+  axiom empty_2R {
+    (forall p: Process :: { p_seq(p, p_empty()) } p_seq(p, p_empty()) == p)
+  }
+  
+  axiom choice_L {
+    (forall p1: Process, p2: Process :: { p_is_choice(p_choice(p1, p2), p1) } p_is_choice(p_choice(p1, p2), p1))
+  }
+  
+  axiom choice_R {
+    (forall p1: Process, p2: Process :: { p_is_choice(p_choice(p1, p2), p2) } p_is_choice(p_choice(p1, p2), p2))
+  }
+  
+  axiom choice_dist {
+    (forall p1: Process, p2: Process, p3: Process :: { p_seq(p_choice(p1, p2), p3) } p_seq(p_choice(p1, p2), p3) == p_choice(p_seq(p1, p3), p_seq(p2, p3)))
+  }
+  
+  axiom seq_assoc {
+    (forall p1: Process, p2: Process, p3: Process :: { p_seq(p_seq(p1, p2), p3) } p_seq(p_seq(p1, p2), p3) == p_seq(p1, p_seq(p2, p3)))
+  }
+  
+  axiom incr_def_2 {
+    (forall p: Process, v: Int :: { p_seq(p, p_incr(v)) } p_seq(p, p_incr(v)) == p_seq(p, p_seq(p_incr(v), p_empty())))
+  }
+  
+  axiom done_def_1 {
+    (forall v: Int :: { p_done(v) } p_empty() == p_done(v))
+  }
+  
+  axiom done_def_2 {
+    (forall p: Process, v: Int :: { p_seq(p, p_done(v)) } p_seq(p, p_done(v)) == p_seq(p, p_seq(p_done(v), p_empty())))
+  }
+  
+  axiom P_def_1 {
+    (forall xs: Seq[Int] :: { p_P(xs) } (0 < |xs| ? p_merge(p_seq(p_incr(xs[0]), p_done(xs[0])), p_P(xs[1..])) : p_empty()) == p_P(xs))
+  }
+  
+  axiom P_def_2 {
+    (forall p: Process, xs: Seq[Int] :: { p_seq(p, p_P(xs)) } p_seq(p, p_P(xs)) == p_seq(p, p_seq(p_P(xs), p_empty())))
+  }
+}
+
+domain TYPE {
+  
+  unique function class_Future(): TYPE
+  
+  unique function class_java_DOT_lang_DOT_Object(): TYPE
+  
+  unique function class_Program(): TYPE
+  
+  unique function class_EncodedGlobalVariables(): TYPE
+  
+  function directSuperclass(t: TYPE): TYPE
+  
+  function type_of(val: Ref): TYPE
+  
+  axiom Future_directSuperclass {
+    directSuperclass(class_Future()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom Program_directSuperclass {
+    directSuperclass(class_Program()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom EncodedGlobalVariables_directSuperclass {
+    directSuperclass(class_EncodedGlobalVariables()) == class_java_DOT_lang_DOT_Object()
+  }
+}
+
+domain frac {
+  
+  function frac_val(a: frac): Perm
+  
+  axiom frac_eq {
+    (forall a: frac, b: frac :: { frac_val(a),frac_val(b) } (frac_val(a) == frac_val(b)) == (a == b))
+  }
+  
+  axiom frac_bound {
+    (forall a: frac :: { frac_val(a) } 0 / 1 < frac_val(a) && frac_val(a) <= 1 / 1)
+  }
+}
+
+domain zfrac {
+  
+  function zfrac_val(a: zfrac): Perm
+  
+  axiom zfrac_eq {
+    (forall a: zfrac, b: zfrac :: { zfrac_val(a),zfrac_val(b) } (zfrac_val(a) == zfrac_val(b)) == (a == b))
+  }
+  
+  axiom zfrac_bound {
+    (forall a: zfrac :: { zfrac_val(a) } 0 / 1 <= zfrac_val(a) && zfrac_val(a) <= 1 / 1)
+  }
+}
+
+domain VCTArray[CT] {
+  
+  function loc(a: VCTArray[CT], i: Int): CT
+  
+  function alen(a: VCTArray[CT]): Int
+  
+  function first(r: CT): VCTArray[CT]
+  
+  function second(r: CT): Int
+  
+  axiom all_diff {
+    (forall a: VCTArray[CT], i: Int :: { (loc(a, i): CT) } (first((loc(a, i): CT)): VCTArray[CT]) == a && (second((loc(a, i): CT)): Int) == i)
+  }
+  
+  axiom len_nonneg {
+    (forall a: VCTArray[CT] :: { (alen(a): Int) } (alen(a): Int) >= 0)
+  }
+}
+
+domain VCTOption[T] {
+  
+  function VCTNone(): VCTOption[T]
+  
+  function VCTSome(t: T): VCTOption[T]
+  
+  function getVCTOption(o: VCTOption[T]): T
+  
+  function getVCTOptionOrElse(o: VCTOption[T], default: T): T
+  
+  axiom not_equal_vct {
+    (forall x: T :: { (VCTSome(x): VCTOption[T]) } (VCTNone(): VCTOption[T]) != (VCTSome(x): VCTOption[T]))
+  }
+  
+  axiom get_axiom_vct {
+    (forall x: T :: { (getVCTOption((VCTSome(x): VCTOption[T])): T) } (getVCTOption((VCTSome(x): VCTOption[T])): T) == x)
+  }
+  
+  axiom get_axiom_vct_2 {
+    (forall x: VCTOption[T] :: { (VCTSome((getVCTOption(x): T)): VCTOption[T]) } (VCTSome((getVCTOption(x): T)): VCTOption[T]) == x)
+  }
+  
+  axiom get_or_else_axiom_1 {
+    (forall val: T, default: T :: { (getVCTOptionOrElse((VCTSome(val): VCTOption[T]), default): T) } (getVCTOptionOrElse((VCTSome(val): VCTOption[T]), default): T) == val)
+  }
+  
+  axiom get_or_else_axiom_2 {
+    (forall default: T :: { (getVCTOptionOrElse((VCTNone(): VCTOption[T]), default): T) } (getVCTOptionOrElse((VCTNone(): VCTOption[T]), default): T) == default)
+  }
+}
+
+//  a field 
+field Future_sum_hist_value: Int
+
+//  a field 
+field Future_sum_hist_init: Int
+
+//  a field 
+field Future_sum_hist_act: Int
+
+//  a field 
+field Future_sum_hist_write: Int
+
+//  a field 
+field Future_sum_hist_free: Int
+
+//  a field 
+field Future_sum_hist_hist: Int
+
+//  a field 
+field Future_sum_hist_action: Int
+
+//  a field 
+field Integer__item: Int
+
+function Program_sum_Sequence$Integer$(xs: Seq[Int]): Int
+{
+  (0 < |xs| ? xs[0] + Program_sum_Sequence$Integer$(xs[1..]) : 0)
+}
+
+function instanceof_TYPE_TYPE(t: TYPE, u: TYPE): Bool
+  ensures result == (t == u || directSuperclass(t) == u)
+
+
+function new_frac(x: Perm): frac
+  requires 0 / 1 < x && x <= 1 / 1
+  ensures frac_val(result) == x
+
+
+function new_zfrac(x: Perm): zfrac
+  requires 0 / 1 <= x && x <= 1 / 1
+  ensures zfrac_val(result) == x
+
+
+function getVCTOption1(x: VCTOption[VCTArray[Ref]]): VCTArray[Ref]
+  requires x != (VCTNone(): VCTOption[VCTArray[Ref]])
+{
+  (getVCTOption(x): VCTArray[Ref])
+}
+
+predicate Future_hist_do_incr_Fraction_Process(diz: Ref, fr: frac, proc: Process) 
+
+predicate Future_hist_idle_Fraction_Process(diz: Ref, fr: frac, proc: Process) 
+
+method Future_incr_begin_Fraction_Process_Integer(diz: Ref, fr: frac, proc: Process, v: Int)
+  requires diz != null
+  requires frac_val(fr) != none
+  requires acc(Future_hist_idle_Fraction_Process(diz, fr, p_seq(p_incr(v), proc)), write)
+  requires write != none
+  requires acc(diz.Future_sum_hist_value, write)
+  requires acc(diz.Future_sum_hist_hist, write)
+  ensures frac_val(fr) != none
+  ensures acc(Future_hist_do_incr_Fraction_Process(diz, fr, proc), write)
+  ensures acc(diz.Future_sum_hist_act, write)
+  ensures acc(diz.Future_sum_hist_value, write)
+  ensures acc(diz.Future_sum_hist_write, write)
+  ensures acc(diz.Future_sum_hist_action, write)
+  ensures diz.Future_sum_hist_value == diz.Future_sum_hist_act
+  ensures diz.Future_sum_hist_value == old(diz.Future_sum_hist_value)
+{
+  inhale false
+}
+
+method Future_incr_commit_Fraction_Process_Integer(diz: Ref, fr: frac, proc: Process, v: Int)
+  requires diz != null
+  requires frac_val(fr) != none
+  requires acc(Future_hist_do_incr_Fraction_Process(diz, fr, proc), write)
+  requires write != none
+  requires acc(diz.Future_sum_hist_act, write)
+  requires acc(diz.Future_sum_hist_value, write)
+  requires acc(diz.Future_sum_hist_write, write)
+  requires acc(diz.Future_sum_hist_action, write)
+  requires diz.Future_sum_hist_value == diz.Future_sum_hist_act + v
+  ensures frac_val(fr) != none
+  ensures acc(Future_hist_idle_Fraction_Process(diz, fr, proc), write)
+  ensures acc(diz.Future_sum_hist_value, write)
+  ensures acc(diz.Future_sum_hist_hist, write)
+  ensures diz.Future_sum_hist_value == old(diz.Future_sum_hist_value)
+{
+  inhale false
+}
+
+method Future_Future() returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_Future()
+  ensures acc(sys__result.Future_sum_hist_value, write)
+  ensures acc(sys__result.Future_sum_hist_write, write)
+  ensures acc(sys__result.Future_sum_hist_free, write)
+  ensures sys__result.Future_sum_hist_value == 0
+{
+  var diz__1: Ref
+  diz__1 := new(Future_sum_hist_value, Future_sum_hist_init, Future_sum_hist_act, Future_sum_hist_write, Future_sum_hist_free, Future_sum_hist_hist, Future_sum_hist_action)
+  inhale type_of(diz__1) == class_Future()
+  Future_hist_set_sum_Integer(diz__1, 0)
+  sys__result := diz__1
+  // assert
+  assert sys__result != null && type_of(sys__result) == class_Future() && acc(sys__result.Future_sum_hist_value, write) && acc(sys__result.Future_sum_hist_write, write) && acc(sys__result.Future_sum_hist_free, write) && sys__result.Future_sum_hist_value == 0
+  inhale false
+}
+
+method Future_hist_set_sum_Integer(diz: Ref, value: Int)
+  requires diz != null
+  requires acc(diz.Future_sum_hist_value, write)
+  requires acc(diz.Future_sum_hist_write, write)
+  ensures acc(diz.Future_sum_hist_value, write) && diz.Future_sum_hist_value == value
+  ensures acc(diz.Future_sum_hist_write, write)
+{
+  inhale false
+}
+
+method Future_end_future(diz: Ref)
+  requires diz != null
+  requires acc(diz.Future_sum_hist_value, write)
+  requires acc(diz.Future_sum_hist_hist, write)
+  requires acc(diz.Future_sum_hist_init, write)
+  requires acc(Future_hist_idle_Fraction_Process(diz, new_frac(write), p_empty()), write)
+  ensures acc(diz.Future_sum_hist_value, write)
+  ensures acc(diz.Future_sum_hist_write, write)
+  ensures acc(diz.Future_sum_hist_free, write)
+  ensures diz.Future_sum_hist_value == old(diz.Future_sum_hist_value)
+  ensures diz.Future_sum_hist_value == old(diz.Future_sum_hist_init)
+{
+  inhale false
+}
+
+method Future_split_Fraction_Process_Fraction_Process(diz: Ref, frac1: frac, proc1: Process, frac2: frac, proc2: Process)
+  requires diz != null
+  requires frac_val(frac1) + frac_val(frac2) <= write
+  requires acc(Future_hist_idle_Fraction_Process(diz, new_frac(frac_val(frac1) + frac_val(frac2)), p_merge(proc1, proc2)), write)
+  ensures acc(Future_hist_idle_Fraction_Process(diz, frac1, proc1), write)
+  ensures acc(Future_hist_idle_Fraction_Process(diz, frac2, proc2), write)
+{
+  inhale false
+}
+
+method Future_merge_Fraction_Process_Fraction_Process(diz: Ref, frac1: frac, proc1: Process, frac2: frac, proc2: Process)
+  requires diz != null
+  requires frac_val(frac1) + frac_val(frac2) <= write
+  requires acc(Future_hist_idle_Fraction_Process(diz, frac1, proc1), write)
+  requires acc(Future_hist_idle_Fraction_Process(diz, frac2, proc2), write)
+  ensures acc(Future_hist_idle_Fraction_Process(diz, new_frac(frac_val(frac1) + frac_val(frac2)), p_merge(proc1, proc2)), write)
+{
+  inhale false
+}
+
+method Future_begin_future_1_Sequence$Integer$(diz: Ref, xs: Seq[Int])
+  requires diz != null
+  requires acc(diz.Future_sum_hist_value, write)
+  requires acc(diz.Future_sum_hist_write, write)
+  requires acc(diz.Future_sum_hist_free, write)
+  requires 0 < |xs|
+  ensures acc(diz.Future_sum_hist_value, write)
+  ensures acc(diz.Future_sum_hist_hist, write)
+  ensures acc(diz.Future_sum_hist_init, write)
+  ensures diz.Future_sum_hist_value == old(diz.Future_sum_hist_value)
+  ensures diz.Future_sum_hist_init == Program_sum_Sequence$Integer$(xs)
+  ensures acc(Future_hist_idle_Fraction_Process(diz, new_frac(write), p_P(xs)), write)
+{
+  inhale false
+}
+
+method Program_lemma_P_split_all_EncodedGlobalVariables_Future_Sequence$Integer$(diz: Ref, globals: Ref, model: Ref, xs: Seq[Int])
+  requires diz != null
+  requires model != null && 0 < |xs|
+  requires acc(Future_hist_idle_Fraction_Process(model, new_frac(write), p_P(xs)), write)
+  ensures model != null && 0 < |xs|
+  ensures (forall i: Int :: { xs[i] } 0 <= i && i < |xs| ==> acc(Future_hist_idle_Fraction_Process(model, new_frac(1 / |xs|), p_seq(p_incr(xs[i]), p_done(xs[i]))), write))
+{
+  inhale false
+}
+
+method Program_lemma_done_merge_all_EncodedGlobalVariables_Future_Sequence$Integer$(diz: Ref, globals: Ref, model: Ref, xs: Seq[Int])
+  requires diz != null
+  requires model != null && 0 < |xs|
+  requires (forall i: Int :: { xs[i] } 0 <= i && i < |xs| ==> acc(Future_hist_idle_Fraction_Process(model, new_frac(1 / |xs|), p_done(xs[i])), write))
+  ensures model != null && 0 < |xs|
+  ensures acc(Future_hist_idle_Fraction_Process(model, new_frac(write), p_empty()), write)
+{
+  inhale false
+}
+
+method Program___contract_unsatisfiable__parsum_EncodedGlobalVariables_Option$Array$Cell$Integer$$$_Sequence$Integer$(diz: Ref, globals: Ref, A: VCTOption[VCTArray[Ref]], xs: Seq[Int]) returns (sys__result: Int)
+  requires diz != null
+{
+  inhale A != (VCTNone(): VCTOption[VCTArray[Ref]]) && (alen(getVCTOption1(A)): Int) == |xs| && 0 < (alen(getVCTOption1(A)): Int) && ((forall i__2: Int :: { (loc(getVCTOption1(A), i__2): Ref) } 0 <= i__2 && i__2 < (alen(getVCTOption1(A)): Int) ==> acc((loc(getVCTOption1(A), i__2): Ref).Integer__item, 1 / 2)) && (forall i__3: Int :: { (loc(getVCTOption1(A), i__3): Ref) } { xs[i__3] } 0 <= i__3 && i__3 < (alen(getVCTOption1(A)): Int) ==> (loc(getVCTOption1(A), i__3): Ref).Integer__item == xs[i__3]))
+  // assert
+  assert false
+  inhale false
+}
+
+method Program_loop_body_4_Option$Array$Cell$Integer$$$_Sequence$Integer$_Future_Integer(diz: Ref, A: VCTOption[VCTArray[Ref]], xs: Seq[Int], model: Ref, tid: Int)
+  requires diz != null
+  requires A != (VCTNone(): VCTOption[VCTArray[Ref]]) && (alen(getVCTOption1(A)): Int) == |xs| && 0 < (alen(getVCTOption1(A)): Int)
+  requires 0 <= tid && tid < (alen(getVCTOption1(A)): Int)
+  requires acc((loc(getVCTOption1(A), tid): Ref).Integer__item, 1 / 4)
+  requires (loc(getVCTOption1(A), tid): Ref).Integer__item == xs[tid]
+  requires acc(Future_hist_idle_Fraction_Process(model, new_frac(1 / |xs|), p_seq(p_incr((loc(getVCTOption1(A), tid): Ref).Integer__item), p_done((loc(getVCTOption1(A), tid): Ref).Integer__item))), write)
+  ensures A != (VCTNone(): VCTOption[VCTArray[Ref]]) && (alen(getVCTOption1(A)): Int) == |xs| && 0 < (alen(getVCTOption1(A)): Int)
+  ensures 0 <= tid && tid < (alen(getVCTOption1(A)): Int)
+  ensures acc((loc(getVCTOption1(A), tid): Ref).Integer__item, 1 / 4)
+  ensures (loc(getVCTOption1(A), tid): Ref).Integer__item == xs[tid]
+  ensures acc(Future_hist_idle_Fraction_Process(model, new_frac(1 / |xs|), p_done((loc(getVCTOption1(A), tid): Ref).Integer__item)), write)
+{
+  var __flatten_2__4: Ref
+  var __flatten_3__5: Process
+  var __flatten_4__6: Ref
+  var __flatten_6__7: Ref
+  var __flatten_8__8: Ref
+  var __flatten_9__9: Process
+  var __flatten_10__10: Ref
+  inhale A != (VCTNone(): VCTOption[VCTArray[Ref]]) && (alen(getVCTOption1(A)): Int) == |xs| && 0 < (alen(getVCTOption1(A)): Int) && (acc(model.Future_sum_hist_value, write) && acc(model.Future_sum_hist_hist, write))
+  __flatten_2__4 := (loc(getVCTOption1(A), tid): Ref)
+  __flatten_3__5 := p_done(__flatten_2__4.Integer__item)
+  __flatten_4__6 := (loc(getVCTOption1(A), tid): Ref)
+  Future_incr_begin_Fraction_Process_Integer(model, new_frac(1 / |xs|), __flatten_3__5, __flatten_4__6.Integer__item)
+  __flatten_6__7 := (loc(getVCTOption1(A), tid): Ref)
+  Future_hist_set_sum_Integer(model, model.Future_sum_hist_value + __flatten_6__7.Integer__item)
+  __flatten_8__8 := (loc(getVCTOption1(A), tid): Ref)
+  __flatten_9__9 := p_done(__flatten_8__8.Integer__item)
+  __flatten_10__10 := (loc(getVCTOption1(A), tid): Ref)
+  Future_incr_commit_Fraction_Process_Integer(model, new_frac(1 / |xs|), __flatten_9__9, __flatten_10__10.Integer__item)
+  exhale A != (VCTNone(): VCTOption[VCTArray[Ref]]) && (alen(getVCTOption1(A)): Int) == |xs| && 0 < (alen(getVCTOption1(A)): Int) && (acc(model.Future_sum_hist_value, write) && acc(model.Future_sum_hist_hist, write))
+}
+
+method Program_parrallel_region_main_1_Option$Array$Cell$Integer$$$_Sequence$Integer$_Future(diz: Ref, A: VCTOption[VCTArray[Ref]], xs: Seq[Int], model: Ref)
+  requires diz != null
+  requires A != (VCTNone(): VCTOption[VCTArray[Ref]]) && (alen(getVCTOption1(A)): Int) == |xs| && 0 < (alen(getVCTOption1(A)): Int)
+  requires (forall tid: Int :: { (loc(getVCTOption1(A), tid): Ref).Integer__item } 0 <= tid && tid < (alen(getVCTOption1(A)): Int) ==> acc((loc(getVCTOption1(A), tid): Ref).Integer__item, 1 / 4))
+  requires (forall tid: Int :: { (loc(getVCTOption1(A), tid): Ref).Integer__item,xs[tid] } 0 <= tid && tid < (alen(getVCTOption1(A)): Int) ==> (loc(getVCTOption1(A), tid): Ref).Integer__item == xs[tid])
+  requires (forall tid: Int :: { (loc(getVCTOption1(A), tid): Ref).Integer__item } 0 <= tid && tid < (alen(getVCTOption1(A)): Int) ==> acc(Future_hist_idle_Fraction_Process(model, new_frac(1 / |xs|), p_seq(p_incr((loc(getVCTOption1(A), tid): Ref).Integer__item), p_done((loc(getVCTOption1(A), tid): Ref).Integer__item))), write))
+  ensures A != (VCTNone(): VCTOption[VCTArray[Ref]]) && (alen(getVCTOption1(A)): Int) == |xs| && 0 < (alen(getVCTOption1(A)): Int)
+  ensures (forall tid: Int :: { (loc(getVCTOption1(A), tid): Ref).Integer__item } 0 <= tid && tid < (alen(getVCTOption1(A)): Int) ==> acc((loc(getVCTOption1(A), tid): Ref).Integer__item, 1 / 4))
+  ensures (forall tid: Int :: { (loc(getVCTOption1(A), tid): Ref).Integer__item,xs[tid] } 0 <= tid && tid < (alen(getVCTOption1(A)): Int) ==> (loc(getVCTOption1(A), tid): Ref).Integer__item == xs[tid])
+  ensures (forall tid: Int :: { (loc(getVCTOption1(A), tid): Ref).Integer__item } 0 <= tid && tid < (alen(getVCTOption1(A)): Int) ==> acc(Future_hist_idle_Fraction_Process(model, new_frac(1 / |xs|), p_done((loc(getVCTOption1(A), tid): Ref).Integer__item)), write))
+{
+  inhale false
+}
+
+method Program_parsum_EncodedGlobalVariables_Option$Array$Cell$Integer$$$_Sequence$Integer$(diz: Ref, globals: Ref, A: VCTOption[VCTArray[Ref]], xs: Seq[Int]) returns (sys__result: Int)
+  requires diz != null
+  requires A != (VCTNone(): VCTOption[VCTArray[Ref]]) && (alen(getVCTOption1(A)): Int) == |xs| && 0 < (alen(getVCTOption1(A)): Int)
+  requires (forall i: Int :: { (loc(getVCTOption1(A), i): Ref) } 0 <= i && i < (alen(getVCTOption1(A)): Int) ==> acc((loc(getVCTOption1(A), i): Ref).Integer__item, 1 / 2))
+  requires (forall i: Int :: { (loc(getVCTOption1(A), i): Ref) } { xs[i] } 0 <= i && i < (alen(getVCTOption1(A)): Int) ==> (loc(getVCTOption1(A), i): Ref).Integer__item == xs[i])
+  ensures A != (VCTNone(): VCTOption[VCTArray[Ref]]) && (alen(getVCTOption1(A)): Int) == |xs| && 0 < (alen(getVCTOption1(A)): Int)
+  ensures (forall i: Int :: { (loc(getVCTOption1(A), i): Ref) } 0 <= i && i < (alen(getVCTOption1(A)): Int) ==> acc((loc(getVCTOption1(A), i): Ref).Integer__item, 1 / 2))
+  ensures (forall i: Int :: { (loc(getVCTOption1(A), i): Ref) } { xs[i] } 0 <= i && i < (alen(getVCTOption1(A)): Int) ==> (loc(getVCTOption1(A), i): Ref).Integer__item == xs[i])
+  ensures sys__result == Program_sum_Sequence$Integer$(xs)
+{
+  var model__11: Ref
+  model__11 := Future_Future()
+  Future_begin_future_1_Sequence$Integer$(model__11, xs)
+  Program_lemma_P_split_all_EncodedGlobalVariables_Future_Sequence$Integer$(diz, globals, model__11, xs)
+  exhale A != (VCTNone(): VCTOption[VCTArray[Ref]]) && (alen(getVCTOption1(A)): Int) == |xs| && 0 < (alen(getVCTOption1(A)): Int) && (acc(model__11.Future_sum_hist_value, write) && acc(model__11.Future_sum_hist_hist, write))
+  Program_parrallel_region_main_1_Option$Array$Cell$Integer$$$_Sequence$Integer$_Future(diz, A, xs, model__11)
+  inhale A != (VCTNone(): VCTOption[VCTArray[Ref]]) && (alen(getVCTOption1(A)): Int) == |xs| && 0 < (alen(getVCTOption1(A)): Int) && (acc(model__11.Future_sum_hist_value, write) && acc(model__11.Future_sum_hist_hist, write))
+  Program_lemma_done_merge_all_EncodedGlobalVariables_Future_Sequence$Integer$(diz, globals, model__11, xs)
+  Future_end_future(model__11)
+  sys__result := model__11.Future_sum_hist_value
+  // assert
+  assert A != (VCTNone(): VCTOption[VCTArray[Ref]]) && (alen(getVCTOption1(A)): Int) == |xs| && 0 < (alen(getVCTOption1(A)): Int) && (forall i__12: Int :: { (loc(getVCTOption1(A), i__12): Ref) } 0 <= i__12 && i__12 < (alen(getVCTOption1(A)): Int) ==> acc((loc(getVCTOption1(A), i__12): Ref).Integer__item, 1 / 2)) && (forall i__13: Int :: { (loc(getVCTOption1(A), i__13): Ref) } { xs[i__13] } 0 <= i__13 && i__13 < (alen(getVCTOption1(A)): Int) ==> (loc(getVCTOption1(A), i__13): Ref).Integer__item == xs[i__13]) && sys__result == Program_sum_Sequence$Integer$(xs)
+  inhale false
+}
+
+method Program___contract_unsatisfiable__Program_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+}
+
+method Program_Program_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_Program()
+{
+  var diz__14: Ref
+  diz__14 := new()
+  inhale type_of(diz__14) == class_Program()
+  sys__result := diz__14
+  // assert
+  assert sys__result != null && type_of(sys__result) == class_Program()
+  inhale false
+}

@@ -63,25 +63,7 @@
         \parindent=0pt
         \noindent
 
-        Abstract syntax trees (AST) are used in compilers and similar programs to represent
-        the structure of a program as a tree data structure. As with any other tree structure,
-        ASTs can be traversed, searched, transformed and so forth. During such operations,
-        subtrees within the AST are potentially checked for equality many times.  Moreover, equality checks
-        also occur in operations on collections of AST subtrees, for example in finding
-        a specific subtree, which may add additional performance overhead.
         
-        Because ASTs represent the structure of programs, equality checks usually happen on a structural level.
-        Structural equality checking of subtrees is done recursively as we have to compare not only the roots, but also their children. This may add unexpected performance costs,
-        especially considering the depth of ASTs representing big programs.
-
-        Many operations on ASTs, including equality checks, have to be implemented for
-        every AST node type individually. But these implementations usually follow a simple
-        pattern and only differ in the arity and type of the node's parameters. Such repetitive
-        code is generally known as boilerplate code and should be reduced to a minimum, for example
-        with automatic code generation using metaprogramming techniques.
-
-        The goal of this thesis is to improve the performance of AST subtree equality checks
-        without burdening developers with additional boilerplate implementations.
     \end{abstract}
     \newpage
 
@@ -109,79 +91,36 @@
     \pagenumbering{arabic}
 
     \section{Introduction}
-
-    \subsection{Viper and Silicon} \label{background:viper}
     
-    Viper \cite{viper} is a verification infrastructure on top of which verification tools
-    for different programming languages can be built. Silicon \cite{silicon} is a backend for Viper,
-    which is based on symbolic execution. To advance program verification in practice,
-    fast verification is crucial as it provides a more streamlined experience for developers.
-    This is the reason why one of Silicon's stated goals is performance:
-
-    \begin{quote} 
-        ``The verifier should enable an IDE-like experience: it should be
-        sufficiently fast such that users can continuously work on verifying
-        programs [...]'' \cite{silicon}
-    \end{quote}
-
-    Silicon internally builds an AST from the Viper input
-    program. This AST is potentially checked for structural equality many times within
-    the execution of Silicon.
-
-    \begin{lstlisting}[language=Scala, caption=Example of multiple subtree (``term'') equality checks occuring during the execution of Silicon.]
-// args is of type Seq[Term], meaning we compare a list of
-// terms within a sort function which is called many times
-// during the sorting process.
-relevantChunks.sortWith((ch1, ch2) => {
-        // ... &&
-        ch1.args == args
-})
-    \end{lstlisting}
-
-    \subsection{Scala and IntelliJ} \label{background:scala}
-
-    The Viper infrastructure is written in the Scala programming language.
-    Scala has support for metaprogramming using macros. For a nice programming experience
-    using macros, IDE support should ideally be provided. In this case, we use the IntelliJ IDE.
-    However, Scala macros are not supported natively by the IntelliJ IDE:
-    \begin{quote}
-        ``Since IntelliJ IDEA’s coding assistance is based on static code analysis,
-        the IDE is not aware of AST changes, and can’t provide appropriate code
-        completion and inspections for the generated code.'' \cite{intellij}
-    \end{quote}
-
-    To ensure support for macros, a macro-specific IntelliJ plugin would have to be developed such that
-    IntelliJ properly picks up macro-generated code.
-
-    \section{Approach} \label{approach}
-
     \subsection{Implementation of Flyweight ASTs} \label{approach:flyweight}
 
-    In a first step, we evaluate the performance of the Silicon backend,
-    which allows us to relate possible performance improvements to 
-    changes made during this project. We use existing benchmarking infrastructure 
-    and, if necessary, create new benchmarks and benchmarking tools.
+    Abstract syntax trees (AST) are used in compilers and similar programs to represent
+    the structure of a program as a tree data structure. As with any other tree structure,
+    ASTs can be traversed, searched, transformed and so forth. During such operations,
+    subtrees within the AST are potentially checked for equality many times.  Moreover, equality checks
+    also occur in operations on collections of AST subtrees, for example in finding
+    a specific subtree, which may add additional performance overhead.
 
-    We can't avoid equality checks themselves, but what we can do is implementing
-    equality checks in a more performant way. Currently in Silicon, new term instances are
-    created independently of already existing ones, which potentially leads 
+    Equality checks can't be avoided, but they can be implemented in a more performant way.
+    Currently in Silicon, new term instances are created independently of already existing ones, which potentially leads 
     to the coexistence of multiple structurally equal term instances. Subterm equality is checked in a
     structural and recursive manner.
 
-    \begin{lstlisting}[language=Scala, caption={Simplification of how term instances currently are
+\begin{lstlisting}[language=Scala, caption={Simplification of how term instances currently are
     implemented. Because \texttt{Plus} is defined as a case class, the compiler automatically
     generates code for recursive structural equality checking.}]
 case class Plus(val p0: Term, val p1: Term) extends Term
-    \end{lstlisting}
+\end{lstlisting}
         
-    Because the AST used in Silicon is immutable, we can utilize the flyweight pattern \cite{patterns} on AST terms.
-    To do this, we maintain a pool of term instances. Whenever a term
-    is to be created, we first compare the components of this new term with our
-    pool of existing terms. If a term with the same components already exists, we return it and
-    avoid creating a new instance of this term. Otherwise, we create a new term and add it to
+    Because the AST used in Silicon is immutable, the flyweight pattern \cite{patterns}
+    can be applied on AST terms.
+    To do this, pool of term instances is maintained. Whenever a term
+    is to be created, the components of this new term is compared with the
+    pool of existing terms. If a term with the same components already exists, it is returned and
+    the creation of a new instance of this term is avoided. Otherwise, a new term is created and added to
     the pool.
 
-    This gives us the guarantee that there are no two instances of the
+    This gives the guarantee that there are no two instances of the
     same term in our pool, meaning every two structurally equal terms point to the same
     underlying object in memory. Comparing terms for structural equality then boils
     down to a cheap reference equality check, and recursive equality checks can be avoided.
@@ -225,43 +164,44 @@ object Plus extends ((Term, Term) => Plus) {
     Silicon's AST representation of the Viper language consists of nearly 100 different terms,
     all with boilerplate implementations for different operations.
     Our changes introduce additional boilerplate code to each term companion object, as seen in the case
-    of the \texttt{Plus} term in listing 3.
+    of the \texttt{Plus} term in listing 2.
 
     Our ASTs shouldn't only be flyweight in the sense of the implementation pattern, but also
     regarding development time and effort. This is why we want to avoid such boilerplate
-    code and instead automatically generate companion objects seen in listing 3 using Scala's macro annotations.
+    code and instead automatically generate companion objects seen in listing 2 using Scala's macro annotations.
     Additional benefits of using macro annotations include improvements in code
     readability and maintainability. Experimenting with code changes will become a matter
     of editing a single macro instead of editing each term individually.
     Terms which may be added in the future are easier to implement.
 
-    \begin{lstlisting}[language=Scala, caption=One possible way to use macro annotations to automatically generate code in listing 3.]
-@memoizing
-case class Plus(left: Term, right: Term) extends Term
-    \end{lstlisting}
-
     \section{Implementation}
 
-    \subsection{Everything about Flyweight ASTs}
+    \subsection{A Macro Annotation for Code Generation}
 
-    \subsubsection{One for All or Each on Their Own}
+    \subsection{Classes or Case Classes}
 
-    \subsubsection{Memory Management}
+    \subsection{Macro Annotations on Nodes}
 
-    \subsubsection{Concurrency}
-
-    \subsection{Implementing the Macro Annotation}
-
-    \subsubsection{Hygiene}
-
-    \subsection{Support for the IntelliJ IDE}
+    \subsection{}
 
     \section{Evaluation}
 
     \subsection{Verification Time}
 
+    The flyweight pattern can be applied effectively if two main points hold.
+    First, the application uses large numbers of objects and causes high storage costs. \cite{patterns}
+    This is true for ASTs as they can grow large containing a large amount of objects.
+    
+    Second, groups of objects may be replaced by few shared objects once extrinsic state is removed. \cite{patterns}
+    In ASTs, many nodes have no state at all, such as \texttt{True}, \texttt{False}.
+    They are well suited as flyweight objects. For non-leave nodes, extrinsic state
+    cannot be externalized, for example the children of a \texttt{Plus(t1, t2)} node.
+
+    \end{enumerate}
+
     \subsection{Memory Consumption}
 
+    \subsection{Automatic Code Generation}
 
     \printbibliography
     

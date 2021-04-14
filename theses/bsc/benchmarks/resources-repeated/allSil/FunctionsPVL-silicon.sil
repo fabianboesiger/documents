@@ -1,0 +1,123 @@
+// Generated on 2021-03-23 at 23:31:46
+domain TYPE {
+  
+  unique function class_counter(): TYPE
+  
+  unique function class_java_DOT_lang_DOT_Object(): TYPE
+  
+  unique function class_EncodedGlobalVariables(): TYPE
+  
+  function directSuperclass(t: TYPE): TYPE
+  
+  function type_of(val: Ref): TYPE
+  
+  axiom counter_directSuperclass {
+    directSuperclass(class_counter()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom EncodedGlobalVariables_directSuperclass {
+    directSuperclass(class_EncodedGlobalVariables()) == class_java_DOT_lang_DOT_Object()
+  }
+}
+
+domain frac {
+  
+  function frac_val(a: frac): Perm
+  
+  axiom frac_eq {
+    (forall a: frac, b: frac :: { frac_val(a),frac_val(b) } (frac_val(a) == frac_val(b)) == (a == b))
+  }
+  
+  axiom frac_bound {
+    (forall a: frac :: { frac_val(a) } 0 / 1 < frac_val(a) && frac_val(a) <= 1 / 1)
+  }
+}
+
+domain zfrac {
+  
+  function zfrac_val(a: zfrac): Perm
+  
+  axiom zfrac_eq {
+    (forall a: zfrac, b: zfrac :: { zfrac_val(a),zfrac_val(b) } (zfrac_val(a) == zfrac_val(b)) == (a == b))
+  }
+  
+  axiom zfrac_bound {
+    (forall a: zfrac :: { zfrac_val(a) } 0 / 1 <= zfrac_val(a) && zfrac_val(a) <= 1 / 1)
+  }
+}
+
+//  a field 
+field counter_x: Int
+
+function counter_get_EncodedGlobalVariables(diz: Ref, globals: Ref): Int
+  requires diz != null
+  requires acc(counter_state_EncodedGlobalVariables(diz, globals), write)
+{
+  (unfolding acc(counter_state_EncodedGlobalVariables(diz, globals), write) in diz.counter_x)
+}
+
+function instanceof_TYPE_TYPE(t: TYPE, u: TYPE): Bool
+  ensures result == (t == u || directSuperclass(t) == u)
+
+
+function new_frac(x: Perm): frac
+  requires 0 / 1 < x && x <= 1 / 1
+  ensures frac_val(result) == x
+
+
+function new_zfrac(x: Perm): zfrac
+  requires 0 / 1 <= x && x <= 1 / 1
+  ensures zfrac_val(result) == x
+
+
+predicate counter_state_EncodedGlobalVariables(diz: Ref, globals: Ref) {
+  diz != null && acc(diz.counter_x, write)
+}
+
+method counter___contract_unsatisfiable__counter_EncodedGlobalVariables_Integer(diz: Ref, globals: Ref, v: Int)
+  requires diz != null
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+}
+
+method counter_counter_EncodedGlobalVariables_Integer(globals: Ref, v: Int) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_counter()
+  ensures acc(counter_state_EncodedGlobalVariables(sys__result, globals), write)
+  ensures counter_get_EncodedGlobalVariables(sys__result, globals) == v
+{
+  var diz__1: Ref
+  diz__1 := new(counter_x)
+  inhale type_of(diz__1) == class_counter()
+  diz__1.counter_x := v
+  fold acc(counter_state_EncodedGlobalVariables(diz__1, globals), write)
+  sys__result := diz__1
+  // assert
+  assert sys__result != null && type_of(sys__result) == class_counter() && acc(counter_state_EncodedGlobalVariables(sys__result, globals), write) && counter_get_EncodedGlobalVariables(sys__result, globals) == v
+  inhale false
+}
+
+method counter___contract_unsatisfiable__incr_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale true && acc(counter_state_EncodedGlobalVariables(diz, globals), write)
+  // assert
+  assert false
+  inhale false
+}
+
+method counter_incr_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+  requires acc(counter_state_EncodedGlobalVariables(diz, globals), write)
+  ensures acc(counter_state_EncodedGlobalVariables(diz, globals), write)
+  ensures counter_get_EncodedGlobalVariables(diz, globals) == old(counter_get_EncodedGlobalVariables(diz, globals)) + 1
+{
+  var __flatten_1__2: Int
+  unfold acc(counter_state_EncodedGlobalVariables(diz, globals), write)
+  __flatten_1__2 := diz.counter_x + 1
+  diz.counter_x := __flatten_1__2
+  fold acc(counter_state_EncodedGlobalVariables(diz, globals), write)
+}

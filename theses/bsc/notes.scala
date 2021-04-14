@@ -1,3 +1,103 @@
+/*
+
+            Live Bytes
+Base        77 MB
+Flyweight   214 MB
+
+
+NEUE BENCHMARKS VerCors verification time (positiv ist besser)
+HashMap	0.04
+Scaffeine	-3.58
+TrieMap	0.61 <- minimale verbesserung
+TrieMap Case Class	-0.25
+
+
+- Arbeitsspeicherauslastung 3 mal mehr für +0.6% performance
+*/
+
+
+
+//- Cache kann nicht funktionieren 
+
+// Pool mit max. 1 Objekt
+val a = Term(1)
+// Term(1) jetzt im memory pool
+Term(2)
+// Term(1) nicht mehr im memory pool
+val b = Term(1)
+// Eine neue Instanz von Term(1) wurde generiert
+assert(a == b)
+// Assertion hält nicht, da a und b verschiedene Instanzen sind
+
+
+
+//- Stattdessen Maps leeren nach jedem Durchlauf?
+//- Multithreading
+
+
+
+
+
+
+
+
+
+
+
+
+// Scalas hashCode Methode ruft foldgende Methode auf:
+scala.runtime.ScalaRunTime._hashCode()
+// Definition:
+def _hashCode(x: Product): Int = {
+  val arr =  x.productArity
+  var code = arr
+  var i = 0
+  while (i < arr) {
+    val elem = x.productElement(i)
+    code = code * 41 + (if (elem == null) 0 else elem.hashCode()) // <- Rekursion!
+    i += 1
+  }
+  code
+}
+
+
+// Stattdessen definieren wir die HashCode Metthode wie folgt:
+override def hashCode(): Int = super.hashCode()
+// super.hashCode() ruft die hashCode Methode von java.lang.Object auf
+// Implementierung:
+/*
+[..] This is typically implemented by converting the internal address of the object into an integer,
+but this implementation technique is not required by the JavaTM programming language.
+*/
+// -> Keine Rekursion
+
+
+
+// Problem
+class Combine(val p0: Term, val p1: Term) extends SnapshotTerm
+  with StructuralEqualityBinaryOp[Term] { ... }
+
+case class MagicWandSnapshot(abstractLhs: Term, rhsSnapshot: Term)
+  extends Combine(abstractLhs, rhsSnapshot) { ... }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Verhält sich wie eine "normale" case class
 @flyweight
 case class Plus {...} 

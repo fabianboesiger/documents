@@ -1,0 +1,204 @@
+// Generated on 2021-03-23 at 23:37:04
+domain TYPE {
+  
+  unique function class_OwickiGries(): TYPE
+  
+  unique function class_java_DOT_lang_DOT_Object(): TYPE
+  
+  unique function class_Worker(): TYPE
+  
+  unique function class_EncodedGlobalVariables(): TYPE
+  
+  function directSuperclass(t: TYPE): TYPE
+  
+  function type_of(val: Ref): TYPE
+  
+  axiom OwickiGries_directSuperclass {
+    directSuperclass(class_OwickiGries()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom Worker_directSuperclass {
+    directSuperclass(class_Worker()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom EncodedGlobalVariables_directSuperclass {
+    directSuperclass(class_EncodedGlobalVariables()) == class_java_DOT_lang_DOT_Object()
+  }
+}
+
+domain frac {
+  
+  function frac_val(a: frac): Perm
+  
+  axiom frac_eq {
+    (forall a: frac, b: frac :: { frac_val(a),frac_val(b) } (frac_val(a) == frac_val(b)) == (a == b))
+  }
+  
+  axiom frac_bound {
+    (forall a: frac :: { frac_val(a) } 0 / 1 < frac_val(a) && frac_val(a) <= 1 / 1)
+  }
+}
+
+domain zfrac {
+  
+  function zfrac_val(a: zfrac): Perm
+  
+  axiom zfrac_eq {
+    (forall a: zfrac, b: zfrac :: { zfrac_val(a),zfrac_val(b) } (zfrac_val(a) == zfrac_val(b)) == (a == b))
+  }
+  
+  axiom zfrac_bound {
+    (forall a: zfrac :: { zfrac_val(a) } 0 / 1 <= zfrac_val(a) && zfrac_val(a) <= 1 / 1)
+  }
+}
+
+//  a field 
+field OwickiGries_x: Int
+
+//  a field 
+field Worker_store: Ref
+
+function instanceof_TYPE_TYPE(t: TYPE, u: TYPE): Bool
+  ensures result == (t == u || directSuperclass(t) == u)
+
+
+function new_frac(x: Perm): frac
+  requires 0 / 1 < x && x <= 1 / 1
+  ensures frac_val(result) == x
+
+
+function new_zfrac(x: Perm): zfrac
+  requires 0 / 1 <= x && x <= 1 / 1
+  ensures zfrac_val(result) == x
+
+
+predicate OwickiGries_lock_held_EncodedGlobalVariables(diz: Ref, globals: Ref) 
+
+predicate OwickiGries_lock_invariant_EncodedGlobalVariables(diz: Ref, globals: Ref) {
+  diz != null && acc(diz.OwickiGries_x, write)
+}
+
+predicate Worker_joinToken_EncodedGlobalVariables(diz: Ref, globals: Ref) 
+
+predicate Worker_idleToken_EncodedGlobalVariables(diz: Ref, globals: Ref) 
+
+method OwickiGries___contract_unsatisfiable__OwickiGries_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+}
+
+method OwickiGries_OwickiGries_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_OwickiGries()
+{
+  var diz__1: Ref
+  diz__1 := new(OwickiGries_x)
+  inhale type_of(diz__1) == class_OwickiGries()
+  diz__1.OwickiGries_x := 0
+  fold acc(OwickiGries_lock_invariant_EncodedGlobalVariables(diz__1, globals), write)
+  exhale acc(OwickiGries_lock_invariant_EncodedGlobalVariables(diz__1, globals), write)
+  sys__result := diz__1
+  // assert
+  assert sys__result != null && type_of(sys__result) == class_OwickiGries()
+  inhale false
+}
+
+method OwickiGries___contract_unsatisfiable__main_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+}
+
+method OwickiGries_main_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  var w1__2: Ref
+  var w2__3: Ref
+  w1__2 := Worker_Worker_EncodedGlobalVariables_OwickiGries(globals, diz)
+  w2__3 := Worker_Worker_EncodedGlobalVariables_OwickiGries(globals, diz)
+  Worker_forkOperator_EncodedGlobalVariables(w1__2, globals)
+  Worker_forkOperator_EncodedGlobalVariables(w2__3, globals)
+  Worker_joinOperator_EncodedGlobalVariables(w1__2, globals)
+  Worker_joinOperator_EncodedGlobalVariables(w2__3, globals)
+}
+
+method Worker___contract_unsatisfiable__Worker_EncodedGlobalVariables_OwickiGries(diz: Ref, globals: Ref, og: Ref)
+  requires diz != null
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+}
+
+method Worker_Worker_EncodedGlobalVariables_OwickiGries(globals: Ref, og: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_Worker()
+  ensures acc(Worker_idleToken_EncodedGlobalVariables(sys__result, globals), write)
+  ensures acc(sys__result.Worker_store, wildcard)
+  ensures sys__result.Worker_store == og
+{
+  var diz__4: Ref
+  diz__4 := new(Worker_store)
+  inhale type_of(diz__4) == class_Worker()
+  diz__4.Worker_store := og
+  inhale acc(Worker_idleToken_EncodedGlobalVariables(diz__4, globals), write)
+  sys__result := diz__4
+  // assert
+  assert sys__result != null && type_of(sys__result) == class_Worker() && acc(Worker_idleToken_EncodedGlobalVariables(sys__result, globals), write) && acc(sys__result.Worker_store, wildcard) && sys__result.Worker_store == og
+  inhale false
+}
+
+method Worker_forkOperator_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+  requires acc(diz.Worker_store, wildcard)
+  requires acc(Worker_idleToken_EncodedGlobalVariables(diz, globals), write)
+  ensures acc(Worker_joinToken_EncodedGlobalVariables(diz, globals), write)
+{
+  inhale false
+}
+
+method Worker_joinOperator_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+  requires acc(Worker_joinToken_EncodedGlobalVariables(diz, globals), write)
+  ensures acc(Worker_idleToken_EncodedGlobalVariables(diz, globals), write)
+  ensures acc(diz.Worker_store, wildcard)
+{
+  inhale false
+}
+
+method Worker___contract_unsatisfiable__run_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale true && acc(diz.Worker_store, wildcard)
+  // assert
+  assert false
+  inhale false
+}
+
+method Worker_run_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+  requires acc(diz.Worker_store, wildcard)
+  ensures acc(diz.Worker_store, wildcard)
+{
+  var __flatten_7__5: Ref
+  var __flatten_8__6: Int
+  var __flatten_9__7: Ref
+  inhale acc(OwickiGries_lock_invariant_EncodedGlobalVariables(diz.Worker_store, globals), write)
+  unfold acc(OwickiGries_lock_invariant_EncodedGlobalVariables(diz.Worker_store, globals), write)
+  inhale acc(OwickiGries_lock_held_EncodedGlobalVariables(diz.Worker_store, globals), write)
+  __flatten_7__5 := diz.Worker_store
+  __flatten_9__7 := diz.Worker_store
+  __flatten_8__6 := __flatten_9__7.OwickiGries_x + 1
+  __flatten_7__5.OwickiGries_x := __flatten_8__6
+  exhale acc(OwickiGries_lock_held_EncodedGlobalVariables(diz.Worker_store, globals), write)
+  fold acc(OwickiGries_lock_invariant_EncodedGlobalVariables(diz.Worker_store, globals), write)
+  exhale acc(OwickiGries_lock_invariant_EncodedGlobalVariables(diz.Worker_store, globals), write)
+}

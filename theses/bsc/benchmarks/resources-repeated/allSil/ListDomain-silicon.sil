@@ -1,0 +1,58 @@
+// Generated on 2021-03-23 at 23:34:29
+domain List[T] {
+  
+  function nil(): List[T]
+  
+  function cons(x: T, xs: List[T]): List[T]
+  
+  function length(xs: List[T]): Int
+  
+  axiom nil_length {
+    (length((nil(): List[T])): Int) == 0
+  }
+  
+  axiom cons_length {
+    (forall x: T, xs: List[T] :: { (length((cons(x, xs): List[T])): Int) } (length((cons(x, xs): List[T])): Int) == (length(xs): Int) + 1)
+  }
+  
+  axiom nil_cons {
+    (forall z: T, zs: List[T] :: { (cons(z, zs): List[T]) } (cons(z, zs): List[T]) != (nil(): List[T]))
+  }
+}
+
+domain TYPE {
+  
+  unique function class_Ref(): TYPE
+  
+  unique function class_java_DOT_lang_DOT_Object(): TYPE
+  
+  unique function class_EncodedGlobalVariables(): TYPE
+  
+  function directSuperclass(t: TYPE): TYPE
+  
+  function type_of(val: Ref): TYPE
+  
+  axiom Ref_directSuperclass {
+    directSuperclass(class_Ref()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom EncodedGlobalVariables_directSuperclass {
+    directSuperclass(class_EncodedGlobalVariables()) == class_java_DOT_lang_DOT_Object()
+  }
+}
+
+function instanceof_TYPE_TYPE(t: TYPE, u: TYPE): Bool
+  ensures result == (t == u || directSuperclass(t) == u)
+
+
+method test_EncodedGlobalVariables_Integer_List$Integer$(globals: Ref, x: Int, xs: List[Int])
+{
+  var n__1: List[Int]
+  n__1 := (nil(): List[Int])
+  // assert
+  assert (length(n__1): Int) == 0
+  // assert
+  assert n__1 != (cons(x, xs): List[Int])
+  // assert
+  assert (length((cons(1, n__1): List[Int])): Int) == 1
+}

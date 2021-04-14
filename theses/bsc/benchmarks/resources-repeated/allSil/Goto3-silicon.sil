@@ -1,0 +1,79 @@
+// Generated on 2021-03-23 at 23:32:09
+domain TYPE {
+  
+  unique function class_C(): TYPE
+  
+  unique function class_java_DOT_lang_DOT_Object(): TYPE
+  
+  unique function class_D(): TYPE
+  
+  unique function class_EncodedGlobalVariables(): TYPE
+  
+  function directSuperclass(t: TYPE): TYPE
+  
+  function type_of(val: Ref): TYPE
+  
+  axiom C_directSuperclass {
+    directSuperclass(class_C()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom D_directSuperclass {
+    directSuperclass(class_D()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom EncodedGlobalVariables_directSuperclass {
+    directSuperclass(class_EncodedGlobalVariables()) == class_java_DOT_lang_DOT_Object()
+  }
+}
+
+function instanceof_TYPE_TYPE(t: TYPE, u: TYPE): Bool
+  ensures result == (t == u || directSuperclass(t) == u)
+
+
+method C___contract_unsatisfiable__m_EncodedGlobalVariables(diz: Ref, globals: Ref) returns (sys__result: Int)
+  requires diz != null
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+}
+
+method C_m_EncodedGlobalVariables(diz: Ref, globals: Ref) returns (sys__result: Int)
+  requires diz != null
+{
+  var r__1: Int
+  r__1 := 3
+  goto lbl
+  r__1 := 4
+  label lbl
+  // assert
+  assert r__1 == 3
+}
+
+method D___contract_unsatisfiable__m_EncodedGlobalVariables(diz: Ref, globals: Ref) returns (sys__result: Int)
+  requires diz != null
+{
+  inhale true && true
+  // assert
+  assert false
+  inhale false
+}
+
+method D_m_EncodedGlobalVariables(diz: Ref, globals: Ref) returns (sys__result: Int)
+  requires diz != null
+{
+  var r__2: Int
+  r__2 := 10
+  while (true)
+    invariant r__2 == 10 
+  {
+    r__2 := 20
+    goto lbl2
+  }
+  // assert
+  assert r__2 == 10
+  label lbl2
+  // assert
+  assert r__2 == 20
+}

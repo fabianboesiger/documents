@@ -1,0 +1,208 @@
+// Generated on 2021-03-23 at 23:33:44
+domain TYPE {
+  
+  unique function class_java_DOT_lang_DOT_Object(): TYPE
+  
+  unique function class_AbruptTermination(): TYPE
+  
+  unique function class_EncodedGlobalVariables(): TYPE
+  
+  function directSuperclass(t: TYPE): TYPE
+  
+  function type_of(val: Ref): TYPE
+  
+  axiom java_DOT_lang_DOT_Object_directSuperclass {
+    directSuperclass(class_java_DOT_lang_DOT_Object()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom AbruptTermination_directSuperclass {
+    directSuperclass(class_AbruptTermination()) == class_java_DOT_lang_DOT_Object()
+  }
+  
+  axiom EncodedGlobalVariables_directSuperclass {
+    directSuperclass(class_EncodedGlobalVariables()) == class_java_DOT_lang_DOT_Object()
+  }
+}
+
+domain frac {
+  
+  function frac_val(a: frac): Perm
+  
+  axiom frac_eq {
+    (forall a: frac, b: frac :: { frac_val(a),frac_val(b) } (frac_val(a) == frac_val(b)) == (a == b))
+  }
+  
+  axiom frac_bound {
+    (forall a: frac :: { frac_val(a) } 0 / 1 < frac_val(a) && frac_val(a) <= 1 / 1)
+  }
+}
+
+domain zfrac {
+  
+  function zfrac_val(a: zfrac): Perm
+  
+  axiom zfrac_eq {
+    (forall a: zfrac, b: zfrac :: { zfrac_val(a),zfrac_val(b) } (zfrac_val(a) == zfrac_val(b)) == (a == b))
+  }
+  
+  axiom zfrac_bound {
+    (forall a: zfrac :: { zfrac_val(a) } 0 / 1 <= zfrac_val(a) && zfrac_val(a) <= 1 / 1)
+  }
+}
+
+domain VCTArray[CT] {
+  
+  function loc(a: VCTArray[CT], i: Int): CT
+  
+  function alen(a: VCTArray[CT]): Int
+  
+  function first(r: CT): VCTArray[CT]
+  
+  function second(r: CT): Int
+  
+  axiom all_diff {
+    (forall a: VCTArray[CT], i: Int :: { (loc(a, i): CT) } (first((loc(a, i): CT)): VCTArray[CT]) == a && (second((loc(a, i): CT)): Int) == i)
+  }
+  
+  axiom len_nonneg {
+    (forall a: VCTArray[CT] :: { (alen(a): Int) } (alen(a): Int) >= 0)
+  }
+}
+
+domain VCTOption[T] {
+  
+  function VCTNone(): VCTOption[T]
+  
+  function VCTSome(t: T): VCTOption[T]
+  
+  function getVCTOption(o: VCTOption[T]): T
+  
+  function getVCTOptionOrElse(o: VCTOption[T], default: T): T
+  
+  axiom not_equal_vct {
+    (forall x: T :: { (VCTSome(x): VCTOption[T]) } (VCTNone(): VCTOption[T]) != (VCTSome(x): VCTOption[T]))
+  }
+  
+  axiom get_axiom_vct {
+    (forall x: T :: { (getVCTOption((VCTSome(x): VCTOption[T])): T) } (getVCTOption((VCTSome(x): VCTOption[T])): T) == x)
+  }
+  
+  axiom get_axiom_vct_2 {
+    (forall x: VCTOption[T] :: { (VCTSome((getVCTOption(x): T)): VCTOption[T]) } (VCTSome((getVCTOption(x): T)): VCTOption[T]) == x)
+  }
+  
+  axiom get_or_else_axiom_1 {
+    (forall val: T, default: T :: { (getVCTOptionOrElse((VCTSome(val): VCTOption[T]), default): T) } (getVCTOptionOrElse((VCTSome(val): VCTOption[T]), default): T) == val)
+  }
+  
+  axiom get_or_else_axiom_2 {
+    (forall default: T :: { (getVCTOptionOrElse((VCTNone(): VCTOption[T]), default): T) } (getVCTOptionOrElse((VCTNone(): VCTOption[T]), default): T) == default)
+  }
+}
+
+//  a field 
+field AbruptTermination_ia: VCTOption[VCTArray[Ref]]
+
+//  a field 
+field Integer__item: Int
+
+function instanceof_TYPE_TYPE(t: TYPE, u: TYPE): Bool
+  ensures result == (t == u || directSuperclass(t) == u)
+
+
+function new_frac(x: Perm): frac
+  requires 0 / 1 < x && x <= 1 / 1
+  ensures frac_val(result) == x
+
+
+function new_zfrac(x: Perm): zfrac
+  requires 0 / 1 <= x && x <= 1 / 1
+  ensures zfrac_val(result) == x
+
+
+function getVCTOption1(x: VCTOption[VCTArray[Ref]]): VCTArray[Ref]
+  requires x != (VCTNone(): VCTOption[VCTArray[Ref]])
+{
+  (getVCTOption(x): VCTArray[Ref])
+}
+
+method java_DOT_lang_DOT_Object_Object_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Object()
+{
+  inhale false
+}
+
+method java_DOT_lang_DOT_Object_internal_Object_EncodedGlobalVariables(globals: Ref) returns (sys__result: Ref)
+  ensures sys__result != null
+  ensures type_of(sys__result) == class_java_DOT_lang_DOT_Object()
+{
+  inhale false
+}
+
+method AbruptTermination_negatefirst_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+  requires acc(diz.AbruptTermination_ia, wildcard)
+  requires diz.AbruptTermination_ia != (VCTNone(): VCTOption[VCTArray[Ref]])
+  requires (forall i: Int :: { (loc(getVCTOption1(diz.AbruptTermination_ia), i): Ref) } 0 <= i && i < (alen(getVCTOption1(diz.AbruptTermination_ia)): Int) ==> acc((loc(getVCTOption1(diz.AbruptTermination_ia), i): Ref).Integer__item, write))
+  ensures acc(diz.AbruptTermination_ia, wildcard)
+  ensures diz.AbruptTermination_ia != (VCTNone(): VCTOption[VCTArray[Ref]])
+  ensures (forall i: Int :: { (loc(getVCTOption1(diz.AbruptTermination_ia), i): Ref) } 0 <= i && i < (alen(getVCTOption1(diz.AbruptTermination_ia)): Int) ==> acc((loc(getVCTOption1(diz.AbruptTermination_ia), i): Ref).Integer__item, write))
+  ensures (alen(getVCTOption1(diz.AbruptTermination_ia)): Int) == old((alen(getVCTOption1(diz.AbruptTermination_ia)): Int))
+  ensures (forall i: Int :: { (loc(getVCTOption1(diz.AbruptTermination_ia), i): Ref) } 0 <= i && i < (alen(getVCTOption1(diz.AbruptTermination_ia)): Int) ==> (old((loc(getVCTOption1(diz.AbruptTermination_ia), i): Ref).Integer__item) < 0 && (forall j: Int :: { (loc(getVCTOption1(diz.AbruptTermination_ia), j): Ref) } 0 <= j && j < i ==> 0 <= old((loc(getVCTOption1(diz.AbruptTermination_ia), j): Ref).Integer__item)) ? (loc(getVCTOption1(diz.AbruptTermination_ia), i): Ref).Integer__item == -old((loc(getVCTOption1(diz.AbruptTermination_ia), i): Ref).Integer__item) : (loc(getVCTOption1(diz.AbruptTermination_ia), i): Ref).Integer__item == old((loc(getVCTOption1(diz.AbruptTermination_ia), i): Ref).Integer__item)))
+{
+  inhale false
+}
+
+method AbruptTermination___contract_unsatisfiable__internal_negatefirst_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+{
+  inhale acc(diz.AbruptTermination_ia, wildcard) && diz.AbruptTermination_ia != (VCTNone(): VCTOption[VCTArray[Ref]]) && (forall i__1: Int :: { (loc(getVCTOption1(diz.AbruptTermination_ia), i__1): Ref) } 0 <= i__1 && i__1 < (alen(getVCTOption1(diz.AbruptTermination_ia)): Int) ==> acc((loc(getVCTOption1(diz.AbruptTermination_ia), i__1): Ref).Integer__item, write)) && true
+  // assert
+  assert false
+  inhale false
+}
+
+method AbruptTermination_internal_negatefirst_EncodedGlobalVariables(diz: Ref, globals: Ref)
+  requires diz != null
+  requires acc(diz.AbruptTermination_ia, wildcard)
+  requires diz.AbruptTermination_ia != (VCTNone(): VCTOption[VCTArray[Ref]])
+  requires (forall i: Int :: { (loc(getVCTOption1(diz.AbruptTermination_ia), i): Ref) } 0 <= i && i < (alen(getVCTOption1(diz.AbruptTermination_ia)): Int) ==> acc((loc(getVCTOption1(diz.AbruptTermination_ia), i): Ref).Integer__item, write))
+  ensures acc(diz.AbruptTermination_ia, wildcard)
+  ensures diz.AbruptTermination_ia != (VCTNone(): VCTOption[VCTArray[Ref]])
+  ensures (forall i: Int :: { (loc(getVCTOption1(diz.AbruptTermination_ia), i): Ref) } 0 <= i && i < (alen(getVCTOption1(diz.AbruptTermination_ia)): Int) ==> acc((loc(getVCTOption1(diz.AbruptTermination_ia), i): Ref).Integer__item, write))
+  ensures (alen(getVCTOption1(diz.AbruptTermination_ia)): Int) == old((alen(getVCTOption1(diz.AbruptTermination_ia)): Int))
+  ensures (forall i: Int :: { (loc(getVCTOption1(diz.AbruptTermination_ia), i): Ref) } 0 <= i && i < (alen(getVCTOption1(diz.AbruptTermination_ia)): Int) ==> (old((loc(getVCTOption1(diz.AbruptTermination_ia), i): Ref).Integer__item) < 0 && (forall j: Int :: { (loc(getVCTOption1(diz.AbruptTermination_ia), j): Ref) } 0 <= j && j < i ==> 0 <= old((loc(getVCTOption1(diz.AbruptTermination_ia), j): Ref).Integer__item)) ? (loc(getVCTOption1(diz.AbruptTermination_ia), i): Ref).Integer__item == -old((loc(getVCTOption1(diz.AbruptTermination_ia), i): Ref).Integer__item) : (loc(getVCTOption1(diz.AbruptTermination_ia), i): Ref).Integer__item == old((loc(getVCTOption1(diz.AbruptTermination_ia), i): Ref).Integer__item)))
+{
+  var i__2: Int
+  var __flatten_1__3: Ref
+  var __flatten_2__4: Ref
+  var __flatten_3__5: Int
+  var __flatten_4__6: Ref
+  var __flatten_5__7: Int
+  i__2 := 0
+  while (i__2 < (alen(getVCTOption1(diz.AbruptTermination_ia)): Int))
+    invariant acc(diz.AbruptTermination_ia, wildcard)
+    invariant diz.AbruptTermination_ia != (VCTNone(): VCTOption[VCTArray[Ref]])
+    invariant (forall i__8: Int :: { (loc(getVCTOption1(diz.AbruptTermination_ia), i__8): Ref) } 0 <= i__8 && i__8 < (alen(getVCTOption1(diz.AbruptTermination_ia)): Int) ==> acc((loc(getVCTOption1(diz.AbruptTermination_ia), i__8): Ref).Integer__item, write))
+    invariant 0 <= i__2 && i__2 <= (alen(getVCTOption1(diz.AbruptTermination_ia)): Int)
+    invariant (forall j__9: Int :: { (loc(getVCTOption1(diz.AbruptTermination_ia), j__9): Ref) } 0 <= j__9 && j__9 < i__2 ==> 0 <= (loc(getVCTOption1(diz.AbruptTermination_ia), j__9): Ref).Integer__item) && (forall j__10: Int :: { (loc(getVCTOption1(diz.AbruptTermination_ia), j__10): Ref) } 0 <= j__10 && j__10 < i__2 ==> (loc(getVCTOption1(diz.AbruptTermination_ia), j__10): Ref).Integer__item == old((loc(getVCTOption1(diz.AbruptTermination_ia), j__10): Ref).Integer__item))
+    invariant (forall j__11: Int :: { (loc(getVCTOption1(diz.AbruptTermination_ia), j__11): Ref) } i__2 <= j__11 && j__11 < (alen(getVCTOption1(diz.AbruptTermination_ia)): Int) ==> (loc(getVCTOption1(diz.AbruptTermination_ia), j__11): Ref).Integer__item == old((loc(getVCTOption1(diz.AbruptTermination_ia), j__11): Ref).Integer__item)) 
+  {
+    // assert
+    assert diz.AbruptTermination_ia == old(diz.AbruptTermination_ia)
+    __flatten_1__3 := (loc(getVCTOption1(diz.AbruptTermination_ia), i__2): Ref)
+    if (__flatten_1__3.Integer__item < 0) {
+      __flatten_2__4 := (loc(getVCTOption1(diz.AbruptTermination_ia), i__2): Ref)
+      __flatten_4__6 := (loc(getVCTOption1(diz.AbruptTermination_ia), i__2): Ref)
+      __flatten_3__5 := -__flatten_4__6.Integer__item
+      __flatten_2__4.Integer__item := __flatten_3__5
+      goto __break_loop_0
+    }
+    __flatten_5__7 := i__2
+    i__2 := i__2 + 1
+  }
+  label __break_loop_0
+  // assert
+  assert diz.AbruptTermination_ia == old(diz.AbruptTermination_ia)
+}
