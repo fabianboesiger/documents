@@ -182,11 +182,17 @@ object Plus extends ((Term, Term) => Plus) {
 
     \subsection{Macro Annotations on Nodes}
 
-    \subsection{}
+    \subsection{Clear Pools after each File}
+
+    \subsection{AST Reduction for Builtin Equals}
+
+    \subsection{Equality Defining Members}
 
     \section{Evaluation}
 
     \subsection{Verification Time}
+
+    Usually, the flyweight pattern is 
 
     The flyweight pattern can be applied effectively if two main points hold.
     First, the application uses large numbers of objects and causes high storage costs. \cite{patterns}
@@ -196,6 +202,8 @@ object Plus extends ((Term, Term) => Plus) {
     In ASTs, many nodes have no state at all, such as \texttt{True}, \texttt{False}.
     They are well suited as flyweight objects. For non-leave nodes, extrinsic state
     cannot be externalized, for example the children of a \texttt{Plus(t1, t2)} node.
+
+
 
     \end{enumerate}
 

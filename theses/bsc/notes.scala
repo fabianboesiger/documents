@@ -1,3 +1,46 @@
+// Mean (B) und Mean (V) Spalten vertauscht bei compare benchmarks
+
+/*
+
+IdentityHashCode (lazy val):	+3.4%
+IdentityHashCode (val): 		-0.3%
+Reset Pools after each file: 	-3.6%
+BuiltinEquals 					+30.1% <- nicht konsistent!
+BuiltinEquals                   -3%    <- nur konsistente files
+
+*/
+
+
+
+/*
+
+BuiltinEquals fehlgeschlagene Tests
+- issue387/va6.vpr
+- issue387/va9.vpr
+- all/basic/abstract_funcs_and_preds.vpr
+- all/basic/arithmetic.vpr
+- all/basic/func2
+- all/basic/goto.vpr
+...
+
+*/
+
+
+
+/*
+Eine Idee:
+
+Ersetze Seq[Term] / Seq[Node] durch LinkedHashSet[Term] / LinkedHashSet[Node]
+- Insertion order wird beibehalten
+- Operationen wie contains() sind schneller
+*/
+
+
+
+
+
+
+
 /*
 
             Live Bytes
