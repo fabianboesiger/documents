@@ -1,3 +1,61 @@
+
+/*
+Plugin fertig!
+
+Reset pools after each file: -3.6% -> Keine Verbesserung
+BuiltinEquals Änderung:            -> Keine Verbesserung
+*/
+
+object Equals extends ((Term, Term) => BooleanTerm) {
+  def apply(e0: Term, e1: Term) = {
+    assert(e0.sort == e1.sort,
+      s"Expected both operands to be of the same sort, but found ${e0.sort} ($e0) and ${e1.sort} ($e1).")
+
+    if (e0 == e1)
+      True()
+    else
+      e0.sort match {
+        case sorts.Snap =>
+          (e0, e1) match {
+            case (sw1: SortWrapper, sw2: SortWrapper) if sw1.t.sort != sw2.t.sort =>
+              assert(false, s"Equality '(Snap) $e0 == (Snap) $e1' is not allowed")
+            /* The next few cases are nonsensical and might indicate a bug in Silicon.
+               However, they can also arise on infeasible paths (and preventing them
+               would require potentially expensive prover calls), so treating
+               them as errors is unfortunately not an option.
+             */
+            // case (_: Combine, _: SortWrapper) =>
+            //   assert(false, s"Equality '$e0 == (Snap) $e1' is not allowed")
+            // case (_: SortWrapper, _: Combine) =>
+            //   assert(false, s"Equality '(Snap) $e0 == $e1' is not allowed")
+            // case (Unit, _: Combine) | (_: Combine, Unit) =>
+            //   assert(false, s"Equality '$e0 == $e1' is not allowed")
+            case _ => /* Ok */
+          }
+
+          BuiltinEquals(e0, e1)
+
+        case _: sorts.Seq | _: sorts.Set | _: sorts.Multiset | _: sorts.Map => CustomEquals(e0, e1)
+        case _ => BuiltinEquals(e0, e1)
+      }
+  }
+
+  def unapply(e: Equals) = Some((e.p0, e.p1))
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Mean (B) und Mean (V) Spalten vertauscht bei compare benchmarks
 
 /*

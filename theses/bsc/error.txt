@@ -1,0 +1,19 @@
+2021-04-25 22:04:11,954 [  16883]  ERROR - edef.SyntheticMembersInjector$ - Error during parsing template from injector: com.spotify.scio.SiliconInjector 
+org.jetbrains.plugins.scala.lang.psi.impl.ScalaPsiElementFactory$ScalaPsiElementCreationException: Cannot create ScFunction from text: object Quantification {
+  def apply(q: Quantifier, vars: Seq[Var], body: Term, triggers: Seq[Trigger], name: String, isGlobal: Boolean): Quantification = ???
+  def unapply(obj: Quantification): Option[(Quantifier, Seq[Var], Term, Seq[Trigger], String, Boolean)] = ???
+}; actual: object Quantification {
+  def apply(q: Quantifier, vars: Seq[Var], body: Term, triggers: Seq[Trigger], name: String, isGlobal: Boolean): Quantification = ???
+  def unapply(obj: Quantification): Option[(Quantifier, Seq[Var], Term, Seq[Trigger], String, Boolean)] = ???
+}; with context: object Quantification
+  extends ((Quantifier, Seq[Var], Term, Seq[Trigger], String, Boolean) => Quantification) {
+
+  def apply(q: Quantifier, vars: Seq[Var], tBody: Term, triggers: Seq[Trigger]): Quantification =
+    apply(q, vars, tBody, triggers, "")
+
+  def apply(q: Quantifier, vars: Seq[Var], tBody: Term, triggers: Seq[Trigger], name: String)
+  : Quantification = {
+
+    apply(q, vars, tBody, triggers, name, false)
+  }
+}

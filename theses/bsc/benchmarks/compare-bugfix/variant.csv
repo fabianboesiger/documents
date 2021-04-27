@@ -1,0 +1,2 @@
+File,Outputs,Mean [ms],StdDev [ms],RelStdDev [%],Best [ms],Median [ms],Worst [ms]
+Abrupt-silicon.sil,1,647,46,7,605,625,713
