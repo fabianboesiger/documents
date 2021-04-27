@@ -1,9 +1,9 @@
 
 /*
-Plugin fertig!
-
 Reset pools after each file: -3.6% -> Keine Verbesserung
 BuiltinEquals Änderung:            -> Keine Verbesserung
+
+- Plugin!
 */
 
 object Equals extends ((Term, Term) => BooleanTerm) {
