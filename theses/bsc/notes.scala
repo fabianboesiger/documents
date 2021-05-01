@@ -1,3 +1,16 @@
+/*
+- case classes -> case objects
+- nur terme, die sich "lohnen" in flyweight zu verwandeln (cache misses?, arraylist?)
+- benchmarks einordnen (beschreibung?)
+  - für Prusti
+    - enableMoreCompleteExhale
+    - disableMostStateConsolidations
+  - numberOfParallelVerifiers
+- plugin tests, konfiguration
+- anzahl knoten der terme bestimmen (equals methode überschreiben?)
+*/
+
+
 
 /*
 Reset pools after each file: -3.6% -> Keine Verbesserung
