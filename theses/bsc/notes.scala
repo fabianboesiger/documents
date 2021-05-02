@@ -1,3 +1,62 @@
+/*
+Verifizierung von VerCors, Frontends: Prusti, Vyper, Gobra
+
+Stdev		2.9%
+Differenz	2.0% 		(Verschlechterung)
+
+--> Differenz liegt innerhalb der Standardabweichung!
+*/
+
+
+/*
+Verifizierung von VerCors
+
+HashMap			-1.3%
+WeakHashMap		-0.2%
+TrieMap			-0.2%
+ListMap			89.5%
+
+--> Schwierig, Aussagen über Performance zu machen, da innerhalb Stdev
+--> Aber: ListMap sehr schlecht :)
+*/
+
+
+
+
+/*
+Multithreading in Silicon
+
+Verifizerung mit 8 Threads ist im Durchschnitt 40% langsamer als mit 1 Thread.
+ABER: Insgesamt über das ganze VerCors Projekt hebt sich das wieder auf (Siehe Diagramm).
+
+Zusammenhang mit bug in compare_benchmarks.py?
+
+Performance würde wahrscheinlich besser werden, wenn Verifizierung von mehreren Files gleichzeitig
+erlaubt wäre ... Eventuell ein Extension Goal?
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*
 Reset pools after each file: -3.6% -> Keine Verbesserung

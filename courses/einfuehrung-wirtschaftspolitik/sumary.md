@@ -194,3 +194,100 @@ Wettbewerb beschränkt Gewinne und ist Quelle für Unsicherheit aus der Sicht ei
 * Missbräuchliche Ausnutzung von Marktmacht
     * Behinderungsmissbrauch (Unternehmen nötigen Marktteilnehmer zu einem bestimmten Verhalten)
     * Ausbeutungsmissbrauch (Durchsetzung zu hoher Preise verglichen mit dem Wettbewerbsfall oder das Bezahlen zu tiefer Preise durch marktmächtige Nachfrager)
+
+## Öffentliche Güter
+
+Wie werden Güter öffentliche?
+
+* Politische Präferenzen (Gesundheitsdienstleistung)
+* Natürliche Umstände (Leuchtturm, der vielen Schiffen als Orientierung dient)
+* Technische Umstände (Leichte Kopierbarkeit digitaler Güter)
+
+### Gütertypen
+
+||Ausschliessbar|Nicht ausschliessbar|
+|Rivalität|Private Güter|Öffentliche Ressourcen|
+|Keine Rivalität|Clubgüter|Öffentliche Güter|
+
+### Öffentliche Güter
+
+Öffentliche Güter können konsumiert werden ohne etwas dafür zu bezahlen. Private Anbieter werden diese Güter nicht produzeren, da die  Kosten nicht gedeckt werden können.
+
+* Verteidigung
+* Forschung
+
+### Öffentliche Ressourcen
+
+Öffentliche Güter können konsumiert werden ohne etwas dafür zu bezahlen. Dies führt zu ineffizien hoher Nutzung, genannt Tragedy of the Commons.
+
+* Luft
+* Wasser
+* Strassen
+
+### Marktversagen und Staatseingriff
+
+Ineffizient niedrige Bereitstellung von öffentlichen Gütern, oder ineffizient hohe Nutzung der öffentlichen Ressourcen konstituiert Marktversagen. Korrektur durch den Staat.
+
+## Natürliche Monopole
+
+### Tendenz zur Aufhebung des Wettbewerbs
+
+Unternehmen zielen natürlicherweise auf Monopolstellungen, um Gewinne zu steigern. Das ist aber nicht die Definition eines natürlichen Monopols.
+
+### Subadditive Kostenfunktion
+
+Ein Unternehmen kann die am Markt absetzbare Gesamtmenge zu geringeren Kosten produzieren kann, als mehrere Unternehmen.
+
+$$C(y_1) + \cdots + C(y_n) > C(y_1 + \cdots + y_n)$$
+
+Gründe beinhalten hohe Fixkosten, niedrige Grenzkosten. Eine Wettbewerbslösung ist weder erreichbar, noch pareto-effizient.
+
+### Irreversible Kosten
+
+Vergangene Kosten, die nicht mehr rückgängig gemacht werden können, wenn sie einmal aufgewendet wurden.
+
+Beispiele: 
+
+* Telefonnetz
+* Schienennetz
+
+
+Zur Wohlfartssteigerung sollte der Staat den Marktpreis regulieren oder betroffene Güter selbst anbieten.
+
+### Regulierung der Monopole
+
+#### Preisregulierung
+
+Probleme:
+
+* Ermittlung der Durchschnittskosten ist problematisch
+* Keine Anreize zu Kostensenkungen
+* Informationsproblem: Woher erfährt die Regulierungsbehörde die tatsächlichen Kosten
+
+#### Gewinnregulierung
+
+Probleme:
+
+* Geringere Anreize für Kostensenkung
+* Schwierig, die richtige Rendite zu finden
+
+
+#### Price Cap Regulierung
+
+Eine dynamische Preisobergrenze wird festgelegt.
+
+Probleme:
+
+* Festlegung der Preisgrenze
+
+#### Regulierung durch Ausschreibungswettbewerb
+
+Es kann ein Wettbewerb um den Monopolmarkt organisiert werden.
+
+Probleme:
+
+* Schlechte Reaktion auf unvorhersehbare Veränderungen, welche ein anderes Bieterverfahren implizieren würden
+* Anreize, gegen Ende der Vertragslaufzeit gehen verloren
+* Notwendigkeit von Qualitätskontrollen
+
+#### Regulierung durch Überführung in öffentliches Eigentum

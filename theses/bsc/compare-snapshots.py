@@ -16,7 +16,7 @@ with open(base_file) as csvfile:
         i += 1
         if i == 1:
             continue
-        if row[0][0] != " " and not "sorts$" in row[0]:
+        if row[0][0] != " " and not "$" in row[0] and not "[]" in row[0]:
             base_rows.append([row[0], to_int(row[3])])
 
 with open(variant_file) as csvfile:
@@ -26,7 +26,7 @@ with open(variant_file) as csvfile:
         i += 1
         if i == 1:
             continue
-        if row[0][0] != " " and not "sorts$" in row[0]:
+        if row[0][0] != " " and not "$" in row[0] and not "[]" in row[0]:
             variant_rows.append([row[0], to_int(row[3])])
 
 result_rows = []
@@ -40,13 +40,13 @@ for [base_name, base_allocated] in base_rows:
                 continue
             hit_percentage = hits / (hits + misses) * 100
             #print(base_name, base_allocated, variant_allocated, hit_percentage)
-            result_rows.append([base_name, hit_percentage])
+            result_rows.append([base_name, base_allocated, variant_allocated, hit_percentage])
             break
 
 result_rows.sort(key=lambda row: row[1], reverse=True)
 
 with open("snapshot_flyweight_vs_base.csv", "w") as csvfile:
     spamwriter = csv.writer(csvfile, delimiter=",")
-    spamwriter.writerow(["File Name", "Hit Percentage"])
+    spamwriter.writerow(["File Name", "Base Instances", "Flyweight Instances", "Hit Percentage"])
     for row in result_rows:
         spamwriter.writerow(row)
