@@ -1,4 +1,9 @@
 /*
+AST Tiefe bei equality checks im Durchschnitt 3.
+*/
+
+
+/*
 Verifizierung von VerCors, Frontends: Prusti, Vyper, Gobra
 
 Stdev		2.9%
@@ -26,7 +31,7 @@ ListMap			89.5%
 /*
 Multithreading in Silicon
 
-Verifizerung mit 8 Threads ist im Durchschnitt 40% langsamer als mit 1 Thread.
+Verifizerung mit 8 Threads ist pro Datei im Durchschnitt 40% langsamer als mit 1 Thread.
 ABER: Insgesamt über das ganze VerCors Projekt hebt sich das wieder auf (Siehe Diagramm).
 
 Zusammenhang mit bug in compare_benchmarks.py?
