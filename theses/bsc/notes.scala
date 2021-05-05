@@ -1,4 +1,11 @@
 /*
+- min max anzahl knoten
+- benchmarks ohne vereinfachungen (performance change vs runtime), mit ohne flyweight
+- plugin konfiguration
+*/
+
+
+/*
 AST Tiefe bei equality checks im Durchschnitt 3.
 */
 
@@ -54,11 +61,16 @@ erlaubt wäre ... Eventuell ein Extension Goal?
 
 
 
+@flyweight 
+class True()
+
+object True
 
 
 
+True()
 
-
+True
 
 
 
@@ -71,7 +83,7 @@ erlaubt wäre ... Eventuell ein Extension Goal?
     - enableMoreCompleteExhale
     - disableMostStateConsolidations
   - numberOfParallelVerifiers
-- plugin tests, konfiguration
+- plugin tests, konfigurationin
 - anzahl knoten der terme bestimmen (equals methode überschreiben?)
 */
 
