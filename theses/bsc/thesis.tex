@@ -90,8 +90,9 @@
 
     \pagenumbering{arabic}
 
-    \section{Introduction}
-    
+    \newpage
+    \section{Approach}
+
     \subsection{Implementation of Flyweight ASTs} \label{approach:flyweight}
 
     Abstract syntax trees (AST) are used in compilers and similar programs to represent
@@ -101,17 +102,11 @@
     also occur in operations on collections of AST subtrees, for example in finding
     a specific subtree, which may add additional performance overhead.
 
-    Equality checks can't be avoided, but they can be implemented in a more performant way.
+    Equality checks can't easily be avoided, but they can be implemented in a more performant way.
     Currently in Silicon, new term instances are created independently of already existing ones, which potentially leads 
     to the coexistence of multiple structurally equal term instances. Subterm equality is checked in a
     structural and recursive manner.
 
-\begin{lstlisting}[language=Scala, caption={Simplification of how term instances currently are
-    implemented. Because \texttt{Plus} is defined as a case class, the compiler automatically
-    generates code for recursive structural equality checking.}]
-case class Plus(val p0: Term, val p1: Term) extends Term
-\end{lstlisting}
-        
     Because the AST used in Silicon is immutable, the flyweight pattern \cite{patterns}
     can be applied on AST terms.
     To do this, pool of term instances is maintained. Whenever a term
@@ -124,47 +119,12 @@ case class Plus(val p0: Term, val p1: Term) extends Term
     same term in our pool, meaning every two structurally equal terms point to the same
     underlying object in memory. Comparing terms for structural equality then boils
     down to a cheap reference equality check, and recursive equality checks can be avoided.
-    
-    \begin{lstlisting}[language=Scala, caption=Avoid instantiating multiple structurally equal terms using the flyweight pattern.]
-class Plus private (left: Term, right: Term) extends Term {
-    // ...
-}
-
-object Plus extends ((Term, Term) => Plus) {
-    // Pool object which holds our "Plus" terms.
-    var pool = new HashMap[(Term, Term), Plus]
-
-    def apply(e0: Term, e1: Term) = {
-        pool.get((e0, e1)) match {
-            // If this term already exists in pool, return it. 
-            case Some(term) => term
-            // Otherwise, create a new instance.
-            case None =>
-                val term = new Plus(e0, e1)
-                pool.addOne((e0, e1), term)
-                term
-        }
-    }
-
-    // ...
-}
-    \end{lstlisting}
-
-    The \texttt{Plus} constructor is now private, which makes it impossible to
-    create \texttt{Plus} instances without checking the pool first. The companion
-    object \texttt{Plus} now contains a pool of all existing \texttt{Plus} instances. Furthermore,
-    \texttt{Plus} is no longer a case class, which means that the default \texttt{equals}
-    method no longer recursively checks for structural equality, but instead
-    simply does a reference equality check. Because Scala's equality operator (\texttt{==})
-    and data structures such as \texttt{HashMap} use the \texttt{equals} method behind
-    the scenes, this will most likely lead to performance improvements.
 
     \subsection{Automate Boilerplate Generation using Macros} \label{approach:macros}
 
     Silicon's AST representation of the Viper language consists of nearly 100 different terms,
     all with boilerplate implementations for different operations.
-    Our changes introduce additional boilerplate code to each term companion object, as seen in the case
-    of the \texttt{Plus} term in listing 2.
+    Our changes introduce additional boilerplate code to each term.
 
     Our ASTs shouldn't only be flyweight in the sense of the implementation pattern, but also
     regarding development time and effort. This is why we want to avoid such boilerplate
@@ -174,9 +134,85 @@ object Plus extends ((Term, Term) => Plus) {
     of editing a single macro instead of editing each term individually.
     Terms which may be added in the future are easier to implement.
 
+    \newpage
     \section{Implementation}
 
     \subsection{A Macro Annotation for Code Generation}
+
+    \begin{enumerate}
+        \item If an \texttt{apply} method is already defined, rename it to \texttt{\_apply}.
+            The already defined apply method can't be discarded because it potentially
+            performs AST simplifications.
+        \item Define a new \texttt{apply} method which uses the flyweight pattern.
+            If a new instance has to be created, either use \texttt{\_apply} method
+            if it exists, else simply create an instance using the \texttt{new} keyword.
+        \item Generate an \texttt{unapply} method.
+        \item Generate a \texttt{copy} method that calls \texttt{apply} instead of creating
+            instances via \texttt{new} such that the flyweight pattern can't be bypassed.
+        \item Override \texttt{hashCode} to use \texttt{System.identityHashCode}.
+    \end{enumerate}
+
+    The inner workings of our macro annotation is best shown in an example.
+
+    \begin{lstlisting}[language=Scala, caption=Input code given to the macro.]
+@flyweight
+class Plus(val p0: Term, val p1: Term)
+    extends ArithmeticTerm with BinaryOp[Term]
+{
+    override val op = "+"
+}
+
+object Plus extends ((Term, Term) => Term) {
+    import predef.Zero
+
+    def apply(e0: Term, e1: Term): Term = (e0, e1) match {
+        case (t0, Zero) => t0
+        case (Zero, t1) => t1
+        case (IntLiteral(n0), IntLiteral(n1)) => IntLiteral(n0 + n1)
+        case _ => new Plus(e0, e1)
+    }
+}        
+    \end{lstlisting}
+
+    \begin{lstlisting}[language=Scala, caption=Output code generated by our macro.]
+class Plus private[terms] (val p0: Term, val p1: Term)
+    extends ArithmeticTerm with BinaryOp[Term]
+{
+    override lazy val hashCode = System.identityHashCode(this)
+
+    def copy(p0: Term = p0, p1: Term = p1) = Plus(p0, p1)
+
+    override val op = "+"
+}
+
+object Plus extends ((Term, Term) => Term) {
+    import scala.collection.concurrent.TrieMap
+    var pool = new TrieMap[(Term, Term), $returnType]
+
+    def apply(e0: Term, e1: Term): Term = {
+        pool.get((e0, e1)) match {
+            case None => 
+                val term = Plus._apply(e0, e1)
+                pool.addOne((e0, e1), term)
+                term
+            case Some(term) => 
+                term
+        }
+    }
+
+    def unapply(t: Plus) =
+        Some((t.p0, t.p1))
+
+    import predef.Zero
+
+    def _apply(e0: Term, e1: Term): Term = (e0, e1) match {
+        case (t0, Zero) => t0
+        case (Zero, t1) => t1
+        case (IntLiteral(n0), IntLiteral(n1)) => IntLiteral(n0 + n1)
+        case _ => new Plus(e0, e1)
+    }
+}       
+    \end{lstlisting}
 
     \subsection{Classes or Case Classes}
 
@@ -188,28 +224,115 @@ object Plus extends ((Term, Term) => Plus) {
 
     \subsection{Equality Defining Members}
 
+    \newpage
     \section{Evaluation}
 
-    \subsection{Verification Time}
+    \subsection{Concluding Performance Evaluation}
 
-    Usually, the flyweight pattern is 
+    To measure the performance difference, test cases over a wide variety of Viper
+    frontends are considered.
 
-    The flyweight pattern can be applied effectively if two main points hold.
-    First, the application uses large numbers of objects and causes high storage costs. \cite{patterns}
-    This is true for ASTs as they can grow large containing a large amount of objects.
-    
-    Second, groups of objects may be replaced by few shared objects once extrinsic state is removed. \cite{patterns}
-    In ASTs, many nodes have no state at all, such as \texttt{True}, \texttt{False}.
-    They are well suited as flyweight objects. For non-leave nodes, extrinsic state
-    cannot be externalized, for example the children of a \texttt{Plus(t1, t2)} node.
+    \begin{center}
+        \begin{tabular}{ |l|c|c| } 
+        \hline
+        Resources Used & VerCors, Prusti, Gobra, Vyper \\ 
+        \hline
+        Number of Parallel Verifiers & 1 \\
+        \hline
+        Repetitions & 10 \\ 
+        \hline
+        \end{tabular}
+    \end{center}
 
+    \begin{center}
+        \begin{tabular}{ |l|c|c| } 
+        \hline
+        Implementation & Relative Performance Change & Standard Derivation \\ 
+        & (Negative is better) & \\
+        \hline
+        Flyweight Pattern & 2\% & 2.9\% \\ 
+        \hline
+        \end{tabular}
+    \end{center}
 
+    Unfortunately, a performance improvement is not observable.
+    The performance difference is well within the standard derivation.
 
-    \end{enumerate}
+    \subsection{Performance of Different Data Structures for the Memory Pool}
+
+    \begin{center}
+        \begin{tabular}{ |l|c|c| } 
+        \hline
+        Resources Used & VerCors \\ 
+        \hline
+        Number of Parallel Verifiers & 1 \\
+        \hline
+        Repetitions & 10 \\ 
+        \hline
+        \end{tabular}
+    \end{center}
+
+    \begin{center}
+        \begin{tabular}{ |l|c|c| } 
+        \hline
+        Data Structure & Relative Performance Change & Standard Derivation \\ 
+        & (Negative is better) & \\
+        \hline
+        \texttt{mutable.HashMap} & -1.3\% & cell3 \\ 
+        \texttt{mutable.WeakHashMap} & -0.2\% & cell6 \\
+        \texttt{concurrent.TrieMap} & -0.2\% & cell9 \\
+        \texttt{concurrent.ListMap} & +89.5\% & cell9 \\ 
+        \hline
+        \end{tabular}
+    \end{center}
+
+    As expected, the use of \texttt{ListMap} significantly worsens performance.
+    The performance of \texttt{HashMap}, \texttt{WeakHashMap}, \texttt{TrieMap}
+    are very similar considering the standard derivation. \texttt{TrieMap} however
+    has the additional benefit of being concurrency-safe.
 
     \subsection{Memory Consumption}
 
+    \subsection{Memory Pool Hit Rate}
+
+    \subsection{AST Node Count on Equality Checks}
+
+    \subsection{Why did Flyweight Fail}
+
     \subsection{Automatic Code Generation}
+
+    \subsection{Impact of AST Simplifications on Performance}
+
+    Thanks tho the macro annotation, Silicon can easily be edited to ignore
+    AST simplifications. To achieve this, calling \texttt{\_apply}, which performs AST
+    simplifications, is avoided. Instead, we directly create instances using \texttt{new}.
+
+    \begin{lstlisting}[language=Scala, caption=Use AST simplifications.]
+def apply(..$fields) = {
+    // ...
+    ${
+        if (hasRenamedApplyMethod)
+            q"${termName}._apply(..${fieldNames})"
+        else
+            q"new $className(..${fieldNames})"
+    }
+    // ...
+}  
+    \end{lstlisting}
+
+    \begin{lstlisting}[language=Scala, caption=Ignore AST simplifications.]
+def apply(..$fields) = {
+    // ...
+    ${
+        q"new $className(..${fieldNames})"
+    }
+    // ...
+}  
+    \end{lstlisting}
+
+    Although the flyweight pattern itself didn't have a significant impact on performance,
+    the macro annotation developed to implement the flyweight pattern can
+    be quickly modified to perform experiments or benchmarks on the Silicon AST.
 
     \printbibliography
     
