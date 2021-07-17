@@ -1,4 +1,21 @@
 /*
+BUG
+- Consider: this.parent == null ==> this.root == this
+- partiallyConsumedHeap, ssCache not equal after pure implies from evaluator
+- second ssCache empty, first not
+*/
+
+
+
+
+
+
+
+
+
+
+
+/*
 - min max anzahl knoten
 - benchmarks ohne vereinfachungen (performance change vs runtime), mit ohne flyweight
 - plugin konfiguration

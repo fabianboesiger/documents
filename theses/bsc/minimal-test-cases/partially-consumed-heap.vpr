@@ -1,0 +1,7 @@
+field f: Int
+
+method test(a: Int, x: Ref, y: Ref) {
+    inhale acc(x.f)
+    x.f := 0
+    exhale acc(x.f) && x.f == 0
+}

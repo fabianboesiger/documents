@@ -1,0 +1,15 @@
+File,Outputs,Mean [ms],StdDev [ms],RelStdDev [%],Best [ms],Median [ms],Worst [ms]
+008-num-traits-pow.rs.vpr,0,5156,408,7,4784,4960,5725
+Ackermann_function.rs.vpr,0,2258,106,4,2119,2279,2378
+Binary_search.rs.vpr,0,7964,340,4,7628,7834,8432
+Dijkstras_algorithm-simpl.rs.vpr,0,587,5,0,579,591,592
+Heapsort_generic.rs.vpr,0,8461,153,1,8245,8553,8585
+Knights_tour.rs.vpr,0,90779,521,0,90042,91124,91171
+Selection_sort.rs.vpr,0,20445,337,1,20024,20462,20849
+account.rs.vpr,0,832,8,0,823,829,844
+ansi-term-external-call.rs.vpr,0,52064,748,1,51245,51894,53054
+case1-overflow.rs.vpr,0,6784,49,0,6719,6795,6839
+complex-fn.rs.vpr,0,421,22,5,398,416,451
+first-final.rs.vpr,0,7080,87,1,7015,7023,7204
+knapsack.rs.vpr,0,112861,2246,1,110979,111585,116019
+with-spec-list.rs.vpr,0,12092,71,0,12033,12052,12193

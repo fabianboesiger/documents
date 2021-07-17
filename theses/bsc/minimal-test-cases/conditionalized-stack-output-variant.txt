@@ -1,0 +1,89 @@
+// 5 EXECUTEs
+
+[info] ---------- METHOD test----------
+[info] EXECUTE 2:8: var y: Int (LocalVarDeclStmt)
+[info] Store: (x -> x@1@16),
+[info] Heap: (),
+[info] OHs: (old: ()),
+[info] PCs: ()
+[info] )
+[info] EXECUTE 2:8: y := 0 (LocalVarAssign)
+[info] Store: (x -> x@1@16, y -> y@2@16),
+[info] Heap: (),
+[info] OHs: (old: ()),
+[info] PCs: ()
+[info] )
+[info] begin branching
+[info] EVAL 3:10: x == 0 (EqCmp)
+[info] Store: (x -> x@1@16, y -> 0),
+[info] Heap: (),
+[info] OHs: (old: ()),
+[info] PCs: ()
+[info] )
+[info] EVAL 3:10: x == 0 (EqCmp)
+[info] Store: (x -> x@1@16, y -> 0),
+[info] Heap: (),
+[info] OHs: (old: ()),
+[info] PCs: (x@1@16 == 0)
+[info] )
+[info] EXECUTE 4:10: y := 1 (LocalVarAssign)
+[info] Store: (x -> x@1@16, y -> 0),
+[info] Heap: (),
+[info] OHs: (old: ()),
+[info] PCs: (x@1@16 == 0)
+[info] )
+[info] join point reached, stop following edges
+[info] EVAL 3:10: !(x == 0) (Not)
+[info] Store: (x -> x@1@16, y -> 0),
+[info] Heap: (),
+[info] OHs: (old: ()),
+[info] PCs: (x@1@16 != 0)
+[info] )
+[info] EVAL 3:10: x == 0 (EqCmp)
+[info] Store: (x -> x@1@16, y -> 0),
+[info] Heap: (),
+[info] OHs: (old: ()),
+[info] PCs: (x@1@16 != 0)
+[info] )
+[info] EXECUTE 6:7: y := 2 (LocalVarAssign)
+[info] Store: (x -> x@1@16, y -> 0),
+[info] Heap: (),
+[info] OHs: (old: ()),
+[info] PCs: (x@1@16 != 0)
+[info] )
+[info] join point reached, stop following edges
+[info] begin joining entries
+[info] continue executing join point
+[info] EXECUTE 8:11: assert x == 0 ==> y == 1 (Assert)
+[info] Store: (x -> x@1@16, y -> $t@3@16),
+[info] Heap: (),
+[info] OHs: (old: ()),
+[info] PCs: (x@1@16 == 0 ==> $t@3@16 == 1, x@1@16 != 0 ==> $t@3@16 == 2)
+[info] )
+[info] CONSUME 8:13: x == 0 ==> y == 1 (Implies)
+[info] Store: (x -> x@1@16, y -> $t@3@16),
+[info] Heap: (),
+[info] OHs: (old: ()),
+[info] PCs: (x@1@16 == 0 ==> $t@3@16 == 1, x@1@16 != 0 ==> $t@3@16 == 2)
+[info] )
+[info] h = ()
+[info] EVAL 8:13: x == 0 ==> y == 1 (Implies)
+[info] Store: (x -> x@1@16, y -> $t@3@16),
+[info] Heap: (),
+[info] OHs: (old: ()),
+[info] PCs: (x@1@16 == 0 ==> $t@3@16 == 1, x@1@16 != 0 ==> $t@3@16 == 2)
+[info] )
+[info] EVAL 8:13: x == 0 (EqCmp)
+[info] Store: (x -> x@1@16, y -> $t@3@16),
+[info] Heap: (),
+[info] OHs: (old: ()),
+[info] PCs: (x@1@16 == 0 ==> $t@3@16 == 1, x@1@16 != 0 ==> $t@3@16 == 2)
+[info] )
+[info] EVAL 8:24: y == 1 (EqCmp)
+[info] Store: (x -> x@1@16, y -> $t@3@16),
+[info] Heap: (),
+[info] OHs: (old: ()),
+[info] PCs: (x@1@16 == 0 ==> $t@3@16 == 1, x@1@16 != 0 ==> $t@3@16 == 2, x@1@16 == 0)
+[info] )
+[info] Silicon finished verification of method `test` in 0.18s seconds with the following result: Verification successful.
+

@@ -1,0 +1,29 @@
+// Any copyright is dedicated to the Public Domain.
+// http://creativecommons.org/publicdomain/zero/1.0/
+
+field left: Ref;
+field right: Ref;
+
+predicate BTree(self: Ref) {
+  acc(self.left) && (self.left != null ==> BTree(self.left)) &&
+  acc(self.right) && (self.right != null ==> BTree(self.right))
+}
+
+function tree_size(tree: Ref): Int
+  requires tree != null ==> BTree(tree)
+{
+  tree == null ? 0 : (
+    unfolding BTree(tree) in 1 + tree_size(tree.left) + tree_size(tree.right)
+  )
+}
+
+method toArray(tree: Ref)
+  requires tree != null
+  requires BTree(tree)
+{
+  unfold BTree(tree)
+
+  assert
+    forall i: Int, b: Int ::
+      (tree_size(tree.left) < i && i < b) ==> (tree_size(tree.left) + 1 < b)
+}

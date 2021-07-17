@@ -1,0 +1,15 @@
+method t1(n: Int) returns ()
+    requires n > 0
+{
+    var i: Int := 0
+
+    while (i < n)
+        invariant i <= n
+    {
+        if (i < n/2) {
+            i := i+2
+        } else {
+            i := i+1
+        }
+    }
+}

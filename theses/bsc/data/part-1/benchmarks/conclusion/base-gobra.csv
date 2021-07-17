@@ -1,0 +1,8 @@
+File,Outputs,Mean [ms],StdDev [ms],RelStdDev [%],Best [ms],Median [ms],Worst [ms]
+forall-simple1.gobra.vpr,2,17,3,17,14,18,25
+forall-simple3.gobra.vpr,0,370,98,26,292,344,611
+global-const-4.gobra.vpr,0,327,18,5,303,328,359
+seq-slice-simple1.gobra.vpr,0,724,126,17,619,691,1045
+seq-update-simple1.gobra.vpr,0,553,22,3,509,556,583
+switch.gobra.vpr,0,567,36,6,530,576,642
+trigger-simple3.gobra.vpr,0,301,13,4,277,304,317

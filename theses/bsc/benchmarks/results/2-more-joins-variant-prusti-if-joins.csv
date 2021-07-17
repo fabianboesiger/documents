@@ -1,0 +1,2 @@
+File,Outputs,Mean [ms],StdDev [ms],RelStdDev [%],Best [ms],Median [ms],Worst [ms]
+008-num-traits-pow.rs.vpr,0,5327,217,4,5154,5194,5635
