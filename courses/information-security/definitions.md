@@ -25,6 +25,16 @@ The encryption is CPA-secure if every randomized poly-time adversary guesses $b$
 
 *(Observation) Every CPA-secure encryption has to be randomized or have a state.*
 
+# Math
+
+#### Safe Prime
+
+Prime $p$ is safe if $\frac{p-1}{2}$ is also prime.
+
+#### Quadratic Residue
+
+$q$ is a quadratic residue modulo $n$ if there exists an integer $x$ such that $x^2 = q \mod n$.
+
 # Security Properties
 
 #### Confidentiality
@@ -85,3 +95,32 @@ After the commit phase, there is only one value that the prover can reveal.
 * Non-injective agreement is satisfied.
 * Each run of $A$ corresponds to a unique run of $B$.
 
+# E-Voting Properties
+
+#### Coercion Resistance
+
+A voter cannot cooperate with a coercer to prove to him that they voted in a certain way.
+
+*Coercion resistance implies receipt-freeness.*
+
+#### Receipt-Freeness
+
+A voter does not gain any information which can be used to prove to a coercer that they voted in a certain way.
+
+# Other Definitions
+
+#### Intrusion Detection
+
+The process of monitoring system/network events for signs of possible incidents, which represent violations of security policies.
+
+#### Anonymity Set
+
+The set of users which appear indistinguishable from each other.
+
+# Protocols
+
+## Message Authentication Code
+
+## Pedersen Commitment Scheme
+
+*Perfectly hiding, computationally binding.*
