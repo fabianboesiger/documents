@@ -11,6 +11,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{float}
+\usepackage{arydshln}
 
 \setmonofont[
   Contextuals={Alternate},
@@ -697,6 +698,180 @@ def apply(..$fields) = {
     Store and heap merges are implemented as according to \ref{merging-the-symbolic-state}.
     Silicon's state however consists of some more fields carrying additional data, that have to be merged with caution.
     Caches within the state are emptied instead of merged for simplicity.
+
+    \begin{lstlisting}[language=Scala, caption={An example Viper program.}, label={lst:viper-example}]
+method test(b: Bool) {
+    var x: Int := 0
+    if (b) {
+        x := x + 5
+    } else {
+        x := x + 7
+    }
+    x := x + 3
+    assert x <= 10
+}       
+    \end{lstlisting}
+
+    \begin{center}
+        \begin{tabular}{ l|l|l }
+            Operation & Store & Path Conditions \\
+            \hline
+            \texttt{var x: Int := 0} & & \\
+            \hdashline
+            \texttt{x := x + 5} & $x \mapsto 0$ & $b$ \\
+            \texttt{x := x + 3} & $x \mapsto 5$ & $b$ \\
+            \texttt{assert x <= 10} & $x \mapsto 8$ & $b$ \\
+            \hdashline
+            \texttt{x := x + 7} & $x \mapsto 0$ & $!b$ \\
+            \texttt{x := x + 3} & $x \mapsto 7$ & $!b$ \\
+            \texttt{assert x <= 10} & $x \mapsto 10$ & $!b$ \\
+        \end{tabular}
+    \end{center}
+
+    \begin{lstlisting}[language=Scala, caption={An example Viper program.}, label={lst:viper-example}]
+EXECUTE 2:8: var x: Int
+Store: (b -> b@1@16),
+PCs: ()
+
+EXECUTE 2:8: x := 0
+Store: (b -> b@1@16, x -> x@2@16),
+PCs: ()
+
+EXECUTE 4:10: x := x + 5
+Store: (b -> b@1@16, x -> 0),
+PCs: (b@1@16)
+
+EVAL 4:19: x + 5
+Store: (b -> b@1@16, x -> 0),
+PCs: (b@1@16)
+
+EXECUTE 8:6: x := x + 3
+Store: (b -> b@1@16, x -> 5),
+PCs: (b@1@16)
+
+EVAL 8:15: x + 3
+Store: (b -> b@1@16, x -> 5),
+PCs: (b@1@16)
+
+EXECUTE 9:11: assert x <= 10
+Store: (b -> b@1@16, x -> 8),
+PCs: (b@1@16)
+
+CONSUME 9:13: x <= 10
+Store: (b -> b@1@16, x -> 8),
+PCs: (b@1@16)
+
+EVAL 9:13: x <= 10
+Store: (b -> b@1@16, x -> 8),
+PCs: (b@1@16)
+
+EVAL 3:10: !b
+Store: (b -> b@1@16, x -> 0),
+PCs: ()
+
+EXECUTE 6:10: x := x + 7
+Store: (b -> b@1@16, x -> 0),
+PCs: (!(b@1@16))
+
+EVAL 6:19: x + 7
+Store: (b -> b@1@16, x -> 0),
+PCs: (!(b@1@16))
+
+EXECUTE 8:6: x := x + 3
+Store: (b -> b@1@16, x -> 7),
+PCs: (!(b@1@16))
+
+EVAL 8:15: x + 3
+Store: (b -> b@1@16, x -> 7),
+PCs: (!(b@1@16))
+
+EXECUTE 9:11: assert x <= 10
+Store: (b -> b@1@16, x -> 10),
+PCs: (!(b@1@16))
+
+CONSUME 9:13: x <= 10
+Store: (b -> b@1@16, x -> 10),
+    \end{lstlisting}
+
+    \begin{lstlisting}[language=Scala, caption={An example Viper program.}, label={lst:viper-example}]
+[info] EXECUTE 2:8: var x: Int
+[info] Store: (b -> b@1@16),
+[info] Heap: (),
+[info] OHs: (old: ()),
+[info] PCs: ()
+[info] )
+[info] EXECUTE 2:8: x := 0
+[info] Store: (b -> b@1@16, x -> x@2@16),
+[info] Heap: (),
+[info] OHs: (old: ()),
+[info] PCs: ()
+[info] )
+[info] EXECUTE 4:10: x := x + 5
+[info] Store: (b -> b@1@16, x -> 0),
+[info] Heap: (),
+[info] OHs: (old: ()),
+[info] PCs: (b@1@16)
+[info] )
+[info] EVAL 4:19: x + 5
+[info] Store: (b -> b@1@16, x -> 0),
+[info] Heap: (),
+[info] OHs: (old: ()),
+[info] PCs: (b@1@16)
+[info] )
+[info] EVAL 3:10: !b
+[info] Store: (b -> b@1@16, x -> 0),
+[info] Heap: (),
+[info] OHs: (old: ()),
+[info] PCs: (!(b@1@16))
+[info] )
+[info] EXECUTE 6:10: x := x + 7
+[info] Store: (b -> b@1@16, x -> 0),
+[info] Heap: (),
+[info] OHs: (old: ()),
+[info] PCs: (!(b@1@16))
+[info] )
+[info] EVAL 6:19: x + 7
+[info] Store: (b -> b@1@16, x -> 0),
+[info] Heap: (),
+[info] OHs: (old: ()),
+[info] PCs: (!(b@1@16))
+[info] )
+
+JOIN
+
+[info] EXECUTE 8:6: x := x + 3
+[info] Store: (b -> b@1@16, x -> (b@1@16 ? 5 : 7)),
+[info] Heap: (),
+[info] OHs: (old: ()),
+[info] PCs: ()
+[info] )
+[info] EVAL 8:15: x + 3
+[info] Store: (b -> b@1@16, x -> (b@1@16 ? 5 : 7)),
+[info] Heap: (),
+[info] OHs: (old: ()),
+[info] PCs: ()
+[info] )
+[info] EXECUTE 9:11: assert x <= 10
+[info] Store: (b -> b@1@16, x -> x@3@16),
+[info] Heap: (),
+[info] OHs: (old: ()),
+[info] PCs: (x@3@16 == (b@1@16 ? 5 : 7) + 3)
+[info] )
+[info] CONSUME 9:13: x <= 10
+[info] Store: (b -> b@1@16, x -> x@3@16),
+[info] Heap: (),
+[info] OHs: (old: ()),
+[info] PCs: (x@3@16 == (b@1@16 ? 5 : 7) + 3)
+[info] )
+[info] h = ()
+[info] EVAL 9:13: x <= 10
+[info] Store: (b -> b@1@16, x -> x@3@16),
+[info] Heap: (),
+[info] OHs: (old: ()),
+[info] PCs: (x@3@16 == (b@1@16 ? 5 : 7) + 3)
+[info] )
+                
+    \end{lstlisting}
 
     \newpage
     \section{Evaluation}

@@ -35,6 +35,18 @@ Prime $p$ is safe if $\frac{p-1}{2}$ is also prime.
 
 $q$ is a quadratic residue modulo $n$ if there exists an integer $x$ such that $x^2 = q \mod n$.
 
+#### Group
+
+* Closed under multiplication
+* Associative: $(a \times b) \times c = a \times (b \times c)$
+* Has identity element
+* Has inverse element
+
+#### Abelian Group
+
+* Satisfies group properties
+* Commutative: $a \times b = b \times a$
+
 # Security Properties
 
 #### Confidentiality
@@ -94,6 +106,8 @@ After the commit phase, there is only one value that the prover can reveal.
 
 * Non-injective agreement is satisfied.
 * Each run of $A$ corresponds to a unique run of $B$.
+
+#### Weak Aliveness
 
 # E-Voting Properties
 
