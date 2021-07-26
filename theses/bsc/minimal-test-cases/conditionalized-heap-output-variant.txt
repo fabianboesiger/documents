@@ -1,0 +1,118 @@
+// 5 EXECUTEs
+
+[info] ---------- METHOD test----------
+[info] EXECUTE 4:11: inhale acc(x.f, write) (Inhale)
+[info] Store: (a -> a@2@16, x -> x@3@16),
+[info] Heap: (),
+[info] OHs: (old: ()),
+[info] PCs: ()
+[info] )
+[info] PRODUCE 4:15: acc(x.f, write) (FieldAccessPredicate)
+[info] Store: (a -> a@2@16, x -> x@3@16),
+[info] Heap: (),
+[info] OHs: (old: ()),
+[info] PCs: ()
+[info] )
+[info] begin branching
+[info] EVAL 5:10: a == 0 (EqCmp)
+[info] Store: (a -> a@2@16, x -> x@3@16),
+[info] Heap: (x@3@16.f -> $t@4@16 # W),
+[info] OHs: (old: ()),
+[info] PCs: ()
+[info] )
+[info] EVAL 5:10: a == 0 (EqCmp)
+[info] Store: (a -> a@2@16, x -> x@3@16),
+[info] Heap: (x@3@16.f -> $t@4@16 # W),
+[info] OHs: (old: ()),
+[info] PCs: (a@2@16 == 0)
+[info] )
+[info] EXECUTE 6:12: x.f := 1 (FieldAssign)
+[info] Store: (a -> a@2@16, x -> x@3@16),
+[info] Heap: (x@3@16.f -> $t@4@16 # W),
+[info] OHs: (old: ()),
+[info] PCs: (a@2@16 == 0)
+[info] )
+[info] join point reached, stop following edges
+[info] EVAL 5:10: !(a == 0) (Not)
+[info] Store: (a -> a@2@16, x -> x@3@16),
+[info] Heap: (x@3@16.f -> $t@4@16 # W),
+[info] OHs: (old: ()),
+[info] PCs: (a@2@16 != 0)
+[info] )
+[info] EVAL 5:10: a == 0 (EqCmp)
+[info] Store: (a -> a@2@16, x -> x@3@16),
+[info] Heap: (x@3@16.f -> $t@4@16 # W),
+[info] OHs: (old: ()),
+[info] PCs: (a@2@16 != 0)
+[info] )
+[info] EXECUTE 8:9: x.f := 2 (FieldAssign)
+[info] Store: (a -> a@2@16, x -> x@3@16),
+[info] Heap: (x@3@16.f -> $t@4@16 # W),
+[info] OHs: (old: ()),
+[info] PCs: (a@2@16 != 0)
+[info] )
+[info] join point reached, stop following edges
+[info] continue executing join point
+[info] EXECUTE 10:11: assert a == 0 ==> x.f == 1 (Assert)
+[info] Store: (a -> a@2@16, x -> x@3@16),
+[info] Heap: (x@3@16.f -> $t@7@16 # W),
+[info] OHs: (old: ()),
+[info] PCs: (a@2@16 == 0 ==> $t@7@16 == 1, a@2@16 != 0 ==> $t@7@16 == 2)
+[info] )
+[info] CONSUME 10:13: a == 0 ==> x.f == 1 (Implies)
+[info] Store: (a -> a@2@16, x -> x@3@16),
+[info] Heap: (x@3@16.f -> $t@7@16 # W),
+[info] OHs: (old: ()),
+[info] PCs: (a@2@16 == 0 ==> $t@7@16 == 1, a@2@16 != 0 ==> $t@7@16 == 2)
+[info] )
+[info] h = (x@3@16.f -> $t@7@16 # W)
+[info] EVAL 10:13: a == 0 ==> x.f == 1 (Implies)
+[info] Store: (a -> a@2@16, x -> x@3@16),
+[info] Heap: (x@3@16.f -> $t@7@16 # W),
+[info] OHs: (old: ()),
+[info] PCs: (a@2@16 == 0 ==> $t@7@16 == 1, a@2@16 != 0 ==> $t@7@16 == 2)
+[info] )
+[info] EVAL 10:13: a == 0 (EqCmp)
+[info] Store: (a -> a@2@16, x -> x@3@16),
+[info] Heap: (x@3@16.f -> $t@7@16 # W),
+[info] OHs: (old: ()),
+[info] PCs: (a@2@16 == 0 ==> $t@7@16 == 1, a@2@16 != 0 ==> $t@7@16 == 2)
+[info] )
+[info] EVAL 10:26: x.f == 1 (EqCmp)
+[info] Store: (a -> a@2@16, x -> x@3@16),
+[info] Heap: (x@3@16.f -> $t@7@16 # W),
+[info] OHs: (old: ()),
+[info] PCs: (a@2@16 == 0 ==> $t@7@16 == 1, a@2@16 != 0 ==> $t@7@16 == 2, a@2@16 == 0)
+[info] )
+[info] EXECUTE 11:11: assert a == 1 ==> x.f == 2 (Assert)
+[info] Store: (a -> a@2@16, x -> x@3@16),
+[info] Heap: (x@3@16.f -> $t@7@16 # W),
+[info] OHs: (old: ()),
+[info] PCs: (a@2@16 == 0 ==> $t@7@16 == 1, a@2@16 != 0 ==> $t@7@16 == 2)
+[info] )
+[info] CONSUME 11:13: a == 1 ==> x.f == 2 (Implies)
+[info] Store: (a -> a@2@16, x -> x@3@16),
+[info] Heap: (x@3@16.f -> $t@7@16 # W),
+[info] OHs: (old: ()),
+[info] PCs: (a@2@16 == 0 ==> $t@7@16 == 1, a@2@16 != 0 ==> $t@7@16 == 2)
+[info] )
+[info] h = (x@3@16.f -> $t@7@16 # W)
+[info] EVAL 11:13: a == 1 ==> x.f == 2 (Implies)
+[info] Store: (a -> a@2@16, x -> x@3@16),
+[info] Heap: (x@3@16.f -> $t@7@16 # W),
+[info] OHs: (old: ()),
+[info] PCs: (a@2@16 == 0 ==> $t@7@16 == 1, a@2@16 != 0 ==> $t@7@16 == 2)
+[info] )
+[info] EVAL 11:13: a == 1 (EqCmp)
+[info] Store: (a -> a@2@16, x -> x@3@16),
+[info] Heap: (x@3@16.f -> $t@7@16 # W),
+[info] OHs: (old: ()),
+[info] PCs: (a@2@16 == 0 ==> $t@7@16 == 1, a@2@16 != 0 ==> $t@7@16 == 2)
+[info] )
+[info] EVAL 11:26: x.f == 2 (EqCmp)
+[info] Store: (a -> a@2@16, x -> x@3@16),
+[info] Heap: (x@3@16.f -> $t@7@16 # W),
+[info] OHs: (old: ()),
+[info] PCs: (a@2@16 == 0 ==> $t@7@16 == 1, a@2@16 != 0 ==> $t@7@16 == 2, a@2@16 == 1)
+[info] )
+[info] Silicon finished verification of method `test` in 0.25s seconds with the following result: Verification successful

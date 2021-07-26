@@ -1,0 +1,86 @@
+[info] ---------- METHOD test----------
+[info] EXECUTE 4:11: inhale (a == 0 ? acc(x.f, write) : acc(y.f, write)) (Inhale)
+[info] Store: (a -> a@3@16, x -> x@4@16, y -> y@5@16),
+[info] Heap: (),
+[info] OHs: (old: ()),
+[info] PCs: ()
+[info] )
+[info] PRODUCE 4:13: (a == 0 ? acc(x.f, write) : acc(y.f, write)) (CondExp)
+[info] Store: (a -> a@3@16, x -> x@4@16, y -> y@5@16),
+[info] Heap: (),
+[info] OHs: (old: ()),
+[info] PCs: ()
+[info] )
+[info] EVAL 4:13: a == 0 (EqCmp)
+[info] Store: (a -> a@3@16, x -> x@4@16, y -> y@5@16),
+[info] Heap: (),
+[info] OHs: (old: ()),
+[info] PCs: ()
+[info] )
+[info] PRODUCE 4:24: acc(x.f, write) (FieldAccessPredicate)
+[info] Store: (a -> a@3@16, x -> x@4@16, y -> y@5@16),
+[info] Heap: (),
+[info] OHs: (old: ()),
+[info] PCs: (a@3@16 == 0)
+[info] )
+[info] EXECUTE 5:11: exhale (a == 0 ? acc(x.f, write) : acc(y.f, write)) (Exhale)
+[info] Store: (a -> a@3@16, x -> x@4@16, y -> y@5@16),
+[info] Heap: (x@4@16.f -> $t@6@16 # W),
+[info] OHs: (old: ()),
+[info] PCs: (a@3@16 == 0)
+[info] )
+[info] CONSUME 5:13: (a == 0 ? acc(x.f, write) : acc(y.f, write)) (CondExp)
+[info] Store: (a -> a@3@16, x -> x@4@16, y -> y@5@16),
+[info] Heap: (x@4@16.f -> $t@6@16 # W),
+[info] OHs: (old: ()),
+[info] PCs: (a@3@16 == 0)
+[info] )
+[info] h = (x@4@16.f -> $t@6@16 # W)
+[info] EVAL 5:13: a == 0 (EqCmp)
+[info] Store: (a -> a@3@16, x -> x@4@16, y -> y@5@16),
+[info] Heap: (x@4@16.f -> $t@6@16 # W),
+[info] OHs: (old: ()),
+[info] PCs: (a@3@16 == 0)
+[info] )
+[info] CONSUME 5:24: acc(x.f, write) (FieldAccessPredicate)
+[info] Store: (a -> a@3@16, x -> x@4@16, y -> y@5@16),
+[info] Heap: (x@4@16.f -> $t@6@16 # W),
+[info] OHs: (old: ()),
+[info] PCs: (a@3@16 == 0)
+[info] )
+[info] h = (x@4@16.f -> $t@6@16 # W)
+[info] PRODUCE 4:35: acc(y.f, write) (FieldAccessPredicate)
+[info] Store: (a -> a@3@16, x -> x@4@16, y -> y@5@16),
+[info] Heap: (),
+[info] OHs: (old: ()),
+[info] PCs: (a@3@16 != 0)
+[info] )
+[info] EXECUTE 5:11: exhale (a == 0 ? acc(x.f, write) : acc(y.f, write)) (Exhale)
+[info] Store: (a -> a@3@16, x -> x@4@16, y -> y@5@16),
+[info] Heap: (y@5@16.f -> $t@8@16 # W),
+[info] OHs: (old: ()),
+[info] PCs: (a@3@16 != 0)
+[info] )
+[info] CONSUME 5:13: (a == 0 ? acc(x.f, write) : acc(y.f, write)) (CondExp)
+[info] Store: (a -> a@3@16, x -> x@4@16, y -> y@5@16),
+[info] Heap: (y@5@16.f -> $t@8@16 # W),
+[info] OHs: (old: ()),
+[info] PCs: (a@3@16 != 0)
+[info] )
+[info] h = (y@5@16.f -> $t@8@16 # W)
+[info] EVAL 5:13: a == 0 (EqCmp)
+[info] Store: (a -> a@3@16, x -> x@4@16, y -> y@5@16),
+[info] Heap: (y@5@16.f -> $t@8@16 # W),
+[info] OHs: (old: ()),
+[info] PCs: (a@3@16 != 0)
+[info] )
+[info] CONSUME 5:35: acc(y.f, write) (FieldAccessPredicate)
+[info] Store: (a -> a@3@16, x -> x@4@16, y -> y@5@16),
+[info] Heap: (y@5@16.f -> $t@8@16 # W),
+[info] OHs: (old: ()),
+[info] PCs: (a@3@16 != 0)
+[info] )
+[info] h = (y@5@16.f -> $t@8@16 # W)
+[info] Silicon finished verification of method `test` in 0.24s seconds with the following result: Verification successful.
+[info] Verification finished in 2.15s with 0 error(s)
+[info] Silicon finished verification successfully in 3.99s.

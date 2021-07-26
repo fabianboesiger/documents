@@ -1,5 +1,6 @@
 field f: Int
 
+
 method test1(x: Ref, y: Ref, z: Ref) {
     assume z == x || z == y
     if (z == x) {
@@ -10,128 +11,8 @@ method test1(x: Ref, y: Ref, z: Ref) {
     exhale acc(z.f)
 }
 
-/*
-[info] Silicon started 2021-05-17 12:31:21 MESZ
-[info] ---------- METHOD test1----------
-[info] EXECUTE 4:13: inhale z == x || z == y
-[info] Store: (x -> x@3@16, y -> y@4@16, z -> z@5@16),
-[info] Heap: (),
-[info] OHs: (old: ()),
-[info] PCs: ()
-[info] )
-[info] PRODUCE 4:13: z == x || z == y
-[info] Store: (x -> x@3@16, y -> y@4@16, z -> z@5@16),
-[info] Heap: (),
-[info] OHs: (old: ()),
-[info] PCs: ()
-[info] )
-[info] EVAL 4:13: z == x || z == y
-[info] Store: (x -> x@3@16, y -> y@4@16, z -> z@5@16),
-[info] Heap: (),
-[info] OHs: (old: ()),
-[info] PCs: ($t@6@16 == _)
-[info] )
-[info] EVAL 4:13: z == x
-[info] Store: (x -> x@3@16, y -> y@4@16, z -> z@5@16),
-[info] Heap: (),
-[info] OHs: (old: ()),
-[info] PCs: ($t@6@16 == _)
-[info] )
-[info] EVAL 4:23: z == y
-[info] Store: (x -> x@3@16, y -> y@4@16, z -> z@5@16),
-[info] Heap: (),
-[info] OHs: (old: ()),
-[info] PCs: ($t@6@16 == _, z@5@16 != x@3@16)
-[info] )
-[info] EVAL 5:10: z == x
-[info] Store: (x -> x@3@16, y -> y@4@16, z -> z@5@16),
-[info] Heap: (),
-[info] OHs: (old: ()),
-[info] PCs: ($t@6@16 == _, z@5@16 == x@3@16 || z@5@16 == y@4@16)
-[info] )
-[info] EXECUTE 6:15: inhale acc(z.f, write)
-[info] Store: (x -> x@3@16, y -> y@4@16, z -> z@5@16),
-[info] Heap: (),
-[info] OHs: (old: ()),
-[info] PCs: ($t@6@16 == _, z@5@16 == x@3@16 || z@5@16 == y@4@16, z@5@16 == x@3@16)
-[info] )
-[info] PRODUCE 6:19: acc(z.f, write)
-[info] Store: (x -> x@3@16, y -> y@4@16, z -> z@5@16),
-[info] Heap: (),
-[info] OHs: (old: ()),
-[info] PCs: ($t@6@16 == _, z@5@16 == x@3@16 || z@5@16 == y@4@16, z@5@16 == x@3@16)
-[info] )
-[info] EXECUTE 10:11: exhale acc(z.f, write)
-[info] Store: (x -> x@3@16, y -> y@4@16, z -> z@5@16),
-[info] Heap: (z@5@16.f -> $t@7@16 # W),
-[info] OHs: (old: ()),
-[info] PCs: ($t@6@16 == _, z@5@16 == x@3@16 || z@5@16 == y@4@16, z@5@16 == x@3@16)
-[info] )
-[info] CONSUME 10:15: acc(z.f, write)
-[info] Store: (x -> x@3@16, y -> y@4@16, z -> z@5@16),
-[info] Heap: (z@5@16.f -> $t@7@16 # W),
-[info] OHs: (old: ()),
-[info] PCs: ($t@6@16 == _, z@5@16 == x@3@16 || z@5@16 == y@4@16, z@5@16 == x@3@16)
-[info] )
-[info] h = (z@5@16.f -> $t@7@16 # W)
-[info] EVAL 5:10: !(z == x)
-[info] Store: (x -> x@3@16, y -> y@4@16, z -> z@5@16),
-[info] Heap: (),
-[info] OHs: (old: ()),
-[info] PCs: ($t@6@16 == _, z@5@16 == x@3@16 || z@5@16 == y@4@16)
-[info] )
-[info] EVAL 5:10: z == x
-[info] Store: (x -> x@3@16, y -> y@4@16, z -> z@5@16),
-[info] Heap: (),
-[info] OHs: (old: ()),
-[info] PCs: ($t@6@16 == _, z@5@16 == x@3@16 || z@5@16 == y@4@16)
-[info] )
-[info] EXECUTE 8:15: inhale acc(z.f, write)
-[info] Store: (x -> x@3@16, y -> y@4@16, z -> z@5@16),
-[info] Heap: (),
-[info] OHs: (old: ()),
-[info] PCs: ($t@6@16 == _, z@5@16 == x@3@16 || z@5@16 == y@4@16, z@5@16 != x@3@16)
-[info] )
-[info] PRODUCE 8:19: acc(z.f, write)
-[info] Store: (x -> x@3@16, y -> y@4@16, z -> z@5@16),
-[info] Heap: (),
-[info] OHs: (old: ()),
-[info] PCs: ($t@6@16 == _, z@5@16 == x@3@16 || z@5@16 == y@4@16, z@5@16 != x@3@16)
-[info] )
-[info] EXECUTE 10:11: exhale acc(z.f, write)
-[info] Store: (x -> x@3@16, y -> y@4@16, z -> z@5@16),
-[info] Heap: (z@5@16.f -> $t@8@16 # W),
-[info] OHs: (old: ()),
-[info] PCs: ($t@6@16 == _, z@5@16 == x@3@16 || z@5@16 == y@4@16, z@5@16 != x@3@16)
-[info] )
-[info] CONSUME 10:15: acc(z.f, write)
-[info] Store: (x -> x@3@16, y -> y@4@16, z -> z@5@16),
-[info] Heap: (z@5@16.f -> $t@8@16 # W),
-[info] OHs: (old: ()),
-[info] PCs: ($t@6@16 == _, z@5@16 == x@3@16 || z@5@16 == y@4@16, z@5@16 != x@3@16)
-[info] )
-[info] h = (z@5@16.f -> $t@8@16 # W)
-[info] Silicon finished verification of method `test1` in 0.20s seconds with the following result: Verification successful.
-[info] Verification finished in 1.87s with 0 error(s)
-
-*/
-
-
-
-/*
-[info] PRODUCE 6:19: acc(z.f, write)
-[info] Store: (x -> x@3@16, y -> y@4@16, z -> z@5@16),
-[info] Heap: (),
-[info] OHs: (old: ()),
-[info] PCs: ($t@6@16 == _, z@5@16 == x@3@16 || z@5@16 == y@4@16, z@5@16 == x@3@16)
-[info] )
-*/
-
-/*
-[info] PRODUCE 8:19: acc(z.f, write)
-[info] Store: (x -> x@3@16, y -> y@4@16, z -> z@5@16),
-[info] Heap: (),
-[info] OHs: (old: ()),
-[info] PCs: ($t@6@16 == _, z@5@16 == x@3@16 || z@5@16 == y@4@16, z@5@16 != x@3@16)
-[info] )
-*/
+method test(x: Ref, y: Ref, z: Ref) {
+	assume z == x || z == y
+	inhale z == x ? acc(x.f) : acc(y.f)
+	exhale acc(z.f)
+}

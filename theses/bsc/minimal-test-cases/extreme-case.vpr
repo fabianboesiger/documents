@@ -1,0 +1,25 @@
+method t1(a: Int) returns (b: Int)
+    requires a > 0
+    ensures b == 2 || b == 3 || b == 4 || b == 5
+{
+    if (a == 1) {
+        b := 2
+    } elseif (a == 2) {
+        b := 3
+    } elseif (a == 3) {
+        b := 4
+    } elseif (a == 4) {
+        b := 2
+    } else {
+        b := 5
+    }
+
+    var x: Int := 0
+    var y: Int := 1
+    var z: Int := 2
+
+    var u: Ref
+    var v: Ref
+
+    u.x := 1
+}

@@ -1,0 +1,117 @@
+[info] ---------- METHOD test----------
+[info] EXECUTE 4:11: inhale (a == 0 ? acc(x.f, write) : acc(y.f, write)) (Inhale)
+[info] Store: (a -> a@3@16, x -> x@4@16, y -> y@5@16),
+[info] Heap: (),
+[info] OHs: (old: ()),
+[info] PCs: ()
+[info] )
+[info] PRODUCE 4:13: (a == 0 ? acc(x.f, write) : acc(y.f, write)) (CondExp)
+[info] Store: (a -> a@3@16, x -> x@4@16, y -> y@5@16),
+[info] Heap: (),
+[info] OHs: (old: ()),
+[info] PCs: ()
+[info] )
+[info] EVAL 4:13: a == 0 (EqCmp)
+[info] Store: (a -> a@3@16, x -> x@4@16, y -> y@5@16),
+[info] Heap: (),
+[info] OHs: (old: ()),
+[info] PCs: ()
+[info] )
+[info] PRODUCE 4:24: acc(x.f, write) (FieldAccessPredicate)
+[info] Store: (a -> a@3@16, x -> x@4@16, y -> y@5@16),
+[info] Heap: (),
+[info] OHs: (old: ()),
+[info] PCs: (a@3@16 == 0)
+[info] )
+[info] PRODUCE 4:35: acc(y.f, write) (FieldAccessPredicate)
+[info] Store: (a -> a@3@16, x -> x@4@16, y -> y@5@16),
+[info] Heap: (),
+[info] OHs: (old: ()),
+[info] PCs: (a@3@16 != 0)
+[info] )
+[info] merging store, same entries: entry1 = (y,y@5@16), cond1 = a@3@16 == 0, entry2 = (y,y@5@16), cond2 = a@3@16 != 0
+[info] merging store, same entries: entry1 = (a,a@3@16), cond1 = a@3@16 == 0, entry2 = (a,a@3@16), cond2 = a@3@16 != 0
+[info] merging store, same entries: entry1 = (x,x@4@16), cond1 = a@3@16 == 0, entry2 = (x,x@4@16), cond2 = a@3@16 != 0
+[info] merging heap: chunk1 = x@4@16.f -> $t@6@16 # W, cond1 = a@3@16 == 0, chunk2 = y@5@16.f -> $t@7@16 # W, cond2 = a@3@16 != 0
+[info] new chunk: x@4@16.f -> $t@8@16 # $t@9@16
+[info] merge pcs: Vector(a@3@16 == 0 ==> $t@8@16 == $t@6@16, a@3@16 != 0 ==> $t@8@16 == $t@7@16, a@3@16 == 0 ==> $t@9@16 == W, a@3@16 != 0 ==> $t@9@16 == W)
+[info] EXECUTE 5:11: exhale (a == 0 ? acc(x.f, write) : acc(y.f, write)) (Exhale)
+[info] Store: (y -> y@5@16, a -> a@3@16, x -> x@4@16),
+[info] Heap: (x@4@16.f -> $t@8@16 # $t@9@16),
+[info] OHs: (old: ()),
+[info] PCs: (a@3@16 == 0 ==> $t@8@16 == $t@6@16, a@3@16 != 0 ==> $t@8@16 == $t@7@16, a@3@16 == 0 ==> $t@9@16 == W, a@3@16 != 0 ==> $t@9@16 == W, a@3@16 == 0 ==> a@3@16 == 0 && x@4@16 != Null, a@3@16 != 0 ==> a@3@16 != 0 && y@5@16 != Null)
+[info] )
+[info] CONSUME 5:13: (a == 0 ? acc(x.f, write) : acc(y.f, write)) (CondExp)
+[info] Store: (y -> y@5@16, a -> a@3@16, x -> x@4@16),
+[info] Heap: (x@4@16.f -> $t@8@16 # $t@9@16),
+[info] OHs: (old: ()),
+[info] PCs: (a@3@16 == 0 ==> $t@8@16 == $t@6@16, a@3@16 != 0 ==> $t@8@16 == $t@7@16, a@3@16 == 0 ==> $t@9@16 == W, a@3@16 != 0 ==> $t@9@16 == W, a@3@16 == 0 ==> a@3@16 == 0 && x@4@16 != Null, a@3@16 != 0 ==> a@3@16 != 0 && y@5@16 != Null)
+[info] )
+[info] h = (x@4@16.f -> $t@8@16 # $t@9@16)
+[info] EVAL 5:13: a == 0 (EqCmp)
+[info] Store: (y -> y@5@16, a -> a@3@16, x -> x@4@16),
+[info] Heap: (x@4@16.f -> $t@8@16 # $t@9@16),
+[info] OHs: (old: ()),
+[info] PCs: (a@3@16 == 0 ==> $t@8@16 == $t@6@16, a@3@16 != 0 ==> $t@8@16 == $t@7@16, a@3@16 == 0 ==> $t@9@16 == W, a@3@16 != 0 ==> $t@9@16 == W, a@3@16 == 0 ==> a@3@16 == 0 && x@4@16 != Null, a@3@16 != 0 ==> a@3@16 != 0 && y@5@16 != Null)
+[info] )
+[info] CONSUME 5:24: acc(x.f, write) (FieldAccessPredicate)
+[info] Store: (y -> y@5@16, a -> a@3@16, x -> x@4@16),
+[info] Heap: (x@4@16.f -> $t@8@16 # $t@9@16),
+[info] OHs: (old: ()),
+[info] PCs: (a@3@16 == 0 ==> $t@8@16 == $t@6@16, a@3@16 != 0 ==> $t@8@16 == $t@7@16, a@3@16 == 0 ==> $t@9@16 == W, a@3@16 != 0 ==> $t@9@16 == W, a@3@16 == 0 ==> a@3@16 == 0 && x@4@16 != Null, a@3@16 != 0 ==> a@3@16 != 0 && y@5@16 != Null, a@3@16 == 0)
+[info] )
+[info] h = (x@4@16.f -> $t@8@16 # $t@9@16)
+[info] CONSUME 5:35: acc(y.f, write) (FieldAccessPredicate)
+[info] Store: (y -> y@5@16, a -> a@3@16, x -> x@4@16),
+[info] Heap: (x@4@16.f -> $t@8@16 # $t@9@16),
+[info] OHs: (old: ()),
+[info] PCs: (a@3@16 == 0 ==> $t@8@16 == $t@6@16, a@3@16 != 0 ==> $t@8@16 == $t@7@16, a@3@16 == 0 ==> $t@9@16 == W, a@3@16 != 0 ==> $t@9@16 == W, a@3@16 == 0 ==> a@3@16 == 0 && x@4@16 != Null, a@3@16 != 0 ==> a@3@16 != 0 && y@5@16 != Null, a@3@16 != 0)
+[info] )
+[info] h = (x@4@16.f -> $t@8@16 # $t@9@16)
+[info] CONSUME 5:35: acc(y.f, write) (FieldAccessPredicate)
+[info] Store: (y -> y@5@16, a -> a@3@16, x -> x@4@16),
+[info] Heap: (x@4@16.f -> $t@8@16 # $t@9@16),
+[info] OHs: (old: ()),
+[info] PCs: (a@3@16 == 0 ==> $t@8@16 == $t@6@16, a@3@16 != 0 ==> $t@8@16 == $t@7@16, a@3@16 == 0 ==> $t@9@16 == W, a@3@16 != 0 ==> $t@9@16 == W, a@3@16 == 0 ==> a@3@16 == 0 && x@4@16 != Null, a@3@16 != 0 ==> a@3@16 != 0 && y@5@16 != Null, a@3@16 != 0, Z <= $t@9@16 - mce_pTaken@11@16, $t@9@16 - mce_pTaken@11@16 <= W, (Z) < ($t@9@16 - mce_pTaken@11@16) ==> x@4@16 != Null, Z <= $t@9@16 - mce_pTaken@12@16, $t@9@16 - mce_pTaken@12@16 <= W, (Z) < ($t@9@16 - mce_pTaken@12@16) ==> x@4@16 != Null)
+[info] )
+[info] h = (x@4@16.f -> $t@8@16 # $t@9@16)
+[info] CONSUME 5:13: (a == 0 ? acc(x.f, write) : acc(y.f, write)) (CondExp)
+[info] Store: (y -> y@5@16, a -> a@3@16, x -> x@4@16),
+[info] Heap: (x@4@16.f -> $t@8@16 # $t@9@16),
+[info] OHs: (old: ()),
+[info] PCs: (a@3@16 == 0 ==> $t@8@16 == $t@6@16, a@3@16 != 0 ==> $t@8@16 == $t@7@16, a@3@16 == 0 ==> $t@9@16 == W, a@3@16 != 0 ==> $t@9@16 == W, a@3@16 == 0 ==> a@3@16 == 0 && x@4@16 != Null, a@3@16 != 0 ==> a@3@16 != 0 && y@5@16 != Null)
+[info] )
+[info] h = (x@4@16.f -> $t@8@16 # $t@9@16)
+[info] EVAL 5:13: a == 0 (EqCmp)
+[info] Store: (y -> y@5@16, a -> a@3@16, x -> x@4@16),
+[info] Heap: (x@4@16.f -> $t@8@16 # $t@9@16),
+[info] OHs: (old: ()),
+[info] PCs: (a@3@16 == 0 ==> $t@8@16 == $t@6@16, a@3@16 != 0 ==> $t@8@16 == $t@7@16, a@3@16 == 0 ==> $t@9@16 == W, a@3@16 != 0 ==> $t@9@16 == W, a@3@16 == 0 ==> a@3@16 == 0 && x@4@16 != Null, a@3@16 != 0 ==> a@3@16 != 0 && y@5@16 != Null)
+[info] )
+[info] CONSUME 5:24: acc(x.f, write) (FieldAccessPredicate)
+[info] Store: (y -> y@5@16, a -> a@3@16, x -> x@4@16),
+[info] Heap: (x@4@16.f -> $t@8@16 # $t@9@16),
+[info] OHs: (old: ()),
+[info] PCs: (a@3@16 == 0 ==> $t@8@16 == $t@6@16, a@3@16 != 0 ==> $t@8@16 == $t@7@16, a@3@16 == 0 ==> $t@9@16 == W, a@3@16 != 0 ==> $t@9@16 == W, a@3@16 == 0 ==> a@3@16 == 0 && x@4@16 != Null, a@3@16 != 0 ==> a@3@16 != 0 && y@5@16 != Null, a@3@16 == 0, (x@4@16 == x@4@16 ? $t@9@16 : Z) <= W)
+[info] )
+[info] h = (x@4@16.f -> $t@8@16 # $t@9@16)
+[info] CONSUME 5:35: acc(y.f, write) (FieldAccessPredicate)
+[info] Store: (y -> y@5@16, a -> a@3@16, x -> x@4@16),
+[info] Heap: (x@4@16.f -> $t@8@16 # $t@9@16),
+[info] OHs: (old: ()),
+[info] PCs: (a@3@16 == 0 ==> $t@8@16 == $t@6@16, a@3@16 != 0 ==> $t@8@16 == $t@7@16, a@3@16 == 0 ==> $t@9@16 == W, a@3@16 != 0 ==> $t@9@16 == W, a@3@16 == 0 ==> a@3@16 == 0 && x@4@16 != Null, a@3@16 != 0 ==> a@3@16 != 0 && y@5@16 != Null, a@3@16 != 0, (x@4@16 == x@4@16 ? $t@9@16 : Z) <= W)
+[info] )
+[info] h = (x@4@16.f -> $t@8@16 # $t@9@16)
+[info] CONSUME 5:35: acc(y.f, write) (FieldAccessPredicate)
+[info] Store: (y -> y@5@16, a -> a@3@16, x -> x@4@16),
+[info] Heap: (x@4@16.f -> $t@8@16 # $t@9@16),
+[info] OHs: (old: ()),
+[info] PCs: (a@3@16 == 0 ==> $t@8@16 == $t@6@16, a@3@16 != 0 ==> $t@8@16 == $t@7@16, a@3@16 == 0 ==> $t@9@16 == W, a@3@16 != 0 ==> $t@9@16 == W, a@3@16 == 0 ==> a@3@16 == 0 && x@4@16 != Null, a@3@16 != 0 ==> a@3@16 != 0 && y@5@16 != Null, a@3@16 != 0, (x@4@16 == x@4@16 ? $t@9@16 : Z) <= W, Z <= $t@9@16 - mce_pTaken@16@16, $t@9@16 - mce_pTaken@16@16 <= W, (Z) < ($t@9@16 - mce_pTaken@16@16) ==> x@4@16 != Null, Z <= $t@9@16 - mce_pTaken@17@16, $t@9@16 - mce_pTaken@17@16 <= W, (Z) < ($t@9@16 - mce_pTaken@17@16) ==> x@4@16 != Null)
+[info] )
+[info] h = (x@4@16.f -> $t@8@16 # $t@9@16)
+[info] Silicon finished verification of method `test` in 0.42s seconds with the following result: Verification failed with 1 errors:
+[info]   [exhale.failed:insufficient.permission] Exhale might fail. There might be insufficient permission to access y.f (cond-expr.vpr@5.11--5.12)
+[info] [exhale.failed:insufficient.permission] Exhale might fail. There might be insufficient permission to access y.f (cond-expr.vpr@5.11--5.12)
+[info] Verification finished in 2.28s with 1 error(s)
+[info] Silicon found 1 error in 4.02s:
+[info]   [0] Exhale might fail. There might be insufficient permission to access y.f (cond-expr.vpr@5.11--5.12)

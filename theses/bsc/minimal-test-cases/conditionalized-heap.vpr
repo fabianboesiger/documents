@@ -1,0 +1,12 @@
+field f: Int
+
+method test(a: Int, x: Ref) {
+    inhale acc(x.f)
+    if (a == 0) {
+        x.f := 1
+    } else {
+    	x.f := 2
+    }
+    assert a == 0 ==> x.f == 1
+    assert a == 1 ==> x.f == 2
+}

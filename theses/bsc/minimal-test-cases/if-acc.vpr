@@ -1,0 +1,14 @@
+field f: Int
+
+method test(b: Bool, x: Ref, y: Ref) {
+    if (b) {
+        inhale acc(x.f)
+    } else {
+    	inhale acc(y.f)
+    }
+    if (b) {
+        exhale acc(x.f)
+    } else {
+    	exhale acc(y.f)
+    }
+}
