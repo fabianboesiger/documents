@@ -3,9 +3,9 @@ field f: Int
 method test1(x: Ref, y: Ref, z: Ref) {
     assume z == x || z == y
     if (z == x) {
-        inhale acc(z.f)
+        inhale acc(x.f)
     } else {
-        inhale acc(z.f)
+        inhale acc(y.f)
     }
     exhale acc(z.f)
 }
