@@ -1,5 +1,16 @@
 field f: Int
 
+
+method test1(x: Ref, y: Ref, z: Ref) {
+    assume z == x || z == y
+    if (z == x) {
+        inhale acc(x.f)
+    } else {
+        inhale acc(y.f)
+    }
+    exhale acc(z.f)
+}
+
 method test(x: Ref, y: Ref, z: Ref) {
 	assume z == x || z == y
 	inhale z == x ? acc(x.f) : acc(y.f)
