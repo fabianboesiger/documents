@@ -131,6 +131,10 @@ The process of monitoring system/network events for signs of possible incidents,
 
 The set of users which appear indistinguishable from each other.
 
+#### Secrecy
+
+Message $m$ is secret if either $m$ is revealed to a honest party and stays secret, or $m$ is revealed to an compromised agent that is assumed to be honest.
+
 # Protocols
 
 ## Message Authentication Code
