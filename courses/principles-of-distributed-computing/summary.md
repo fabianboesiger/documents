@@ -25,3 +25,5 @@
 ||
 
 ## Wireless Protocols
+
+$$(1 - x)^t \leq e^{-xt}$$
