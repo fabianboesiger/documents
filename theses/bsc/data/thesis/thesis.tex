@@ -537,7 +537,7 @@ object Plus extends ((Term, Term) => Term) {
     to emulate real-life usage as close as possible.
     For the benchmark, total verification time  is measured.
     The benchmark is repeated ten times, where the
-    slowest and fastest verification time are ignored.
+    slowest and fastest verification times are ignored.
     
     Silicon optionally
     allows parallel verification, however the number of parallel 
@@ -603,6 +603,37 @@ object Plus extends ((Term, Term) => Term) {
 
     %\subsection{Automatic Code Generation}
 
+    \subsection{Complementary Benchmarks}
+
+    \subsubsection{Parallelization}
+
+    In this section we discuss the impact of
+    parallelization in Silicon.
+    Figure \ref{fig:parallelization} illustrates the change of performance
+    if parallelization is enabled for the base implementation using 8 threads.
+
+    For small programs, the overhead introduced by parallelization isn't worth
+    the speedup, and performance decreases up to 100\%, which isn't much in absolute
+    terms as absolute verification times are quite small. For larger programs
+    with absolute verification time of five seconds and above, parallelization
+    provides a clear performance improvement of up to around 50\%.
+
+    Figure \ref{fig:parallelization-flyweight} shows that using the flyweight
+    pattern for terms has no impact on parallelization, as expected.
+
+    \begin{figure}[H]
+        \includegraphics[width=\linewidth]{parallelization.png}
+        \caption{Change in performance when parallelization is enabled in the base implementation. Negative performance differnece shows a speedup.}
+        \label{fig:parallelization}
+    \end{figure}
+
+    \begin{figure}[H]
+        \includegraphics[width=\linewidth]{parallelization-flyweight.png}
+        \caption{Change in performance when parallelization is enabled in the flyweight implementation. Negative performance differnece shows a speedup.}
+        \label{fig:parallelization-flyweight}
+    \end{figure}
+
+
     \subsection{Using Macros to Facilitate Experiments}
 
     Although the flyweight pattern itself didn't have a significant impact on performance,
@@ -644,9 +675,6 @@ def apply(..$fields) = {
     This illustrates that the macro developed as part of this thesis
     facilitates experiments and benchmarks in Silicon.
 
-    \subsection{Complementary Benchmarks}
-
-    \subsubsection{Parallelization}
 
 
     \newpage
@@ -694,7 +722,7 @@ def apply(..$fields) = {
     possible input values of the program. When encountering certain expressions or statements, for example an
     if-statement, symbolic execution branches with the assumptions of the corresponding program path.
     In the following sections, we list the different statements and expressions 
-    that can be joined again.
+    that result in a branching of execution paths which can be joined again.
 
     \subsubsection{Conditional Expressions}
 
@@ -764,9 +792,10 @@ def findJoinPoint(branchPoint)
     Whenever a join point exists for a branch point created via if-statement, we are now able
     to join the branches.
 
-    Branches created by both conditional expressions and implications are already being joined if they are pure.
+    Branches created by both conditional expressions and implications are already being joined if they are pure,
+    that is they do not modify the symbolic state.
     Branches resulting from impure conditional expressions and implications,
-    and from all if-statements however aren't joined again, meaning that
+    and from all if-statements aren't joined again, meaning that
     all statements later down the verification path are evaluated twice. Both of these
     verification paths may branch again, eventually leading to exponential growth in branches.
     These branches are avoided when joining the symbolic execution paths back together.
@@ -818,11 +847,11 @@ def findJoinPoint(branchPoint)
             In this case, we modify the heap chunk such that $x \mapsto Ite(c_1, v_1, v_2) \in \gamma_3$.
     \end{enumerate}
 
-    \subsubsection{Merging the Heap}
+    \subsubsection{Merging the Heap} \label{merging-the-heap}
 
     A heap is essentially a collection of heap chunks, where each heap chunk provides information
     about the location's value and the receiver's permission amount to the location.
-    As there may be multiple heap chunks making statements about aliased receivers,
+    As there may be multiple heap chunks making statements about the same location,
     Silicon provides a mechanism to merge them using a mechanism called state consolidation.
     To merge heaps $h_1$ and $h_2$, we perform the following steps:
 
@@ -867,11 +896,13 @@ def findJoinPoint(branchPoint)
     If an if-statement is encountered during verification, we check if a 
     corresponding join point exists and the branches can be joined again.
 
-    \subsection{Implementing State Merges}
+    \subsection{Implementing State Merges} \label{implementing-state-merges}
 
     Store and heap merges are implemented as according to section \ref{merging-the-symbolic-state}.
     Silicon's state however consists of some more fields carrying additional data, that have to be merged with caution.
-    Caches within the state are emptied instead of merged for simplicity.
+    Some of these additional fields are chages that are used at various times during verification
+    to increase performance.
+    Such caches within the state currently are emptied instead of merged for simplicity.
 
     Our implementation can be optionally enabled by passing the command-line
     argument \texttt{--moreJoins} to the Silicon executable. To illustrate the difference
@@ -926,6 +957,30 @@ method test(b: Bool) {
         \label{execution-2}
     \end{center}
 
+    \subsection{Configuration and Command Line Arguments}
+
+    Our heap merging implementation may
+    introduce multiple heap chunks making statements about the same location. This can be
+    avoided if the state resulting from the merging process consolidated as
+    described in section \ref{merging-the-heap}. But doing a state consolidation
+    after every merge has shown to decrease performance.
+    Instead, we avoid state consolidation after each merge alltogether.
+
+    Proving assertions or permission amounts of a location in the heap
+    is normally done greedily, where the heap chuncks are
+    traversed until the first matching heap chunk for the location is found.
+    This greedy algorithm does not work if multiple heap chunks for the same location
+    exist. To avoid any issues,
+    option \texttt{--enableMoreCompleteExhale} should be used,
+    which enables a more sophisticated method of finding matching heap chunks.
+    Furthermore, more complete exhale provides a small performance improvement
+    by itself, as later discussed in section \ref{more-complete-exhale}.
+
+    As state merging currently empties caches held in the state
+    instead of merging them, the option
+    \texttt{--disableCaches} which disables the caches
+    was also added to Silicon in order to provide more fair benchmarks.
+
     \newpage
     \section{Evaluation}
 
@@ -937,16 +992,21 @@ method test(b: Bool) {
 
     \subsection{Concluding Performance Evaluation} \label{concluding-performance-evaluation}
     
-    The benchmark of frontend-generated Viper programs from Vercors \cite{vercors},
+    The benchmark uses frontend-generated Viper programs from Vercors \cite{vercors},
     Prusti \cite{prusti}, Gobra \cite{gobra}, Vyper \cite{vyper} and Nagini \cite{nagini}
-    shows that verification time using more joins
-    decreases by around 3\% on average, relative to a version which doesn't
+    to emulate real-life usage as close as possible, and
+    the total duration of each verification run is measured.
+    The benchmark is repeated five times, where the
+    slowest and fastest verification times are ignored.
+    The results show that verification time
+    decreases by around 3\% on average when using more joins,
+    relative to a version which doesn't
     make use of the implemented joining procedures.
     Intuitively, one would expect that fewer branches lead to better
     performance, however state merging introduces a more complex final state which again tends to worsen
     performance.
     
-    When comparing the number of state merges that occur during verification
+    When comparing the number of state merges 
     to the verification time performance difference, no clear correlation is
     visible, as can be seen in figure \ref{fig:state-merges}.
 
@@ -960,7 +1020,7 @@ method test(b: Bool) {
     \end{figure}
 
     Interestingly, figure \ref{fig:absolute-verification-time} shows that the performance seems to improve about 3.3\% for programs
-    with an absolute base verification time up to 0.5 seconds. With increasing verification
+    with an absolute base verification time of up to 0.5 seconds. With increasing verification
     time, the performance decreases, and for programs with a verification time greater
     than 10 seconds, we get a decrease of performance of nearly 25\%.
     
@@ -979,13 +1039,13 @@ method test(b: Bool) {
 
     \subsection{Complementary Benchmarks}
 
-    \subsubsection{Disable Caching}
+    \subsubsection{Disable Caching} \label{disable-caching}
 
     As state merging currently empties caches instead of merging them, an option to disable the caches
     entirely was added to Silicon in order to provide more fair benchmarks. Disabling caches results in a performance decrease of 1.9\%
     compared to the base implementation with caching enabled.
 
-    \subsubsection{More Complete Exhale}
+    \subsubsection{More Complete Exhale} \label{more-complete-exhale}
 
     Silicon additionally provides an option of enabling a more complete version of exhaling permissions,
     which must be used when joining is enabled. This is because joining may result in permissions of a 
@@ -1004,6 +1064,10 @@ method test(b: Bool) {
             a new symbolic variable $v'$ as
             $v = v'$ and restrict the value of $v'$ in the path conditions using implications
             $b \implies v' = e_2$ and $\overline{b} \implies v' = e_2$.
+        \item Section \ref{implementing-state-merges} discusses how caches are
+            used in Silicons state. For simplicity, we empty such chaches
+            instead of merging them. Implementing sophisticated cache merges would most
+            certainly result in a performance increase when using more joins.
     \end{itemize}
 
     \newpage
