@@ -139,6 +139,12 @@ Message $m$ is secret if either $m$ is revealed to a honest party and stays secr
 
 ## Message Authentication Code
 
+Check **integrity** of the message, has someone tapered with it?
+
+**MAC security:** A given MAC is secure, if for all probabistical poly-time adversaries A: P[A breaks MAC] = e(n)
+
+*Breaks* mean A produces a valid (m', t') pair for an unseen message m'.
+
 ## Pedersen Commitment Scheme
 
 *Perfectly hiding, computationally binding.*
