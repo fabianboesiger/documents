@@ -1,0 +1,5 @@
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Q[Contextuals=Alternate, Scale=0.8]Fira Code\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Qmystyle basicstyle=, keywordstyle=, commentstyle=, frame=single, numbers=left, style=mystyle\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QBachelor's Thesis Performance Improvements of a Program Verifier Fabian Bösiger Supervised by Dr. Malte Schwerhoff Programming Methodology Group Department of Computer Science ETH Zürich\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QPlus(IntLiteral(1), IntLiteral(2)) represents the program code \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QPlus, IntLiteral(1) and IntLiteral(2) are all terms.\\E$"}

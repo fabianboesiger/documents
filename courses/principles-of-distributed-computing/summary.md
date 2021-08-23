@@ -1,3 +1,13 @@
+## Models
+
+### LOCAL
+
+* Nodes can simulate any algorithm locally with constant slowdown.
+
+### CONGEST
+
+* Each node can send one $O(\log n)$ message to each neighbor.
+
 ## Bounds
 
 ### Coloring 
@@ -8,6 +18,7 @@
 |General Graph with $O(\Delta^2)$ Colors (Linial's Algorithm)|$O(\log^* n)$|
 |General Graph with $O(\Delta+1)$ Colors|$O(\Delta \log \Delta + \log^* n)$|
 |$O(\log \log n)$ coloring of graph with $\Delta = O(1)$|$O(1)$|
+|$2\Delta-1$ Edge Coloring|$O(\log^* n + \Delta)$|
 
 *Unrooted tree to rooted tree: $O(\log n)$ (?)*
 
@@ -17,8 +28,9 @@
 |---|---|---|
 |Minimum Spanning Tree (MST)|$O(n \log n)$|$O(m \log n)$|
 ||$O(n)$|$O(m + n \log n)$|
-|Maximal Independent Set (MIS) TODO|$O(\log n)$, WHP||
-|Maximal Independent Set (MIS) on Directed Cycle|O(\log^* n)$||
+|Maximal Independent Set (MIS, Luby's Algorithm)|$O(\log n)$, WHP||
+|Maximal Independent Set (MIS)|$poly(\log n)$, deterministic||
+|Maximal Independent Set (MIS) on Directed Cycle|$O(\log^* n)$||
 |Approximatie Min Cut|$\Omega(D)$||
 |Network Decomposition|$O(poly(\log n))$||
 |Comput Diameter|$O(n)$|$O(\log n)$|
@@ -53,7 +65,7 @@ Network Decomposition into Strong diameter clusters with $C = O(\log n)$, $D = O
 |Adjacency General Graph|$\Omega(n)$|
 |Ancestor Tree|$O(2 \log n)$|
 |Distance Tree|$O(n \log n)$|
-|||
+|Distance Tree (Heavy-Light Decomposition)|$O(\log^2 n)$|
 
 ### Wireless Protocols
 
@@ -104,4 +116,22 @@ $P[X > (1 + \delta) \mu] < (\frac{e^\delta}{(1 + \delta)^{(1 + \delta)}})^\mu$
 
 $(1 - x)^t \leq e^{-xt}$
 
+$(1 - 1/x)^x = 1/e$
+
+## Communication Complexity
+
+### Equality
+
+$CC(EQ) = \Omega(n)$
+
+### Disjointness
+
+$$
+DISJ(x, y) := \begin{cases}
+0 & \exists i: x_i = y_i = 1 \\
+1 & \text{else}
+\end{cases}
+$$
+
+$CC(DISJ) = \Omega(n)$
 
