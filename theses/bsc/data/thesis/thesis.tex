@@ -12,6 +12,7 @@
 \usepackage{amssymb}
 \usepackage{float}
 \usepackage{caption}
+\usepackage{pdfpages}
 
 \setmonofont[Contextuals={Alternate}, Scale=0.8]{Fira Code}
 
@@ -27,6 +28,7 @@
 \addbibresource{gobra.bib}
 \addbibresource{prusti.bib}
 \addbibresource{vyper.bib}
+\addbibresource{z3.bib}
 
 \parskip=1em
 \parindent=0pt
@@ -72,13 +74,15 @@
         \parindent=0pt
         \noindent
 
-        This thesis explores ways to improve performance of
+        To advance program verification in practice,
+        fast verification is crucial as it provides a more streamlined experience for developers.
+        This thesis explores two different approaches to improve performance of
         the Silicon program verification backend for the Viper
         verification infrastructure.
-        
+
         In the first part,
-        we explore the concept of applying the flyweight pattern on ASTs.
-        Applying the flyweight pattern avoids multiple instances of structurally equal nodes
+        we explore the concept of applying the flyweight pattern on Silicon's AST structures.
+        Applying the flyweight pattern avoids multiple instances of structurally equal AST nodes
         existing at the same time. This allows us to replace structural and recursive
         equality checks with reference equality checks, with the goal of improving performance of equality checks.
 
@@ -97,10 +101,10 @@
         me with the opportunity to write this thesis. The time
         and effort he expended to help and advice me was highly appreciated.
 
-        Additionally, I'd like to thank Peter Müller and his group for sparking interest and providing insight
+        Furthermore, I'd like to thank Peter Müller and his group for sparking interest and providing insight
         into topics such as these.
 
-        Furthermore, I'd like to express my gratitude towards my family for providing
+        Last but not least, I'd like to express my gratitude towards my family for providing
         me with a very pleasant home office environment.
     \end{abstract}
     \newpage
@@ -140,7 +144,7 @@
     Equality checks can't easily be avoided, but they can be implemented in a more performant way.
     Silicon's AST nodes are called terms, which represent different program operations.
     \texttt{Plus(IntLiteral(1), IntLiteral(2))} represents the program code $1 + 2$. \texttt{Plus}, \texttt{IntLiteral(1)}
-    and \texttt{IntLiteral(2)} are all terms.
+    and \texttt{IntLiteral(2)} are called terms.
     Currently in Silicon, new term instances are created independently of already existing ones, which potentially leads 
     to the coexistence of multiple structurally equal term instances. Subterm equality is checked in a
     structural and recursive manner. In part \ref{part-1} of working towards a potential improvement in performance,
@@ -170,6 +174,9 @@
     \newpage
     \section{Approach}
 
+    In the following sections we discuss our approach of implementing the flyweight pattern on
+    ASTs, and the advantage of using code generation via metaprogramming for our implementation.
+
     \subsection{Implementation of Flyweight ASTs}
 
     Currently in Silicon, new term instances are created independently of already existing ones, which potentially leads 
@@ -190,13 +197,32 @@
     down to a cheap reference equality check, and recursive equality checks can be avoided,
     at the cost of increased overhead at the creation of a term instance due to the flyweight pattern.
 
+    \begin{figure}[H]
+        \begin{center}
+            \begin{minipage}{.4\textwidth}
+                \begin{center}
+                    \includegraphics[width=1.0\textwidth]{no-flyweight.png}
+                    \caption{Example AST without using the flyweight pattern. Multiple structurally equal instances of the some subterm may exist in the AST.}
+                    \label{fig:no-flyweight-ast}
+                \end{center}
+            \end{minipage}
+            \hspace{.1\textwidth}
+            \begin{minipage}{.35\textwidth}
+                \begin{center}
+                    \includegraphics[width=0.5\textwidth]{with-flyweight.png}
+                    \caption{The same AST as in figure \ref{fig:no-flyweight-ast}, but using the flyweight pattern. This guarantees that no two structurally equal subterms exist in the AST.}
+                \end{center}
+            \end{minipage}
+        \end{center}
+    \end{figure}
+
     \subsection{Automate Boilerplate Generation Using Macros} \label{boilerplate-generation-using-macros}
 
     Silicon's AST representation of the Viper language consists of nearly 100 different terms,
     all with boilerplate implementations for different operations. For example,
     because Silicon usually doesn't use case classes for its terms,
     each term defines it's own \texttt{unapply} method.
-    Our changes adds additional boilerplate code by implementing
+    Our changes introduce additional boilerplate code by implementing
     the flyweight pattern for each term as seen in listing \ref{implementation-flyweight-pattern}.
 
     Our ASTs shouldn't only be flyweight in the sense of the implementation pattern, but also
@@ -213,11 +239,15 @@
     \newpage
     \section{Implementation}
 
-    \subsection{Implementation of the Flyweight Pattern} \label{implementation-flyweight-pattern}
-
+    After discussing the general idea of flyweight ASTs, we now focus on the
+    specific implementation details for Silicon's ASTs.
     As the flyweight pattern for Silicon's terms is implemented in Scala,
     we assume general familiarity with the language. 
-    The implementation works as follows:
+
+    \subsection{Implementation of the Flyweight Pattern} \label{implementation-flyweight-pattern}
+
+    For the implementation of flyweight ASTs in Silicon, we modify
+    the AST terms as follows:
 
     \begin{enumerate}
         \item The constructor of a term is made private (listing \ref{lst:flyweight-pattern}, line 1) so that new term instances can't be created via
@@ -374,11 +404,8 @@ object Plus extends ((Term, Term) => Term) {
 
     \subsection{Flyweight Macro Support for IntelliJ} \label{macro-support-intellij}
 
-    The Viper infrastructure is written in the Scala programming language.
-    Scala has support for metaprogramming using macros, which provide
-    a nice and easy way for metaprogramming and
-    are regularly used. For a nice programming experience
-    using macros, IDE support should ideally be provided. In this case, we use the IntelliJ IDE.
+    For a nice programming experience
+    using Scala macros, IDE support should ideally be provided. In this case, we use the IntelliJ IDE.
     However, coding assistance for Scala macros is not supported natively by the IntelliJ IDE, 
     as it is difficult for IDE's to provide proper syntax highlighting.:
 
@@ -435,12 +462,17 @@ object Plus extends ((Term, Term) => Term) {
     coding assistance.
     Whenever the macro is modified and the program is compiled again,
     the configuration file is rewritten, and the IntelliJ plugin is
-    aware of the changes. This is illustrated in figure \ref{fig:ide-fixed-generic}.
+    aware of the changes, without the programmer being required
+    do manually rewrite the plugin. This is illustrated in figure \ref{fig:ide-fixed-generic}.
 
     \begin{figure}[H]
         \begin{center}
             \includegraphics[width=0.8\textwidth]{ide-fixed-generic.png}
-            \caption{The IDE is now aware of code changes done by the flyweight macro, which fixes error reporting.}
+            \caption{
+                The IDE is aware of code changes done by the flyweight macro,
+                which fixes error reporting. The plugin does not manually need
+                to be edited whenever changes in the macro are made.
+            }
             \label{fig:ide-fixed-generic}
         \end{center}   
     \end{figure}
@@ -476,15 +508,15 @@ object Plus extends ((Term, Term) => Term) {
     % \end{center}
 
     The table below shows the performance change of the flyweight implementation
-    using different map data structures for the flyweight pool implementation which stores
+    using different map data structures for the flyweight pool implementation that stores
     term instances. The performance change is relative to the base implementation
     without flyweight pattern.
 
     \begin{center}
         \begin{tabular}{ ll } 
         \hline
-        Data Structure & Relative Performance Change \\ 
-        & (Negative is better) \\
+        Data Structure & Relative Performance Change to Base \\ 
+        & Implementation (Negative is better) \\
         \hline
         \texttt{mutable.HashMap} & -1.3\% \\ 
         \texttt{mutable.WeakHashMap} & -0.2\% \\
@@ -537,15 +569,15 @@ object Plus extends ((Term, Term) => Term) {
     slowest and fastest verification times are ignored.
     
     Silicon optionally
-    allows parallel verification, however the number of parallel 
-    verifiers is set to one. As Scala's \texttt{mutable.TrieMap} is used,
+    allows multithreaded verification, but for this benchmark, multithreading
+    is disabled. However, as Scala's \texttt{mutable.TrieMap} is used,
     the flyweight pattern would still work in a parallelized environment.
     
     Figure \ref{fig:absolute-verification-time-part-1} suggests that there is a small
     performance improvement of programs with an absolute verification time greater than
     ten seconds, but for programs with less than ten seconds absolute verification time,
     we observe a performance decrease.
-    On Average, the flyweight implementation 2\% was slower,
+    On average, the flyweight implementation 2\% was slower,
     which is still within the standard derivation of 2.9\%.
 
     \begin{figure}[H]
@@ -582,8 +614,8 @@ object Plus extends ((Term, Term) => Term) {
 
     Another reason may lie in the depth of the terms on an equality check. If
     the terms are very flat when checking for equality, the additional performance overhead of structural, recursive equality checks becomes negligible compared to reference equality checks, even
-    if many equality checks take place. To support this hypothesis, we counted the number of subterms
-    contained term at every equality check. For example, if \texttt{Plus(1, Minus(2, 3))} was checked for equality,
+    if many equality checks take place. To test this hypothesis, we counted the number of subterms
+    contained term at every equality check. For example, if \texttt{Plus(1, Minus(2, 3))} was checked for equality with some other term,
     we count 5 contained subterms: once \texttt{Plus}, once \texttt{Minus} and three integer literals.
     Figure \ref{fig:node-count} shows the average subterm count for each term class. On average,
     a term contains around 14 subterms on equality check.
@@ -625,7 +657,10 @@ object Plus extends ((Term, Term) => Term) {
 
     \begin{figure}[H]
         \includegraphics[width=\linewidth]{parallelization-flyweight.png}
-        \caption{Change in performance when parallelization is enabled in the flyweight implementation. Negative performance difference shows a speedup.}
+        \caption{
+            Change in performance when parallelization is enabled in the flyweight implementation.
+            Negative performance difference shows a speedup.
+        }
         \label{fig:parallelization-flyweight}
     \end{figure}
 
@@ -638,8 +673,9 @@ object Plus extends ((Term, Term) => Term) {
 
     In the following example, the macro is edited to ignore AST simplifications.
     The method \texttt{\_apply} performs AST simplifications. To ignore 
-    them, we can avoid calling \texttt{apply} and instead,
+    them, we don't call \texttt{apply} and instead,
     we directly create instances using the \texttt{new} keyword.
+    As the AST simplifications take place in the \texttt{apply} method, they are now circumvented.
     Using the macro, this can be done quickly for all terms by only modifying three lines
     instead of rewriting every term manually.
 
@@ -674,7 +710,18 @@ def apply(..$fields) = {
 
 
     \newpage
-    \section{Future Work}
+    \section{Conclusion and Future Work}
+
+    In this part, we have introduced the concept of flyweight ASTs,
+    which avoids multiple structurally equal terms within the same AST.
+    This has the advantage of being able to replace structural, recursive
+    equality checks by simple reference equality checks, but also adds
+    additional overhead due to the flyweight pattern.
+    The benchmark has shown that for most programs,
+    a small performance decrease is visible when using flyweight ASTs.
+    However, the macro annotation and IDE plugin
+    developed as a part of this thesis invite for further
+    experimentation in other directions:
 
     \begin{itemize}
         \item The macro annotation developed to modify Silicon's Terms
@@ -716,10 +763,36 @@ def apply(..$fields) = {
     For verifying a program, Silicon symbolically executes the program,
     and a symbolic state keeps track of all possible program states at the current point of execution, for all
     possible input values of the program. When encountering certain expressions or statements, for example an
-    if-statement, symbolic execution branches with the assumptions of the corresponding program path.
+    if-statement, symbolic execution branches into two execution paths, where in
+    one path the if-statement is assumed to evaluate to true, and in the second path to false.
     In the following sections, we list the different statements and expressions 
     that result in a branching of execution paths, which later can be joined again.
     
+    \begin{lstlisting}[language=Scala, caption={An example Viper program to demonstrate how branching relates to the number of symbolic execution paths. Let \texttt{s0}, \texttt{s1}, \texttt{s2} and \texttt{s3} denote generic viper statements.}, label={lst:viper-branching-example}]
+method test(b: Bool) {
+    s0
+    if (b) {
+        s1
+    } else {
+        s2
+    }
+    s3
+}       
+    \end{lstlisting}
+
+    \begin{figure}[H]
+        \begin{center}
+            \includegraphics[width=0.4\linewidth]{example-execution-paths.png}
+            \caption{
+                The symbolic execution paths taken by Silicon
+                when verifying the program in listing \ref{lst:viper-branching-example}.
+                Note that \texttt{s3} is symbolically executed twice as
+                the paths are not joined after the if-statement.
+            }
+            \label{fig:example-execution-paths}
+        \end{center}   
+    \end{figure}
+
     \subsubsection{If-Statements} \label{if-statements}
 
     Viper is parsed into a control flow graph (CFG) consisting of blocks containing
@@ -735,9 +808,9 @@ def apply(..$fields) = {
 
     Consider a conditional expression of the form \texttt{$b$ ? $e_1$ : $e_2$}.
     As Silicon evaluates this expression, and $b$ cannot definitely be evaluated to true or false,
-    two branches are created, the first one assumes that $b$
-    is true and the expression is evaluated to be $e_1$.
-    the second branch assumes that $b$ is false, and the evaluation yields $e_2$.
+    two branches are created, in the first one, $b$ is assumed to be
+    true, and the expression is evaluated to be $e_1$.
+    In the second branch, $b$ is assumed to be false, and the evaluation yields $e_2$.
     The symbolic execution is continued in both branches, and all following code
     is executed twice.
 
@@ -745,9 +818,8 @@ def apply(..$fields) = {
     \subsubsection{Implications}
 
     Similar to conditional expressions, symbolic execution branches on implications too. Consider
-    an implication of the form \texttt{$b_1$ ==> $b_2$}. The first branch assumes that $b_1$ is true and
-    consequently the implication $b_2$ holds. The second branch assumes that $b_1$ is false and the
-    implication $b_2$ may or may not hold. 
+    an implication of the form \texttt{$b_1$ ==> $b_2$}. Again, in the first branch, $b_1$ is assumed to be true,
+    and in the second branch, $b_1$ is assumed false.
 
     \subsection{Pros and Cons of Joining}
 
@@ -755,7 +827,8 @@ def apply(..$fields) = {
     that is, they do not modify the heap.
     Branches resulting from impure conditional expressions and implications,
     and from all if-statements aren't joined again, meaning that
-    all statements later down the verification path are evaluated twice. Both of these
+    all statements later down the verification path are evaluated twice, as demonstrated
+    in the example of figure \ref{fig:example-execution-paths}. Both of these
     verification paths may branch again, eventually leading to exponential growth in branches.
     These branches are avoided when joining the symbolic execution paths back together.
 
@@ -813,10 +886,10 @@ def apply(..$fields) = {
     For merging stores $\gamma_1$ and $\gamma_2$, we consider two cases:
 
     \begin{enumerate}
-        \item Let $x \mapsto v$ denote that $x$ has value $v$.
+        \item Let $x \mapsto v$ denote that the variable $x$ maps to the value $v$.
             Assume that for some local variable $x$, we have $x \mapsto v_1 \in \gamma_1$ and $x \mapsto v_2 \notin \gamma_2$.
             In this case, we can simply omit $x$ in the new store $\gamma_3$ as we can assume that $x$ won't
-            be needed later down the verification path as Viper has the usual lexicographic
+            be needed later down the verification path as Viper has the usual lexical
             variable scopes.
         \item For some local variable $x$, we have $x \mapsto v_1 \in \gamma_1$ and $x \mapsto v_2 \in \gamma_2$.
             In this case, we modify store entry such that $x \mapsto Ite(c_1, v_1, v_2) \in \gamma_3$,
@@ -856,7 +929,7 @@ def apply(..$fields) = {
     traversed until the first matching heap chunk for the location is found.
     This greedy algorithm is in general incomplete if multiple heap chunks for the same location
     exist. To avoid any issues,
-    option \texttt{--enableMoreCompleteExhale} should be used,
+    Silicon's option \texttt{--enableMoreCompleteExhale} should be used,
     which enables a more sophisticated method of finding matching heap chunks.
     Furthermore, more complete exhale provides a small performance improvement
     by itself, as later discussed in section \ref{more-complete-exhale}.
@@ -895,7 +968,7 @@ def apply(..$fields) = {
     \end{math}
 
     As $a$ occurs in the store of both $\sigma_1$ and $\sigma_2$,
-    the new store entry has the shape $x \mapsto Ite(b <= 10, 7, 8)$.
+    the new store entry has the shape $a \mapsto Ite(b <= 10, 7, 8)$.
 
     For the heap, we cannot be sure whether the receivers $x$ and $y$
     are aliases, which is why we keep both heap chunks but with modified
@@ -916,7 +989,7 @@ def apply(..$fields) = {
     \subsection{Finding Join Points} \label{finding-join-points}
 
     In section \ref{where-to-join}, we have discussed which statements and expressions cause
-    branches that can be joined again, but we still need to identify where we need to join.
+    branches that can be joined again, but we still need to identify the join points.
     For conditional expressions and implications, finding the join point is trivial
     as it is within the same expression as the branch point.
     For if-statements, finding the join point to a corresponding branch point is more 
@@ -937,10 +1010,10 @@ def apply(..$fields) = {
     \end{enumerate}
 
     \begin{lstlisting}[language=Scala, caption={The join point finding algorithm without support for loops.}, label={lst:join-point-algorithm}]
-def findJoinPoint(branchPoint)
+def findJoinPoint(branchPoint: CFGNode)
     queue = branchPoint.successors
     visited = [branchPoint]
-    // Abort while loop if no next node is given.
+    // Abort while the loop if no next node is given.
     while curr = queue.next
         if curr not in visited
             visited += curr
@@ -1000,11 +1073,10 @@ def findJoinPoint(branchPoint)
     Some of these additional state components are used at various times during verification
     to increase performance.
     Such caches within the state are currently emptied instead of merged for simplicity.
-
-    As state merging currently empties caches held in the state
-    instead of merging them, the option
+    Furthermore, the option
     \texttt{--disableCaches}, which disables the caches,
     was added to Silicon in order to provide more fair benchmarks.
+    The performance impact of disabling caches is further discussed in section \ref{disable-caching}.
 
     Our implementation can be optionally enabled by passing the command-line
     argument \texttt{--moreJoins} to the Silicon executable. To illustrate the difference
@@ -1064,13 +1136,13 @@ method test(b: Bool) {
 
     In the following section \ref{performance-evaluation}, we analyze the performance difference
     of our implementation using more joins, compared to the base implementation,
-    which only joins on simple cases, as described \ref{p2-approach}. in Additionally, we provide some complementary benchmark results
+    which only joins on simple cases, as described in \ref{p2-approach}. Additionally, we provide some complementary benchmark results
     which provide additional insights. 
 
 
     \subsection{Performance Evaluation} \label{performance-evaluation}
     
-    The benchmark uses frontend-generated Viper programs from Vercors \cite{vercors},
+    The benchmark uses frontend-generated Viper programs from VerCors \cite{vercors},
     Prusti \cite{prusti}, Gobra \cite{gobra}, Vyper \cite{vyper} and Nagini \cite{nagini}
     as we are interested in the performance impact on verifying real-life examples, and
     the total duration of each verification run is measured.
@@ -1144,7 +1216,14 @@ method test(b: Bool) {
 
 
     \newpage
-    \section{Future Work}
+    \section{Conclusion and Future Work}
+
+    We have presented an approach for joining verification branches
+    in Silicon, and discussed the advantages and disadvantages of
+    joining. The benchmark has shown that joining does not generally lead
+    to a performance improvement when verifying programs.
+    Nevertheless, there are still some open questions 
+    that can be addressed in future work:
 
     \begin{itemize}
         \item Currently, we use conditional expressions for merging both
@@ -1165,12 +1244,18 @@ method test(b: Bool) {
         \item The current implementation described in part \ref{part-2}
             has introduced a bug which in a few cases (7 of the 333
             tests used in the benchmark were affected) leads to a failure
-            in the interaction with the SMT solver Z3 that Silicon
-            uses internally.
+            in the interaction with the SMT solver Z3 \cite{z3} that Silicon
+            uses internally. Simply put, the merging of some quantified heap
+            chunks may result in a Z3 warning because two triggers,
+            that for themselves work flawlessly, may result in a new, invalid
+            trigger when merged. The exact details or an approach to fix
+            this bug are currently unclear and should be further examined.
     \end{itemize}
 
     \newpage
     %\bibliographystyle{unsrt}
     \printbibliography
-    
+
+    \includepdf[pages=-]{plagiat-eigenstaendigkeitserklaerung-filled.pdf}
+
 \end{document}
